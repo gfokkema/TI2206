@@ -1,4 +1,9 @@
-ti2206-template
-===============
+# TI2206 - Group X (Tetris)
 
-Template repository for TI2206
+This team consists of the following students:
+
+* Student #1
+* Student #2
+* Student #3
+* Student #4
+* Student #5
