@@ -10,6 +10,7 @@ public class Launcher {
 	public static void main(String[] args) {
 		// This main method is called when starting your game.
 		log.info("Starting game...");
+		System.out.println("Baloney");
 	}
 
 }
