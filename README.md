@@ -2,11 +2,11 @@
 
 This team consists of the following students:
 
-* Student #1
-* Student #2
-* Student #3
-* Student #4
-* Student #5
+* Gerlof Fokkema
+* Owen Huang
+* Adam Iqbal
+* Nando Kartoredjo
+* Skip Lentz
 
 ## How to start this game.
 
