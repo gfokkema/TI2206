@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,8 +11,8 @@ public class Launch extends Game {
 	/**
 	 * Initialize a spritebatch and bitmapfont for later use.
 	 */
-	SpriteBatch batch;
-	BitmapFont font;
+	public SpriteBatch batch;
+	public BitmapFont font;
 	
 	/**
 	 * Create the spritebatch and bitmapfont.

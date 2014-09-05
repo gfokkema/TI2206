@@ -1,7 +1,9 @@
-package nl.tudelft.ti2206.bubbleshooter.core;
+package nl.tudelft.ti2206.bubbleshooter.screens;
+
+import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -23,7 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
  * @author group-15
  *
  */
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen extends ScreenAdapter {
 	
 	/**
 	 * Initialize the skin, stage and the current game session.
@@ -86,43 +88,6 @@ public class MainMenuScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		stage.draw();
-		
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
