@@ -25,7 +25,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	Launch game;
 	
 	/**
-	 * The menu screen calls the {@link #create} method estabilishing the stage.
+	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
 	 */
 	public MainMenuScreen(Launch game) {
@@ -36,11 +36,15 @@ public class MainMenuScreen extends ScreenAdapter {
 		Button play = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
+				game.font,
+				"Play!",
 				() -> this.game.setScreen(new BubbleShooterScreen(game))
 		);
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
 				new Color(0xFFFF00FF),
+				game.font,
+				"Settings",
 				() -> System.out.println("Check")
 		);
 		buttons.add(play);
@@ -48,7 +52,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	}
 	
 	/**
-	 * Render the stage.
+	 * Render the buttons
 	 */
 	@Override
 	public void render(float delta) {
@@ -60,6 +64,9 @@ public class MainMenuScreen extends ScreenAdapter {
 		game.batch.end();
 	}
 
+	/**
+	 * Update during each frame. Called by {@link #render(float)}
+	 */
 	private void update() {
         boolean left_down = Gdx.input.justTouched();
 		if (left_down) {
