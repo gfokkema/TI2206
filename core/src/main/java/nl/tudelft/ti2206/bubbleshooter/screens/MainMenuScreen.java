@@ -38,7 +38,13 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				() -> this.game.setScreen(new BubbleShooterScreen(game))
 		);
+		Button settings = new Button(
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
+				new Color(0xFFFF00FF),
+				() -> System.out.println("Check")
+		);
 		buttons.add(play);
+		buttons.add(settings);
 	}
 	
 	/**
@@ -58,13 +64,11 @@ public class MainMenuScreen extends ScreenAdapter {
         boolean left_down = Gdx.input.justTouched();
 		if (left_down) {
 			int x = Gdx.input.getX();
-			int y = Gdx.input.getY();
-			Button hit = buttons.stream()
+			int y = Gdx.graphics.getHeight() - Gdx.input.getY();
+			buttons.stream()
 					.filter((Button b) -> b.hit(x,y))
 					.findFirst()
-					.get();
-
-			hit.apply();
+					.ifPresent(Button::apply);
 		}
 	}
 
