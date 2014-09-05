@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.util.ArrayList;
+
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
@@ -20,18 +22,24 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class MainMenuScreen extends ScreenAdapter {
 	Button play;
+	ArrayList<Button> buttons;
 	Launch game;
 	
 	/**
 	 * The menu screen calls the {@link #create} method estabilishing the stage.
 	 * @param game the current game session
 	 */
-	public MainMenuScreen( Launch game){
+	public MainMenuScreen(Launch game) {
 		this.game = game;
+		this.buttons = new ArrayList<Button>();
+
+		// Add a Button with a callback.
 		this.play = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
-				new Color(0xFFFF00FF)
+				new Color(0xFFFF00FF),
+				() -> this.game.setScreen(new BubbleShooterScreen(game))
 		);
+		buttons.add(play);
 	}
 	
 	/**
@@ -52,10 +60,12 @@ public class MainMenuScreen extends ScreenAdapter {
 		if (left_down) {
 			int x = Gdx.input.getX();
 			int y = Gdx.input.getY();
-			if (play.hit(x, y)) {
-				System.out.println("Hit!");
-//				this.game.setScreen(new BubbleShooterScreen(game));
-			}
+			Button hit = buttons.stream()
+					.filter((Button b) -> b.hit(x,y))
+					.findFirst()
+					.get();
+
+			hit.apply();
 		}
 	}
 
