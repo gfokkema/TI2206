@@ -30,7 +30,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		this.game = game;
 		this.play = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
-				new Color(1, 0, 0, 1)
+				new Color(0xFFFF00FF)
 		);
 	}
 	
