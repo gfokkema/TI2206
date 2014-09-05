@@ -34,21 +34,29 @@ public class MainMenuScreen extends ScreenAdapter {
 
 		// Add a Button with a callback.
 		Button play = new Button(
-				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 50, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
 				() -> this.game.setScreen(new BubbleShooterScreen(game))
 		);
 		Button settings = new Button(
-				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Settings",
 				() -> System.out.println("Check")
 		);
+		Button quit = new Button(
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
+				new Color(0xFFFF00FF),
+				game.font,
+				"Quit",
+				() -> Gdx.app.exit()
+		);
 		buttons.add(play);
 		buttons.add(settings);
+		buttons.add(quit);
 	}
 	
 	/**
@@ -73,9 +81,9 @@ public class MainMenuScreen extends ScreenAdapter {
 			int x = Gdx.input.getX();
 			int y = Gdx.graphics.getHeight() - Gdx.input.getY();
 			buttons.stream()
-					.filter((Button b) -> b.hit(x,y))
-					.findFirst()
-					.ifPresent(Button::apply);
+				.filter((Button b) -> b.hit(x,y))
+				.findFirst()
+				.ifPresent(Button::apply);
 		}
 	}
 
