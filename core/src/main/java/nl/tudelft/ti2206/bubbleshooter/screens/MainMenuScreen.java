@@ -21,7 +21,6 @@ import com.badlogic.gdx.math.Rectangle;
  *
  */
 public class MainMenuScreen extends ScreenAdapter {
-	Button play;
 	ArrayList<Button> buttons;
 	Launch game;
 	
@@ -34,7 +33,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		this.buttons = new ArrayList<Button>();
 
 		// Add a Button with a callback.
-		this.play = new Button(
+		Button play = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
 				() -> this.game.setScreen(new BubbleShooterScreen(game))
@@ -51,7 +50,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		update();
 		game.batch.begin();
-		play.draw(game.batch);
+		buttons.forEach((Button b) -> b.draw(game.batch));
 		game.batch.end();
 	}
 
