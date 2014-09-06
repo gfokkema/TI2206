@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
@@ -22,36 +25,43 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class MainMenuScreen extends ScreenAdapter {
 	public static final String title = "Bubbleshooter";
+	
+	Game game;
+	BitmapFont font;
+	SpriteBatch batch;
+	
 	ArrayList<Button> buttons;
-	Launch game;
 	
 	/**
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
 	 */
-	public MainMenuScreen(Launch game) {
+	public MainMenuScreen(Game game) {
 		this.game = game;
+		this.font = new BitmapFont();
+		this.batch = new SpriteBatch();
+		
 		this.buttons = new ArrayList<Button>();
 
 		//Add buttons, each with their own callback.
 		Button play = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 50, 200, 50),
 				new Color(0xFFFF00FF),
-				game.font,
+				font,
 				"Play!",
 				() -> this.game.setScreen(new BubbleShooterScreen(game))
 		);
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
-				game.font,
+				font,
 				"Settings",
 				() -> System.out.println("Check")
 		);
 		Button quit = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
 				new Color(0xFFFF00FF),
-				game.font,
+				font,
 				"Quit",
 				() -> Gdx.app.exit()
 		);
@@ -65,16 +75,16 @@ public class MainMenuScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void render(float delta) {
+		update();
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		update();
-		game.batch.begin();
-
-		game.font.setColor(new Color(0xFFFF00FF));
-		game.font.draw(game.batch, title, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 125);
-
-		buttons.forEach((Button b) -> b.draw(game.batch));
-		game.batch.end();
+		
+		batch.begin();
+		font.setColor(new Color(0xFFFF00FF));
+		font.draw(batch, title, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 125);
+		buttons.forEach((Button b) -> b.draw(batch));
+		batch.end();
 	}
 
 	/**
@@ -91,5 +101,4 @@ public class MainMenuScreen extends ScreenAdapter {
 				.ifPresent(Button::apply);
 		}
 	}
-
 }

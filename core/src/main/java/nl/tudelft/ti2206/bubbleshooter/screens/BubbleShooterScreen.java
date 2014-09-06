@@ -1,38 +1,16 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Launch;
-
-import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 
 public class BubbleShooterScreen extends ScreenAdapter {
-	
-	Launch game;
-	private Rectangle bubble_blue;
-	Texture bubble_blue_img;
-	Texture bubble_orange;
-	Texture bubble_green;
-	Texture bubble_pink;
-	float elapsed;
+	Game game;
 
-	public BubbleShooterScreen(Launch game) {
+	public BubbleShooterScreen(Game game) {
 		this.game = game;
-		create();
-	}
-	
-	public void create () {
-		// some bubbles, positioning
-		bubble_blue_img = new Texture(Gdx.files.internal("Bubble-Blue.png"));
-		bubble_blue = new Rectangle();
-		bubble_blue.x = 400;
-		bubble_blue.y = 400;
-//		bubble_orange = new Texture(Gdx.files.internal("Bubble-Orange.png"));
-//		bubble_green = new Texture(Gdx.files.internal("Bubble-green.png"));
-//		bubble_pink = new Texture(Gdx.files.internal("Bubble-pink.png"));
 	}
 
 	@Override
@@ -41,28 +19,16 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	
 	@Override
 	public void render (float delta) {
-		elapsed += Gdx.graphics.getDeltaTime();
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		game.batch.begin();
-		game.batch.draw(bubble_blue_img, bubble_blue.x, bubble_blue.y);
-//		batch.draw(bubble_orange, 100+100*(float)Math.cos(elapsed), 100+25*(float)Math.sin(elapsed));
-//		batch.draw(bubble_green, 200+100*(float)Math.cos(elapsed), 200+25*(float)Math.sin(elapsed));
-//		batch.draw(bubble_pink, 400+100*(float)Math.cos(elapsed), 400+25*(float)Math.sin(elapsed));
-		game.batch.end();
+		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		// sample user input
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) bubble_blue.x -= 300 * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) bubble_blue.x += 300 * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Keys.DOWN)) bubble_blue.y -= 300 * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Keys.UP)) bubble_blue.y += 300 * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) dispose();
+		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
+			game.setScreen(new MainMenuScreen(game));
+		}
 	}
 
 	@Override
 	public void dispose () {
-		// testing
-		System.exit(0);
 	}
 
 }
