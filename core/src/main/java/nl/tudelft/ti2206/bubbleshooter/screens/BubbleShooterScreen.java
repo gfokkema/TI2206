@@ -13,12 +13,7 @@ import com.badlogic.gdx.ScreenAdapter;
 public class BubbleShooterScreen extends ScreenAdapter {
 	
 	Launch game;
-	private Rectangle bubble_blue;
 	Bubble blue;
-	Texture bubble_blue_img;
-	Texture bubble_orange;
-	Texture bubble_green;
-	Texture bubble_pink;
 	float elapsed;
 
 	public BubbleShooterScreen(Launch game) {
@@ -44,9 +39,19 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		elapsed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		game.batch.begin();
-		blue.draw(game.batch);
 		
+		int blue_width = blue.getTexture().getWidth();
+		int blue_height = blue.getTexture().getHeight();
+		Rectangle bRectangle = blue.getRectangle();
+		
+		game.batch.begin();
+		// bubble stays within screen bounds
+		if(blue.getX() < 0) bRectangle.x = 0;
+		if(blue.getX() > Gdx.graphics.getWidth() - blue_width) bRectangle.x = Gdx.graphics.getWidth() - blue_width;
+		if(blue.getY() < 0) bRectangle.y = 0;
+		if(blue.getY() > Gdx.graphics.getHeight() - blue_height) bRectangle.y = Gdx.graphics.getHeight() - blue_height;
+		
+		blue.draw(game.batch);
 //		batch.draw(bubble_orange, 100+100*(float)Math.cos(elapsed), 100+25*(float)Math.sin(elapsed));
 //		batch.draw(bubble_green, 200+100*(float)Math.cos(elapsed), 200+25*(float)Math.sin(elapsed));
 //		batch.draw(bubble_pink, 400+100*(float)Math.cos(elapsed), 400+25*(float)Math.sin(elapsed));

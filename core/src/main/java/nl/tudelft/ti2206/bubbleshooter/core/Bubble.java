@@ -48,6 +48,30 @@ public class Bubble {
 	}
 	
 	/**
+	 * Retrieve bubble's texture
+	 * @return texture of the bubble
+	 */
+	public Texture getTexture() {
+		return bubble_img;
+	}
+	
+	/**
+	 * Get the X coordinate of the bubble.
+	 * @return
+	 */
+	public float getX() {
+		return bubble.x;
+	}
+	
+	/**
+	 * Get Y coordinate of the bubble.
+	 * @return
+	 */
+	public float getY() {
+		return bubble.y;
+	}
+	
+	/**
 	 * Draws the bubble
 	 * @param batch
 	 */
