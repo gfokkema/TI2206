@@ -23,6 +23,7 @@ public class Button {
 	 * @author skip
 	 *
 	 */
+	@FunctionalInterface
 	public interface CallBack {
 		public void apply();
 	}
@@ -64,6 +65,6 @@ public class Button {
 	 */
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
-		font.draw(batch, text, sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight() / 2);
+		font.draw(batch, text, sprite.getX(), sprite.getY());
 	}
 }

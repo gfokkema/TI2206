@@ -23,7 +23,6 @@ public class Launch extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		font.setColor(new Color(0x000000FF));
 		this.setScreen(new MainMenuScreen(this));
 	}
 	
