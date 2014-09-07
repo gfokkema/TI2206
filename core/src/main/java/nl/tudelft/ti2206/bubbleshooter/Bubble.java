@@ -12,12 +12,22 @@ public class Bubble {
 		NORTH_WEST
 	}
 
+	public enum Color {
+		RED,
+		GREEN,
+		BLUE,
+		PURPLE,
+		ORANGE
+	}
+
+	private Color color;
 	private Bubble[] neighbors;
 	private Circle bounds;
 	private boolean isRoot;
 	private boolean marked;
 
 	public Bubble() {
-		neighbors = new Bubble[6];
+		this.neighbors = new Bubble[6];
 	}
+
 }

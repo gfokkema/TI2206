@@ -18,20 +18,35 @@ public class Board {
 		bubbles = new ArrayList<Bubble>(width*height);
 	}
 
-	public Optional<List<Bubble>> collides(Bubble b) {
+	public boolean collides(Bubble b) {
 		// Get the Bubble's index on the hex grid
 		// Check each Bubble around this bubble
-		// Return a list of all bubbles that it collided with
-		return Optional.of(new ArrayList<Bubble>());
+		// Return true on collision
+		return true;
 	}
 
-	public void add(Bubble b, int i, int j) {
-		// Add the bubble to the arraylist
-		// Update the bounds of the Bubble
-		// Add neighbors to the Bubble
+	public void attach(Bubble b, int i, int j) {
+		// Attach the Bubble to its neighbors.
+		// Add the Bubble to the List.
+		// Update the bounds of the Bubble.
+	}
+
+	/**
+	 * Traversal to find all of the nodes that should be removed.
+	 * If nothing should be removed, then nothing is returned.
+	 * @param b - The bubble where it all starts.
+	 * @return An Optional which represents nothing, or the
+	 * 	List of nodes that should be removed.
+	 */
+	public Optional<List<Bubble>> getNextRemoved(Bubble b) {
+		return null;
+	}
+
+	public void removeAll(List<Bubble> bs) {
+		bubbles.removeAll(bs);
 	}
 
 	public void draw(SpriteBatch batch) {
-		// Draw all the bubbles in the arraylist
+		// Draw all the bubbles in the List
 	}
 }
