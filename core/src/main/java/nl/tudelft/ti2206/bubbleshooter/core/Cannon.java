@@ -11,8 +11,8 @@ public class Cannon {
 	public Cannon(float x, float y, float angle) {
 		this.setX(x);
 		this.setY(y);
-		
 		vector = new Vector2(coordinateX,coordinateY);	
+		this.setAngle(angle);
 	}
 	
 	public float getX() {return coordinateX;}
@@ -29,4 +29,8 @@ public class Cannon {
 		angle = degree;
 		vector.setAngle(angle);
 	}
+	
+	public String toString() {
+		return "Vector{X:" + coordinateX + "Y:" + coordinateY + "A:" + angle + "}";
+		}
 }
