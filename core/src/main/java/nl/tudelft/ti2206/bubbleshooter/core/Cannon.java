@@ -31,6 +31,6 @@ public class Cannon {
 	}
 	
 	public String toString() {
-		return "Vector{X:" + coordinateX + "Y:" + coordinateY + "A:" + angle + "}";
+		return "Vector{X:" + coordinateX + ", Y:" + coordinateY + ", A:" + angle + "}";
 		}
 }
