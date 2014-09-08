@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 
 import com.badlogic.gdx.graphics.GL30;

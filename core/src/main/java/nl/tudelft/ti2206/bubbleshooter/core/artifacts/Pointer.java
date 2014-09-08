@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.core;
+package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -7,7 +7,7 @@ public class Pointer {
 	Vector2 cursor;
 	Vector2 normal;
 
-	public Cannon(Vector2 vector) {
+	public Pointer(Vector2 vector) {
 		setCursor(vector);
 	}
 	
