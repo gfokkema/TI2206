@@ -1,5 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -18,11 +21,9 @@ public class Pointer {
 
 	/**
 	 * Constructor for pointer
-	 * @param x
-	 * @param y
 	 */
-	public Pointer(int x, int y) {
-		setCursor(x, y);
+	public Pointer() {
+		setCursor();
 	}
 	
 	/**
@@ -30,8 +31,9 @@ public class Pointer {
 	 * @param x
 	 * @param y
 	 */
-	public void setCursor(int x, int y) {
-		cursor = new Vector2(x, y);
+	public void setCursor() {
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		cursor = new Vector2(p.x, p.y);
 		normalize(cursor);
 	}
 	

@@ -26,7 +26,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		// some bubbles, positioning
 		blue = new Bubble("Bubble-Blue.png");
 		blue.setPosition(400, 400);
-		cannon = new Cannon(200,200,"Bubble-Orange.png");
+		cannon = new Cannon(Gdx.graphics.getWidth()/2,100,"Bubble-Orange.png");
+		cannon.setAngle(40);
 //		bubble_orange = new Texture(Gdx.files.internal("Bubble-Orange.png"));
 //		bubble_green = new Texture(Gdx.files.internal("Bubble-green.png"));
 //		bubble_pink = new Texture(Gdx.files.internal("Bubble-pink.png"));
@@ -52,7 +53,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		if(blue.getX() > Gdx.graphics.getWidth() - blue_width) bRectangle.x = Gdx.graphics.getWidth() - blue_width;
 		if(blue.getY() < 0) bRectangle.y = 0;
 		if(blue.getY() > Gdx.graphics.getHeight() - blue_height) bRectangle.y = Gdx.graphics.getHeight() - blue_height;
-		
 		cannon.draw(game.batch);
 		blue.draw(game.batch);
 //		batch.draw(bubble_orange, 100+100*(float)Math.cos(elapsed), 100+25*(float)Math.sin(elapsed));
