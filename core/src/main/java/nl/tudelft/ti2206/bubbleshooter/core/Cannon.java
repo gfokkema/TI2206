@@ -2,35 +2,37 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import com.badlogic.gdx.math.Vector2;
 
+
 public class Cannon {
-	Vector2 vector;
-	float coordinateX;
-	float coordinateY;
-	float angle;
-	
-	public Cannon(float x, float y, float angle) {
-		this.setX(x);
-		this.setY(y);
-		vector = new Vector2(coordinateX,coordinateY);	
-		this.setAngle(angle);
+	Vector2 cursor;
+	Vector2 normal;
+
+	public Cannon(Vector2 vector) {
+		setCursor(vector);
 	}
 	
-	public float getX() {return coordinateX;}
-	
-	public float getY() {return coordinateY;}
-	
-	public void setX(float x) {coordinateX = x;}
-	
-	public void setY(float y) {coordinateY = y;}
-	
-	public float getAngle() {return angle;}
-	
-	public void setAngle(float degree) {
-		angle = degree;
-		vector.setAngle(angle);
+	public void setCursor(Vector2 vector) {
+		cursor = vector;
+		normalize(cursor);
 	}
 	
-	public String toString() {
-		return "Vector{X:" + coordinateX + ", Y:" + coordinateY + ", A:" + angle + "}";
-		}
+	public Vector2 getCursor() {
+		return cursor;
+	}
+	
+	public Vector2 getNormal() {
+		return normal;
+	}
+	
+	public float getAngle() {
+		return normal.angle();
+	}
+	
+	public void setAngle(float degrees) {
+		normal.setAngle(degrees);
+	}
+	
+	public void normalize(Vector2 vector) {
+		normal = vector.nor();
+	}
 }
