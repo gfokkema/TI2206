@@ -25,10 +25,13 @@ public class Board {
 		return true;
 	}
 
+	public void add(Bubble b, int i, int j) {
+		// Add the Bubble to the list
+		// Update the bounds of the circle
+	}
+
 	public void attach(Bubble b, int i, int j) {
 		// Attach the Bubble to its neighbors.
-		// Add the Bubble to the List.
-		// Update the bounds of the Bubble.
 	}
 
 	/**
