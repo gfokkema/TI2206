@@ -22,6 +22,31 @@ public class Board {
 		// Get the Bubble's index on the hex grid
 		// Check each Bubble around this bubble
 		// Return true on collision
+		// 
+		
+		// int collision = 0;// kan ook met break
+		// while(collision == 0){
+		// 		Float bubbleX = b.getX();
+		// 		Float bubbleY = b.getY();
+		//
+		// 		Float KleurBubble = bubbleArray.get(b);
+		//
+		//
+		// 		Float stillBubbleX= getHexagonabove(bubbleX)
+		// 		Float stillBubbleY=getHexagoneCoordinabove(bubbleY)
+		//	
+		// 				if (!isEmpty(stillBubbleX && stillBubbleY){
+		// 						if(hasHitThriceorMore(b)){
+		//							collision =1;//break;
+		//  						destroy bubbles}
+		// 						else{ 
+		//							collision =1;//break;
+		// 							getStuck()}
+		//					 }		
+		//  			else{
+		// 				setBubbleX(directionX+1?) + setBubbleX(directionY+1?)
+		//				}
+		
 		return true;
 	}
 
