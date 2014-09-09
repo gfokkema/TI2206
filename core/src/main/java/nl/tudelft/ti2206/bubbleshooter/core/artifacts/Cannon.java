@@ -33,13 +33,14 @@ public class Cannon {
 	public Cannon(int x, int y) {
 		pointer = new Pointer(new Vector2(x, y));
 		
+		// texture for cannon + angle
 		image = new Texture("testCannon.png");
+		angle = 0;
 		
+		// sprite settings
 		sprite = new Sprite(image);
 		sprite.setOrigin(sprite.getWidth()/2, 0);
-		sprite.setPosition(pointer.getOrigin().x, pointer.getOrigin().y);
-		
-		angle = 0;
+		sprite.setPosition(x, y);
 	}
 	
 	/**
@@ -51,16 +52,20 @@ public class Cannon {
 		 *  Compute difference between previous and current rotation,
 		 *  since rotate from the Sprite class rotates relatively from the current rotation.
 		 */
-		if(degrees > LEFT_BOUNDARY) 
+		if(degrees > LEFT_BOUNDARY) {
 			angle = LEFT_BOUNDARY;
+		}
 		
-		if(degrees < RIGHT_BOUNDARY) 
+		if(degrees < RIGHT_BOUNDARY) {
 			angle = RIGHT_BOUNDARY;
+		}
 		
+		// rotate the actual rotation difference.
 		sprite.rotate(sprite.getRotation() - angle);
 		sprite.setRotation(angle);
 		pointer.setAngle(angle);
 		
+		// debugging...
 		Gdx.app.log("Degrees is", "" + angle);
 	}
 		
@@ -88,16 +93,17 @@ public class Cannon {
 	}
 	
 	/**
-	 * per frame checks if angle of the cannon changed.
+	 * Per frame checks if angle of the cannon changed,
 	 * at the end draws the actual cannon onto screen.
 	 * @param batch
 	 */
-	public void update(SpriteBatch batch) {
+	public void draw(SpriteBatch batch) {
 		// check for left/right key presses
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 			angle += 300*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
 			
+			// debugging...
 			Gdx.app.log("Angle is", "" + angle); 
 		}
 		
@@ -105,9 +111,11 @@ public class Cannon {
 			angle -= 300*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
 			
+			// debugging...
 			Gdx.app.log("Angle is", "" + angle); 
 		}
+		
+		// draw the cannon
 		sprite.draw(batch);
 	}
-	
 }

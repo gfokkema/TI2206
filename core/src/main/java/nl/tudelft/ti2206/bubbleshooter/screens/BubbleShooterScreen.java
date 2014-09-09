@@ -57,7 +57,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		if(blue.getY() > Gdx.graphics.getHeight() - blue_height) bRectangle.y = Gdx.graphics.getHeight() - blue_height;
 		
 		// draw the cannon (+ temp a bubble...)
-		cannon.update(game.batch);
+		cannon.draw(game.batch);
 		blue.draw(game.batch);
 		
 		// end batch
