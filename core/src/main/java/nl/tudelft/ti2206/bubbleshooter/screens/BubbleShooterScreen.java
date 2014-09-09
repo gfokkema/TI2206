@@ -27,7 +27,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		// some bubbles, positioning
 		blue = new Bubble("Bubble-Blue.png");
 		blue.setPosition(400, 400);
-		cannon = new Cannon(Gdx.graphics.getWidth()/2,100,"testCannon.png");
+		cannon = new Cannon(Gdx.graphics.getWidth()/2,100);
 //		bubble_orange = new Texture(Gdx.files.internal("Bubble-Orange.png"));
 //		bubble_green = new Texture(Gdx.files.internal("Bubble-green.png"));
 //		bubble_pink = new Texture(Gdx.files.internal("Bubble-pink.png"));
@@ -57,7 +57,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		if(blue.getY() > Gdx.graphics.getHeight() - blue_height) bRectangle.y = Gdx.graphics.getHeight() - blue_height;
 		
 		// draw the cannon (+ temp a bubble...)
-		cannon.draw(game.batch);
+		cannon.update(game.batch);
 		blue.draw(game.batch);
 		
 		// end batch

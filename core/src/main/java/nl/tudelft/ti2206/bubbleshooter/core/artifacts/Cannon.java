@@ -30,13 +30,16 @@ public class Cannon {
 	 * @param x
 	 * @param y
 	 */
-	public Cannon(int x, int y, String img) {
+	public Cannon(int x, int y) {
 		pointer = new Pointer(new Vector2(x, y));
-		image = new Texture(img);
+		
+		image = new Texture("testCannon.png");
+		
 		sprite = new Sprite(image);
-		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
+		sprite.setOrigin(sprite.getWidth()/2, 0);
+		sprite.setPosition(pointer.getOrigin().x, pointer.getOrigin().y);
+		
 		angle = 0;
-		setSpritePosition();
 	}
 	
 	/**
@@ -48,18 +51,19 @@ public class Cannon {
 		 *  Compute difference between previous and current rotation,
 		 *  since rotate from the Sprite class rotates relatively from the current rotation.
 		 */
-		if(degrees > LEFT_BOUNDARY) angle = LEFT_BOUNDARY;
-		if(degrees < RIGHT_BOUNDARY) angle = RIGHT_BOUNDARY;
+		if(degrees > LEFT_BOUNDARY) 
+			angle = LEFT_BOUNDARY;
+		
+		if(degrees < RIGHT_BOUNDARY) 
+			angle = RIGHT_BOUNDARY;
+		
 		sprite.rotate(sprite.getRotation() - angle);
 		sprite.setRotation(angle);
 		pointer.setAngle(angle);
+		
 		Gdx.app.log("Degrees is", "" + angle);
 	}
-	
-	public void setSpritePosition() {
-		sprite.setPosition(pointer.getCoordinateDirection().x, pointer.getCoordinateDirection().y);
-	}
-	
+		
 	/**
 	 * Get the associated pointer with the cannon.
 	 * @return pointer
@@ -74,24 +78,7 @@ public class Cannon {
 	public void shoot() {
 		//TODO more pew pew!
 	}
-	
-	/**
-	 * Handle random bubble spawning (different bubble colors)?
-	 */
-	public void spawnBubble() {
-		//TODO what?
-	}
-	
-	/**
-	 * Draw the actual cannon onto screen.
-	 * Additionally check if angle of the cannon changed.
-	 * @param batch
-	 */
-	public void draw(SpriteBatch batch) {
-		update();
-		sprite.draw(batch);
-	}
-	
+		
 	/**
 	 * Get the cannon angle
 	 * @return angle
@@ -101,21 +88,26 @@ public class Cannon {
 	}
 	
 	/**
-	 * Updates the angle every time left or right arrow keys are pressed.
+	 * per frame checks if angle of the cannon changed.
+	 * at the end draws the actual cannon onto screen.
+	 * @param batch
 	 */
-	public void update() {
+	public void update(SpriteBatch batch) {
 		// check for left/right key presses
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 			angle += 300*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
+			
 			Gdx.app.log("Angle is", "" + angle); 
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			angle -= 300*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
+			
 			Gdx.app.log("Angle is", "" + angle); 
 		}
+		sprite.draw(batch);
 	}
 	
 }
