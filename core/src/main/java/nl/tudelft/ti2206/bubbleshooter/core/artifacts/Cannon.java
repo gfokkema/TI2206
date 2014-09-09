@@ -23,6 +23,7 @@ public class Cannon {
 	float angle;
 	private final float LEFT_BOUNDARY = 40;
 	private final float RIGHT_BOUNDARY = -40;
+	private final int sensitivity = 100;
 	
 	
 	/**
@@ -100,7 +101,7 @@ public class Cannon {
 	public void draw(SpriteBatch batch) {
 		// check for left/right key presses
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-			angle += 300*Gdx.graphics.getDeltaTime(); 
+			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
 			
 			// debugging...
@@ -108,7 +109,7 @@ public class Cannon {
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			angle -= 300*Gdx.graphics.getDeltaTime(); 
+			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
 			
 			// debugging...
