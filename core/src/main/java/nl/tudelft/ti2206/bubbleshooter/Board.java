@@ -29,14 +29,11 @@ public class Board extends Sprite {
 		bubbles.add(new Bubble(new Vector2(164, 400)));
 	}
 
-/**
- * Checks the bubble that gets shot, with all the other bubbles if there is a collision.
- * 
- * @param b
- *  		- the bubble that gets shot.
- *  
- * @return A boolean gets returned depending if there was a collision.
- */
+    /**
+     * Checks the bubble that gets shot, with all the other bubbles if there is a collision.
+     * @param b - the bubble that gets shot.
+     * @return A boolean gets returned depending if there was a collision.
+     */
 	public boolean collides(Bubble b) {
 		// Get the Bubble's index on the hex grid
 		// Check each Bubble around this bubble
@@ -87,9 +84,7 @@ public class Board extends Sprite {
 	/**
 	 * Traversal to find all of the nodes that should be removed. If nothing
 	 * should be removed, then nothing is returned.
-	 * 
-	 * @param b
-	 *            - The bubble where it all starts.
+	 * @param b - The bubble where it all starts.
 	 * @return An Optional which represents nothing, or the List of nodes that
 	 *         should be removed.
 	 */
@@ -104,8 +99,6 @@ public class Board extends Sprite {
 	@Override
 	public void draw(Batch batch) {
 		super.draw(batch);
-		for (Bubble bubble : bubbles) {
-			bubble.draw(batch);
-		}
+		bubbles.forEach((Bubble b) -> b.draw(batch));
 	}
 }
