@@ -1,7 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
 import java.util.Optional;
+import java.util.Random;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -27,9 +29,9 @@ public class Bubble extends Sprite {
 			return orientations[this.ordinal() + 3];
 		}
 	}
-	private static final Orientation[] orientations = Orientation.values();
+	protected static Orientation[] orientations = Orientation.values();
 
-	public enum Color {
+	public enum ColorValue {
 		RED(0xFF0000FF),
 		GREEN(0x00FF00FF),
 		BLUE(0x0000FFFF),
@@ -38,19 +40,23 @@ public class Bubble extends Sprite {
 
 		protected int rgba;
 
-		private Color(int rgba) {
+		private ColorValue(int rgba) {
 			this.rgba = rgba;
 		}
 	}
+	protected static ColorValue[] colors = ColorValue.values();
 
-	private Color color;
-	private Bubble[] neighbors;
-	private Circle bounds;
+	protected ColorValue color;
+	protected Bubble[] neighbors;
+	protected Circle bounds;
 
 	public Bubble(Vector2 mid) {
 		super(new Texture("Bubble-Blue.png"));
-		bounds = new Circle(mid, 64);
+		this.bounds = new Circle();
+		this.setPosition(mid.x, mid.y);
 		this.neighbors = new Bubble[6];
+		this.color = colors[getRandomColor()];
+		this.setColor(new Color(color.rgba));
 	}
 
 	public Optional<Bubble> getNeighbor(Orientation dir) {
@@ -66,7 +72,17 @@ public class Bubble extends Sprite {
 	}
 	
 	@Override
-	public void draw(Batch batch) {
-		batch.draw(this.getTexture(), bounds.x, bounds.y);
+	public void setPosition(float x, float y) {
+		super.setPosition(x, y);
+		this.bounds.setPosition(x, y);
+	}
+
+	protected int getRandomColor() {
+		Random r = getRNG();
+		return r.nextInt(colors.length);
+	}
+
+	protected Random getRNG() {
+		return new Random();
 	}
 }
