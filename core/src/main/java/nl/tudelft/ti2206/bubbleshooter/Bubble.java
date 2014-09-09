@@ -20,9 +20,9 @@ public class Bubble extends Sprite {
 		NORTH_WEST;
 
 		/**
-		 * Returns the opposite orientation,
-		 * for example SOUTH_EAST.getOpposite()
-		 * will return NORTH_EAST.
+		 * Returns the opposite orientation, for example
+		 * SOUTH_EAST.getOpposite() will return NORTH_EAST.
+		 * 
 		 * @return the opposite orientation
 		 */
 		public Orientation getOpposite() {
@@ -67,10 +67,19 @@ public class Bubble extends Sprite {
 		neighbors[dir.ordinal()] = b;
 	}
 
-	public boolean collides(Bubble b){
-		return true;
+	/**
+	 * Checks if the if the bubbles hit each other
+	 * 
+	 * @param b
+	 *            - the bubble that gets shot
+	 * 
+	 * @return a boolean depending on the collide
+	 */
+	public boolean collides(Bubble b) {
+		return bounds.overlaps(b.bounds);
+
 	}
-	
+
 	@Override
 	public void setPosition(float x, float y) {
 		super.setPosition(x, y);
