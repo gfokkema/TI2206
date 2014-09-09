@@ -1,8 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
-
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -16,14 +13,15 @@ public class Pointer {
 	/**
 	 * Vector intialization.
 	 */
-	Vector2 cursor;
-	Vector2 normal;
+	Vector2 direction;
+	Vector2 origin;
 
 	/**
 	 * Constructor for pointer
 	 */
-	public Pointer() {
-		setCursor();
+	public Pointer(Vector2 origin) {
+		setOrigin(origin);
+		setDirection(new Vector2(0,1));
 	}
 	
 	/**
@@ -31,34 +29,37 @@ public class Pointer {
 	 * @param x
 	 * @param y
 	 */
-	public void setCursor() {
-		Point p = MouseInfo.getPointerInfo().getLocation();
-		cursor = new Vector2(p.x, p.y);
-		normalize(cursor);
+	public void setOrigin(Vector2 coordinate) {
+		origin = coordinate;
 	}
 	
-	/**
-	 * Get cursor vector.
-	 * @return cursor
-	 */
-	public Vector2 getCursor() {
-		return cursor;
+	public void setDirection(Vector2 vector) {
+		this.direction = direction.nor();
 	}
 	
-	/**
-	 * Get normal of the cursor vector.
-	 * @return normal
-	 */
-	public Vector2 getNormal() {
-		return normal;
+	public void setPointDirection(Vector2 coordinate) {
+		Vector2 direction = coordinate.sub(origin);
+		setDirection(direction);
 	}
 	
+	public Vector2 getCoordinateDirection() {
+		return origin.add(direction);
+	}
+	
+	public Vector2 getDirection() {
+		return direction;
+	}
+	
+	public Vector2 getOrigin() {
+		return origin;
+	}
+		
 	/**
 	 * Get the angle of the normal compared to the x-axis.
 	 * @return angle of normal.
 	 */
 	public float getAngle() {
-		return normal.angle();
+		return direction.angle();
 	}
 	
 	/**
@@ -66,21 +67,13 @@ public class Pointer {
 	 * @param degrees
 	 */
 	public void setAngle(float degrees) {
-		normal.setAngle(degrees);
+		direction.setAngle(degrees);
 	}
-	
-	/**
-	 * Normalize the vector
-	 * @param vector
-	 */
-	public void normalize(Vector2 vector) {
-		normal = vector.nor();
-	}
-	
+		
 	/**
 	 * Simple string representation of a Pointer.
 	 */
 	public String toString() {
-		return "Pointer{Cursor:" + cursor + " ,Normal:" + normal + "}";
+		return "Pointer{Direction:" + direction + " ,Origin:" + origin + "}";
 	}
 }

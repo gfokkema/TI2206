@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -26,10 +25,9 @@ public class Cannon {
 	 * @param y
 	 */
 	public Cannon(int x, int y, String img) {
-		pointer = new Pointer();
+		pointer = new Pointer(new Vector2(x,y));
 		image = new Texture(img);
 		sprite = new Sprite(image);
-		setPosition(x, y);
 	}
 	
 	/**
@@ -42,11 +40,8 @@ public class Cannon {
 		sprite.rotate(degrees);
 	}
 	
-	/**
-	 * Set position of the cannon itself on the screen.
-	 */
-	public void setPosition(int x, int y) {
-		sprite.setPosition(x, y);
+	public void setSpritePosition() {
+		sprite.setPosition(pointer.getCoordinateDirection().x, pointer.getCoordinateDirection().y);
 	}
 	
 	/**
@@ -76,7 +71,12 @@ public class Cannon {
 	 * @param batch
 	 */
 	public void draw(SpriteBatch batch) {
+		setSpritePosition();
 		sprite.draw(batch);
+	}
+	
+	public float getAngle() {
+		return pointer.getAngle();
 	}
 	
 }
