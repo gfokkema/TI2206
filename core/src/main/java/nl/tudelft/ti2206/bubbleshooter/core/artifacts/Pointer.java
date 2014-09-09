@@ -34,7 +34,7 @@ public class Pointer {
 	}
 	
 	public void setDirection(Vector2 vector) {
-		this.direction = direction.nor();
+		this.direction = vector.nor();
 	}
 	
 	public void setPointDirection(Vector2 coordinate) {
