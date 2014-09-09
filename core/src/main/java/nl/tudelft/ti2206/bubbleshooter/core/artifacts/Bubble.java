@@ -1,81 +1,114 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
-import com.badlogic.gdx.Gdx;
+import java.util.Optional;
+import java.util.Random;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 
-/**
- * Bubbles are used in the {@link #BubbleShooterScreen}.
- * The player is able to fire bubbles towards other bubbles.
- * @author group-15
- *
- */
-public class Bubble {
-	
-	/**
-	 * Rectangle and texture.
-	 * The former being used for placement.
-	 */
-	Rectangle bubble;
-	Texture bubble_img;
+public class Bubble extends Sprite {
+	public enum Orientation {
+		NORTH_EAST,
+		EAST,
+		SOUTH_EAST,
+		SOUTH_WEST,
+		WEST,
+		NORTH_WEST;
+
+		/**
+		 * Returns the opposite orientation, for example
+		 * SOUTH_EAST.getOpposite() will return NORTH_EAST.
+		 * 
+		 * @return the opposite orientation
+		 */
+		public Orientation getOpposite() {
+			return orientations[this.ordinal() + 3];
+		}
+	}
+	protected static Orientation[] orientations = Orientation.values();
+
+	public enum ColorValue {
+		RED(0xFF0000FF),
+		GREEN(0x00FF00FF),
+		BLUE(0x0000FFFF),
+		PURPLE(0xFF00FFFF),
+		YELLOW(0xFFFF00FF);
+
+		protected int rgba;
+
+		private ColorValue(int rgba) {
+			this.rgba = rgba;
+		}
+	}
+	protected static ColorValue[] colors = ColorValue.values();
+
+	protected ColorValue color;
+	protected Bubble[] neighbors;
+	protected Circle bounds;
 
 	/**
-	 * Creates a new bubble.
-	 * @param tex the name of the bubble texture.
+	 * Add a new Bubble at position mid
+	 * @param mid the position of the Bubble.
 	 */
-	public Bubble(String tex) {
-		this.bubble_img = new Texture(Gdx.files.internal(tex));
-		this.bubble = new Rectangle();
+	public Bubble(Vector2 mid) {
+		super(new Texture("Bubble-Blue.png"));
+		this.bounds = new Circle();
+		this.setPosition(mid.x, mid.y);
+		this.neighbors = new Bubble[6];
+		this.color = getRandomColor();
+		this.setColor(new Color(color.rgba));
 	}
-	
+
 	/**
-	 * Set position of the bubble on screen (in pixels)
-	 * @param x
-	 * @param y
+	 * Get the neighbor at the Orientation specified.
+	 * @param orient - the Orientation of the neighbor.
+	 * @return The neighbor, or nothing if there is no neighbor.
 	 */
-	public void setPosition(int x, int y) {
-		this.bubble.x = x;
-		this.bubble.y = y;
+	public Optional<Bubble> getNeighbor(Orientation orient) {
+		return Optional.ofNullable(neighbors[orient.ordinal()]);
 	}
-	
+
 	/**
-	 * Get the rectangle bound to the bubble.
-	 * @return
+	 * Set the neighbor at the given Orientation.
+	 * @param b - the new neighbor of this Bubble.
+	 * @param orient - the Orientation of the neighbor
 	 */
-	public Rectangle getRectangle() {
-		return bubble;	
+	public void setNeighbor(Bubble b, Orientation orient) {
+		neighbors[orient.ordinal()] = b;
 	}
-	
+
 	/**
-	 * Retrieve bubble's texture
-	 * @return texture of the bubble
+	 * Check if this Bubble collides with b.
+	 * @param b - the bubble that gets shot.
+	 * @return true if the Bubbles collided.
 	 */
-	public Texture getTexture() {
-		return bubble_img;
+	public boolean collides(Bubble b) {
+		return bounds.overlaps(b.bounds);
+
 	}
-	
-	/**
-	 * Get the X coordinate of the bubble.
-	 * @return
-	 */
-	public float getX() {
-		return bubble.x;
+
+	@Override
+	public void setPosition(float x, float y) {
+		super.setPosition(x, y);
+		this.bounds.setPosition(x, y);
 	}
-	
+
 	/**
-	 * Get Y coordinate of the bubble.
-	 * @return
+	 * Pick a ColorValue at random.
+	 * @return a randomly chosen ColorValue.
 	 */
-	public float getY() {
-		return bubble.y;
+	protected ColorValue getRandomColor() {
+		return colors[getRNG().nextInt(colors.length)];
 	}
-	
+
 	/**
-	 * Draws the bubble
-	 * @param batch
+	 * Get a specific Random Number Generator (RNG).
+	 * @return a RNG
 	 */
-	public void draw(SpriteBatch batch) {
-		batch.draw(bubble_img, bubble.x, bubble.y);
+	protected Random getRNG() {
+		return new Random();
 	}
 }
