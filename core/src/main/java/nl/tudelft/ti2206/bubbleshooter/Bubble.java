@@ -50,30 +50,41 @@ public class Bubble extends Sprite {
 	protected Bubble[] neighbors;
 	protected Circle bounds;
 
+	/**
+	 * Add a new Bubble at position mid
+	 * @param mid the position of the Bubble.
+	 */
 	public Bubble(Vector2 mid) {
 		super(new Texture("Bubble-Blue.png"));
 		this.bounds = new Circle();
 		this.setPosition(mid.x, mid.y);
 		this.neighbors = new Bubble[6];
-		this.color = colors[getRandomColor()];
+		this.color = getRandomColor();
 		this.setColor(new Color(color.rgba));
 	}
 
-	public Optional<Bubble> getNeighbor(Orientation dir) {
-		return Optional.ofNullable(neighbors[dir.ordinal()]);
-	}
-
-	public void setNeighbor(Bubble b, Orientation dir) {
-		neighbors[dir.ordinal()] = b;
+	/**
+	 * Get the neighbor at the Orientation specified.
+	 * @param orient - the Orientation of the neighbor.
+	 * @return The neighbor, or nothing if there is no neighbor.
+	 */
+	public Optional<Bubble> getNeighbor(Orientation orient) {
+		return Optional.ofNullable(neighbors[orient.ordinal()]);
 	}
 
 	/**
-	 * Checks if the if the bubbles hit each other
-	 * 
-	 * @param b
-	 *            - the bubble that gets shot
-	 * 
-	 * @return a boolean depending on the collide
+	 * Set the neighbor at the given Orientation.
+	 * @param b - the new neighbor of this Bubble.
+	 * @param orient - the Orientation of the neighbor
+	 */
+	public void setNeighbor(Bubble b, Orientation orient) {
+		neighbors[orient.ordinal()] = b;
+	}
+
+	/**
+	 * Check if this Bubble collides with b.
+	 * @param b - the bubble that gets shot.
+	 * @return true if the Bubbles collided.
 	 */
 	public boolean collides(Bubble b) {
 		return bounds.overlaps(b.bounds);
@@ -86,11 +97,18 @@ public class Bubble extends Sprite {
 		this.bounds.setPosition(x, y);
 	}
 
-	protected int getRandomColor() {
-		Random r = getRNG();
-		return r.nextInt(colors.length);
+	/**
+	 * Pick a ColorValue at random.
+	 * @return a randomly chosen ColorValue.
+	 */
+	protected ColorValue getRandomColor() {
+		return colors[getRNG().nextInt(colors.length)];
 	}
 
+	/**
+	 * Get a specific Random Number Generator (RNG).
+	 * @return a RNG
+	 */
 	protected Random getRNG() {
 		return new Random();
 	}
