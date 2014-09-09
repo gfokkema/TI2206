@@ -2,9 +2,13 @@ package nl.tudelft.ti2206.bubbleshooter;
 
 import java.util.Optional;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 
-public class Bubble {
+public class Bubble extends Sprite {
 	public enum Orientation {
 		NORTH_EAST,
 		EAST,
@@ -43,7 +47,9 @@ public class Bubble {
 	private Bubble[] neighbors;
 	private Circle bounds;
 
-	public Bubble() {
+	public Bubble(Vector2 mid) {
+		super(new Texture("Bubble-Blue.png"));
+		bounds = new Circle(mid, 64);
 		this.neighbors = new Bubble[6];
 	}
 
@@ -57,5 +63,10 @@ public class Bubble {
 
 	public boolean collides(Bubble b){
 		return true;
+	}
+	
+	@Override
+	public void draw(Batch batch) {
+		batch.draw(this.getTexture(), bounds.x, bounds.y);
 	}
 }

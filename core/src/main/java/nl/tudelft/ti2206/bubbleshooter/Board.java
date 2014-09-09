@@ -4,18 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Represents the play field with all the bubbles.
  * @author skip
  *
  */
-public class Board {
+public class Board extends Sprite {
 	private ArrayList<Bubble> bubbles;
+	private int width, height;
 
 	public Board(int width, int height) {
+		super(new Texture("back_one_player.png"));
+		this.width = width;
+		this.height = height;
+		
 		bubbles = new ArrayList<Bubble>(width*height);
+		bubbles.add(new Bubble(new Vector2(100, 400)));
+		bubbles.add(new Bubble(new Vector2(164, 400)));
 	}
 
 	public boolean collides(Bubble b) {
@@ -73,8 +83,12 @@ public class Board {
 	public void removeAll(List<Bubble> bs) {
 		bubbles.removeAll(bs);
 	}
-
-	public void draw(SpriteBatch batch) {
-		// Draw all the bubbles in the List
+	
+	@Override
+	public void draw(Batch batch) {
+		super.draw(batch);
+		for (Bubble bubble : bubbles) {
+			bubble.draw(batch);
+		}
 	}
 }
