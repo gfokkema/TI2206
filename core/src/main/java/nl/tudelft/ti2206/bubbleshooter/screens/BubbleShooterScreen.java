@@ -16,7 +16,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	Bubble blue;
 	Cannon cannon;
 	float elapsed;
-	float angle;
+
 	
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
@@ -28,8 +28,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		blue = new Bubble("Bubble-Blue.png");
 		blue.setPosition(400, 400);
 		cannon = new Cannon(Gdx.graphics.getWidth()/2,100,"testCannon.png");
-		cannon.setSpritePosition();
-		angle = 0;
 //		bubble_orange = new Texture(Gdx.files.internal("Bubble-Orange.png"));
 //		bubble_green = new Texture(Gdx.files.internal("Bubble-green.png"));
 //		bubble_pink = new Texture(Gdx.files.internal("Bubble-pink.png"));
@@ -49,30 +47,24 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		int blue_height = blue.getTexture().getHeight();
 		Rectangle bRectangle = blue.getRectangle();
 		
+		// batch begins
 		game.batch.begin();
+		
 		// bubble stays within screen bounds
 		if(blue.getX() < 0) bRectangle.x = 0;
 		if(blue.getX() > Gdx.graphics.getWidth() - blue_width) bRectangle.x = Gdx.graphics.getWidth() - blue_width;
 		if(blue.getY() < 0) bRectangle.y = 0;
 		if(blue.getY() > Gdx.graphics.getHeight() - blue_height) bRectangle.y = Gdx.graphics.getHeight() - blue_height;
 		
-		// sample user input
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) {angle += 300*Gdx.graphics.getDeltaTime(); Gdx.app.log("Angle is", "" + angle); cannon.setAngle(angle);}
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {angle -= 300*Gdx.graphics.getDeltaTime(); Gdx.app.log("Angle is", "" + angle); cannon.setAngle(angle);}
-		
+		// draw the cannon (+ temp a bubble...)
 		cannon.draw(game.batch);
 		blue.draw(game.batch);
-//		batch.draw(bubble_orange, 100+100*(float)Math.cos(elapsed), 100+25*(float)Math.sin(elapsed));
-//		batch.draw(bubble_green, 200+100*(float)Math.cos(elapsed), 200+25*(float)Math.sin(elapsed));
-//		batch.draw(bubble_pink, 400+100*(float)Math.cos(elapsed), 400+25*(float)Math.sin(elapsed));
+		
+		// end batch
 		game.batch.end();
 		
-
-		
-	
-//		if(Gdx.input.isKeyPressed(Keys.DOWN)) blue.getRectangle().y -= 300 * Gdx.graphics.getDeltaTime();
-//		if(Gdx.input.isKeyPressed(Keys.UP)) blue.getRectangle().y += 300 * Gdx.graphics.getDeltaTime();
-//		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) dispose();
+		// testing...
+		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) dispose();
 	}
 
 	@Override

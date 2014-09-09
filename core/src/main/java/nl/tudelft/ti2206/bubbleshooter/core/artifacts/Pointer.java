@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * The Pointer class contains a vector of the place where the cursor of the user was at the time.
  * Furthermore contains the normalized vector of the cursor.
- * @author Owen
+ * @author Nando &amp; Owen
  *
  */
 public class Pointer {
@@ -33,23 +33,44 @@ public class Pointer {
 		origin = coordinate;
 	}
 	
+	/**
+	 * Set the direction of the vector.
+	 * @param vector
+	 */
 	public void setDirection(Vector2 vector) {
 		this.direction = vector.nor();
 	}
 	
+	/**
+	 * Set the direction of a vector (a point)
+	 * Calls {@link #setDirection}.
+	 * @param coordinate
+	 */
 	public void setPointDirection(Vector2 coordinate) {
 		Vector2 direction = coordinate.sub(origin);
 		setDirection(direction);
 	}
 	
+	/**
+	 * Get the original coordinate from the direction.
+	 * @return original point
+	 */
 	public Vector2 getCoordinateDirection() {
 		return origin.add(direction);
 	}
 	
+	/**
+	 * Retrieve the direction.
+	 * @return direction
+	 */
 	public Vector2 getDirection() {
 		return direction;
 	}
 	
+	/**
+	 * Retrieve the origin.
+	 * @return origin
+	 */
 	public Vector2 getOrigin() {
 		return origin;
 	}
@@ -74,6 +95,6 @@ public class Pointer {
 	 * Simple string representation of a Pointer.
 	 */
 	public String toString() {
-		return "Pointer{Direction:" + direction + " ,Origin:" + origin + "}";
+		return "Pointer(Direction: " + direction + ", Origin:" + origin + ")";
 	}
 }
