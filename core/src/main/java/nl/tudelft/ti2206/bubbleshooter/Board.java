@@ -29,6 +29,14 @@ public class Board extends Sprite {
 		bubbles.add(new Bubble(new Vector2(164, 400)));
 	}
 
+/**
+ * Checks the bubble that gets shot, with all the other bubbles if there is a collision.
+ * 
+ * @param b
+ *  		- the bubble that gets shot.
+ *  
+ * @return A boolean gets returned depending if there was a collision.
+ */
 	public boolean collides(Bubble b) {
 		// Get the Bubble's index on the hex grid
 		// Check each Bubble around this bubble
