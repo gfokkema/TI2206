@@ -25,7 +25,7 @@ public class Bubble extends Sprite {
 		 * @return the opposite orientation
 		 */
 		public Orientation getOpposite() {
-			return orientations[this.ordinal() + 3];
+			return orientations[(this.ordinal() + 3) % 6];
 		}
 	}
 	protected static Orientation[] orientations = Orientation.values();

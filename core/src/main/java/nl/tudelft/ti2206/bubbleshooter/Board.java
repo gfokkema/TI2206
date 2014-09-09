@@ -11,9 +11,6 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Represents the play field with all the bubbles.
- * 
- * @author skip
- *
  */
 public class Board extends Sprite {
 	private ArrayList<Bubble> bubbles;
