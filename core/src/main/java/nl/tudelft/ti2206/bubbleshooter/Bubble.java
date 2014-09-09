@@ -26,11 +26,17 @@ public class Bubble {
 	private static final Orientation[] orientations = Orientation.values();
 
 	public enum Color {
-		RED,
-		GREEN,
-		BLUE,
-		PURPLE,
-		ORANGE
+		RED(0xFF0000FF),
+		GREEN(0x00FF00FF),
+		BLUE(0x0000FFFF),
+		PURPLE(0xFF00FFFF),
+		YELLOW(0xFFFF00FF);
+
+		protected int rgba;
+
+		private Color(int rgba) {
+			this.rgba = rgba;
+		}
 	}
 
 	private Color color;
@@ -47,5 +53,9 @@ public class Bubble {
 
 	public void setNeighbor(Bubble b, Orientation dir) {
 		neighbors[dir.ordinal()] = b;
+	}
+
+	public boolean collides(Bubble b){
+		return true;
 	}
 }
