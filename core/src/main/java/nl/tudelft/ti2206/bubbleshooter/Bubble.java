@@ -7,12 +7,20 @@ import com.badlogic.gdx.math.Circle;
 
 public class Bubble {
 	public enum Orientation {
-		EAST,		//+ 1
-		SOUTH_EAST, //+ width
-		SOUTH_WEST, //+ width - 1
-		WEST,		//- 1
-		NORTH_WEST, //- width
-		NORTH_EAST; //- width + 1 == - (width - 1)
+		EAST(0, 1),			//+ 1
+		SOUTH_EAST(1, 0),	//+ width
+		SOUTH_WEST(1, -1),	//+ width - 1
+		WEST(0,-1),			//- 1
+		NORTH_WEST(-1, 0),	//- width
+		NORTH_EAST(-1, 1);	//- width + 1 == - (width - 1)
+
+		int a_coeff;
+		int b_coeff;
+
+		private Orientation(int a, int b) {
+			this.a_coeff = a;
+			this.b_coeff = b;
+		}
 
 		/**
 		 * Returns the opposite orientation, for example
@@ -25,15 +33,16 @@ public class Bubble {
 
 		/**
 		 * Returns the index at this direction from the given
-		 * index. For example:
+		 * index. It works according to the following formula:
+		 * newIndex = startIndex + a * width + b,
+		 * where a and b are either -1, 0 or 1.
 		 * NORTH_EAST.fromIndex(6, 4) will return 3.
 		 * @param index
 		 * @param width
 		 * @return
 		 */
 		public int fromIndex(int index, int width) {
-			//TODO
-			return 0;
+			return index + a_coeff * width + b_coeff;
 		}
 	}
 	protected static Orientation[] orientations = Orientation.values();
