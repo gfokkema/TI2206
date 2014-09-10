@@ -24,6 +24,7 @@ public class Cannon {
 	
 	Texture bubbleImage;
 	Sprite bubbleSprite;
+	Vector2 BCPosition;
 	
 	private final float LEFT_BOUNDARY = 40;
 	private final float RIGHT_BOUNDARY = -40;
@@ -47,13 +48,11 @@ public class Cannon {
 		sprite.setOrigin(sprite.getWidth()/2, 25);
 		sprite.setPosition(x - image.getWidth()/2, y);
 		
-		// add bubble
-		Vector2 temp = pointer.getOrigin().add(pointer.getDirection().scl(00));
-				
+		// add bubble		
+		BCPosition = new Vector2(0,0);
 		bubbleImage = new Texture("Bubble-Blue.png");
-		bubbleSprite = new Sprite(bubbleImage);
-		bubbleSprite.setPosition(temp.x, temp.y);
-		
+//		bubbleSprite = new Sprite(bubbleImage);
+//		bubbleSprite.setPosition(temp.x, temp.y);
 		pointer.setOrigin(new Vector2(x-bubbleImage.getWidth()/2, y));
 	}
 	
@@ -107,6 +106,14 @@ public class Cannon {
 	}
 	
 	/**
+	 * Get the position of where the bubble should be relatively to the cannon.
+	 * @return BCPosition
+	 */
+	public Vector2 getBCPosition() {
+		return BCPosition;
+	}
+	
+	/**
 	 * Per frame checks if angle of the cannon changed,
 	 * at the end draws the actual cannon onto screen.
 	 * @param batch
@@ -129,12 +136,8 @@ public class Cannon {
 			Gdx.app.log("Angle is", "" + angle); 
 		}
 		
-		Vector2 temp = pointer.getOrigin().add(pointer.getDirection().scl(100));
-		
-		Gdx.app.log("temp is",temp.toString()); 
-		
-		bubbleSprite.setPosition(temp.x, temp.y);
-		bubbleSprite.draw(batch);
+		//Gdx.app.log("Bubble Cannon Position is", "" + BCPosition); 
+		BCPosition = pointer.getOrigin().add(pointer.getDirection().scl(100));
 		
 		// draw the cannon
 		sprite.draw(batch);

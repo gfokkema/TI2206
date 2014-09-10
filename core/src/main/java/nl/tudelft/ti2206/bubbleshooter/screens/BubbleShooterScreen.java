@@ -17,7 +17,7 @@ import com.badlogic.gdx.ScreenAdapter;
 
 public class BubbleShooterScreen extends ScreenAdapter {
 	Launch game;
-	Bubble blue;
+	Bubble projectile;
 	Cannon cannon;
 	Board board;
 	float elapsed;
@@ -33,6 +33,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.game = game;
 		this.board = new Board(8, 15);
 		cannon = new Cannon(Gdx.graphics.getWidth()/2,100);
+		projectile = new Bubble();
+		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/2);
+		Gdx.app.log("Create BCPos", "" + cannon.getBCPosition()); 
 	}
 	
 
@@ -49,7 +52,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
 		game.batch.begin();
-
 		Color current = game.batch.getColor();
 
 		game.batch.draw(bg, 0, 0);
@@ -61,6 +63,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		});
 		game.batch.setColor(current);
 		cannon.draw(game.batch);
+		
+		// update... <--- should be done diff
+		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/2);
+		game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y);
+
+		//Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
 		game.batch.end();
 	}
 	
