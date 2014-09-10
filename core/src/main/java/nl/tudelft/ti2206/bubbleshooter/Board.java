@@ -98,7 +98,7 @@ public class Board {
 	 *         should be removed.
 	 */
 	public Optional<List<Bubble>> getNextRemoved(int id) {
-		List<Bubble> result = new ArrayList<Bubble>();
+		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
 
 		// Search for bubbles of the same color
 		List<Bubble> sameColors = breadthFirst(
@@ -126,7 +126,10 @@ public class Board {
 					ds
 			));
 		}
-		return null;
+
+		// Remove all of the bubbles that are not connected to the ceiling.
+		result.removeAll(connectedToCeiling);
+		return Optional.of(result);
 	}
 
 	private List<Bubble> breadthFirst(Integer subject, BiPredicate<Integer, Integer> condition, DisjointSet ds) {
