@@ -1,25 +1,25 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * Represents the play field with all the bubbles.
  */
 public class Board {
-	private ArrayList<Bubble> bubbles;
 	private int width = 8, height = 20;
+	private HashMap<Integer,Bubble> bubbles;
 
 	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 
-		bubbles = new ArrayList<Bubble>(width * height);
+		bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
 		for (int i = 0; i < 40; i++) {
-			bubbles.add(new Bubble());
+			bubbles.put(i, new Bubble());
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class Board {
 		// setBubbleX(directionX+1?) + setBubbleX(directionY+1?)
 		// }
 
-		for (Bubble c : bubbles) {
+		for (Bubble c : bubbles.values()) {
 			if (c.collides(b)) {
 				return true;
 			}
@@ -83,8 +83,8 @@ public class Board {
 		// Attach the Bubble to its neighbors.
 	}
 	
-	public ArrayList<Bubble> getBubbles() {
-		return bubbles;
+	public Collection<Bubble> getBubbles() {
+		return bubbles.values();
 	}
 
 	/**
@@ -99,6 +99,6 @@ public class Board {
 	}
 
 	public void removeAll(List<Bubble> bs) {
-		bubbles.removeAll(bs);
+		bubbles.values().removeAll(bs);
 	}
 }

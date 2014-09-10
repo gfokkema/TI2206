@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
-import java.util.Optional;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
@@ -8,21 +7,33 @@ import com.badlogic.gdx.math.Circle;
 
 public class Bubble {
 	public enum Orientation {
-		NORTH_EAST,
-		EAST,
-		SOUTH_EAST,
-		SOUTH_WEST,
-		WEST,
-		NORTH_WEST;
+		EAST,		//+ 1
+		SOUTH_EAST, //+ width
+		SOUTH_WEST, //+ width - 1
+		WEST,		//- 1
+		NORTH_WEST, //- width
+		NORTH_EAST; //- width + 1 == - (width - 1)
 
 		/**
 		 * Returns the opposite orientation, for example
 		 * SOUTH_EAST.getOpposite() will return NORTH_EAST.
-		 * 
 		 * @return the opposite orientation
 		 */
 		public Orientation getOpposite() {
 			return orientations[(this.ordinal() + 3) % 6];
+		}
+
+		/**
+		 * Returns the index at this direction from the given
+		 * index. For example:
+		 * NORTH_EAST.fromIndex(6, 4) will return 3.
+		 * @param index
+		 * @param width
+		 * @return
+		 */
+		public int fromIndex(int index, int width) {
+			//TODO
+			return 0;
 		}
 	}
 	protected static Orientation[] orientations = Orientation.values();
@@ -35,29 +46,10 @@ public class Bubble {
 		Color.YELLOW
 	};
 	protected Color color;
-	protected Bubble[] neighbors;
 	protected Circle bounds;
 	
 	public Bubble() {
 		this.color = getRandomColor();
-	}
-
-	/**
-	 * Get the neighbor at the Orientation specified.
-	 * @param orient - the Orientation of the neighbor.
-	 * @return The neighbor, or nothing if there is no neighbor.
-	 */
-	public Optional<Bubble> getNeighbor(Orientation orient) {
-		return Optional.ofNullable(neighbors[orient.ordinal()]);
-	}
-
-	/**
-	 * Set the neighbor at the given Orientation.
-	 * @param b - the new neighbor of this Bubble.
-	 * @param orient - the Orientation of the neighbor
-	 */
-	public void setNeighbor(Bubble b, Orientation orient) {
-		neighbors[orient.ordinal()] = b;
 	}
 
 	/**

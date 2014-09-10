@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
@@ -38,10 +39,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Color current = game.batch.getColor();
 		
 		game.batch.draw(bg, 0, 0);
-		ArrayList<Bubble> bubbles = board.getBubbles();
-		for (int i = 0; i < bubbles.size(); i++) {
+		Collection<Bubble> bubbles = board.getBubbles();
+		int i = 0;
+		for(Bubble b : bubbles) {
 			Vector2 loc = getLoc(i);
-			game.batch.setColor(bubbles.get(i).getColor());
+			game.batch.setColor(b.getColor());
 			game.batch.draw(fg, loc.x + 190, Gdx.graphics.getHeight() - 32 - loc.y, 32, 32);
 		}
 		
