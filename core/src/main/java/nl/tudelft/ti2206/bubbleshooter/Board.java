@@ -4,28 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * Represents the play field with all the bubbles.
  */
-public class Board extends Sprite {
+public class Board {
 	private ArrayList<Bubble> bubbles;
 	private int width, height;
 
 	public Board(int width, int height) {
-		super(new Texture("back_one_player.png"));
 		this.width = width;
 		this.height = height;
 
 		bubbles = new ArrayList<Bubble>(width * height);
-		bubbles.add(new Bubble(new Vector2(100, 400)));
-		bubbles.add(new Bubble(new Vector2(164, 400)));
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
+		bubbles.add(new Bubble());
 	}
-
+	
     /**
      * Checks the bubble that gets shot, with all the other bubbles if there is a collision.
      * @param b - the bubble that gets shot.
@@ -77,6 +91,10 @@ public class Board extends Sprite {
 	public void attach(Bubble b, int i, int j) {
 		// Attach the Bubble to its neighbors.
 	}
+	
+	public ArrayList<Bubble> getBubbles() {
+		return bubbles;
+	}
 
 	/**
 	 * Traversal to find all of the nodes that should be removed. If nothing
@@ -91,11 +109,5 @@ public class Board extends Sprite {
 
 	public void removeAll(List<Bubble> bs) {
 		bubbles.removeAll(bs);
-	}
-
-	@Override
-	public void draw(Batch batch) {
-		super.draw(batch);
-		bubbles.forEach((Bubble b) -> b.draw(batch));
 	}
 }
