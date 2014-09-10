@@ -42,7 +42,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		for (int i = 0; i < bubbles.size(); i++) {
 			Vector2 loc = getLoc(i);
 			game.batch.setColor(bubbles.get(i).getColor());
-			game.batch.draw(fg, loc.x + 200, Gdx.graphics.getHeight() - 32 - loc.y, 32, 32);
+			game.batch.draw(fg, loc.x + 190, Gdx.graphics.getHeight() - 32 - loc.y, 32, 32);
 		}
 		
 		game.batch.setColor(current);
@@ -50,10 +50,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	}
 	
 	private Vector2 getLoc(int idx) {
-		int x = (idx % 7 % 4) * 32 +
-				((idx % 7) / 4) * 16;
-		int y = (idx / 7) * 64 +
-				(idx % 7) / 4 * 32;
+		int width = board.getWidth();
+		int x = (idx % (width * 2 - 1) % width) * 32 +
+				((idx % (width * 2 - 1)) / width) * 16;
+		int y = (idx / (width * 2 - 1)) * 64 +
+				(idx % (width * 2 - 1)) / width * 32;
 		return new Vector2(x, y);
 	}
 }

@@ -11,33 +11,24 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Board {
 	private ArrayList<Bubble> bubbles;
-	private int width, height;
+	private int width = 8, height = 20;
 
 	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 
 		bubbles = new ArrayList<Bubble>(width * height);
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
-		bubbles.add(new Bubble());
+		for (int i = 0; i < 40; i++) {
+			bubbles.add(new Bubble());
+		}
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 	
     /**
