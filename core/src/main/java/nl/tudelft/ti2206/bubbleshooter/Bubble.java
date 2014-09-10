@@ -57,10 +57,22 @@ public class Bubble {
 	protected Color color;
 	protected Circle bounds;
 	
+	/**
+	 * Instantiate a new Bubble, with a Random color.
+	 */
 	public Bubble() {
 		this.color = getRandomColor();
 	}
 
+	/**
+	 * Instantiate a new Bubble, with the given color.
+	 * This function is for testing purposes, therefore
+	 * it's protected and can only be used in the same package.
+	 * @param c - the Color of the Bubble.
+	 */
+	protected Bubble(Color c) {
+		this.color = c;
+	}
 	/**
 	 * Check if this Bubble collides with b.
 	 * @param b - the bubble that gets shot.
