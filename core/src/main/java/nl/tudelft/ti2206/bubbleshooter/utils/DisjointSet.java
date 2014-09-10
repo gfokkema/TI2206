@@ -55,4 +55,8 @@ public class DisjointSet {
 			sz[root_i] += sz[root_j];
 		}
 	}
+
+	public int sizeof(int i) {
+		return sz[i];
+	}
 }

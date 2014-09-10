@@ -73,6 +73,7 @@ public class Bubble {
 	protected Bubble(Color c) {
 		this.color = c;
 	}
+
 	/**
 	 * Check if this Bubble collides with b.
 	 * @param b - the bubble that gets shot.
