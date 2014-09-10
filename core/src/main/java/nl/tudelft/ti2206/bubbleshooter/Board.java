@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -83,8 +84,8 @@ public class Board {
 		// Attach the Bubble to its neighbors.
 	}
 	
-	public Collection<Bubble> getBubbles() {
-		return bubbles.values();
+	public Map<Integer, Bubble> getBubbles() {
+		return bubbles;
 	}
 
 	/**
