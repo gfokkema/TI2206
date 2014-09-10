@@ -56,7 +56,7 @@ public class Pointer {
 	 * @return original point
 	 */
 	public Vector2 getCoordinateDirection() {
-		return origin.add(direction);
+		return getOrigin().add(getDirection());
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class Pointer {
 	 * @return direction
 	 */
 	public Vector2 getDirection() {
-		return direction;
+		return new Vector2(direction);
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class Pointer {
 	 * @return origin
 	 */
 	public Vector2 getOrigin() {
-		return origin;
+		return new Vector2(origin);
 	}
 		
 	/**
@@ -85,10 +85,11 @@ public class Pointer {
 	
 	/**
 	 * Set the angle of the normal.
+	 * pointer with angle 0 points up
 	 * @param degrees
 	 */
 	public void setAngle(float degrees) {
-		direction.setAngle(degrees);
+		direction.setAngle(degrees + 90);
 	}
 		
 	/**

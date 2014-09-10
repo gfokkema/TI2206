@@ -21,6 +21,10 @@ public class Cannon {
 	Texture image;
 	Sprite sprite;
 	float angle;
+	
+	Texture bubbleImage;
+	Sprite bubbleSprite;
+	
 	private final float LEFT_BOUNDARY = 40;
 	private final float RIGHT_BOUNDARY = -40;
 	private final int sensitivity = 100;
@@ -33,7 +37,7 @@ public class Cannon {
 	 */
 	public Cannon(int x, int y) {
 		pointer = new Pointer(new Vector2(x, y));
-		
+				
 		// texture for cannon + angle
 		image = new Texture("cannon.png");
 		angle = 0;
@@ -41,7 +45,15 @@ public class Cannon {
 		// sprite settings
 		sprite = new Sprite(image);
 		sprite.setOrigin(sprite.getWidth()/2, 25);
-		sprite.setPosition(x, y);
+		sprite.setPosition(x - image.getWidth()/2, y);
+		
+		// add bubble
+		Vector2 temp = pointer.getOrigin().add(pointer.getDirection().scl(100));
+				
+		bubbleImage = new Texture("Bubble-Blue.png");
+		bubbleSprite = new Sprite(bubbleImage);
+		bubbleSprite.setOrigin(bubbleImage.getWidth()/2, bubbleImage.getHeight()/2);
+		bubbleSprite.setPosition(temp.x, temp.y);
 	}
 	
 	/**
@@ -115,6 +127,13 @@ public class Cannon {
 			// debugging...
 			Gdx.app.log("Angle is", "" + angle); 
 		}
+		
+		Vector2 temp = pointer.getOrigin().add(pointer.getDirection().scl(100));
+		
+		Gdx.app.log("temp is",temp.toString()); 
+		
+		bubbleSprite.setPosition(temp.x, temp.y);
+		bubbleSprite.draw(batch);
 		
 		// draw the cannon
 		sprite.draw(batch);
