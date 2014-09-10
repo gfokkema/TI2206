@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Nando &amp; Owen
  *
  */
-public class Cannon extends Sprite{
+public class Cannon {
 
 	/**
 	 * Create a pointer and the texture for the cannon.

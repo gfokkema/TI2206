@@ -1,7 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Bubble;
@@ -13,24 +14,29 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Represents the play field with all the bubbles.
- * 
- * @author skip
- *
  */
-public class Board extends Sprite {
-	private ArrayList<Bubble> bubbles;
-	private int width, height;
+public class Board {
+	private int width = 8, height = 20;
+	private HashMap<Integer,Bubble> bubbles;
 
 	public Board(int width, int height) {
-		super(new Texture("back_one_player.png"));
 		this.width = width;
 		this.height = height;
 
-		bubbles = new ArrayList<Bubble>(width * height);
-		bubbles.add(new Bubble(new Vector2(100, 400)));
-		bubbles.add(new Bubble(new Vector2(164, 400)));
+		bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
+		for (int i = 0; i < 40; i++) {
+			bubbles.put(i, new Bubble());
+		}
 	}
-
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
     /**
      * Checks the bubble that gets shot, with all the other bubbles if there is a collision.
      * @param b - the bubble that gets shot.
@@ -65,7 +71,7 @@ public class Board extends Sprite {
 		// setBubbleX(directionX+1?) + setBubbleX(directionY+1?)
 		// }
 
-		for (Bubble c : bubbles) {
+		for (Bubble c : bubbles.values()) {
 			if (c.collides(b)) {
 				return true;
 			}
@@ -82,6 +88,10 @@ public class Board extends Sprite {
 	public void attach(Bubble b, int i, int j) {
 		// Attach the Bubble to its neighbors.
 	}
+	
+	public Map<Integer, Bubble> getBubbles() {
+		return bubbles;
+	}
 
 	/**
 	 * Traversal to find all of the nodes that should be removed. If nothing
@@ -95,12 +105,6 @@ public class Board extends Sprite {
 	}
 
 	public void removeAll(List<Bubble> bs) {
-		bubbles.removeAll(bs);
-	}
-
-	@Override
-	public void draw(Batch batch) {
-		super.draw(batch);
-		bubbles.forEach((Bubble b) -> b.draw(batch));
+		bubbles.values().removeAll(bs);
 	}
 }
