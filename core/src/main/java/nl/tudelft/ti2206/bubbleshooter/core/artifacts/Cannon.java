@@ -48,12 +48,13 @@ public class Cannon {
 		sprite.setPosition(x - image.getWidth()/2, y);
 		
 		// add bubble
-		Vector2 temp = pointer.getOrigin().add(pointer.getDirection().scl(100));
+		Vector2 temp = pointer.getOrigin().add(pointer.getDirection().scl(00));
 				
 		bubbleImage = new Texture("Bubble-Blue.png");
 		bubbleSprite = new Sprite(bubbleImage);
-		bubbleSprite.setOrigin(bubbleImage.getWidth()/2, bubbleImage.getHeight()/2);
 		bubbleSprite.setPosition(temp.x, temp.y);
+		
+		pointer.setOrigin(new Vector2(x-bubbleImage.getWidth()/2, y));
 	}
 	
 	/**
