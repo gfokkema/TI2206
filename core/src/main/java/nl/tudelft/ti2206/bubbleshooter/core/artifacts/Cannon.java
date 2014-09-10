@@ -35,12 +35,12 @@ public class Cannon extends Sprite{
 		pointer = new Pointer(new Vector2(x, y));
 		
 		// texture for cannon + angle
-		image = new Texture("testCannon.png");
+		image = new Texture("cannon.png");
 		angle = 0;
 		
 		// sprite settings
 		sprite = new Sprite(image);
-		sprite.setOrigin(sprite.getWidth()/2, 0);
+		sprite.setOrigin(sprite.getWidth()/2, 25);
 		sprite.setPosition(x, y);
 	}
 	
