@@ -44,19 +44,26 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		for(Bubble b : bubbles) {
 			Vector2 loc = getLoc(i);
 			game.batch.setColor(b.getColor());
-			game.batch.draw(fg, loc.x + 190, Gdx.graphics.getHeight() - 32 - loc.y, 32, 32);
+			game.batch.draw(fg, loc.x + 190, 480 - loc.y, 32, 32);
 		}
 		
 		game.batch.setColor(current);
 		game.batch.end();
 	}
 	
+	/**
+	 * Returns the bottom left xy-coordinates of a bubble
+	 * @param idx	the index of the bubble on the board
+	 * @return		{@link Vector2} representing xy-coordinates
+	 */
 	private Vector2 getLoc(int idx) {
 		int width = board.getWidth();
 		int x = (idx % (width * 2 - 1) % width) * 32 +
 				((idx % (width * 2 - 1)) / width) * 16;
-		int y = (idx / (width * 2 - 1)) * 64 +
-				(idx % (width * 2 - 1)) / width * 32;
-		return new Vector2(x, y);
+		int y = (idx / (width * 2 - 1)) * 56 +
+				(idx % (width * 2 - 1)) / width * 28;
+
+		// Correction for going from top left corner to bottom left corner
+		return new Vector2(x, y + 32);
 	}
 }
