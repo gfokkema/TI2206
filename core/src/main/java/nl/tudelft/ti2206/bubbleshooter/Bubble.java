@@ -14,12 +14,12 @@ public class Bubble {
 		NORTH_WEST(-1, 0),	//- width
 		NORTH_EAST(-1, 1);	//- width + 1 == - (width - 1)
 
-		int a_coeff;
-		int b_coeff;
+		int delta_y;
+		int delta_x;
 
 		private Orientation(int a, int b) {
-			this.a_coeff = a;
-			this.b_coeff = b;
+			this.delta_y = a;
+			this.delta_x = b;
 		}
 
 		/**
@@ -34,15 +34,15 @@ public class Bubble {
 		/**
 		 * Returns the index at this direction from the given
 		 * index. It works according to the following formula:
-		 * newIndex = startIndex + a * width + b,
-		 * where a and b are either -1, 0 or 1.
+		 * newIndex = startIndex + delta_y * width + delta_x,
+		 * where delta_y and delta_x both be either -1, 0 or 1.
 		 * NORTH_EAST.fromIndex(6, 4) will return 3.
 		 * @param index
 		 * @param width
 		 * @return
 		 */
 		public int fromIndex(int index, int width) {
-			return index + a_coeff * width + b_coeff;
+			return index + delta_y * width + delta_x;
 		}
 	}
 	protected static Orientation[] orientations = Orientation.values();
