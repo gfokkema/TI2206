@@ -125,9 +125,8 @@ public class Board {
 	}
 	
 	/**
-	 * Traversal to find all of the nodes that should be removed.
-	 * If nothing should be removed, then nothing is returned.
-	 * @return 		{@link Collection} that's either empty or filled with nodes that will be removed 
+	 * Traversal to find all of the {@link Bubble}s that are disconnected from the ceiling.
+	 * @return A {@link Collection} with all the disconnected Bubbles.
 	 */
 	public Collection<Bubble> getDisconnectedGroup() {
 		// The same Map will be used for each depth-first search.
