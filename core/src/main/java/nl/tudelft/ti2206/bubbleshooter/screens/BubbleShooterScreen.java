@@ -15,19 +15,14 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 
 public class BubbleShooterScreen extends ScreenAdapter {
 	Launch game;
 	Projectile projectile;
-	Circle pCircle;
 	Cannon cannon;
 	Board board;
-	int frame_count;
-	boolean fired;
 	Texture bg = new Texture("back_one_player.png");
 	Texture fg = new Texture("Bubble-Blue.png");
 	boolean testperformed = false;
@@ -40,13 +35,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		cannon = new Cannon(Gdx.graphics.getWidth()/2,100);
-//		projectile = new Bubble();
-//		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
-//		pCircle = projectile.getCircle();
-//		Gdx.app.log("Create BCPos", "" + cannon.getBCPosition()); 
-		frame_count = 0;
-		fired = false;
+		this.cannon = new Cannon(Gdx.graphics.getWidth() / 2,100);
 	}
 	
 
@@ -89,12 +78,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		game.batch.setColor(current);
 		
 		cannon.draw(game.batch);
-		//Gdx.app.log("Count is", "" + frame_count);
-		// frame count
-		if(frame_count == 50){
-			fired = false;
-			frame_count = 0;
-		}
 		
 		game.batch.end();
 	}
@@ -115,6 +98,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		}
 		
 		// put pressed on true when Spacebar was hit
-		if(Gdx.input.isKeyPressed(Keys.SPACE)) projectile = cannon.shoot();
+		if (Gdx.input.isKeyPressed(Keys.SPACE) && projectile == null) projectile = cannon.shoot();
 	}
 }

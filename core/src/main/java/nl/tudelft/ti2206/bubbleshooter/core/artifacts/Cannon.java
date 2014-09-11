@@ -48,9 +48,7 @@ public class Cannon {
 		pointer.setOrigin(new Vector2(x - 16, y));
 		
 		// add bubble
-		Vector2 origin = new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
-						.add(pointer.getDirection().scl(100));
-		projectile = new Projectile(new Circle(origin, 16), pointer.direction, 0);
+		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		setAngle(0);
 	}
 	
@@ -81,6 +79,10 @@ public class Cannon {
 		// debugging...
 		Gdx.app.log("Degrees is", "" + angle);
 	}
+	
+	public Bubble getBubble() {
+		return this.projectile;
+	}
 		
 	/**
 	 * Get the associated pointer with the cannon.
@@ -95,22 +97,10 @@ public class Cannon {
 	 */
 	public Projectile shoot() {
 		Projectile fired = projectile;
-		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
-		
 		fired.setVelocity(velocity);
-		return fired;
-	}
 		
-	/**
-	 * Get the cannon angle
-	 * @return angle
-	 */
-	public float getAngle() {
-		return angle;
-	}
-	
-	public Bubble getBubble() {
-		return this.projectile;
+		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
+		return fired;
 	}
 	
 	/**
