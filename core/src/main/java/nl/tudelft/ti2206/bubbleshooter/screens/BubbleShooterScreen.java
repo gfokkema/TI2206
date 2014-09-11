@@ -2,7 +2,6 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
