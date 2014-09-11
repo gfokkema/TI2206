@@ -2,15 +2,17 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
+
 import java.util.Map;
 
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
-
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -18,9 +20,12 @@ import com.badlogic.gdx.ScreenAdapter;
 public class BubbleShooterScreen extends ScreenAdapter {
 	Launch game;
 	Bubble projectile;
+	Circle pCircle;
 	Cannon cannon;
 	Board board;
 	float elapsed;
+	int count;
+	boolean pressed;
 	Texture bg = new Texture("back_one_player.png");
 	Texture fg = new Texture("Bubble-Blue.png");
 
@@ -34,8 +39,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.board = new Board(8, 15);
 		cannon = new Cannon(Gdx.graphics.getWidth()/2,100);
 		projectile = new Bubble();
-		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/2);
+		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
+		pCircle = projectile.getCircle();
 		Gdx.app.log("Create BCPos", "" + cannon.getBCPosition()); 
+		count = 0;
+		pressed = false;
 	}
 	
 
@@ -62,13 +70,46 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.draw(fg, loc.x + 190, 480 - loc.y, 32, 32);
 		});
 		game.batch.setColor(current);
+		Gdx.app.log("Count is", "" + count);
+		if(!pressed){
 		cannon.draw(game.batch);
-		
-		// update... <--- should be done diff
-		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/2);
-		game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y);
+		}
 
-		//Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
+		if(Gdx.input.isKeyPressed(Keys.SPACE)){	
+			pressed = true;
+		}
+		if(pressed){
+			cannon.getBCPosition().x += cannon.getPointer().getDirection().x *15;
+			cannon.getBCPosition().y += cannon.getPointer().getDirection().y *15;
+			
+			
+			projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
+			// bubble stays within screen bounds
+			if(pCircle.x < 190) pCircle.x = 190;
+			if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
+			if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
+			
+			Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
+			game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y, 32, 32);
+			count++;
+		
+		}
+		if(count == 15){
+			pressed = false;
+			count = 0;
+		}
+		//cannon.shoot();
+		// update... <--- should be done diff
+		Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
+		if(!pressed){
+		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
+		
+		// DUPLICATE
+		if(pCircle.x < 190) pCircle.x = 190;
+		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
+		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
+		game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y, 32, 32);
+		}
 		game.batch.end();
 	}
 	

@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -53,7 +54,7 @@ public class Cannon {
 		bubbleImage = new Texture("Bubble-Blue.png");
 //		bubbleSprite = new Sprite(bubbleImage);
 //		bubbleSprite.setPosition(temp.x, temp.y);
-		pointer.setOrigin(new Vector2(x-bubbleImage.getWidth()/2, y));
+		pointer.setOrigin(new Vector2(x-bubbleImage.getWidth()/4, y));
 	}
 	
 	/**
@@ -94,6 +95,17 @@ public class Cannon {
 	 * Shoot the actual bubble: pew pew!
 	 */
 	public void shoot() {
+		//Gdx.app.log("Before", BCPosition.toString());
+		//Gdx.app.log("Pointer dir", pointer.getDirection().toString());
+		if(Gdx.input.isKeyPressed(Keys.SPACE)){
+			Gdx.gl.glClearColor(0, 0, 0, 0);
+			Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+			for(int i = 0; i < 20; i++){
+				BCPosition.x += pointer.getDirection().x * Gdx.graphics.getDeltaTime() * 3000;
+				BCPosition.y += pointer.getDirection().y * Gdx.graphics.getDeltaTime() * 3000;
+			}
+		}
+		//Gdx.app.log("After", BCPosition.toString());
 		//TODO more pew pew!
 	}
 		
