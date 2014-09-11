@@ -16,20 +16,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *
  */
 public class Cannon {
-
 	/**
 	 * Create a pointer and the texture for the cannon.
 	 */
-	Bubble projectile;
-	Pointer pointer;
-	Texture image;
 	Sprite sprite;
+	Pointer pointer;
 	float angle;
-	Circle pCircle;
-	
-	Texture fg = new Texture("Bubble-Blue.png");
-	Sprite bubbleSprite;
-	Vector2 BCPosition;
+
+	Bubble projectile;
+	boolean moving = false;
 	
 	private final float LEFT_BOUNDARY = 40;
 	private final float RIGHT_BOUNDARY = -40;
@@ -43,23 +38,21 @@ public class Cannon {
 	 * @param y coordinate
 	 */
 	public Cannon(int x, int y) {
-		pointer = new Pointer(new Vector2(x, y));
-				
-		// texture for cannon + angle
-		image = new Texture("cannon.png");
-		angle = 0;
+		Texture image = new Texture("cannon.png");
 		
 		// sprite settings
 		sprite = new Sprite(image);
-		sprite.setOrigin(sprite.getWidth()/2, 25);
-		sprite.setPosition(x - image.getWidth()/2, y);
+		sprite.setOrigin(sprite.getWidth() / 2, 25);
+		sprite.setPosition(x - image.getWidth() / 2, y);
+		pointer = new Pointer(new Vector2(x, y));
+		pointer.setOrigin(new Vector2(x - 16, y));
 		
-		// add bubble		
-		BCPosition = new Vector2(0,0);
+		// add bubble
 		projectile = new Bubble();
-		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
-		pCircle = projectile.getCircle();
-		pointer.setOrigin(new Vector2(x-fg.getWidth()/4, y));
+		Vector2 origin = new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
+						.add(pointer.getDirection().scl(100));
+		projectile.setBounds(new Circle(origin, 16));
+		setAngle(0);
 	}
 	
 	/**
@@ -83,7 +76,7 @@ public class Cannon {
 		sprite.rotate(sprite.getRotation() - angle);
 		sprite.setRotation(angle);
 		pointer.setAngle(angle);
-		
+			
 		// debugging...
 		Gdx.app.log("Degrees is", "" + angle);
 	}
@@ -100,10 +93,10 @@ public class Cannon {
 	 * Shoot the actual bubble: pew pew!
 	 */
 	public void shoot() {
-		BCPosition.x += pointer.getDirection().x *velocity;
-		BCPosition.y += pointer.getDirection().y *velocity;
-		
-		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
+		Circle bounds = projectile.getBounds();
+		bounds.x += pointer.getDirection().x * velocity;
+		bounds.y += pointer.getDirection().y * velocity;
+		projectile.setBounds(bounds);
 	}
 		
 	/**
@@ -114,56 +107,35 @@ public class Cannon {
 		return angle;
 	}
 	
-	/**
-	 * Get the position of where the bubble should be relatively to the cannon.
-	 * @return BCPosition
-	 */
-	public Vector2 getBCPosition() {
-		return BCPosition;
-	}
-	
-	/**
-	 * Per frame checks if angle of the cannon changed,
-	 * at the end draws the actual cannon onto screen.
-	 * @param batch
-	 */
-	public void draw(SpriteBatch batch) {
-		// check for left/right key presses
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
-			setAngle(angle); 
-			
-			// debugging...
-			Gdx.app.log("Angle is", "" + angle); 
-		}
-		
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
-			setAngle(angle); 
-			
-			// debugging...
-			Gdx.app.log("Angle is", "" + angle); 
-		}
-		
-		//Gdx.app.log("Bubble Cannon Position is", "" + BCPosition); 
-		BCPosition = pointer.getOrigin().add(pointer.getDirection().scl(100));
-
-		// draw the cannon
-		sprite.draw(batch);
+	public Bubble getBubble() {
+		return this.projectile;
 	}
 	
 	/**
 	 * Draw the bubble which the cannon shoots
 	 * @param batch
 	 */
-	public void drawBubble(SpriteBatch batch){
-		// follow cannon angle
-		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
+	public void draw(SpriteBatch batch) {
+		Circle c = projectile.getBounds();
 		// bubble stays within given bounds.
-		if(pCircle.x < 190) pCircle.x = 190;
-		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
-		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
-		batch.draw(fg, pCircle.x, pCircle.y, 32, 32);	
+		if(c.x < 190 + 16) c.x = 190 + 16;
+		if(c.x > Gdx.graphics.getWidth() - 190 - 16) c.x = Gdx.graphics.getWidth() - 190 - 16;
+		if(c.y > Gdx.graphics.getHeight() - 16) c.y = Gdx.graphics.getHeight() - 16;
+		// check for left/right key presses
+		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+			angle += sensitivity * Gdx.graphics.getDeltaTime(); 
+			setAngle(angle); 
+			
+			// debugging...
+			Gdx.app.log("Angle is", "" + angle); 
+		}
+		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			angle -= sensitivity * Gdx.graphics.getDeltaTime(); 
+			setAngle(angle); 
+			
+			// debugging...
+			Gdx.app.log("Angle is", "" + angle); 
+		}
 		sprite.draw(batch);
 	}
 }
