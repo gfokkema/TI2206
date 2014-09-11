@@ -3,7 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
