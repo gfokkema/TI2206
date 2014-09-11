@@ -146,6 +146,9 @@ public class Board {
 	}
 
 	public int toIdx(int x, int y) {
+		if (x < 0 || y < 0 || x >= width - y % 2 || y >= height)
+			throw new IndexOutOfBoundsException();
+		
 		return y * width - y / 2 + x;
 	}
 
