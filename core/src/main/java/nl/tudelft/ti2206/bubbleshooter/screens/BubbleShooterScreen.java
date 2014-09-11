@@ -71,16 +71,21 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		});
 		game.batch.setColor(current);
 		Gdx.app.log("Count is", "" + count);
+		
+		// cannon must not be drawn when space has been pressed...
 		if(!pressed){
 		cannon.draw(game.batch);
 		}
 
+		// put pressed on true when space was hit
 		if(Gdx.input.isKeyPressed(Keys.SPACE)){	
 			pressed = true;
 		}
+		
+		// draw if space was pressed <---- THIS IS "SHOOT"...
 		if(pressed){
-			cannon.getBCPosition().x += cannon.getPointer().getDirection().x *15;
-			cannon.getBCPosition().y += cannon.getPointer().getDirection().y *15;
+			cannon.getBCPosition().x += cannon.getPointer().getDirection().x *5;
+			cannon.getBCPosition().y += cannon.getPointer().getDirection().y *5;
 			
 			
 			projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
@@ -94,21 +99,26 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			count++;
 		
 		}
-		if(count == 15){
+		
+		// frane count
+		if(count == 40){
 			pressed = false;
 			count = 0;
 		}
 		//cannon.shoot();
-		// update... <--- should be done diff
-		Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
-		if(!pressed){
-		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
 		
-		// DUPLICATE
-		if(pCircle.x < 190) pCircle.x = 190;
-		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
-		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
-		game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y, 32, 32);
+		// bubble on cannon draw
+		Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
+		
+		// only draw bubble on cannon if we didn't shoot yet
+		if(!pressed){
+			projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
+			
+			// boundary for moving bubble <--- not necessary anymore actually...
+	//		if(pCircle.x < 190) pCircle.x = 190;
+	//		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
+	//		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
+			game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y, 32, 32);
 		}
 		game.batch.end();
 	}
