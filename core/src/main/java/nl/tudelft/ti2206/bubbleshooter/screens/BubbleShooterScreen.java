@@ -17,7 +17,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 
 public class BubbleShooterScreen extends ScreenAdapter {
@@ -26,9 +25,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	Circle pCircle;
 	Cannon cannon;
 	Board board;
-	float elapsed;
-	int count;
-	boolean pressed;
+	int frame_count;
+	boolean fired;
 	Texture bg = new Texture("back_one_player.png");
 	Texture fg = new Texture("Bubble-Blue.png");
 	boolean testperformed = false;
@@ -42,12 +40,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.game = game;
 		this.board = new Board(8, 15);
 		cannon = new Cannon(Gdx.graphics.getWidth()/2,100);
-		projectile = new Bubble();
-		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
-		pCircle = projectile.getCircle();
-		Gdx.app.log("Create BCPos", "" + cannon.getBCPosition()); 
-		count = 0;
-		pressed = false;
+//		projectile = new Bubble();
+//		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
+//		pCircle = projectile.getCircle();
+//		Gdx.app.log("Create BCPos", "" + cannon.getBCPosition()); 
+		frame_count = 0;
+		fired = false;
 	}
 	
 
@@ -74,60 +72,28 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.draw(fg, loc.x + 190, 480 - loc.y, 32, 32);
 		});
 		game.batch.setColor(current);
-		Gdx.app.log("Count is", "" + count);
 		
-		// cannon must not be drawn when space has been pressed...
-		if(!pressed){
-		cannon.draw(game.batch);
-		}
-
-		// put pressed on true when space was hit
-		if(Gdx.input.isKeyPressed(Keys.SPACE)){	
-			pressed = true;
-		}
-		
-		// draw if space was pressed <---- THIS IS "SHOOT"...
-		if(pressed){
-			cannon.getBCPosition().x += cannon.getPointer().getDirection().x *5;
-			cannon.getBCPosition().y += cannon.getPointer().getDirection().y *5;
-			
-			
-			projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
-			// bubble stays within screen bounds
-			if(pCircle.x < 190) pCircle.x = 190;
-			if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
-			if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
-			
-			Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
-			game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y, 32, 32);
-			count++;
-		
+		// cannon must not be drawn when space has been pressed... (CHANGE!)
+		if(!fired) 		cannon.draw(game.batch);
+		// draw the projectile
+		cannon.drawBubble(game.batch);
+		// increment frame counter
+		if(fired)		frame_count++;
+		Gdx.app.log("Count is", "" + frame_count);
+		// frame count
+		if(frame_count == 50){
+			fired = false;
+			frame_count = 0;
 		}
 		
-		// frane count
-		if(count == 40){
-			pressed = false;
-			count = 0;
-		}
-		//cannon.shoot();
-		
-		// bubble on cannon draw
-		Gdx.app.log("Circle Pos", "X= " + projectile.getCircle().x + " Y= " + projectile.getCircle().y);
-		
-		// only draw bubble on cannon if we didn't shoot yet
-		if(!pressed){
-			projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
-			
-			// boundary for moving bubble <--- not necessary anymore actually...
-	//		if(pCircle.x < 190) pCircle.x = 190;
-	//		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
-	//		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
-			game.batch.draw(fg, projectile.getCircle().x, projectile.getCircle().y, 32, 32);
-		}
 		game.batch.end();
 	}
 	
+	/**
+	 * Handle the input given by the player.
+	 */
 	private void handle_input() {
+		// remove bubble test --> Key = R
 		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
 			testperformed = true;
 			Collection<Bubble> remove = board.getColorGroup(0);
@@ -137,6 +103,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				board.removeAll(disconnected);
 			}
 		}
+		
+		// put pressed on true when Spacebar was hit
+		if(Gdx.input.isKeyPressed(Keys.SPACE))	fired = true;
+		// if space was pressed then shoot must be called for X frames.
+		if(fired)	cannon.shoot();
+		
 	}
 
 	/**

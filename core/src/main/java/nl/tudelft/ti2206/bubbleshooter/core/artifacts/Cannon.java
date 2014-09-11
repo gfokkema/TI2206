@@ -1,9 +1,11 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
+import nl.tudelft.ti2206.bubbleshooter.Bubble;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,24 +20,27 @@ public class Cannon {
 	/**
 	 * Create a pointer and the texture for the cannon.
 	 */
+	Bubble projectile;
 	Pointer pointer;
 	Texture image;
 	Sprite sprite;
 	float angle;
+	Circle pCircle;
 	
-	Texture bubbleImage;
+	Texture fg = new Texture("Bubble-Blue.png");
 	Sprite bubbleSprite;
 	Vector2 BCPosition;
 	
 	private final float LEFT_BOUNDARY = 40;
 	private final float RIGHT_BOUNDARY = -40;
 	private final int sensitivity = 100;
+	private final int velocity = 5;
 	
 	
 	/**
 	 * Cannon constructor
-	 * @param x
-	 * @param y
+	 * @param x coordinate
+	 * @param y coordinate
 	 */
 	public Cannon(int x, int y) {
 		pointer = new Pointer(new Vector2(x, y));
@@ -51,10 +56,10 @@ public class Cannon {
 		
 		// add bubble		
 		BCPosition = new Vector2(0,0);
-		bubbleImage = new Texture("Bubble-Blue.png");
-//		bubbleSprite = new Sprite(bubbleImage);
-//		bubbleSprite.setPosition(temp.x, temp.y);
-		pointer.setOrigin(new Vector2(x-bubbleImage.getWidth()/4, y));
+		projectile = new Bubble();
+		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
+		pCircle = projectile.getCircle();
+		pointer.setOrigin(new Vector2(x-fg.getWidth()/4, y));
 	}
 	
 	/**
@@ -95,18 +100,10 @@ public class Cannon {
 	 * Shoot the actual bubble: pew pew!
 	 */
 	public void shoot() {
-		//Gdx.app.log("Before", BCPosition.toString());
-		//Gdx.app.log("Pointer dir", pointer.getDirection().toString());
-		if(Gdx.input.isKeyPressed(Keys.SPACE)){
-			Gdx.gl.glClearColor(0, 0, 0, 0);
-			Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-			for(int i = 0; i < 20; i++){
-				BCPosition.x += pointer.getDirection().x * Gdx.graphics.getDeltaTime() * 3000;
-				BCPosition.y += pointer.getDirection().y * Gdx.graphics.getDeltaTime() * 3000;
-			}
-		}
-		//Gdx.app.log("After", BCPosition.toString());
-		//TODO more pew pew!
+		BCPosition.x += pointer.getDirection().x *velocity;
+		BCPosition.y += pointer.getDirection().y *velocity;
+		
+		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
 	}
 		
 	/**
@@ -150,8 +147,22 @@ public class Cannon {
 		
 		//Gdx.app.log("Bubble Cannon Position is", "" + BCPosition); 
 		BCPosition = pointer.getOrigin().add(pointer.getDirection().scl(100));
-		
+
 		// draw the cannon
 		sprite.draw(batch);
+	}
+	
+	/**
+	 * Draw the bubble which the cannon shoots
+	 * @param batch
+	 */
+	public void drawBubble(SpriteBatch batch){
+		// follow cannon angle
+		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
+		// bubble stays within given bounds.
+		if(pCircle.x < 190) pCircle.x = 190;
+		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
+		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
+		batch.draw(fg, pCircle.x, pCircle.y, 32, 32);	
 	}
 }
