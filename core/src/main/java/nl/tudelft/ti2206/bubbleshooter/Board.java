@@ -107,7 +107,6 @@ public class Board {
 	
 	/**
 	 * Traversal to find all of the {@link Bubble}s that are disconnected from the ceiling.
-	 * @param b - The {@link Bubble} where it all starts.
 	 * @return A {@link Collection} with all the disconnected Bubbles.
 	 */
 	public Collection<Bubble> getDisconnectedGroup() {
