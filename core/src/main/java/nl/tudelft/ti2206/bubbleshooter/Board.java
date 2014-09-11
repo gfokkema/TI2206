@@ -9,6 +9,9 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.function.BiPredicate;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
+
 import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
 import nl.tudelft.ti2206.bubbleshooter.utils.DisjointSet;
 
@@ -25,8 +28,11 @@ public class Board {
 		this.height = height;
 
 		bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
-		for (int i = 0; i < 40; i++) {
+		for (int i = 4; i < 10; i++) {
 			bubbles.put(i, new Bubble());
+		}
+		for (int i = 0; i < 4; i++) {
+			bubbles.put(i, new Bubble(Color.RED));
 		}
 	}
 	
@@ -91,27 +97,31 @@ public class Board {
 	}
 
 	/**
-	 * Traversal to find all of the nodes that should be removed. If nothing
-	 * should be removed, then nothing is returned.
-	 * @param b - The bubble where it all starts.
-	 * @return An Optional which represents nothing, or the List of nodes that
-	 *         should be removed.
+	 * Get a List of all the same colors adjacent to the
+	 * given Bubble.
+	 * @param id - The id on the grid of the Bubble.
+	 * @return The List of the Bubble at the given id and its
+	 *         adjacent Bubbles of the same color.
 	 */
-	public Optional<List<Bubble>> getNextRemoved(int id) {
-		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
-
+	public List<Bubble> getColorGroup(int id) {
 		// Search for bubbles of the same color
 		List<Bubble> sameColors = breadthFirst(
 				id,
 				(current, neighbor) -> bubbles.get(current).color == bubbles.get(neighbor).color,
 				new DisjointSet(width*height)
 		);
-
-		if (sameColors.isEmpty()) {
-			return Optional.empty();
-		}
-		result.addAll(sameColors);
-
+		sameColors.add(bubbles.get(id));
+		return sameColors;
+	}
+	
+	/**
+	 * Traversal to find all of the nodes that should be removed. If nothing
+	 * should be removed, then nothing is returned.
+	 * @param b - The bubble where it all starts.
+	 * @return An Optional which represents nothing, or the List of nodes that
+	 *         should be removed.
+	 */
+	public Optional<List<Bubble>> getDisconnectedGroup() {
 		// Use the same DisjointSet for all the breadth-first searches
 		DisjointSet ds = new DisjointSet(width * height);
 		List<Bubble> connectedToCeiling = new ArrayList<Bubble>();
@@ -126,21 +136,24 @@ public class Board {
 					ds
 			));
 		}
-
+		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
 		// Remove all of the bubbles that are not connected to the ceiling.
 		result.removeAll(connectedToCeiling);
+		removeAll(result);
 		return Optional.of(result);
 	}
 
 	private List<Bubble> breadthFirst(Integer subject, BiPredicate<Integer, Integer> condition, DisjointSet ds) {
 		Queue<Integer> q = new LinkedList<Integer>();
 		List<Bubble> result = new ArrayList<Bubble>();
+		result.add(bubbles.get(subject));
 
 		q.add(subject);
 		while(!q.isEmpty()) {
 			int currentIndex = q.remove();
 			for(Orientation o : Bubble.orientations) {
 				int neighborIndex = o.fromIndex(currentIndex, this.width);
+				if (!adjacent(currentIndex, neighborIndex)) continue;
 				if (neighborIndex < 0 || neighborIndex >= width*height){
 					//Invalid index
 					continue;
@@ -165,4 +178,32 @@ public class Board {
 	public void removeAll(List<Bubble> bs) {
 		bubbles.values().removeAll(bs);
 	}
+
+	public boolean adjacent(int a, int b) {
+		if (a > b) { int temp = a; a = b; b = temp; }
+		if (b < 1) 					return false;
+		if (b >= width * height) 	return false;
+		
+		Vector2 xy_a = toXY(a);
+		Vector2 xy_b = toXY(b);
+		
+		return	xy_a.y == xy_b.y && b - a == 1 ||
+				xy_b.y - xy_a.y == 1 && b - a > 0 &&
+					((b - a) == width || (b - a) == width - 1);
+	}
+
+	public int toIdx(int x, int y) {
+		return y * width - y / 2 + x;
+	}
+
+	public Vector2 toXY(int idx) {
+		int rowset = (width * 2 - 1);
+		
+		int y_even = idx / rowset;
+		int y = y_even * 2 + (idx - y_even * rowset) / width;
+		int x = idx - toIdx(0, y);
+		
+		return new Vector2(x, y);
+	}
+
 }

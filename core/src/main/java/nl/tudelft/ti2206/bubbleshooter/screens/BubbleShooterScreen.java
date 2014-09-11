@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 
 public class BubbleShooterScreen extends ScreenAdapter {
@@ -19,6 +22,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	float elapsed;
 	Texture bg = new Texture("back_one_player.png");
 	Texture fg = new Texture("Bubble-Blue.png");
+	boolean testperformed = false;
 
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
@@ -36,7 +40,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 
 		game.batch.begin();
 		Color current = game.batch.getColor();
-
+		handle_input();
 		game.batch.draw(bg, 0, 0);
 		Map<Integer, Bubble> bubbles = board.getBubbles();
 		bubbles.forEach((Integer k, Bubble v) -> {
@@ -48,6 +52,18 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		game.batch.end();
 	}
 	
+	private void handle_input() {
+		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
+			testperformed = true;
+			List<Bubble> remove = board.getColorGroup(0);
+			if(remove.size() >= 3) {
+				board.removeAll(remove);
+				Optional<List<Bubble>> disconnected = board.getDisconnectedGroup();
+				disconnected.ifPresent(board::removeAll);
+			}
+		}
+	}
+
 	/**
 	 * Returns the bottom left xy-coordinates of a bubble
 	 * @param idx	the index of the bubble on the board
