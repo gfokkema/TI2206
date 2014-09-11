@@ -164,5 +164,6 @@ public class Cannon {
 		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
 		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
 		batch.draw(fg, pCircle.x, pCircle.y, 32, 32);	
+		sprite.draw(batch);
 	}
 }
