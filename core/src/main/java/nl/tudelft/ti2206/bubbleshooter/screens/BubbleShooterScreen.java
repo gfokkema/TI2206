@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 
@@ -60,17 +59,25 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+		
+		//
+		// PROTOTYPE
+		//
+		// if (board.collides(shot)) board.add(b, toIdx);
 
 		game.batch.begin();
 		Color current = game.batch.getColor();
+		
 		handle_input();
 		game.batch.draw(bg, 0, 0);
 		Map<Integer, Bubble> bubbles = board.getBubbles();
 		bubbles.forEach((Integer k, Bubble v) -> {
-			Vector2 loc = getLoc(k);
 			game.batch.setColor(v.getColor());
-			game.batch.draw(fg, loc.x + 190, 480 - loc.y, 32, 32);
+			
+			// translate from the midpoint to the bottom left
+			game.batch.draw(fg, v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
 		});
+		
 		game.batch.setColor(current);
 		
 		// cannon must not be drawn when space has been pressed... (CHANGE!)
@@ -109,21 +116,5 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		// if space was pressed then shoot must be called for X frames.
 		if(fired)	cannon.shoot();
 		
-	}
-
-	/**
-	 * Returns the bottom left xy-coordinates of a bubble
-	 * @param idx	the index of the bubble on the board
-	 * @return		{@link Vector2} representing xy-coordinates
-	 */
-	private Vector2 getLoc(int idx) {
-		int width = board.getWidth();
-		int x = (idx % (width * 2 - 1) % width) * 32 +
-				((idx % (width * 2 - 1)) / width) * 16;
-		int y = (idx / (width * 2 - 1)) * 56 +
-				(idx % (width * 2 - 1)) / width * 28;
-
-		// Correction for going from top left corner to bottom left corner
-		return new Vector2(x, y + 32);
 	}
 }

@@ -254,7 +254,7 @@ public class BoardTest {
 	}
 	
 	/**
-	 * Test getters:
+	 * Test getters for width and height:
 	 *	getWidth()
 	 *	getHeight()
 	 */
@@ -266,5 +266,22 @@ public class BoardTest {
 		board = new Board(2, 4);
 		assertEquals(2, board.getWidth());
 		assertEquals(4, board.getHeight());
+	}
+	
+	@Test
+	public void testAdd() {
+		assertTrue(board.add(new Bubble(), 40));
+		assertFalse(board.add(new Bubble(), 8));
+	}
+	
+	/**
+	 * Verify all bubbles in the grid have a bounding box
+	 */
+	@Test
+	public void testBoundingBoxes() {
+		board.getBubbles().forEach((Integer k, Bubble v) -> {
+			assertEquals(board.getLoc(k).x, v.getBounds().x, .0001);
+			assertEquals(board.getLoc(k).y, v.getBounds().y, .0001);
+		});
 	}
 }

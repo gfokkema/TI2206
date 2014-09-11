@@ -113,4 +113,20 @@ public class Bubble {
 	protected Color getRandomColor() {
 		return colors[(new Random()).nextInt(colors.length)];
 	}
+	
+	/**
+	 * Get the bounding {@link Circle} of this {@link Bubble}.
+	 * @return	{@link Circle} that bounds this bubble
+	 */
+	public Circle getBounds() {
+		return this.bounds;
+	}
+	
+	/**
+	 * Set the bounding {@link Circle} of this {@link Bubble}.
+	 * @param c	{@link Circle} that bounds this bubble
+	 */
+	public void setBounds(Circle c) {
+		this.bounds = c;
+	}
 }

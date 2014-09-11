@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
@@ -30,11 +31,11 @@ public class Board {
 		this.height = height;
 
 		bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
-		for (int i = 4; i < 10; i++) {
-			bubbles.put(i, new Bubble());
+		for (int i = 4; i < 40; i++) {
+			add(new Bubble(), i);
 		}
 		for (int i = 0; i < 4; i++) {
-			bubbles.put(i, new Bubble(Color.RED));
+			add(new Bubble(Color.RED), i);
 		}
 	}
 	
@@ -62,6 +63,7 @@ public class Board {
 	public boolean collides(Bubble b) {
 		for (Bubble c : bubbles.values()) {
 			if (c.collides(b)) {
+				System.out.println("collision!");
 				return true;
 			}
 		}
@@ -69,14 +71,31 @@ public class Board {
 	}
 
 	/**
+	 * Add a {@link Bubble} to the {@link Board} on a specific {@link Board} index.
+	 * @param b		{@link Bubble} that has to be added
+	 * @param idx	{@link Board} index
+	 * @return		true if the {@link Board} has been added successfully, false otherwise
+	 */
+	public boolean add(Bubble b, int idx) {
+		if (bubbles.containsKey(idx)) return false;
+		
+		// Add the Bubble to the list
+		bubbles.put(idx, b);
+		
+		// Update the bounds of the circle
+		b.setBounds(new Circle(getLoc(idx), 16));
+		return true;
+	}
+	
+	/**
 	 * Add a {@link Bubble} to the {@link Board} on a specific hex index.
 	 * @param b	{@link Bubble} that has to be added
 	 * @param i	hexagonal x-coordinate
 	 * @param j	hexagonal y-coordinate
+	 * @return		true if the {@link Board} has been added successfully, false otherwise
 	 */
-	public void add(Bubble b, int i, int j) {
-		// Add the Bubble to the list
-		// Update the bounds of the circle
+	public boolean add(Bubble b, int i, int j) {
+		return add(b, toIdx(i, j));
 	}
 	
 	/**
@@ -106,10 +125,15 @@ public class Board {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Traversal to find all of the nodes that should be removed.
 	 * If nothing should be removed, then nothing is returned.
 	 * @param b		the {@link Bubble} where it all starts
 	 * @return 		{@link Collection} that's either empty or filled with nodes that will be removed 
+=======
+	 * Traversal to find all of the {@link Bubble}s that are disconnected from the ceiling.
+	 * @return A {@link Collection} with all the disconnected Bubbles.
+>>>>>>> master
 	 */
 	public Collection<Bubble> getDisconnectedGroup() {
 		// The same Map will be used for each depth-first search.
@@ -196,6 +220,25 @@ public class Board {
 		int x = idx - toIdx(0, y);
 		
 		if (idx < 0 || y >= height) throw new IndexOutOfBoundsException();
+		return new Vector2(x, y);
+	}
+	
+	/**
+	 * Returns the topleft xy-coordinates of a bubble
+	 * @param idx	the index of the bubble on the board
+	 * @return		{@link Vector2} representing xy-coordinates
+	 */
+	public Vector2 getLoc(int idx) {
+		int odd = (idx % (width * 2 - 1)) / width;
+		
+		int x = (idx % (width * 2 - 1) % width) * 32	+ odd * 16;
+		int y = (idx / (width * 2 - 1)) * 56			+ odd * 28;
+		
+		// offset the game field with 190 px and correct from left -> mid
+		x = 190 + x + 16;
+		// flip the coordinate system and correct from top -> mid
+		y = 480 - (y + 16);
+
 		return new Vector2(x, y);
 	}
 }
