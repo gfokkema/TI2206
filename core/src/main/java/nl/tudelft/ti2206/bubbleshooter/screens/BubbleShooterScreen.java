@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -54,10 +55,10 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	private void handle_input() {
 		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
 			testperformed = true;
-			List<Bubble> remove = board.getColorGroup(0);
+			Collection<Bubble> remove = board.getColorGroup(0);
 			if(remove.size() >= 3) {
 				board.removeAll(remove);
-				List<Bubble> disconnected = board.getDisconnectedGroup();
+				Collection<Bubble> disconnected = board.getDisconnectedGroup();
 				board.removeAll(disconnected);
 			}
 		}

@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,34 +50,6 @@ public class Board {
      * @return A boolean gets returned depending if there was a collision.
      */
 	public boolean collides(Bubble b) {
-		// Get the Bubble's index on the hex grid
-		// Check each Bubble around this bubble
-		// Return true on collision
-		//
-
-		// int collision = 0;// kan ook met break
-		// while(collision == 0){
-		// Float bubbleX = b.getX();
-		// Float bubbleY = b.getY();
-		//
-		// Float KleurBubble = bubbleArray.get(b);
-		//
-		//
-		// Float stillBubbleX= getHexagonabove(bubbleX)
-		// Float stillBubbleY=getHexagoneCoordinabove(bubbleY)
-		//
-		// if (!isEmpty(stillBubbleX && stillBubbleY){
-		// if(hasHitThriceorMore(b)){
-		// collision =1;//break;
-		// destroy bubbles}
-		// else{
-		// collision =1;//break;
-		// getStuck()}
-		// }
-		// else{
-		// setBubbleX(directionX+1?) + setBubbleX(directionY+1?)
-		// }
-
 		for (Bubble c : bubbles.values()) {
 			if (c.collides(b)) {
 				return true;
@@ -102,15 +75,16 @@ public class Board {
 	 * @return The List of the Bubble at the given id and its
 	 *         adjacent Bubbles of the same color.
 	 */
-	public List<Bubble> getColorGroup(int id) {
+	public Collection<Bubble> getColorGroup(int id) {
 		// Search for bubbles of the same color
-		List<Bubble> sameColors = breadthFirst(
+		HashMap<Integer, Bubble> sameColors = new HashMap<Integer, Bubble>();
+		depthFirst(
 				id,
 				(current, neighbor) -> bubbles.get(current).color == bubbles.get(neighbor).color,
-				new DisjointSet(width*height)
+				sameColors
 		);
-		sameColors.add(bubbles.get(id));
-		return sameColors;
+		sameColors.put(id, bubbles.get(id));
+		return sameColors.values();
 	}
 	
 	/**
@@ -120,61 +94,45 @@ public class Board {
 	 * @return An Optional which represents nothing, or the List of nodes that
 	 *         should be removed.
 	 */
-	public List<Bubble> getDisconnectedGroup() {
-		// Use the same DisjointSet for all the breadth-first searches
-		DisjointSet ds = new DisjointSet(width * height);
-		List<Bubble> connectedToCeiling = new ArrayList<Bubble>();
+	public Collection<Bubble> getDisconnectedGroup() {
+		// The same Map will be used for each depth-first search.
+		HashMap<Integer, Bubble> connectedToCeiling = new HashMap<Integer, Bubble>();
 		for(int ceilingIndex = 0; ceilingIndex < width; ceilingIndex++) {
 			if(!bubbles.containsKey(ceilingIndex)) {
 				//There's no bubble here
 				continue;
 			}
-			connectedToCeiling.addAll(breadthFirst(
+			depthFirst(
 					ceilingIndex,
 					(current, neighbor) -> true,
-					ds
-			));
+					connectedToCeiling
+			);
 		}
 		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
 		// Remove all of the bubbles that are not connected to the ceiling.
-		result.removeAll(connectedToCeiling);
+		result.removeAll(connectedToCeiling.values());
 		removeAll(result);
 		return result;
 	}
 
-	private List<Bubble> breadthFirst(Integer subject, BiPredicate<Integer, Integer> condition, DisjointSet ds) {
-		Queue<Integer> q = new LinkedList<Integer>();
-		List<Bubble> result = new ArrayList<Bubble>();
-		result.add(bubbles.get(subject));
+	private void depthFirst(Integer currentIndex, BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
+		for(Orientation o : Bubble.orientations) {
+			int neighborIndex = o.fromIndex(currentIndex, this.width);
+			if (!adjacent(currentIndex, neighborIndex))	continue;
+			// Check if there's a neighbor Bubble.
+			if (!bubbles.containsKey(neighborIndex))	continue;
 
-		q.add(subject);
-		while(!q.isEmpty()) {
-			int currentIndex = q.remove();
-			for(Orientation o : Bubble.orientations) {
-				int neighborIndex = o.fromIndex(currentIndex, this.width);
-				if (!adjacent(currentIndex, neighborIndex)) continue;
-				if (neighborIndex < 0 || neighborIndex >= width*height){
-					//Invalid index
-					continue;
-				}
-				Bubble neighbor = bubbles.get(neighborIndex);
-				if (neighbor == null) {
-					//Continue, because there's no neighbor here
-					continue;
-				}
-				if (!ds.connected(currentIndex, neighborIndex)) {
-					if (condition.test(currentIndex, neighborIndex)) {
-						ds.union(currentIndex, neighborIndex);
-						q.add(neighborIndex);
-						result.add(bubbles.get(neighborIndex));
-					}
+			// Check if the neighbor hasn't already been visited.
+			if (!remove.containsKey(neighborIndex)) {
+				if (condition.test(currentIndex, neighborIndex)) {
+					remove.put(neighborIndex, bubbles.get(neighborIndex));
+					depthFirst(neighborIndex, condition, remove);
 				}
 			}
 		}
-		return result;
 	}
 
-	public void removeAll(List<Bubble> bs) {
+	public void removeAll(Collection<Bubble> bs) {
 		bubbles.values().removeAll(bs);
 	}
 
