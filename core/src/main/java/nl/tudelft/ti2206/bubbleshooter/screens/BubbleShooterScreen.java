@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Board;
+import nl.tudelft.ti2206.bubbleshooter.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
 
 import java.util.Collection;
@@ -21,7 +22,7 @@ import com.badlogic.gdx.ScreenAdapter;
 
 public class BubbleShooterScreen extends ScreenAdapter {
 	Launch game;
-	Bubble projectile;
+	Projectile projectile;
 	Circle pCircle;
 	Cannon cannon;
 	Board board;
@@ -61,16 +62,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
-		Bubble b = cannon.getBubble();
-		if (!fired) {
-			Vector2 origin = new Vector2(cannon.getPointer().getOrigin().add(16, 16))
-										.add(cannon.getPointer().getDirection().scl(100));
-			cannon.getBubble().setBounds(new Circle(origin, 16));
-		} else {
-			board.collides(b);
-			frame_count++;
-		}
-		
 		game.batch.begin();
 		handle_input();
 		game.batch.draw(bg, 0, 0);
@@ -84,11 +75,19 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			// translate from the midpoint to the bottom left
 			game.batch.draw(fg, v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
 		});
-		game.batch.setColor(b.getColor());
-		game.batch.draw(fg, b.getBounds().x - 16, b.getBounds().y - 16, 32, 32);
+		if (projectile != null) {
+			projectile.move();
+			game.batch.setColor(projectile.getColor());
+			game.batch.draw(fg, projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
+			if (board.collides(projectile)) {
+				board.add(projectile);
+				projectile = null;
+			}
+		}
+		game.batch.setColor(cannon.getBubble().getColor());
+		game.batch.draw(fg, cannon.getBubble().getBounds().x - 16, cannon.getBubble().getBounds().y - 16, 32, 32);
 		game.batch.setColor(current);
 		
-		// draw the projectile
 		cannon.draw(game.batch);
 		//Gdx.app.log("Count is", "" + frame_count);
 		// frame count
@@ -116,9 +115,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		}
 		
 		// put pressed on true when Spacebar was hit
-		if(Gdx.input.isKeyPressed(Keys.SPACE))	fired = true;
-		// if space was pressed then shoot must be called for X frames.
-		if(fired) cannon.shoot();
-		
+		if(Gdx.input.isKeyPressed(Keys.SPACE)) projectile = cannon.shoot();
 	}
 }

@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.Projectile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
@@ -23,14 +24,13 @@ public class Cannon {
 	Pointer pointer;
 	float angle;
 
-	Bubble projectile;
+	Projectile projectile;
 	boolean moving = false;
 	
 	private final float LEFT_BOUNDARY = 40;
 	private final float RIGHT_BOUNDARY = -40;
 	private final int sensitivity = 100;
 	private final int velocity = 5;
-	
 	
 	/**
 	 * Cannon constructor
@@ -48,10 +48,9 @@ public class Cannon {
 		pointer.setOrigin(new Vector2(x - 16, y));
 		
 		// add bubble
-		projectile = new Bubble();
 		Vector2 origin = new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
 						.add(pointer.getDirection().scl(100));
-		projectile.setBounds(new Circle(origin, 16));
+		projectile = new Projectile(new Circle(origin, 16), pointer.direction, 0);
 		setAngle(0);
 	}
 	
@@ -76,6 +75,8 @@ public class Cannon {
 		sprite.rotate(sprite.getRotation() - angle);
 		sprite.setRotation(angle);
 		pointer.setAngle(angle);
+		
+		projectile.setBounds(new Circle(getBubblePos(), 16));
 			
 		// debugging...
 		Gdx.app.log("Degrees is", "" + angle);
@@ -92,11 +93,12 @@ public class Cannon {
 	/**
 	 * Shoot the actual bubble: pew pew!
 	 */
-	public void shoot() {
-		Circle bounds = projectile.getBounds();
-		bounds.x += pointer.getDirection().x * velocity;
-		bounds.y += pointer.getDirection().y * velocity;
-		projectile.setBounds(bounds);
+	public Projectile shoot() {
+		Projectile fired = projectile;
+		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
+		
+		fired.setVelocity(velocity);
+		return fired;
 	}
 		
 	/**
@@ -137,5 +139,10 @@ public class Cannon {
 			Gdx.app.log("Angle is", "" + angle); 
 		}
 		sprite.draw(batch);
+	}
+	
+	private Vector2 getBubblePos() {
+		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
+						.add(pointer.getDirection().scl(100));
 	}
 }
