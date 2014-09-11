@@ -13,8 +13,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
-import nl.tudelft.ti2206.bubbleshooter.utils.DisjointSet;
-
 
 /**
  * Represents the play field with all the bubbles.
