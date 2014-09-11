@@ -58,8 +58,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			List<Bubble> remove = board.getColorGroup(0);
 			if(remove.size() >= 3) {
 				board.removeAll(remove);
-				Optional<List<Bubble>> disconnected = board.getDisconnectedGroup();
-				disconnected.ifPresent(board::removeAll);
+				List<Bubble> disconnected = board.getDisconnectedGroup();
+				board.removeAll(disconnected);
 			}
 		}
 	}

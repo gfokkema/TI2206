@@ -121,7 +121,7 @@ public class Board {
 	 * @return An Optional which represents nothing, or the List of nodes that
 	 *         should be removed.
 	 */
-	public Optional<List<Bubble>> getDisconnectedGroup() {
+	public List<Bubble> getDisconnectedGroup() {
 		// Use the same DisjointSet for all the breadth-first searches
 		DisjointSet ds = new DisjointSet(width * height);
 		List<Bubble> connectedToCeiling = new ArrayList<Bubble>();
@@ -140,7 +140,7 @@ public class Board {
 		// Remove all of the bubbles that are not connected to the ceiling.
 		result.removeAll(connectedToCeiling);
 		removeAll(result);
-		return Optional.of(result);
+		return result;
 	}
 
 	private List<Bubble> breadthFirst(Integer subject, BiPredicate<Integer, Integer> condition, DisjointSet ds) {
