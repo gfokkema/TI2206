@@ -13,12 +13,18 @@ import com.badlogic.gdx.math.Vector2;
 import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
 
 /**
- * Represents the play field with all the bubbles.
+ * The {@link Board} class represents the playing field which contains all the {@link Bubble} objects.
  */
 public class Board {
 	private int width = 8, height = 20;
 	private HashMap<Integer,Bubble> bubbles;
 
+	/**
+	 * Constructs a {@link Board} that can hold {@link Bubble} objects.
+	 * The {@link Board} represents the playing field.
+	 * @param width		the width of the board in bubbles
+	 * @param height	the height of the board in bubbles
+	 */
 	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -32,18 +38,26 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Returns the width of the {@link Board}.
+	 * @return	width in bubbles
+	 */
 	public int getWidth() {
 		return width;
 	}
 	
+	/**
+	 * Returns the height of the {@link Board}.
+	 * @return	height in bubbles
+	 */
 	public int getHeight() {
 		return height;
 	}
 	
     /**
-     * Checks the bubble that gets shot, with all the other bubbles if there is a collision.
-     * @param b - the bubble that gets shot.
-     * @return A boolean gets returned depending if there was a collision.
+     * Checks the {@link Bubble} that gets shot for collisions with all the other bubbles.
+     * @param b	{@link Bubble} that has been shot
+     * @return 	true if there's a collision, false otherwise
      */
 	public boolean collides(Bubble b) {
 		for (Bubble c : bubbles.values()) {
@@ -51,25 +65,33 @@ public class Board {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
+	/**
+	 * Add a {@link Bubble} to the {@link Board} on a specific hex index.
+	 * @param b	{@link Bubble} that has to be added
+	 * @param i	hexagonal x-coordinate
+	 * @param j	hexagonal y-coordinate
+	 */
 	public void add(Bubble b, int i, int j) {
 		// Add the Bubble to the list
 		// Update the bounds of the circle
 	}
 	
+	/**
+	 * Returns a {@link Map} with the {@link Bubble} objects that are currently on the {@link Board}.
+	 * @return	{@link Map} with all {@link Bubble} objects
+	 */
 	public Map<Integer, Bubble> getBubbles() {
 		return bubbles;
 	}
 
 	/**
-	 * Get a List of all the same colors adjacent to the
-	 * given Bubble.
-	 * @param id - The id on the grid of the Bubble.
-	 * @return The List of the Bubble at the given id and its
-	 *         adjacent Bubbles of the same color.
+	 * Get a {@link Collection} of all {@link Bubble} objects
+	 * adjacent to the given {@link Bubble} that have the same color.
+	 * @param id	the grid id of the {@link Bubble}
+	 * @return 		{@link Collection} of {@link Bubble} objects adjacent to id and with the same color
 	 */
 	public Collection<Bubble> getColorGroup(int id) {
 		// Search for bubbles of the same color
@@ -84,11 +106,10 @@ public class Board {
 	}
 	
 	/**
-	 * Traversal to find all of the nodes that should be removed. If nothing
-	 * should be removed, then nothing is returned.
-	 * @param b - The bubble where it all starts.
-	 * @return An Optional which represents nothing, or the List of nodes that
-	 *         should be removed.
+	 * Traversal to find all of the nodes that should be removed.
+	 * If nothing should be removed, then nothing is returned.
+	 * @param b		the {@link Bubble} where it all starts
+	 * @return 		{@link Collection} that's either empty or filled with nodes that will be removed 
 	 */
 	public Collection<Bubble> getDisconnectedGroup() {
 		// The same Map will be used for each depth-first search.
@@ -132,6 +153,12 @@ public class Board {
 		bubbles.values().removeAll(bs);
 	}
 
+	/**
+	 * Checks whether two {@link Bubble} objects are adjacent to each other
+	 * @param a		{@link Bubble} object a
+	 * @param b		{@link Bubble} object b
+	 * @return		true if a and b are adjacent, false otherwise
+	 */
 	public boolean adjacent(int a, int b) {
 		if (a > b) { int temp = a; a = b; b = temp; }
 		
@@ -143,6 +170,12 @@ public class Board {
 					((b - a) == width || (b - a) == width - 1);
 	}
 
+	/**
+	 * Converts a given hexagonal xy-coordinate into an index value
+	 * @param x		hexagonal x-coordinate
+	 * @param y		hexagonal y-coordinate
+	 * @return		the board index
+	 */
 	public int toIdx(int x, int y) {
 		if (x < 0 || y < 0 || x >= width - y % 2 || y >= height)
 			throw new IndexOutOfBoundsException();
@@ -150,6 +183,11 @@ public class Board {
 		return y * width - y / 2 + x;
 	}
 
+	/**
+	 * Converts a given board index into a hexagonal xy-coordinate
+	 * @param idx	the board index
+	 * @return		{@link Vector2} representing the hexagonal xy-coordinates
+	 */
 	public Vector2 toXY(int idx) {
 		int rowset = (width * 2 - 1);
 		
@@ -160,5 +198,4 @@ public class Board {
 		if (idx < 0 || y >= height) throw new IndexOutOfBoundsException();
 		return new Vector2(x, y);
 	}
-
 }
