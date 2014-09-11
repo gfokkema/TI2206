@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
+package nl.tudelft.ti2206.bubbleshooter;
 
 import java.util.Random;
 
@@ -7,12 +7,20 @@ import com.badlogic.gdx.math.Circle;
 
 public class Bubble {
 	public enum Orientation {
-		EAST,		//+ 1
-		SOUTH_EAST, //+ width
-		SOUTH_WEST, //+ width - 1
-		WEST,		//- 1
-		NORTH_WEST, //- width
-		NORTH_EAST; //- width + 1 == - (width - 1)
+		EAST(0, 1),			//+ 1
+		SOUTH_EAST(1, 0),	//+ width
+		SOUTH_WEST(1, -1),	//+ width - 1
+		WEST(0,-1),			//- 1
+		NORTH_WEST(-1, 0),	//- width
+		NORTH_EAST(-1, 1);	//- width + 1 == - (width - 1)
+
+		int delta_y;
+		int delta_x;
+
+		private Orientation(int a, int b) {
+			this.delta_y = a;
+			this.delta_x = b;
+		}
 
 		/**
 		 * Returns the opposite orientation, for example
@@ -25,15 +33,16 @@ public class Bubble {
 
 		/**
 		 * Returns the index at this direction from the given
-		 * index. For example:
+		 * index. It works according to the following formula:
+		 * newIndex = startIndex + delta_y * width + delta_x,
+		 * where delta_y and delta_x both be either -1, 0 or 1.
 		 * NORTH_EAST.fromIndex(6, 4) will return 3.
 		 * @param index
 		 * @param width
 		 * @return
 		 */
 		public int fromIndex(int index, int width) {
-			//TODO
-			return 0;
+			return index + delta_y * width + delta_x;
 		}
 	}
 	protected static Orientation[] orientations = Orientation.values();
@@ -48,9 +57,22 @@ public class Bubble {
 	protected Color color;
 	protected Circle bounds;
 	
+	/**
+	 * Instantiate a new Bubble, with a Random color.
+	 */
 	public Bubble() {
 		this.color = getRandomColor();
 		this.bounds = new Circle();
+	}
+
+	/**
+	 * Instantiate a new Bubble, with the given color.
+	 * This function is for testing purposes, therefore
+	 * it's protected and can only be used in the same package.
+	 * @param c - the Color of the Bubble.
+	 */
+	protected Bubble(Color c) {
+		this.color = c;
 	}
 
 	/**

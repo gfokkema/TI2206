@@ -1,11 +1,13 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Bubble;
+
+import nl.tudelft.ti2206.bubbleshooter.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
 
+import java.util.Collection;
 import java.util.Map;
 
-import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 
 import com.badlogic.gdx.Input.Keys;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 
 public class BubbleShooterScreen extends ScreenAdapter {
@@ -28,6 +31,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	boolean pressed;
 	Texture bg = new Texture("back_one_player.png");
 	Texture fg = new Texture("Bubble-Blue.png");
+	boolean testperformed = false;
 
 	/**
 	 * Constructor of BubbleShooterScreen
@@ -61,7 +65,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 
 		game.batch.begin();
 		Color current = game.batch.getColor();
-
+		handle_input();
 		game.batch.draw(bg, 0, 0);
 		Map<Integer, Bubble> bubbles = board.getBubbles();
 		bubbles.forEach((Integer k, Bubble v) -> {
@@ -123,6 +127,18 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		game.batch.end();
 	}
 	
+	private void handle_input() {
+		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
+			testperformed = true;
+			Collection<Bubble> remove = board.getColorGroup(0);
+			if(remove.size() >= 3) {
+				board.removeAll(remove);
+				Collection<Bubble> disconnected = board.getDisconnectedGroup();
+				board.removeAll(disconnected);
+			}
+		}
+	}
+
 	/**
 	 * Returns the bottom left xy-coordinates of a bubble
 	 * @param idx	the index of the bubble on the board
