@@ -134,8 +134,6 @@ public class Board {
 
 	public boolean adjacent(int a, int b) {
 		if (a > b) { int temp = a; a = b; b = temp; }
-		if (b < 1) 					return false;
-		if (b >= width * height) 	return false;
 		
 		Vector2 xy_a = toXY(a);
 		Vector2 xy_b = toXY(b);
@@ -159,6 +157,7 @@ public class Board {
 		int y = y_even * 2 + (idx - y_even * rowset) / width;
 		int x = idx - toIdx(0, y);
 		
+		if (idx < 0 || y >= height) throw new IndexOutOfBoundsException();
 		return new Vector2(x, y);
 	}
 
