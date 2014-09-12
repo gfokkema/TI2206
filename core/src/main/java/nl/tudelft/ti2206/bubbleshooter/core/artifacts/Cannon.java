@@ -17,25 +17,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Cannon {
 
-	/**
-	 * Create a pointer and the texture for the cannon.
-	 */
-	Bubble projectile;
 	Pointer pointer;
+	
 	Texture image;
 	Sprite sprite;
 	float angle;
-	boolean fired;
-	int counter = 0; //temp
 	
-	Texture fg = new Texture("Bubble-Blue.png");
+	Bubble projectile;
+	Texture fg;
 	Sprite bubbleSprite;
+	
+	boolean fired;
 	
 	private final float LEFT_BOUNDARY = 60;
 	private final float RIGHT_BOUNDARY = -60;
 	private final int sensitivity = 100;
 	private final int velocity = 5;
-	
 	
 	/**
 	 * Cannon constructor
@@ -54,7 +51,8 @@ public class Cannon {
 		sprite.setOrigin(sprite.getWidth()/2, 25);
 		sprite.setPosition(x - image.getWidth()/2, y);
 		
-		// add bubble		
+		// add bubble
+		fg = new Texture("Bubble-Blue.png");
 		projectile = new Bubble();
 		projectile.setCircle(0, 0, fg.getHeight()/4);
 		pointer.setOrigin(new Vector2(x-fg.getWidth()/4, y));
@@ -97,17 +95,26 @@ public class Cannon {
 		
 		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
 		
-		if(projectile.getCircle().y > Gdx.graphics.getHeight())
+		// projectile out of screen
+		if(projectile.getCircle().y > Gdx.graphics.getHeight()) {
 			fired = false;
+		}
 		
 	}
 	
+	/**
+	 * draw attributes
+	 * @param batch
+	 */
 	public void draw(SpriteBatch batch) {
 		update();
 		sprite.draw(batch);
 		batch.draw(fg, projectile.getBounds().x, projectile.getBounds().y, 32, 32);
 	}
 	
+	/**
+	 * Controls handleInput
+	 */
 	public void handleInput() {
 		//if pressed left, turn cannon to the left
 		if(Gdx.input.isKeyPressed(Keys.LEFT) && !fired) {
