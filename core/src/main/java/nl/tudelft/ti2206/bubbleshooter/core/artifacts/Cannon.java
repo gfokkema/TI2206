@@ -25,11 +25,9 @@ public class Cannon {
 	Texture image;
 	Sprite sprite;
 	float angle;
-	Circle pCircle;
 	
 	Texture fg = new Texture("Bubble-Blue.png");
 	Sprite bubbleSprite;
-	Vector2 BCPosition;
 	
 	private final float LEFT_BOUNDARY = 40;
 	private final float RIGHT_BOUNDARY = -40;
@@ -55,11 +53,10 @@ public class Cannon {
 		sprite.setPosition(x - image.getWidth()/2, y);
 		
 		// add bubble		
-		BCPosition = new Vector2(0,0);
 		projectile = new Bubble();
-		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
-		pCircle = projectile.getCircle();
+		projectile.setCircle(0, 0, fg.getHeight()/4);
 		pointer.setOrigin(new Vector2(x-fg.getWidth()/4, y));
+		projectile.setDirection(pointer.getDirection());
 	}
 	
 	/**
@@ -83,45 +80,26 @@ public class Cannon {
 		sprite.rotate(sprite.getRotation() - angle);
 		sprite.setRotation(angle);
 		pointer.setAngle(angle);
+		projectile.setDirection(pointer.getDirection());
 		
 		// debugging...
 		Gdx.app.log("Degrees is", "" + angle);
 	}
 		
-	/**
-	 * Get the associated pointer with the cannon.
-	 * @return pointer
-	 */
-	public Pointer getPointer() {
-		return pointer;
-	}
-	
+		
 	/**
 	 * Shoot the actual bubble: pew pew!
 	 */
 	public void shoot() {
-		BCPosition.x += pointer.getDirection().x *velocity;
-		BCPosition.y += pointer.getDirection().y *velocity;
+		
+		Circle BCPosition = projectile.getCircle();
+		
+		BCPosition.x += projectile.getDirection().x *velocity;
+		BCPosition.y += projectile.getDirection().y *velocity;
 		
 		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
 	}
-		
-	/**
-	 * Get the cannon angle
-	 * @return angle
-	 */
-	public float getAngle() {
-		return angle;
-	}
-	
-	/**
-	 * Get the position of where the bubble should be relatively to the cannon.
-	 * @return BCPosition
-	 */
-	public Vector2 getBCPosition() {
-		return BCPosition;
-	}
-	
+			
 	/**
 	 * Per frame checks if angle of the cannon changed,
 	 * at the end draws the actual cannon onto screen.
@@ -146,7 +124,7 @@ public class Cannon {
 		}
 		
 		//Gdx.app.log("Bubble Cannon Position is", "" + BCPosition); 
-		BCPosition = pointer.getOrigin().add(pointer.getDirection().scl(100));
+		projectile.setPosition(pointer.getOrigin().add(pointer.getDirection().scl(100)));
 
 		// draw the cannon
 		sprite.draw(batch);
@@ -158,12 +136,39 @@ public class Cannon {
 	 */
 	public void drawBubble(SpriteBatch batch){
 		// follow cannon angle
-		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
+		projectile.setCircle(projectile.getPosition(), fg.getHeight()/4);
 		// bubble stays within given bounds.
+		
+		Circle pCircle = projectile.getCircle();
+		
 		if(pCircle.x < 190) pCircle.x = 190;
 		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
 		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
 		batch.draw(fg, pCircle.x, pCircle.y, 32, 32);	
 		sprite.draw(batch);
+	}
+	
+	/**
+	 * Get the associated pointer with the cannon.
+	 * @return pointer
+	 */
+	public Pointer getPointer() {
+		return pointer;
+	}
+	
+	/**
+	 * Get the cannon angle
+	 * @return angle
+	 */
+	public float getAngle() {
+		return angle;
+	}
+	
+	/**
+	 * Get the position of where the bubble should be relatively to the cannon.
+	 * @return BCPosition
+	 */
+	public Vector2 getProjectilePosition() {
+		return projectile.getPosition();
 	}
 }

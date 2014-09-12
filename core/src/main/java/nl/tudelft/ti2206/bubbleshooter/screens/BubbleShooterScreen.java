@@ -81,12 +81,19 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		game.batch.setColor(current);
 		
 		// cannon must not be drawn when space has been pressed... (CHANGE!)
-		if(!fired) 		cannon.draw(game.batch);
+		if(!fired) 		
+			cannon.draw(game.batch);
+		
 		// draw the projectile
 		cannon.drawBubble(game.batch);
+		
 		// increment frame counter
-		if(fired)		frame_count++;
+		if(fired)		
+			frame_count++;
+		
+		
 		Gdx.app.log("Count is", "" + frame_count);
+		
 		// frame count
 		if(frame_count == 50){
 			fired = false;
