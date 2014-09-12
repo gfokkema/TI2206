@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
+import nl.tudelft.ti2206.bubbleshooter.Board;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Cannon {
 
 	Pointer pointer;
+	Board board;	
 	
 	Texture image;
 	Sprite sprite;
@@ -39,7 +42,8 @@ public class Cannon {
 	 */
 	public Cannon(int x, int y) {
 		pointer = new Pointer(new Vector2(x, y));
-				
+		board = new Board(1,1);
+		
 		// texture for cannon + angle
 		image = new Texture("cannon.png");
 		angle = 0;
@@ -90,7 +94,7 @@ public class Cannon {
 	
 	private void projectileCollision() {
 		// projectile out of screen
-		//board.add(new Projectile(projectile));
+		board.add(new Projectile(projectile));
 		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, 0);
 		fired = false;	
 	}
@@ -99,8 +103,8 @@ public class Cannon {
 	 * draw attributes
 	 * @param batch
 	 */
-	public void draw(SpriteBatch batch) {
-		update();
+	public void draw(SpriteBatch batch, Board table) {
+		update(table);
 		sprite.draw(batch);
 		batch.setColor(projectile.getColor());
 		batch.draw(fg, projectile.getBounds().x, projectile.getBounds().y, 32, 32);
@@ -131,9 +135,11 @@ public class Cannon {
 	/**
 	 * Update attributes which are able to move
 	 */
-	private void update() {		
+	private void update(Board table) {		
 		
-		if( projectile.getCircle().y > Gdx.graphics.getHeight() )
+		board = table;
+		
+		if(table.collides(projectile) || projectile.getCircle().y > Gdx.graphics.getHeight() )
 			projectileCollision();
 		
 		// if fired, check if the projectile hits the wall
