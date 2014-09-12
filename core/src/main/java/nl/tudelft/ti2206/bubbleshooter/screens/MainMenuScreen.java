@@ -2,12 +2,12 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
+import nl.tudelft.ti2206.bubbleshooter.BackgroundMusic;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.math.Rectangle;
@@ -24,7 +24,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class MainMenuScreen extends ScreenAdapter {
 	public static final String title = "Bubble Shooter";
 	private final String BGMname = "lol.ogg";
-	Music BGM;
+	BackgroundMusic BGM;
 	ArrayList<Button> buttons;
 	Launch game;
 	
@@ -32,10 +32,10 @@ public class MainMenuScreen extends ScreenAdapter {
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
 	 */
-	public MainMenuScreen(Launch game, Music BGM) {
+	public MainMenuScreen(Launch game) {
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
-		this.BGM = BGM;
+		BGM = new BackgroundMusic(BGMname);
 		
 		//Add buttons, each with their own callback.
 		Button play = new Button(
@@ -50,7 +50,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Settings",
-				() -> this.game.setScreen(new OptionsScreen(game, this.BGM))
+				() -> this.game.setScreen(new OptionsScreen(game, BGM))
 		);
 		Button quit = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
@@ -102,7 +102,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void show() {
-		BGM.play();
+		BGM.getBGM().play();
 	}
 	
 	/**
@@ -110,6 +110,6 @@ public class MainMenuScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void hide() {
-		BGM.pause();
+		BGM.getBGM().pause();
 	}
 }

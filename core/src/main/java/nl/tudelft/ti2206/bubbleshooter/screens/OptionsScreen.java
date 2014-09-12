@@ -2,12 +2,12 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
+import nl.tudelft.ti2206.bubbleshooter.BackgroundMusic;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,7 +16,7 @@ public class OptionsScreen extends ScreenAdapter {
 	
 	public static final String title = "Options";
 	Launch game;
-	Music BGM;
+	BackgroundMusic BGM;
 	float volume;
 	private final float volumeStep = 0.1f;
 	ArrayList<Button> buttons;
@@ -25,10 +25,10 @@ public class OptionsScreen extends ScreenAdapter {
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
 	 */
-	public OptionsScreen(Launch game, Music BGM) {
+	public OptionsScreen(Launch game, BackgroundMusic BGM) {
 		this.BGM = BGM;
 		this.game = game;
-		volume = BGM.getVolume();
+		volume = this.BGM.getVolume();
 		this.buttons = new ArrayList<Button>();
 
 		//Add buttons, each with their own callback.
@@ -51,7 +51,7 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Back",
-				() -> this.game.setScreen(new MainMenuScreen(game, this.BGM))
+				() -> this.game.setScreen(game.mms)
 		);
 		buttons.add(volup);
 		buttons.add(voldown);
@@ -92,16 +92,19 @@ public class OptionsScreen extends ScreenAdapter {
 	
 	/**
 	 * Play some main menu background music
-	 *
+	 * This music will be played in the main menu screen and options screen
 	 */
 	@Override
 	public void show() {
-		BGM.play();
+		BGM.getBGM().play();
 	}
 	
+	/**
+	 * Hide is being called when the main menu screen is not the current screen.
+	 */
 	@Override
 	public void hide() {
-		BGM.pause();
+		BGM.getBGM().pause();
 	}
 	
 	/**
