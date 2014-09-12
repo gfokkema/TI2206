@@ -80,25 +80,26 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		
 		game.batch.setColor(current);
 		
+		cannon.draw(game.batch);
+		
 		// cannon must not be drawn when space has been pressed... (CHANGE!)
-		if(!fired) 		
-			cannon.draw(game.batch);
-		
-		// draw the projectile
-		cannon.drawBubble(game.batch);
-		
-		// increment frame counter
-		if(fired)		
-			frame_count++;
-		
-		
-		Gdx.app.log("Count is", "" + frame_count);
-		
-		// frame count
-		if(frame_count == 50){
-			fired = false;
-			frame_count = 0;
-		}
+//		if(!fired) 		
+//			cannon.draw(game.batch);
+//		
+//		// draw the projectile
+//		cannon.drawBubble(game.batch);
+//		
+//		// increment frame counter
+//		if(fired)		
+//			frame_count++;
+//		
+//		
+//		Gdx.app.log("Count is", "" + frame_count);
+//		// frame count
+//		if(frame_count == 50){
+//			fired = false;
+//			frame_count = 0;
+//		}
 		
 		game.batch.end();
 	}
@@ -118,10 +119,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			}
 		}
 		
-		// put pressed on true when Spacebar was hit
-		if(Gdx.input.isKeyPressed(Keys.SPACE))	fired = true;
-		// if space was pressed then shoot must be called for X frames.
-		if(fired)	cannon.shoot();
+		cannon.handleInput();
+		
+//		// put pressed on true when Spacebar was hit
+//		if(Gdx.input.isKeyPressed(Keys.SPACE))	fired = true;
+//		// if space was pressed then shoot must be called for X frames.
+//		if(fired)	cannon.shoot();
 		
 	}
 }

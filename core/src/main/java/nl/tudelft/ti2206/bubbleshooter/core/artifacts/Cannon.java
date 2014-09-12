@@ -25,6 +25,8 @@ public class Cannon {
 	Texture image;
 	Sprite sprite;
 	float angle;
+	boolean fired;
+	int counter = 0; //temp
 	
 	Texture fg = new Texture("Bubble-Blue.png");
 	Sprite bubbleSprite;
@@ -98,16 +100,30 @@ public class Cannon {
 		BCPosition.y += projectile.getDirection().y *velocity;
 		
 		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
+		
+		//temp
+		counter++;
+		
+		if(counter == 40) {
+			fired = false;
+			counter = 0;
+		}
+		
 	}
-			
-	/**
-	 * Per frame checks if angle of the cannon changed,
-	 * at the end draws the actual cannon onto screen.
-	 * @param batch
-	 */
+	
 	public void draw(SpriteBatch batch) {
-		// check for left/right key presses
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+		
+		if(fired)
+			shoot();
+		else
+			projectile.setPosition(pointer.getOrigin().add(pointer.getDirection().scl(100)));
+		
+		sprite.draw(batch);
+		batch.draw(fg, projectile.getBounds().x, projectile.getBounds().y, 32, 32);
+	}
+	
+	public void handleInput() {
+		if(Gdx.input.isKeyPressed(Keys.LEFT) && !fired) {
 			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
 			
@@ -115,38 +131,67 @@ public class Cannon {
 			Gdx.app.log("Angle is", "" + angle); 
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+		if(Gdx.input.isKeyPressed(Keys.RIGHT) && !fired) {
 			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
 			
 			// debugging...
 			Gdx.app.log("Angle is", "" + angle); 
 		}
-		
-		//Gdx.app.log("Bubble Cannon Position is", "" + BCPosition); 
-		projectile.setPosition(pointer.getOrigin().add(pointer.getDirection().scl(100)));
-
-		// draw the cannon
-		sprite.draw(batch);
+				
+		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+			fired = true;
+		}		
 	}
 	
-	/**
-	 * Draw the bubble which the cannon shoots
-	 * @param batch
-	 */
-	public void drawBubble(SpriteBatch batch){
-		// follow cannon angle
-		projectile.setCircle(projectile.getPosition(), fg.getHeight()/4);
-		// bubble stays within given bounds.
-		
-		Circle pCircle = projectile.getCircle();
-		
-		if(pCircle.x < 190) pCircle.x = 190;
-		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
-		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
-		batch.draw(fg, pCircle.x, pCircle.y, 32, 32);	
-		sprite.draw(batch);
-	}
+			
+//	/**
+//	 * Per frame checks if angle of the cannon changed,
+//	 * at the end draws the actual cannon onto screen.
+//	 * @param batch
+//	 */
+//	public void draw(SpriteBatch batch) {
+//		// check for left/right key presses
+//		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+//			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
+//			setAngle(angle); 
+//			
+//			// debugging...
+//			Gdx.app.log("Angle is", "" + angle); 
+//		}
+//		
+//		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+//			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
+//			setAngle(angle); 
+//			
+//			// debugging...
+//			Gdx.app.log("Angle is", "" + angle); 
+//		}
+//		
+//		//Gdx.app.log("Bubble Cannon Position is", "" + BCPosition); 
+//		projectile.setPosition(pointer.getOrigin().add(pointer.getDirection().scl(100)));
+//
+//		// draw the cannon
+//		sprite.draw(batch);
+//	}
+//	
+//	/**
+//	 * Draw the bubble which the cannon shoots
+//	 * @param batch
+//	 */
+//	public void drawBubble(SpriteBatch batch){
+//		// follow cannon angle
+//		projectile.setCircle(projectile.getPosition(), fg.getHeight()/4);
+//		// bubble stays within given bounds.
+//		
+//		Circle pCircle = projectile.getCircle();
+//		
+//		if(pCircle.x < 190) pCircle.x = 190;
+//		if(pCircle.x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) pCircle.x = Gdx.graphics.getWidth() - 190 - fg.getWidth()/2;
+//		if(pCircle.y > Gdx.graphics.getHeight() - fg.getHeight()/2) pCircle.y = Gdx.graphics.getHeight() - fg.getHeight()/2;
+//		batch.draw(fg, pCircle.x, pCircle.y, 32, 32);	
+//		sprite.draw(batch);
+//	}
 	
 	/**
 	 * Get the associated pointer with the cannon.
