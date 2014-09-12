@@ -96,8 +96,5 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				board.removeAll(disconnected);
 			}
 		}
-		
-		// put pressed on true when Spacebar was hit
-		if (Gdx.input.isKeyPressed(Keys.SPACE) && projectile == null) projectile = cannon.shoot();
 	}
 }

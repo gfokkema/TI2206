@@ -73,6 +73,7 @@ public class Cannon {
 		sprite.rotate(sprite.getRotation() - angle);
 		sprite.setRotation(angle);
 		pointer.setAngle(angle);
+		projectile.setDirection(pointer.getDirection());
 		
 		projectile.setBounds(new Circle(getBubblePos(), 16));
 			
@@ -84,14 +85,7 @@ public class Cannon {
 		return this.projectile;
 	}
 		
-	/**
-	 * Get the associated pointer with the cannon.
-	 * @return pointer
-	 */
-	public Pointer getPointer() {
-		return pointer;
-	}
-	
+		
 	/**
 	 * Shoot the actual bubble: pew pew!
 	 */

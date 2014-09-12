@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 
 public class Bubble {
 	public enum Orientation {
@@ -56,6 +57,7 @@ public class Bubble {
 	};
 	protected Color color;
 	protected Circle bounds;
+	protected Vector2 direction;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
@@ -63,6 +65,7 @@ public class Bubble {
 	public Bubble() {
 		this.color = getRandomColor();
 		this.bounds = new Circle();
+		this.direction = new Vector2();
 	}
 
 	/**
@@ -106,6 +109,18 @@ public class Bubble {
 		bounds.set(x, y, radius);
 	}
 	
+	public void setCircle(Vector2 position, float radius) {
+		bounds.set(position, radius);
+	}
+	
+	public Vector2 getPosition() {
+		return new Vector2(bounds.x, bounds.y);
+	}
+	
+	public void setPosition(Vector2 position) {
+		bounds.set(position, bounds.radius);
+	}
+		
 	/**
 	 * Pick a ColorValue at random.
 	 * @return a randomly chosen ColorValue.
@@ -128,5 +143,13 @@ public class Bubble {
 	 */
 	public void setBounds(Circle c) {
 		this.bounds = c;
+	}
+	
+	public void setDirection(Vector2 direction) {
+		this.direction = new Vector2(direction);
+	}
+	
+	public Vector2 getDirection() {
+		return new Vector2(direction);
 	}
 }
