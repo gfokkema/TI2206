@@ -245,7 +245,8 @@ public class Board {
 		y = 480 - y;
 		int x_id = x/32;
 		int y_id = y - (x_id & 1) * 16;
-		y_id /= 32;
+		y_id /= 28;
+		
 		return toIdx(x_id, y_id);
 	}
 }
