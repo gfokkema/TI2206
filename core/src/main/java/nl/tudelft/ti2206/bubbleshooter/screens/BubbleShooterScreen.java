@@ -71,7 +71,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			
 			if (board.collides(projectile)) {
 				int new_idx = board.getIndex(projectile.getPosition());
-				board.add(projectile, new_idx);
+				if (board.add(projectile, new_idx) && board.getColorGroup(new_idx).size() > 2)
+					board.removeAll(board.getColorGroup(new_idx));
+				board.removeAll(board.getDisconnectedGroup());
 				projectile = null;
 			}
 		}
