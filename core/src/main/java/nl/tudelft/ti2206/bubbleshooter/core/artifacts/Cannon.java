@@ -56,7 +56,7 @@ public class Cannon {
 		sprite.setPosition(x - image.getWidth()/2, y);
 		
 		// add bubble
-		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, velocity);
+		CreateProjectile();
 		pointer.setOrigin(new Vector2(x-fg.getWidth()/4, y));
 	}
 	
@@ -92,10 +92,9 @@ public class Cannon {
 		fired = true;		
 	}
 	
-	private void projectileCollision() {
-		// projectile out of screen
-		//board.add(projectile);
-		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, 0);
+	private void CreateProjectile() {
+		Circle circle = new Circle(new Vector2(pointer.getOrigin()).add(new Vector2(pointer.getDirection()).scl(100)), 16);
+		projectile = new Projectile(circle, new Vector2(pointer.getDirection()), 0);
 		fired = false;	
 	}
 	
@@ -127,7 +126,8 @@ public class Cannon {
 		}
 		
 		//if pressed space, trigger shoot
-		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+		if(Gdx.input.isKeyPressed(Keys.SPACE) && !board.collides(projectile)) {
+			Gdx.app.log("Collides 1","" + board.collides(projectile));
 			shoot();
 		}		
 	}
@@ -138,15 +138,18 @@ public class Cannon {
 	private void update(Board table) {		
 		
 		board = table;
-		
-		if(table.collides(projectile) || projectile.getCircle().y > Gdx.graphics.getHeight() )
-			projectileCollision();
-		
+				
 		// if fired, check if the projectile hits the wall
 		// perform shoot
 		if(fired) {
+			if(table.collides(projectile) || projectile.getCircle().y > Gdx.graphics.getHeight() ) {
+				board.add(projectile);
+				CreateProjectile();
+			}
+			
 			if(projectile.getCircle().x < 190 || projectile.getCircle().x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2)
 				projectile.getDirection().setAngle(180 -projectile.getDirection().angle());
+			
 			projectile.move();
 		}
 		// else draw projectile on cannon
