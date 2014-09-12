@@ -70,6 +70,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.draw(fg, projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
 			
 			if (board.collides(projectile)) {
+				int new_idx = board.getIndex(projectile.getPosition());
+				board.add(projectile, new_idx);
 				projectile = null;
 			}
 		}
