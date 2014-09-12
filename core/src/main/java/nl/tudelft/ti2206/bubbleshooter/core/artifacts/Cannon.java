@@ -40,9 +40,9 @@ public class Cannon {
 	 * @param x coordinate
 	 * @param y coordinate
 	 */
-	public Cannon(int x, int y) {
+	public Cannon(int x, int y, Board board) {
 		pointer = new Pointer(new Vector2(x, y));
-		board = new Board(10,10);
+		this.board = board;
 		
 		// texture for cannon + angle
 		image = new Texture("cannon.png");
@@ -102,8 +102,8 @@ public class Cannon {
 	 * draw attributes
 	 * @param batch
 	 */
-	public void draw(SpriteBatch batch, Board table) {
-		update(table);
+	public void draw(SpriteBatch batch) {
+		update();
 		sprite.draw(batch);
 		batch.setColor(projectile.getColor());
 		batch.draw(fg, projectile.getBounds().x, projectile.getBounds().y, 32, 32);
@@ -134,18 +134,14 @@ public class Cannon {
 	/**
 	 * Update attributes which are able to move
 	 */
-	private void update(Board table) {		
-		
-		board = table;
-				
+	private void update() {		
 		// if fired, check if the projectile hits the wall
 		// perform shoot
 		if(fired) {
-			if(table.collides(projectile) || projectile.getCircle().y > 480) {
+			if(board.collides(projectile) || projectile.getCircle().y > 480) {
 				Circle c = projectile.getBounds();
-				int idx = table.getIndex(new Vector2(c.x, c.y));
-				System.out.println(c.x + " " + c.y + " " + idx);
-				table.add(projectile, idx);
+				int idx = board.getIndex(new Vector2(c.x, c.y));
+				board.add(projectile, idx);
 				CreateProjectile();
 			}
 			
