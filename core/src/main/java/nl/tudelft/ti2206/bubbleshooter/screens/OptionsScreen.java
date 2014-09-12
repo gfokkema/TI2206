@@ -17,7 +17,7 @@ public class OptionsScreen extends ScreenAdapter {
 	public static final String title = "Options";
 	Launch game;
 	Music BGM;
-	float volume = 0.5f;
+	float volume;
 	private final float volumeStep = 0.1f;
 	ArrayList<Button> buttons;
 	
@@ -28,6 +28,7 @@ public class OptionsScreen extends ScreenAdapter {
 	public OptionsScreen(Launch game, Music BGM) {
 		this.BGM = BGM;
 		this.game = game;
+		volume = BGM.getVolume();
 		this.buttons = new ArrayList<Button>();
 
 		//Add buttons, each with their own callback.
@@ -36,14 +37,14 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Volume Up!",
-				() -> this.BGM.setVolume(volume+=volumeStep)
+				() -> volumeUp()
 		);
 		Button voldown = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2 + 50, 100, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Volume Down!",
-				() -> this.BGM.setVolume(volume-=volumeStep)
+				() -> volumeDown()
 		);
 		Button back = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
@@ -101,6 +102,30 @@ public class OptionsScreen extends ScreenAdapter {
 	@Override
 	public void hide() {
 		BGM.pause();
+	}
+	
+	/**
+	 * Set volume boundaries, so it stays within the [0,1] interval.
+	 */
+	public void checkVolume() {
+		if(volume < 0) volume = 0;
+		if(volume > 1) volume = 1;
+	}
+	
+	/**
+	 * Raise the volume.
+	 */
+	public void volumeUp() {
+		this.BGM.setVolume(volume+=volumeStep);
+		checkVolume();
+	}
+	
+	/**
+	 * Lower the volume
+	 */
+	public void volumeDown() {
+		this.BGM.setVolume(volume-=volumeStep);
+		checkVolume();
 	}
 	
 }
