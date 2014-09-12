@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
 import com.badlogic.gdx.graphics.Color;
@@ -63,7 +64,6 @@ public class Board {
 	public boolean collides(Bubble b) {
 		for (Bubble c : bubbles.values()) {
 			if (c.collides(b)) {
-				System.out.println("collision!");
 				return true;
 			}
 		}
@@ -98,6 +98,26 @@ public class Board {
 		return add(b, toIdx(i, j));
 	}
 	
+	public boolean add(Bubble b) {
+		for (Entry<Integer, Bubble> entry : bubbles.entrySet()) {
+			Bubble v = entry.getValue();
+			int idx = entry.getKey();
+			
+			if (v.collides(b)) {
+				for (Orientation orientation : Orientation.values()) {
+					int new_idx = orientation.fromIndex(idx, width);
+					Circle c = new Circle(getLoc(new_idx), 16);
+					
+					if (	adjacent(idx, new_idx) &&
+							b.bounds.overlaps(c)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Returns a {@link Map} with the {@link Bubble} objects that are currently on the {@link Board}.
 	 * @return	{@link Map} with all {@link Bubble} objects
@@ -125,8 +145,15 @@ public class Board {
 	}
 	
 	/**
+<<<<<<< HEAD
+	 * Traversal to find all of the nodes that should be removed.
+	 * If nothing should be removed, then nothing is returned.
+	 * @param b		the {@link Bubble} where it all starts
+	 * @return 		{@link Collection} that's either empty or filled with nodes that will be removed 
+=======
 	 * Traversal to find all of the {@link Bubble}s that are disconnected from the ceiling.
 	 * @return A {@link Collection} with all the disconnected Bubbles.
+>>>>>>> master
 	 */
 	public Collection<Bubble> getDisconnectedGroup() {
 		// The same Map will be used for each depth-first search.

@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
 import static org.junit.Assert.*;
+import nl.tudelft.ti2206.bubbleshooter.Board;
 
 import org.junit.Before;
 import org.junit.Test;
