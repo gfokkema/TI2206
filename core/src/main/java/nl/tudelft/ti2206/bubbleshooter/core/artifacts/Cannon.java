@@ -9,26 +9,21 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Create a cannon which can shoot bubbles!
  * @author Nando &amp; Owen
  *
  */
-public class Cannon {
-	/**
-	 * Create a pointer and the texture for the cannon.
-	 */
-	Sprite sprite;
+public class Cannon extends Sprite {
 	Pointer pointer;
 	float angle;
 
 	Projectile projectile;
-	boolean moving = false;
+	boolean fired = false;
 	
-	private final float LEFT_BOUNDARY = 40;
-	private final float RIGHT_BOUNDARY = -40;
+	private final float LEFT_BOUNDARY = 60;
+	private final float RIGHT_BOUNDARY = -60;
 	private final int sensitivity = 100;
 	private final int velocity = 5;
 	
@@ -38,12 +33,10 @@ public class Cannon {
 	 * @param y coordinate
 	 */
 	public Cannon(int x, int y) {
-		Texture image = new Texture("cannon.png");
+		super(new Sprite(new Texture("cannon.png")));
+		this.setOrigin(this.getWidth() / 2, 25);
+		this.setPosition(x - this.getWidth() / 2, y);
 		
-		// sprite settings
-		sprite = new Sprite(image);
-		sprite.setOrigin(sprite.getWidth() / 2, 25);
-		sprite.setPosition(x - image.getWidth() / 2, y);
 		pointer = new Pointer(new Vector2(x, y));
 		pointer.setOrigin(new Vector2(x - 16, y));
 		
@@ -70,15 +63,11 @@ public class Cannon {
 		}
 		
 		// rotate the actual rotation difference.
-		sprite.rotate(sprite.getRotation() - angle);
-		sprite.setRotation(angle);
+		this.rotate(this.getRotation() - angle);
+		this.setRotation(angle);
 		pointer.setAngle(angle);
-		projectile.setDirection(pointer.getDirection());
 		
 		projectile.setBounds(new Circle(getBubblePos(), 16));
-			
-		// debugging...
-		Gdx.app.log("Degrees is", "" + angle);
 	}
 	
 	public Bubble getBubble() {
@@ -92,41 +81,39 @@ public class Cannon {
 	public Projectile shoot() {
 		Projectile fired = projectile;
 		fired.setVelocity(velocity);
+		fired.setDirection(pointer.direction);
 		
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		return fired;
 	}
 	
 	/**
-	 * Draw the bubble which the cannon shoots
-	 * @param batch
+	 * Controls handleInput
 	 */
-	public void draw(SpriteBatch batch) {
-		Circle c = projectile.getBounds();
-		// bubble stays within given bounds.
-		if(c.x < 190 + 16) c.x = 190 + 16;
-		if(c.x > Gdx.graphics.getWidth() - 190 - 16) c.x = Gdx.graphics.getWidth() - 190 - 16;
-		if(c.y > Gdx.graphics.getHeight() - 16) c.y = Gdx.graphics.getHeight() - 16;
-		// check for left/right key presses
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-			angle += sensitivity * Gdx.graphics.getDeltaTime(); 
+	public void handleInput() {
+		//if pressed left, turn cannon to the left
+		if(Gdx.input.isKeyPressed(Keys.LEFT) && !fired) {
+			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
-			
-			// debugging...
-			Gdx.app.log("Angle is", "" + angle); 
 		}
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			angle -= sensitivity * Gdx.graphics.getDeltaTime(); 
+		
+		//if pressed right, turn cannon to the right
+		if(Gdx.input.isKeyPressed(Keys.RIGHT) && !fired) {
+			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
-			
-			// debugging...
-			Gdx.app.log("Angle is", "" + angle); 
 		}
-		sprite.draw(batch);
+	}
+	
+	/**
+	 * Get the associated pointer with the cannon.
+	 * @return pointer
+	 */
+	public Pointer getPointer() {
+		return pointer;
 	}
 	
 	private Vector2 getBubblePos() {
 		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
-						.add(pointer.getDirection().scl(100));
+						.add(pointer.getDirection().nor().scl(100));
 	}
 }

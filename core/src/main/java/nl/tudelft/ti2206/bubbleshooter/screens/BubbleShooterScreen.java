@@ -96,5 +96,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				board.removeAll(disconnected);
 			}
 		}
+		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE)) {
+			projectile = cannon.shoot();
+		}
+		cannon.handleInput();
 	}
 }

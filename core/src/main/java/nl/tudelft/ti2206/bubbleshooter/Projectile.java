@@ -14,11 +14,28 @@ public class Projectile extends Bubble {
 	}
 	
 	public void move() {
-		bounds.x += direction.x * velocity;
-		bounds.y += direction.y * velocity;
+		Vector2 dir = direction.nor().scl(velocity);
+		bounds.x += dir.x;
+		bounds.y += dir.y;
 	}
 	
 	public void setVelocity(int velocity) {
 		this.velocity = velocity;
+	}
+	
+	/**
+	 * Sets the direction of the bubble.
+	 * @param direction the direction for a 2D plane.
+	 */
+	public void setDirection(Vector2 direction) {
+		this.direction = direction;
+	}
+	
+	/**
+	 * Gets the direction of the bubble.
+	 * @return direction the direction of the bubble in  a 2D plane.
+	 */
+	public Vector2 getDirection() {
+		return direction;
 	}
 }

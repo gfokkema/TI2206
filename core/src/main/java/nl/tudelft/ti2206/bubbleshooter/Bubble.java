@@ -57,7 +57,6 @@ public class Bubble {
 	};
 	protected Color color;
 	protected Circle bounds;
-	protected Vector2 direction;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
@@ -65,7 +64,6 @@ public class Bubble {
 	public Bubble() {
 		this.color = getRandomColor();
 		this.bounds = new Circle();
-		this.direction = new Vector2();
 	}
 
 	/**
@@ -87,6 +85,10 @@ public class Bubble {
 		return bounds.overlaps(b.bounds);
 	}
 	
+	/**
+	 * return color
+	 * @return color
+	 */
 	public Color getColor() {
 		return this.color;
 	}
@@ -109,14 +111,28 @@ public class Bubble {
 		bounds.set(x, y, radius);
 	}
 	
+	/**
+	 * Sets the bounding {@link Circle} of the bubble.
+	 * @param position the position as x and y coordinate.
+	 * @param radius radius the radius of the circle.
+	 */
 	public void setCircle(Vector2 position, float radius) {
 		bounds.set(position, radius);
 	}
 	
+	/**
+	 * Gets the position of the bubble.
+	 * @return vector2 with c and y coordinate.
+	 */
 	public Vector2 getPosition() {
 		return new Vector2(bounds.x, bounds.y);
 	}
 	
+	/**
+	 * Sets the position of the bubble.
+	 * radius stays the same.
+	 * @param position vector with x and y coordinate.
+	 */
 	public void setPosition(Vector2 position) {
 		bounds.set(position, bounds.radius);
 	}
@@ -143,13 +159,5 @@ public class Bubble {
 	 */
 	public void setBounds(Circle c) {
 		this.bounds = c;
-	}
-	
-	public void setDirection(Vector2 direction) {
-		this.direction = new Vector2(direction);
-	}
-	
-	public Vector2 getDirection() {
-		return new Vector2(direction);
 	}
 }

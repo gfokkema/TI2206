@@ -64,7 +64,7 @@ public class Pointer {
 	 * @return direction
 	 */
 	public Vector2 getDirection() {
-		return new Vector2(direction);
+		return direction;
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class Pointer {
 	 * @return origin
 	 */
 	public Vector2 getOrigin() {
-		return new Vector2(origin);
+		return origin;
 	}
 		
 	/**
