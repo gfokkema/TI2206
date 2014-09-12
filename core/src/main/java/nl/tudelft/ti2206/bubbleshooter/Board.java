@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
 import com.badlogic.gdx.graphics.Color;
@@ -61,10 +62,21 @@ public class Board {
      * @return 	true if there's a collision, false otherwise
      */
 	public boolean collides(Bubble b) {
-		for (Bubble c : bubbles.values()) {
-			if (c.collides(b)) {
-				System.out.println("collision!");
-				return true;
+		for (Entry<Integer, Bubble> entry : bubbles.entrySet()) {
+			Bubble v = entry.getValue();
+			int idx = entry.getKey();
+			
+			if (v.collides(b)) {
+				for (Orientation orientation : Orientation.values()) {
+					int new_idx = orientation.fromIndex(idx, width);
+					Circle c = new Circle(getLoc(new_idx), 16);
+					
+					if (	adjacent(idx, new_idx) &&
+							b.bounds.overlaps(c) &&
+							add(b, new_idx)) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
