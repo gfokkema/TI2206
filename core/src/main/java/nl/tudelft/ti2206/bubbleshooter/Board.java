@@ -243,9 +243,9 @@ public class Board {
 		int y = (int)loc.y;
 		x = x - 190;
 		y = 480 - y;
-		int x_id = x/32;
-		int y_id = y - (x_id & 1) * 16;
-		y_id /= 28;
+		int y_id = y / 28;
+		int x_id = x - (y_id & 1) * 16;
+		x_id /= 32;
 		
 		return toIdx(x_id, y_id);
 	}
