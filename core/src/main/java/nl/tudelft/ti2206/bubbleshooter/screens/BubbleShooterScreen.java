@@ -71,9 +71,13 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			
 			if (board.collides(projectile)) {
 				int new_idx = board.getIndex(projectile.getPosition());
-				if (board.add(projectile, new_idx) && board.getColorGroup(new_idx).size() > 2)
-					board.removeAll(board.getColorGroup(new_idx));
-				board.removeAll(board.getDisconnectedGroup());
+				if (board.add(projectile, new_idx)) {
+					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
+					if (sameColors.size() >= 3) {
+						board.removeAll(sameColors);
+						board.removeAll(board.getDisconnectedGroup());
+					}
+				}
 				projectile = null;
 			}
 		}
@@ -90,15 +94,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Handle the input given by the player.
 	 */
 	private void handle_input() {
-		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
-			testperformed = true;
-			Collection<Bubble> remove = board.getColorGroup(0);
-			if(remove.size() >= 3) {
-				board.removeAll(remove);
-				Collection<Bubble> disconnected = board.getDisconnectedGroup();
-				board.removeAll(disconnected);
-			}
-		}
 		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE)) {
 			projectile = cannon.shoot();
 		}
