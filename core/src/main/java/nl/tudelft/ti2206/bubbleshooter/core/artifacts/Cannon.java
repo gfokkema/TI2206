@@ -20,7 +20,6 @@ public class Cannon extends Sprite {
 	float angle;
 
 	Projectile projectile;
-	boolean fired = false;
 	
 	private final float LEFT_BOUNDARY = 60;
 	private final float RIGHT_BOUNDARY = -60;
@@ -81,7 +80,7 @@ public class Cannon extends Sprite {
 	public Projectile shoot() {
 		Projectile fired = projectile;
 		fired.setVelocity(velocity);
-		fired.setDirection(pointer.direction);
+		fired.setDirection(new Vector2(pointer.direction));
 		
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		return fired;
@@ -92,15 +91,15 @@ public class Cannon extends Sprite {
 	 */
 	public void handleInput() {
 		//if pressed left, turn cannon to the left
-		if(Gdx.input.isKeyPressed(Keys.LEFT) && !fired) {
+		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
-			setAngle(angle); 
+			setAngle(angle);
 		}
 		
 		//if pressed right, turn cannon to the right
-		if(Gdx.input.isKeyPressed(Keys.RIGHT) && !fired) {
+		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
-			setAngle(angle); 
+			setAngle(angle);
 		}
 	}
 	
