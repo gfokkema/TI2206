@@ -12,56 +12,49 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.math.Rectangle;
 
-/**
- * The actual menu screen, which shows the various buttons to choose from.
- * Such buttons include:
- * - Starting game
- * - Options menu
- * - Viewing high scores
- * @author group-15
- *
- */
-public class MainMenuScreen extends ScreenAdapter {
-	public static final String title = "Bubble Shooter";
-	private final String BGMname = "lol.ogg";
-	Music BGM;
-	ArrayList<Button> buttons;
+public class OptionsScreen extends ScreenAdapter {
+	
+	public static final String title = "Options";
 	Launch game;
+	Music BGM;
+	float volume = 0.5f;
+	private final float volumeStep = 0.1f;
+	ArrayList<Button> buttons;
 	
 	/**
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
 	 */
-	public MainMenuScreen(Launch game, Music BGM) {
+	public OptionsScreen(Launch game, Music BGM) {
+		this.BGM = BGM;
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
-		this.BGM = BGM;
-		
+
 		//Add buttons, each with their own callback.
-		Button play = new Button(
-				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 50, 200, 50),
+		Button volup = new Button(
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 125, Gdx.graphics.getHeight() / 2 + 50, 100, 50),
 				new Color(0xFFFF00FF),
 				game.font,
-				"Play!",
-				() -> this.game.setScreen(new BubbleShooterScreen(game))
+				"Volume Up!",
+				() -> this.BGM.setVolume(volume+=volumeStep)
 		);
-		Button settings = new Button(
+		Button voldown = new Button(
+				new Rectangle(Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2 + 50, 100, 50),
+				new Color(0xFFFF00FF),
+				game.font,
+				"Volume Down!",
+				() -> this.BGM.setVolume(volume-=volumeStep)
+		);
+		Button back = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
-				"Settings",
-				() -> this.game.setScreen(new OptionsScreen(game, this.BGM))
+				"Back",
+				() -> this.game.setScreen(new MainMenuScreen(game, this.BGM))
 		);
-		Button quit = new Button(
-				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
-				new Color(0xFFFF00FF),
-				game.font,
-				"Quit",
-				() -> Gdx.app.exit()
-		);
-		buttons.add(play);
-		buttons.add(settings);
-		buttons.add(quit);
+		buttons.add(volup);
+		buttons.add(voldown);
+		buttons.add(back);
 	}
 	
 	/**
@@ -75,7 +68,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		game.batch.begin();
 
 		game.font.setColor(new Color(0xFFFF00FF));
-		game.font.draw(game.batch, title, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 125);
+		game.font.draw(game.batch, title, Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2 + 125);
 
 		buttons.forEach((Button b) -> b.draw(game.batch));
 		game.batch.end();
@@ -98,18 +91,16 @@ public class MainMenuScreen extends ScreenAdapter {
 	
 	/**
 	 * Play some main menu background music
-	 * This music will be played in the main menu screen and options screen
+	 *
 	 */
 	@Override
 	public void show() {
 		BGM.play();
 	}
 	
-	/**
-	 * Hide is being called when the main menu screen is not the current screen.
-	 */
 	@Override
 	public void hide() {
 		BGM.pause();
 	}
+	
 }
