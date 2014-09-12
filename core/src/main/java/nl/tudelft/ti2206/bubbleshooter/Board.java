@@ -73,7 +73,7 @@ public class Board {
 					
 					if (	adjacent(idx, new_idx) &&
 							b.bounds.overlaps(c) &&
-							add(b, new_idx)) {
+							add(b, getIndex(b.getPosition()))) {
 						return true;
 					}
 				}
@@ -243,9 +243,10 @@ public class Board {
 	 */
 	public Vector2 getLoc(int idx) {
 		int odd = (idx % (width * 2 - 1)) / width;
+		Vector2 xy = toXY(idx);
 		
-		int x = (idx % (width * 2 - 1) % width) * 32	+ odd * 16;
-		int y = (idx / (width * 2 - 1)) * 56			+ odd * 28;
+		int x = (int)xy.x * 32	+ odd * 16;
+		int y = (int)xy.y * 28;
 		
 		// offset the game field with 190 px and correct from left -> mid
 		x = 190 + x + 16;
@@ -253,5 +254,17 @@ public class Board {
 		y = 480 - (y + 16);
 
 		return new Vector2(x, y);
+	}
+
+	public int getIndex(Vector2 loc) {
+		int x = (int)loc.x;
+		int y = (int)loc.y;
+		x = x - 190;
+		y = 480 - y;
+		int y_id = y / 28;
+		int x_id = x - (y_id & 1) * 16;
+		x_id /= 32;
+		
+		return toIdx(x_id, y_id);
 	}
 }

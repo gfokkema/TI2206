@@ -86,7 +86,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Handle the input given by the player.
 	 */
 	private void handle_input() {
-		// remove bubble test --> Key = R
 		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
 			testperformed = true;
 			Collection<Bubble> remove = board.getColorGroup(0);
