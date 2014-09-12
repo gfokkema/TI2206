@@ -15,6 +15,12 @@ public class Projectile extends Bubble {
 		this.velocity = velocity;
 	}
 	
+	public Projectile(Projectile projectile) {
+		this.bounds = new Circle(projectile.getBounds());
+		this.direction = new Vector2(projectile.getDirection());
+		this.velocity = new Integer(projectile.getVelocity());
+	}
+	
 	public void move() {
 		bounds.x += direction.x * velocity;
 		bounds.y += direction.y * velocity;
@@ -56,4 +62,9 @@ public class Projectile extends Bubble {
 	public Vector2 getDirection() {
 		return direction;
 	}
+	
+	public int getVelocity() {
+		return velocity;
+	}
+	
 }

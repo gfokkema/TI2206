@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
+import nl.tudelft.ti2206.bubbleshooter.Board;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Cannon {
 
 	Pointer pointer;
+	Board board;	
 	
 	Texture image;
 	Sprite sprite;
@@ -39,7 +42,8 @@ public class Cannon {
 	 */
 	public Cannon(int x, int y) {
 		pointer = new Pointer(new Vector2(x, y));
-				
+		board = new Board(1,1);
+		
 		// texture for cannon + angle
 		image = new Texture("cannon.png");
 		angle = 0;
@@ -52,7 +56,7 @@ public class Cannon {
 		sprite.setPosition(x - image.getWidth()/2, y);
 		
 		// add bubble
-		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, velocity);
+		CreateProjectile();
 		pointer.setOrigin(new Vector2(x-fg.getWidth()/4, y));
 	}
 	
@@ -88,10 +92,9 @@ public class Cannon {
 		fired = true;		
 	}
 	
-	private void projectileCollision() {
-		// projectile out of screen
-		//board.add(new Projectile(projectile));
-		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, 0);
+	private void CreateProjectile() {
+		Circle circle = new Circle(new Vector2(pointer.getOrigin()).add(new Vector2(pointer.getDirection()).scl(100)), 16);
+		projectile = new Projectile(circle, new Vector2(pointer.getDirection()), 0);
 		fired = false;	
 	}
 	
@@ -99,8 +102,8 @@ public class Cannon {
 	 * draw attributes
 	 * @param batch
 	 */
-	public void draw(SpriteBatch batch) {
-		update();
+	public void draw(SpriteBatch batch, Board table) {
+		update(table);
 		sprite.draw(batch);
 		batch.setColor(projectile.getColor());
 		batch.draw(fg, projectile.getBounds().x, projectile.getBounds().y, 32, 32);
@@ -123,7 +126,8 @@ public class Cannon {
 		}
 		
 		//if pressed space, trigger shoot
-		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+		if(Gdx.input.isKeyPressed(Keys.SPACE) && !board.collides(projectile)) {
+			Gdx.app.log("Collides 1","" + board.collides(projectile));
 			shoot();
 		}		
 	}
@@ -131,16 +135,21 @@ public class Cannon {
 	/**
 	 * Update attributes which are able to move
 	 */
-	private void update() {		
+	private void update(Board table) {		
 		
-		if( projectile.getCircle().y > Gdx.graphics.getHeight() )
-			projectileCollision();
-		
+		board = table;
+				
 		// if fired, check if the projectile hits the wall
 		// perform shoot
 		if(fired) {
+			if(table.collides(projectile) || projectile.getCircle().y > Gdx.graphics.getHeight() ) {
+				board.add(projectile);
+				CreateProjectile();
+			}
+			
 			if(projectile.getCircle().x < 190 || projectile.getCircle().x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2)
 				projectile.getDirection().setAngle(180 -projectile.getDirection().angle());
+			
 			projectile.move();
 		}
 		// else draw projectile on cannon
