@@ -68,8 +68,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			projectile.move();
 			game.batch.setColor(projectile.getColor());
 			game.batch.draw(fg, projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
+			
 			if (board.collides(projectile)) {
-				board.add(projectile);
 				projectile = null;
 			}
 		}
