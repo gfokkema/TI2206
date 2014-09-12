@@ -237,4 +237,15 @@ public class Board {
 
 		return new Vector2(x, y);
 	}
+
+	public int getIndex(Vector2 loc) {
+		int x = (int)loc.x;
+		int y = (int)loc.y;
+		x = x - 190;
+		y = 480 - y;
+		int x_id = x/32;
+		int y_id = y - (x_id & 1) * 16;
+		y_id /= 32;
+		return toIdx(x_id, y_id);
+	}
 }

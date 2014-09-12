@@ -61,6 +61,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	}
 	
 	private void handle_input() {
+		if(Gdx.input.justTouched()) {
+			int idx = board.getIndex(new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY()));
+			System.out.println(idx);
+			board.add(new Bubble(), idx);
+		}
 		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
 			testperformed = true;
 			Collection<Bubble> remove = board.getColorGroup(0);
