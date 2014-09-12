@@ -43,7 +43,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> {this.game.setScreen(new BubbleShooterScreen(game)); BGM.dispose();}
+				() -> this.game.setScreen(new BubbleShooterScreen(game))
 		);
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
@@ -105,6 +105,14 @@ public class MainMenuScreen extends ScreenAdapter {
 		BGM.setVolume(0.5f);
 		BGM.setLooping(true);
 		BGM.play();
+	}
+	
+	/**
+	 * Hide is being called when the main menu screen is not the current screen.
+	 */
+	@Override
+	public void hide() {
+		 BGM.dispose();
 	}
 
 }
