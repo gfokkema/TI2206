@@ -109,8 +109,7 @@ public class Board {
 					Circle c = new Circle(getLoc(new_idx), 16);
 					
 					if (	adjacent(idx, new_idx) &&
-							b.bounds.overlaps(c) &&
-							add(b, new_idx)) {
+							b.bounds.overlaps(c)) {
 						return true;
 					}
 				}
