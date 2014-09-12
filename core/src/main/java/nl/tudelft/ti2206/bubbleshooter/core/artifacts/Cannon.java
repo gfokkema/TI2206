@@ -1,7 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
-import nl.tudelft.ti2206.bubbleshooter.Bubble;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -23,7 +21,7 @@ public class Cannon {
 	Sprite sprite;
 	float angle;
 	
-	Bubble projectile;
+	Projectile projectile;
 	Texture fg;
 	Sprite bubbleSprite;
 	
@@ -46,17 +44,16 @@ public class Cannon {
 		image = new Texture("cannon.png");
 		angle = 0;
 		
+		fg = new Texture("Bubble-Blue.png");
+		
 		// sprite settings
 		sprite = new Sprite(image);
 		sprite.setOrigin(sprite.getWidth()/2, 25);
 		sprite.setPosition(x - image.getWidth()/2, y);
 		
 		// add bubble
-		fg = new Texture("Bubble-Blue.png");
-		projectile = new Bubble();
-		projectile.setCircle(0, 0, fg.getHeight()/4);
+		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, velocity);
 		pointer.setOrigin(new Vector2(x-fg.getWidth()/4, y));
-		projectile.setDirection(pointer.getDirection());
 	}
 	
 	/**
@@ -86,20 +83,16 @@ public class Cannon {
 	/**
 	 * Shoot the actual bubble: pew pew!
 	 */
-	public void shoot() {
-		
-		Circle BCPosition = projectile.getCircle();
-		
-		BCPosition.x += projectile.getDirection().x *velocity;
-		BCPosition.y += projectile.getDirection().y *velocity;
-		
-		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
-		
+	private void shoot() {
+		projectile.setVelocity(velocity);
+		fired = true;		
+	}
+	
+	private void projectileCollision() {
 		// projectile out of screen
-		if(projectile.getCircle().y > Gdx.graphics.getHeight()) {
-			fired = false;
-		}
-		
+		//board.add(new Projectile(projectile));
+		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, 0);
+		fired = false;	
 	}
 	
 	/**
@@ -109,6 +102,7 @@ public class Cannon {
 	public void draw(SpriteBatch batch) {
 		update();
 		sprite.draw(batch);
+		batch.setColor(projectile.getColor());
 		batch.draw(fg, projectile.getBounds().x, projectile.getBounds().y, 32, 32);
 	}
 	
@@ -130,7 +124,7 @@ public class Cannon {
 		
 		//if pressed space, trigger shoot
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
-			fired = true;
+			shoot();
 		}		
 	}
 	
@@ -139,12 +133,15 @@ public class Cannon {
 	 */
 	private void update() {		
 		
+		if( projectile.getCircle().y > Gdx.graphics.getHeight() )
+			projectileCollision();
+		
 		// if fired, check if the projectile hits the wall
 		// perform shoot
 		if(fired) {
 			if(projectile.getCircle().x < 190 || projectile.getCircle().x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2)
 				projectile.getDirection().setAngle(180 -projectile.getDirection().angle());
-			shoot();
+			projectile.move();
 		}
 		// else draw projectile on cannon
 		else {

@@ -74,9 +74,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.draw(fg, v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
 		});
 		
-		game.batch.setColor(current);
-		
 		cannon.draw(game.batch);
+		game.batch.setColor(current);
 		
 		game.batch.end();
 	}
