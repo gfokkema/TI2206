@@ -7,6 +7,7 @@ import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.math.Rectangle;
@@ -22,6 +23,8 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class MainMenuScreen extends ScreenAdapter {
 	public static final String title = "Bubbleshooter";
+	private final String BGMname = "lol.ogg";
+	Music BGM;
 	ArrayList<Button> buttons;
 	Launch game;
 	
@@ -32,6 +35,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	public MainMenuScreen(Launch game) {
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
+		playBGM(BGMname);
 
 		//Add buttons, each with their own callback.
 		Button play = new Button(
@@ -39,7 +43,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> this.game.setScreen(new BubbleShooterScreen(game))
+				() -> {this.game.setScreen(new BubbleShooterScreen(game)); BGM.dispose();}
 		);
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
@@ -90,6 +94,17 @@ public class MainMenuScreen extends ScreenAdapter {
 				.findFirst()
 				.ifPresent(Button::apply);
 		}
+	}
+	
+	/**
+	 * Play some main menu background music
+	 * @param name
+	 */
+	public void playBGM(String name) {
+		BGM = Gdx.audio.newMusic(Gdx.files.internal(name));
+		BGM.setVolume(0.5f);
+		BGM.setLooping(true);
+		BGM.play();
 	}
 
 }
