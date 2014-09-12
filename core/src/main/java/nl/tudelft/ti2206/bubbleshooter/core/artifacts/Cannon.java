@@ -94,7 +94,7 @@ public class Cannon {
 	
 	private void projectileCollision() {
 		// projectile out of screen
-		board.add(new Projectile(projectile));
+		board.add(projectile);
 		projectile = new Projectile(new Circle(new Vector2(0,0), 16), pointer.direction, 0);
 		fired = false;	
 	}
