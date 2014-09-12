@@ -31,8 +31,8 @@ public class Cannon {
 	Texture fg = new Texture("Bubble-Blue.png");
 	Sprite bubbleSprite;
 	
-	private final float LEFT_BOUNDARY = 40;
-	private final float RIGHT_BOUNDARY = -40;
+	private final float LEFT_BOUNDARY = 60;
+	private final float RIGHT_BOUNDARY = -60;
 	private final int sensitivity = 100;
 	private final int velocity = 5;
 	
@@ -82,10 +82,6 @@ public class Cannon {
 		sprite.rotate(sprite.getRotation() - angle);
 		sprite.setRotation(angle);
 		pointer.setAngle(angle);
-		projectile.setDirection(pointer.getDirection());
-		
-		// debugging...
-		Gdx.app.log("Degrees is", "" + angle);
 	}
 		
 		
@@ -101,13 +97,8 @@ public class Cannon {
 		
 		projectile.setCircle(BCPosition.x, BCPosition.y, fg.getHeight()/4);
 		
-		//temp
-		counter++;
-		
-		if(counter == 100) {
+		if(projectile.getCircle().y > Gdx.graphics.getHeight())
 			fired = false;
-			counter = 0;
-		}
 		
 	}
 	
@@ -118,39 +109,41 @@ public class Cannon {
 	}
 	
 	public void handleInput() {
+		//if pressed left, turn cannon to the left
 		if(Gdx.input.isKeyPressed(Keys.LEFT) && !fired) {
 			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
-			
-			// debugging...
-			Gdx.app.log("Angle is", "" + angle); 
 		}
 		
+		//if pressed right, turn cannon to the right
 		if(Gdx.input.isKeyPressed(Keys.RIGHT) && !fired) {
 			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
 			setAngle(angle); 
-			
-			// debugging...
-			Gdx.app.log("Angle is", "" + angle); 
 		}
-				
+		
+		//if pressed space, trigger shoot
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
 			fired = true;
 		}		
 	}
 	
-	private void update() {
-		if(fired) {
-			
-			if (projectile.getCircle().x < 190 || projectile.getCircle().x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2) {
-				projectile.getDirection().setAngle(180 -projectile.getDirection().angle());
-			}
-			
-			shoot();
-		}			
+	/**
+	 * Update attributes which are able to move
+	 */
+	private void update() {		
 		
-		else
+		// if fired, check if the projectile hits the wall
+		// perform shoot
+		if(fired) {
+			if(projectile.getCircle().x < 190 || projectile.getCircle().x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2)
+				projectile.getDirection().setAngle(180 -projectile.getDirection().angle());
+			shoot();
+		}
+		// else draw projectile on cannon
+		else {
 			projectile.setPosition(new Vector2(pointer.getOrigin()).add(new Vector2(pointer.getDirection()).scl(100)));
+			projectile.setDirection(pointer.getDirection());
+		}
 	}
 	
 	/**
