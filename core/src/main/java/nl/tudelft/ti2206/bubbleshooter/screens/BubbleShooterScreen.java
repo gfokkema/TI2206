@@ -39,10 +39,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.game = game;
 		this.board = new Board(8, 15);
 		cannon = new Cannon(Gdx.graphics.getWidth()/2,100);
-//		projectile = new Bubble();
-//		projectile.setCircle(cannon.getBCPosition().x, cannon.getBCPosition().y, fg.getHeight()/4);
-//		pCircle = projectile.getCircle();
-//		Gdx.app.log("Create BCPos", "" + cannon.getBCPosition()); 
 		frame_count = 0;
 		fired = false;
 	}
@@ -82,25 +78,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		
 		cannon.draw(game.batch);
 		
-		// cannon must not be drawn when space has been pressed... (CHANGE!)
-//		if(!fired) 		
-//			cannon.draw(game.batch);
-//		
-//		// draw the projectile
-//		cannon.drawBubble(game.batch);
-//		
-//		// increment frame counter
-//		if(fired)		
-//			frame_count++;
-//		
-//		
-//		Gdx.app.log("Count is", "" + frame_count);
-//		// frame count
-//		if(frame_count == 50){
-//			fired = false;
-//			frame_count = 0;
-//		}
-		
 		game.batch.end();
 	}
 	
@@ -118,13 +95,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				board.removeAll(disconnected);
 			}
 		}
-		
 		cannon.handleInput();
-		
-//		// put pressed on true when Spacebar was hit
-//		if(Gdx.input.isKeyPressed(Keys.SPACE))	fired = true;
-//		// if space was pressed then shoot must be called for X frames.
-//		if(fired)	cannon.shoot();
-		
 	}
 }

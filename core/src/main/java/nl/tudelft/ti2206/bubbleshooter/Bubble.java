@@ -150,6 +150,6 @@ public class Bubble {
 	}
 	
 	public Vector2 getDirection() {
-		return new Vector2(direction);
+		return direction;
 	}
 }
