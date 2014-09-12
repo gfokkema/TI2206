@@ -88,7 +88,7 @@ public class Board {
 	 * @param idx	{@link Board} index
 	 * @return		true if the {@link Board} has been added successfully, false otherwise
 	 */
-	private boolean add(Bubble b, int idx) {
+	public boolean add(Bubble b, int idx) {
 		if (bubbles.containsKey(idx)) return false;
 		
 		// Add the Bubble to the list
