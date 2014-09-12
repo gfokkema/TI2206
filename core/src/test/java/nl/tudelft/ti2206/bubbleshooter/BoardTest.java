@@ -262,8 +262,8 @@ public class BoardTest {
 		assertEquals(6, board.getWidth());
 		assertEquals(15, board.getHeight());
 		
-		board = new Board(2, 4);
-		assertEquals(2, board.getWidth());
+		board = new Board(20, 4);
+		assertEquals(20, board.getWidth());
 		assertEquals(4, board.getHeight());
 	}
 	
