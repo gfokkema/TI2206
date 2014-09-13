@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
