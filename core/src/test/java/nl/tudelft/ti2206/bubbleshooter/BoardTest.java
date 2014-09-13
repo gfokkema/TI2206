@@ -339,4 +339,77 @@ public class BoardTest {
 				(Bubble b) -> assertEquals(Color.RED, b.getColor())
 		);
 	}
+	
+	/**
+	 * Checks whether (adjacent on the board) add bubbles, of the same color,
+	 *  all get add.
+	 */
+	@Test
+	public void testAddColorGroup(){
+
+		for (int i = 0; i < 4; i++) {
+			board.add( new Bubble(Color.RED));
+			}
+		
+		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
+		colorGroupRed.forEach(
+				(Bubble b) -> assertEquals(Color.RED, b.color)
+		);
+	}	
+	
+
+/**
+ * Checks whether (adjacent on the board) add bubbles, of the same color,
+ *  all get add.
+ */
+	@Test
+	public void testAddColorGroupWrongColorAddedAdjacent(){
+
+		for (int i = 0; i < 4; i++) {
+			board.add( new Bubble(Color.RED));
+		}
+	
+		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
+		assertFalse(colorGroupRed.contains(Color.BLUE));
+
+	}	
+
+	
+	/**
+	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
+	 * all get add.
+	 * 
+	 */
+	@Test
+	public void testAddColorGroupNotAdjacent(){
+		
+		board.add(new Bubble(Color.BLUE),4);
+		board.add(new Bubble(Color.BLUE),5);
+		board.add(new Bubble(Color.RED),7);	
+		board.add(new Bubble(Color.BLUE), 10);
+		
+		Collection<Bubble> colorGroupBlue = board.getColorGroup(5);
+		colorGroupBlue.forEach(
+			(Bubble c) -> assertEquals(Color.BLUE, c.color)
+		);
+		
+	}
+	
+	/**
+	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
+	 * all get add and the other colored bubbles do not.
+	 * 
+	 */
+	@Test
+	public void testAddColorGroupWrongColorAdded(){
+		
+		board.add(new Bubble(Color.BLUE),4);
+		board.add(new Bubble(Color.BLUE),5);
+		board.add(new Bubble(Color.RED),7);	
+		board.add(new Bubble(Color.BLUE), 10);
+		
+		Collection<Bubble> colorGroupBlue = board.getColorGroup(5);
+		
+		assertFalse(colorGroupBlue.contains(Color.RED));
+	}
 }
