@@ -1,7 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import static org.junit.Assert.*;
-import nl.tudelft.ti2206.bubbleshooter.core.Launch;
+import nl.tudelft.ti2206.bubbleshooter.Projectile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +28,56 @@ public class CannonTest {
 	}
 
 	@Test
-	public void testPointer() throws InterruptedException {
+	public void testInitializeCannon() {
+		assertEquals(tex, cannon.getTexture());
 		assertEquals(new Vector2(-16, 0), cannon.getPointer().getOrigin());
+	}
+	
+	@Test
+	public void testAngle() {
+		assertEquals(90,  cannon.getPointer().getAngle(), .001);
+		
+		cannon.setAngle(-45);
+		assertEquals(45, cannon.getPointer().getAngle(), .001);
+		
+		cannon.setAngle(45);
+		assertEquals(135, cannon.getPointer().getAngle(), .001);
+		
+		cannon.setAngle(-60);
+		assertEquals(30, cannon.getPointer().getAngle(), .001);
+		
+		cannon.setAngle(60);
+		assertEquals(150, cannon.getPointer().getAngle(), .001);
+	}
+	
+	@Test
+	public void testAngleOutsideOfBoundaries() {
+		cannon.setAngle(-70);
+		assertEquals(30, cannon.getPointer().getAngle(), .001);
+		
+		cannon.setAngle(70);
+		assertEquals(150, cannon.getPointer().getAngle(), .001);
+	}
+	
+	@Test
+	public void testProjectile() {
+		Projectile ammo = cannon.getProjectile();
+		Vector2 pos = cannon.projectile.getPosition();
+		assertEquals(cannon.getPointer().direction.add(0, 16), pos);
+		
+		
+	}
+	
+	@Test
+	public void testShoot() {
+		Projectile ammo, fired;
+		
+		ammo = cannon.projectile;
+		assertEquals(ammo, cannon.projectile);
+		
+		fired = cannon.shoot();
+		assertEquals(fired, ammo);
+		assertNotEquals(fired, cannon.projectile);
 	}
 
 }

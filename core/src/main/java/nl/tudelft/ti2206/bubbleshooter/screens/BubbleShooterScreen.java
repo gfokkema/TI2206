@@ -89,8 +89,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				projectile = null;
 			}
 		}
-		game.batch.setColor(cannon.getBubble().getColor());
-		game.batch.draw(fg, cannon.getBubble().getBounds().x - 16, cannon.getBubble().getBounds().y - 16, 32, 32);
+		game.batch.setColor(cannon.getProjectile().getColor());
+		game.batch.draw(fg, cannon.getProjectile().getBounds().x - 16, cannon.getProjectile().getBounds().y - 16, 32, 32);
 		game.batch.setColor(current);
 		
 		cannon.draw(game.batch);

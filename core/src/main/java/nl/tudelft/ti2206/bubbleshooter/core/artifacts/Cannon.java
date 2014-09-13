@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
-import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
 
 import com.badlogic.gdx.Gdx;
@@ -17,8 +16,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class Cannon extends Sprite {
 	Pointer pointer;
-	float angle;
-
 	Projectile projectile;
 	
 	private final float LEFT_BOUNDARY = 60;
@@ -58,22 +55,21 @@ public class Cannon extends Sprite {
 		 *  since rotate from the Sprite class rotates relatively from the current rotation.
 		 */
 		if(degrees > LEFT_BOUNDARY) {
-			angle = LEFT_BOUNDARY;
+			degrees = LEFT_BOUNDARY;
 		}
 		
 		if(degrees < RIGHT_BOUNDARY) {
-			angle = RIGHT_BOUNDARY;
+			degrees = RIGHT_BOUNDARY;
 		}
 		
 		// rotate the actual rotation difference.
-		this.rotate(this.getRotation() - angle);
-		this.setRotation(angle);
-		pointer.setAngle(angle);
+		this.setRotation(degrees);
+		pointer.setAngle(degrees);
 		
 		projectile.setBounds(new Circle(getBubblePos(), 16));
 	}
 	
-	public Bubble getBubble() {
+	public Projectile getProjectile() {
 		return this.projectile;
 	}
 		
@@ -96,14 +92,12 @@ public class Cannon extends Sprite {
 	public void handleInput() {
 		//if pressed left, turn cannon to the left
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-			angle += sensitivity*Gdx.graphics.getDeltaTime(); 
-			setAngle(angle);
+			setAngle(this.getRotation() + sensitivity*Gdx.graphics.getDeltaTime());
 		}
 		
 		//if pressed right, turn cannon to the right
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			angle -= sensitivity*Gdx.graphics.getDeltaTime(); 
-			setAngle(angle);
+		if(Gdx.input.isKeyPressed(Keys.RIGHT)) { 
+			setAngle(this.getRotation() - sensitivity*Gdx.graphics.getDeltaTime());
 		}
 	}
 	
