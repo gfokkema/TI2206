@@ -139,6 +139,7 @@ public class Board {
 				//There's no bubble here
 				continue;
 			}
+			connectedToCeiling.put(ceilingIndex, bubbles.get(ceilingIndex));
 			depthFirst(
 					ceilingIndex,
 					(current, neighbor) -> true,
