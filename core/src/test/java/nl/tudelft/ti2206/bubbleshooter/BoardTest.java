@@ -353,7 +353,7 @@ public class BoardTest {
 		
 		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
 		colorGroupRed.forEach(
-				(Bubble b) -> assertEquals(Color.RED, b.color)
+				(Bubble b) -> assertEquals(Color.RED, b.getColor())
 		);
 	}	
 	
@@ -390,7 +390,7 @@ public class BoardTest {
 		
 		Collection<Bubble> colorGroupBlue = board.getColorGroup(5);
 		colorGroupBlue.forEach(
-			(Bubble c) -> assertEquals(Color.BLUE, c.color)
+			(Bubble c) -> assertEquals(Color.BLUE, c.getColor())
 		);
 		
 	}
