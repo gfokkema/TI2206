@@ -23,7 +23,7 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class MainMenuScreen extends ScreenAdapter {
 	public static final String title = "Bubble Shooter";
-	private final String BGMname = "lol.ogg";
+	private final String BGMname = "BGMenu.ogg";
 	BackgroundMusic BGM;
 	ArrayList<Button> buttons;
 	Launch game;
