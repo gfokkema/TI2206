@@ -412,4 +412,19 @@ public class BoardTest {
 		
 		assertFalse(colorGroupBlue.contains(Color.RED));
 	}
+
+	/**
+	 * Test whether an empty Collection is returned when all Bubbles are connected to the ceiling.
+	 */
+	@Test
+	public void testGetDisconnectedGroupEmpty() {
+		// Initialize four bubbles
+		board.add(new Bubble());
+		board.add(new Bubble());
+		board.add(new Bubble());
+		board.add(new Bubble());
+
+		Collection<Bubble> empty = board.getDisconnectedGroup();
+		assertTrue(empty.isEmpty());
+	}
 }
