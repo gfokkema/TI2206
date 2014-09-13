@@ -35,9 +35,11 @@ public class BubbleTest {
 		bubble.setBounds(c);
 		assertEquals(c, bubble.getBounds());
 	}
-	
+	/**
+	 * Check whether with the given bounds, overlaps gives the right output.
+	 */
 	@Test
-	public void testCollision() {
+	public void testCollide() {
 		Circle c1 = new Circle(0, 0, 5);
 		Circle c2 = new Circle(0, 5, 5);
 		Circle c3 = new Circle(0, 10, 5);
@@ -45,16 +47,16 @@ public class BubbleTest {
 		b.setBounds(c1);
 		
 		bubble.setBounds(c1);
-		assertTrue(bubble.collides(b));
+		assertTrue(bubble.bounds.overlaps(b.bounds));
 		
 		bubble.setBounds(c2);
-		assertTrue(bubble.collides(b));
+		assertTrue(bubble.bounds.overlaps(b.bounds));
 		
 		bubble.setBounds(c3);
-		assertFalse(bubble.collides(b));
+		assertFalse(bubble.bounds.overlaps(b.bounds));
 		
 		b.setBounds(c2);
-		assertTrue(bubble.collides(b));
+		assertTrue(bubble.bounds.overlaps(b.bounds));
 	}
 	
 	@Test
