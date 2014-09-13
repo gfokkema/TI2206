@@ -62,7 +62,6 @@ public class Bubble {
 	 */
 	public Bubble() {
 		this.color = getRandomColor();
-		this.bounds = new Circle();
 	}
 
 	/**
@@ -88,24 +87,6 @@ public class Bubble {
 		return this.color;
 	}
 
-	/**
-	 * Gets the bounding circle of the bubble.
-	 * @return {@link Circle} containing center and radius.
-	 */
-	public Circle getCircle() {
-		return bounds;
-	}
-	
-	/**
-	 * Sets the bounding {@link Circle} of the bubble.
-	 * @param x the x coordinate - absolute position.
-	 * @param y the y coordinate - absolute position.
-	 * @param radius the radius of the circle.
-	 */
-	public void setCircle(float x, float y, float radius) {
-		bounds.set(x, y, radius);
-	}
-	
 	/**
 	 * Pick a ColorValue at random.
 	 * @return a randomly chosen ColorValue.
