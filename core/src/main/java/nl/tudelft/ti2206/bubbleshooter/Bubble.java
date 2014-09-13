@@ -6,7 +6,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * This class represent a {@link Bubble} on the playing field.
+ * @author gerlof
+ */
 public class Bubble {
+	/**
+	 * This enum holds all the orientations for adjacent {@link Bubble}s.
+	 */
 	public enum Orientation {
 		EAST(0, 1),			//+ 1
 		SOUTH_EAST(1, 0),	//+ width
