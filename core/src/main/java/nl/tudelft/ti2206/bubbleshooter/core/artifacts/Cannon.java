@@ -14,10 +14,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  * Create a cannon which can shoot bubbles!
- * @author Nando &amp; Owen
+ * This class also handles the input necessary to shoot and rotate the cannon.
+ * @author group-15
  *
  */
 public class Cannon extends Sprite {
+	
+	/**
+	 * Variable initialization.
+	 */
 	Pointer pointer;
 	float angle;
 	Launch game;
@@ -31,10 +36,10 @@ public class Cannon extends Sprite {
 	private final int velocity = 5;
 	
 	/**
-	 * Cannon constructor
-	 * @param game the current game session
-	 * @param x coordinate
-	 * @param y coordinate
+	 * Cannon constructor.
+	 * @param game the current game session.
+	 * @param x coordinate.
+	 * @param y coordinate.
 	 */
 	public Cannon(SoundEffect settings, int x, int y) {
 		super(new Sprite(new Texture("cannon.png")));
@@ -47,12 +52,11 @@ public class Cannon extends Sprite {
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		setAngle(0);
 		SFX = settings;
-		Gdx.app.log("SFXVolkannon", "" + settings.getVolume());
 	}
 	
 	/**
 	 * Set the angle of the cannon (in other words the direction of which the cannon shoots in).
-	 * @param degrees the angle in amount of degrees
+	 * @param degrees the angle in amount of degrees.
 	 */
 	public void setAngle(float degrees) {
 		/*
@@ -81,7 +85,7 @@ public class Cannon extends Sprite {
 		
 		
 	/**
-	 * Shoot the actual bubble: pew pew!
+	 * Shoot the actual bubble: wub wub!
 	 */
 	public Projectile shoot() {
 		Projectile fired = projectile;
@@ -89,14 +93,17 @@ public class Cannon extends Sprite {
 		fired.setDirection(new Vector2(pointer.direction));
 		
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
-		// wub wub :D
+		
+		// "wub wub" - plays the projectile sound upon firing.
 		projectile.getSFX().setVolume(SFX.getVolume());
 		projectile.getSFX().play();
 		return fired;
 	}
 	
 	/**
-	 * Controls handleInput
+	 * Controls handleInput.
+	 * Whenever the left arrow key is pressed, the cannon's angle grows (goes "left").
+	 * Whenever the right arrow key is pressed, the cannnon's angle shrinks (goes "right").
 	 */
 	public void handleInput() {
 		//if pressed left, turn cannon to the left
@@ -120,6 +127,10 @@ public class Cannon extends Sprite {
 		return pointer;
 	}
 	
+	/**
+	 * Get the position of the bubble.
+	 * @return Vector2 the position of the bubble.
+	 */
 	private Vector2 getBubblePos() {
 		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
 						.add(pointer.getDirection().nor().scl(100));

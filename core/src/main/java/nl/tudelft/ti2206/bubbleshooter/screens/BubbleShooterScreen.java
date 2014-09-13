@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
@@ -20,7 +19,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 
+/**
+ * The bubble shooter screen is the screen where the actual game is being played.
+ * The screen contains a board (on which bubbles are drawn), and a cannon.
+ * @author group-15
+ *
+ */
 public class BubbleShooterScreen extends ScreenAdapter {
+	
+	/**
+	 * Variable initialization.
+	 * The defined textures are used for the bubble and the board.
+	 */
 	Launch game;
 	Projectile projectile;
 	Cannon cannon;
@@ -41,7 +51,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.app.log("SFXVolBSS", "" + settings.getVolume());
 	}
 	
-
+	/**
+	 * Used for resizing the screen.
+	 */
 	@Override
 	public void resize (int width, int height) {
 	}
@@ -67,6 +79,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			// translate from the midpoint to the bottom left
 			game.batch.draw(fg, v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
 		});
+		
 		if (projectile != null) {
 			if (projectile.getBounds().x - 16 < 190 || projectile.getBounds().x + 16 > 190 + board.getWidth() * 32) {
 				Vector2 dir = projectile.getDirection();
@@ -88,12 +101,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				projectile = null;
 			}
 		}
+		
 		game.batch.setColor(cannon.getBubble().getColor());
 		game.batch.draw(fg, cannon.getBubble().getBounds().x - 16, cannon.getBubble().getBounds().y - 16, 32, 32);
 		game.batch.setColor(current);
 		
 		cannon.draw(game.batch);
-		
 		game.batch.end();
 	}
 	

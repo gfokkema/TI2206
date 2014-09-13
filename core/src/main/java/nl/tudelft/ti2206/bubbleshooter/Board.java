@@ -151,7 +151,13 @@ public class Board {
 		removeAll(result);
 		return result;
 	}
-
+	
+	/**
+	 * Internal method for depth first search
+	 * @param currentIndex
+	 * @param condition
+	 * @param remove
+	 */
 	private void depthFirst(Integer currentIndex, BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
 		for(Orientation o : Bubble.orientations) {
 			int neighborIndex = o.fromIndex(currentIndex, this.width);
@@ -168,7 +174,11 @@ public class Board {
 			}
 		}
 	}
-
+	
+	/**
+	 * Removes all the bubbles.
+	 * @param bs the collection in which all the to be removed bubbles are in.
+	 */
 	public void removeAll(Collection<Bubble> bs) {
 		bubbles.values().removeAll(bs);
 	}
@@ -240,7 +250,12 @@ public class Board {
 
 		return new Vector2(x, y);
 	}
-
+	
+	/**
+	 * Gets the index.
+	 * @param loc 	the vector location.
+	 * @return 		the index.
+	 */
 	public int getIndex(Vector2 loc) {
 		int x = (int)loc.x;
 		int y = (int)loc.y;

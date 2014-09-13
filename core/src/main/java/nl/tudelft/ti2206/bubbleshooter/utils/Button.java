@@ -36,6 +36,14 @@ public class Button {
 		public void apply();
 	}
 
+	/**
+	 * Constructor for button
+	 * @param bounds the bounding box of the button
+	 * @param color the color of the button
+	 * @param font the font used
+	 * @param text the actual text message
+	 * @param func the callback function
+	 */
 	public Button(Rectangle bounds, Color color, BitmapFont font, String text, CallBack func) {
 		this.func = func;
 		this.font = font;

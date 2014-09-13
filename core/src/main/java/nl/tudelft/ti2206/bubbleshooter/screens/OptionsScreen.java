@@ -13,15 +13,25 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * The options screen, where the player may change volume settings.
+ * @author group-15
+ *
+ */
 public class OptionsScreen extends ScreenAdapter {
 	
+	/**
+	 * Variable initialization.
+	 * Set the screen title.
+	 */
 	public static final String title = "Options";
+	private final float volumeStep = 0.1f;
+
 	Launch game;
 	BackgroundMusic BGM;
 	SoundEffect SFX;
 	float BGMvolume;
 	float SFXvolume;
-	private final float volumeStep = 0.1f;
 	ArrayList<Button> buttons;
 	
 	/**
@@ -36,7 +46,7 @@ public class OptionsScreen extends ScreenAdapter {
 		SFX = new SoundEffect("BubbleSFX.wav");
 		SFXvolume = 0.5f;
 
-		//Add buttons, each with their own callback.
+		// Button that turns the BGM volume up!
 		Button BGMvolup = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 125, Gdx.graphics.getHeight() / 2 + 50, 100, 50),
 				new Color(0xFFFF00FF),
@@ -44,6 +54,8 @@ public class OptionsScreen extends ScreenAdapter {
 				"Volume Up!",
 				() -> BGMvolumeUp()
 		);
+		
+		// Button that turns the BGM volume down!
 		Button BGMvoldown = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2 + 50, 100, 50),
 				new Color(0xFFFF00FF),
@@ -52,6 +64,7 @@ public class OptionsScreen extends ScreenAdapter {
 				() -> BGMvolumeDown()
 		);
 		
+		// Button that turns the SFX volume up!
 		Button SFXvolup = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 125, Gdx.graphics.getHeight() / 2 - 25, 100, 50),
 				new Color(0xFFFF00FF),
@@ -60,6 +73,7 @@ public class OptionsScreen extends ScreenAdapter {
 				() -> SFXvolumeUp()
 		);
 		
+		// Button that turns the SFX volume down!
 		Button SFXvoldown = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2 - 25, 100, 50),
 				new Color(0xFFFF00FF),
@@ -68,6 +82,7 @@ public class OptionsScreen extends ScreenAdapter {
 				() -> SFXvolumeDown()
 		);
 		
+		// Button that sends the player back to the main menu.
 		Button back = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
 				new Color(0xFFFF00FF),
@@ -76,6 +91,7 @@ public class OptionsScreen extends ScreenAdapter {
 				() -> this.game.setScreen(game.mms)
 		);
 		
+		//Add buttons, each with their own callback.
 		buttons.add(BGMvolup);
 		buttons.add(BGMvoldown);
 		buttons.add(SFXvolup);
@@ -102,6 +118,7 @@ public class OptionsScreen extends ScreenAdapter {
 
 	/**
 	 * Update during each frame. Called by {@link #render(float)}
+	 * Checks if buttons were hit and reacts to it.
 	 */
 	private void update() {
         boolean left_down = Gdx.input.justTouched();
@@ -116,7 +133,7 @@ public class OptionsScreen extends ScreenAdapter {
 	}
 	
 	/**
-	 * Play some main menu background music
+	 * Play some background music.
 	 * This music will be played in the main menu screen and options screen
 	 */
 	@Override
@@ -133,7 +150,7 @@ public class OptionsScreen extends ScreenAdapter {
 	}
 	
 	/**
-	 * Raise the volume.
+	 * Raise the BGM volume.
 	 */
 	public void BGMvolumeUp() {
 		this.BGM.setVolume(BGMvolume+=volumeStep);
@@ -141,7 +158,7 @@ public class OptionsScreen extends ScreenAdapter {
 	}
 	
 	/**
-	 * Lower the volume
+	 * Lower the BGM volume.
 	 */
 	public void BGMvolumeDown() {
 		this.BGM.setVolume(BGMvolume-=volumeStep);
@@ -150,7 +167,7 @@ public class OptionsScreen extends ScreenAdapter {
 	
 	
 	/**
-	 * Raise the volume.
+	 * Raise the SFX volume.
 	 */
 	public void SFXvolumeUp() {
 		buttons.forEach((Button b) -> {
@@ -162,11 +179,10 @@ public class OptionsScreen extends ScreenAdapter {
 			Gdx.app.log("SFXVol", "" +SFXvolume);
 		});
 		SFX.setVolume(SFXvolume);
-		Gdx.app.log("SFXVolCannon", "" + SFX.getVolume());
 	}
 	
 	/**
-	 * Lower the volume
+	 * Lower the SFX volume.
 	 */
 	public void SFXvolumeDown() {
 		buttons.forEach((Button b) -> {
@@ -178,7 +194,6 @@ public class OptionsScreen extends ScreenAdapter {
 			Gdx.app.log("SFXVol", "" +SFXvolume);
 		});
 		SFX.setVolume(SFXvolume);
-		Gdx.app.log("SFXVolCannon", "" + SFX.getVolume());
 	}
 	
 	/**
@@ -208,7 +223,7 @@ public class OptionsScreen extends ScreenAdapter {
 	
 	/**
 	 * Get the SFX (with its settings) from the optionsscreen.
-	 * @return
+	 * @return SFX the SFX alongside with all the (changed) settings.
 	 */
 	public SoundEffect getSFX() {
 		return SFX;

@@ -36,7 +36,7 @@ public class BackgroundMusic {
 	
 	/**
 	 * Get the background music.
-	 * @return
+	 * @return BGM the background music
 	 */
 	public Music getBGM() {
 		return BGM;

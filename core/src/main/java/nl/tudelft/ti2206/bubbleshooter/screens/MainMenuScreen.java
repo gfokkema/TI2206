@@ -23,6 +23,12 @@ import com.badlogic.gdx.math.Rectangle;
  *
  */
 public class MainMenuScreen extends ScreenAdapter {
+	
+	/**
+	 * Variable initialization.
+	 * Set the title of the screen.
+	 * Set the BGM used.
+	 */
 	public static final String title = "Bubble Shooter";
 	private final String BGMname = "BGMenu.ogg";
 	BackgroundMusic BGM;
@@ -46,14 +52,16 @@ public class MainMenuScreen extends ScreenAdapter {
 		Gdx.app.log("SFXVolMainmen", "" + options.getSFX().getVolume());
 		BBS = new BubbleShooterScreen(game, settings);
 		
-		//Add buttons, each with their own callback.
+		// The play button which sends the player to the bubble shooter game screen
 		Button play = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 50, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> {this.game.setScreen(BBS); Gdx.app.log("SFXVolMainPass", "" + settings.getVolume());}
+				() -> this.game.setScreen(BBS)
 		);
+		
+		// The settings button sends the player to the options menu.
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
@@ -61,6 +69,8 @@ public class MainMenuScreen extends ScreenAdapter {
 				"Settings",
 				() -> this.game.setScreen(options)
 		);
+		
+		// The quit button used to terminate the game.
 		Button quit = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
 				new Color(0xFFFF00FF),
@@ -68,6 +78,8 @@ public class MainMenuScreen extends ScreenAdapter {
 				"Quit",
 				() -> Gdx.app.exit()
 		);
+		
+		// Add buttons, each with their own callback.
 		buttons.add(play);
 		buttons.add(settings);
 		buttons.add(quit);
@@ -92,6 +104,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
 	/**
 	 * Update during each frame. Called by {@link #render(float)}
+	 * Checks if buttons were hit and reacts to it.
 	 */
 	private void update() {
         boolean left_down = Gdx.input.justTouched();
@@ -112,6 +125,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		BGM.getBGM().play();
+		
 		// refresh the settings
 		settings = options.getSFX();
 		BBS = new BubbleShooterScreen(game, settings);
