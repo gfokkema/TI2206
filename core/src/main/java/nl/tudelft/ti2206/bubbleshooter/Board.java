@@ -29,14 +29,7 @@ public class Board {
 	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
-
-		bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
-		for (int i = 4; i < 40; i++) {
-			add(new Bubble(), i);
-		}
-		for (int i = 0; i < 4; i++) {
-			add(new Bubble(Color.RED), i);
-		}
+		this.bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
 	}
 	
 	/**

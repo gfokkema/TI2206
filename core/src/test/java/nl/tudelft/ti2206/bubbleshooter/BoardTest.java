@@ -271,8 +271,8 @@ public class BoardTest {
 	
 	@Test
 	public void testAdd() {
-		assertTrue(board.add(new Bubble(), 40));
-		assertFalse(board.add(new Bubble(), 8));
+		assertTrue(board.add(new Bubble(), 0));
+		assertFalse(board.add(new Bubble(), 0));
 	}
 	
 	/**
