@@ -84,7 +84,7 @@ public class Cannon extends Sprite {
 		
 	/**
 	 * Shoot the actual bubble: pew pew!
-	 * @returns	{@link Projectile} that has been shot
+	 * @return	{@link Projectile} that has been shot
 	 */
 	public Projectile shoot() {
 		Projectile fired = projectile;
@@ -97,6 +97,7 @@ public class Cannon extends Sprite {
 	
 	/**
 	 * Moves the cannon to the left
+	 * @param dt	the amount to move
 	 */
 	public void left(float dt) {
 		setAngle(this.getRotation() + sensitivity * dt);
@@ -104,6 +105,7 @@ public class Cannon extends Sprite {
 	
 	/**
 	 * Moves the cannon to the right
+	 * @param dt	the amount to move
 	 */
 	public void right(float dt) { 
 		setAngle(this.getRotation() - sensitivity * dt);
