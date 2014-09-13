@@ -6,7 +6,6 @@ import nl.tudelft.ti2206.bubbleshooter.Board;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -284,30 +283,5 @@ public class BoardTest {
 			assertEquals(board.getLoc(k).x, v.getBounds().x, .0001);
 			assertEquals(board.getLoc(k).y, v.getBounds().y, .0001);
 		});
-	}
-	
-	/**
-	 * Test whether the collision method works, with the collision in possible circumstances.
-	 */
-	@Test
-	public void testCollision() {
-		Bubble bubble = new Bubble();
-		Circle c1 = new Circle(0, 0, 5);
-		Circle c2 = new Circle(0, 5, 5);
-		Circle c3 = new Circle(0, 10, 5);
-		Bubble b = new Bubble();
-		b.setBounds(c1);
-		
-		bubble.setBounds(c1);
-		assertTrue(bubble.collides(b));
-		
-		bubble.setBounds(c2);
-		assertTrue(bubble.collides(b));
-		
-		bubble.setBounds(c3);
-		assertFalse(bubble.collides(b));
-		
-		b.setBounds(c2);
-		assertTrue(bubble.collides(b));
 	}
 }
