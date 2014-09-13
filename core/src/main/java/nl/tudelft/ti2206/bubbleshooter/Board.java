@@ -61,11 +61,8 @@ public class Board {
      * @return 	true if there's a collision, false otherwise
      */
 	public boolean collides(Bubble b) {
-		for (Bubble c : bubbles.values()) {
-			if (c.collides(b)) {
-				System.out.println("collision!");
-				return true;
-			}
+		for (Bubble v : bubbles.values()) {
+			if (v.collides(b)) return true;
 		}
 		return false;
 	}
@@ -98,6 +95,10 @@ public class Board {
 		return add(b, toIdx(i, j));
 	}
 	
+	public boolean add(Bubble b) {
+		return add(b, bubbles.size());
+	}
+	
 	/**
 	 * Returns a {@link Map} with the {@link Bubble} objects that are currently on the {@link Board}.
 	 * @return	{@link Map} with all {@link Bubble} objects
@@ -125,8 +126,10 @@ public class Board {
 	}
 	
 	/**
-	 * Traversal to find all of the {@link Bubble}s that are disconnected from the ceiling.
-	 * @return A {@link Collection} with all the disconnected Bubbles.
+	 * Traversal to find all of the nodes that should be removed.
+	 * If nothing should be removed, then nothing is returned.
+	 * @param b		the {@link Bubble} where it all starts
+	 * @return 		{@link Collection} that's either empty or filled with nodes that will be removed 
 	 */
 	public Collection<Bubble> getDisconnectedGroup() {
 		// The same Map will be used for each depth-first search.
@@ -236,5 +239,17 @@ public class Board {
 		y = 480 - (y + 16);
 
 		return new Vector2(x, y);
+	}
+
+	public int getIndex(Vector2 loc) {
+		int x = (int)loc.x;
+		int y = (int)loc.y;
+		x = x - 190;
+		y = 480 - y;
+		int y_id = y / 28;
+		int x_id = x - (y_id & 1) * 16;
+		x_id /= 32;
+		
+		return toIdx(x_id, y_id);
 	}
 }
