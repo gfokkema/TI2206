@@ -223,36 +223,20 @@ public class BoardTest {
 	}
 	
 	/**
-	 * Test adjacent out of bound cells, negative
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testAdjacentOutOfBounds_1() {
-		board.adjacent(-1, -2);
-	}
-	 */
-	
-	/**
-	 * Test adjacent out of bound cells, negative
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testAdjacentOutOfBounds_2() {
-		board.adjacent(0, -6);
-	}
-	 */
-	
-	/**
 	 * Test adjacent out of bound cells, positive
+	 */
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAdjacentOutOfBounds_3() {
 		board.adjacent(77, 83);
 	}
-	 */
 	
 	/**
 	 * Test adjacent out of bound cells, positive
+	 */
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAdjacentOutOfBounds_4() {
 		board.adjacent(83, 84);
 	}
-	 */
 	
 	/**
 	 * Test getters for width and height:
