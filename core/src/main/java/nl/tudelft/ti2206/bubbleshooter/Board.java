@@ -182,8 +182,6 @@ public class Board {
 	 */
 	public boolean adjacent(int a, int b) {
 		if (a > b) { int temp = a; a = b; b = temp; }
-		if (b < 0)	return false;
-		if (a < 0)	return false;
 		
 		Vector2 xy_a = toXY(a);
 		Vector2 xy_b = toXY(b);
