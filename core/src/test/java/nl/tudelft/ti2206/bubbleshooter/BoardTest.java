@@ -299,6 +299,10 @@ public class BoardTest {
 		assertTrue(bubble.collides(b));
 	}
 
+	/**
+	 * Test that only adjacent Bubbles of the same colors
+	 * are returned.
+	 */
 	@Test
 	public void testGetColorGroup() {
 		//Add 3 Bubbles in a row.
@@ -307,10 +311,32 @@ public class BoardTest {
 		board.add(new Bubble(Color.BLUE));
 		//Add one Bubble of a different color.
 		board.add(new Bubble(Color.RED));
+		//Add one Bubble of the same color, but not adjacent.
+		board.add(new Bubble(Color.BLUE), 1, 2);
 
 		Collection<Bubble> colorGroup = board.getColorGroup(0);
+		assertEquals(3, colorGroup.size());
 		colorGroup.forEach(
 				(Bubble b) -> assertEquals(Color.BLUE, b.color)
+		);
+	}
+
+	/**
+	 * Test to see if only Bubbles that are disconnected
+	 * from the ceiling are returned.
+	 */
+	@Test
+	public void testGetDisconnectedGroup() {
+		board.add(new Bubble(Color.BLUE), 1, 0);
+		board.add(new Bubble(Color.BLUE), 2, 0);
+		board.add(new Bubble(Color.BLUE), 3, 0);
+		board.add(new Bubble(Color.RED), 4, 2);
+		board.add(new Bubble(Color.RED), 5, 2);
+
+		Collection<Bubble> disconnectedGroup = board.getDisconnectedGroup();
+		assertEquals(2, disconnectedGroup.size());
+		disconnectedGroup.forEach(
+				(Bubble b) -> assertEquals(Color.RED, b.color)
 		);
 	}
 }
