@@ -139,12 +139,15 @@ public class Board {
 				//There's no bubble here
 				continue;
 			}
+			connectedToCeiling.put(ceilingIndex, bubbles.get(ceilingIndex));
 			depthFirst(
 					ceilingIndex,
 					(current, neighbor) -> true,
 					connectedToCeiling
 			);
 		}
+		System.out.println(connectedToCeiling);
+		
 		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
 		// Remove all of the bubbles that are not connected to the ceiling.
 		result.removeAll(connectedToCeiling.values());
