@@ -24,7 +24,6 @@ public class SoundEffect {
 	 */
 	public SoundEffect(String name) {
 		SFX = Gdx.audio.newSound(Gdx.files.internal(name));
-		// initial play to remember the sound for further manipulation later on
 		SFXvol = 0;
 	}
 	

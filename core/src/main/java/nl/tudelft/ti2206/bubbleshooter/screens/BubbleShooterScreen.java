@@ -48,7 +48,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.game = game;
 		this.board = new Board(8, 15);
 		this.cannon = new Cannon(settings, Gdx.graphics.getWidth() / 2,100);
-		Gdx.app.log("SFXVolBSS", "" + settings.getVolume());
 	}
 	
 	/**

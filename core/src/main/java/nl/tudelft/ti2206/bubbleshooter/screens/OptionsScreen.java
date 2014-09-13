@@ -176,7 +176,6 @@ public class OptionsScreen extends ScreenAdapter {
 			SFXvolume+=volumeStep;
 			SFXcheckVolume();
 			b.getSFX().setVolume(SFXvolume); 
-			Gdx.app.log("SFXVol", "" +SFXvolume);
 		});
 		SFX.setVolume(SFXvolume);
 	}
@@ -191,7 +190,6 @@ public class OptionsScreen extends ScreenAdapter {
 			SFXvolume-=volumeStep;
 			SFXcheckVolume();
 			b.getSFX().setVolume(SFXvolume); 
-			Gdx.app.log("SFXVol", "" +SFXvolume);
 		});
 		SFX.setVolume(SFXvolume);
 	}

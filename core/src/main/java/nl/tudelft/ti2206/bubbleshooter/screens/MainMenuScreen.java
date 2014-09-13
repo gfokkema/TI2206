@@ -49,7 +49,6 @@ public class MainMenuScreen extends ScreenAdapter {
 		options = new OptionsScreen(game, BGM);
 		settings = options.getSFX();
 		settings.setVolume(0.5f);
-		Gdx.app.log("SFXVolMainmen", "" + options.getSFX().getVolume());
 		BBS = new BubbleShooterScreen(game, settings);
 		
 		// The play button which sends the player to the bubble shooter game screen
