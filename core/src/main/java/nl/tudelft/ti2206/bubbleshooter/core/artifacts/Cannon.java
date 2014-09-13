@@ -31,8 +31,8 @@ public class Cannon extends Sprite {
 	 * @param x coordinate
 	 * @param y coordinate
 	 */
-	public Cannon(int x, int y) {
-		super(new Sprite(new Texture("cannon.png")));
+	public Cannon(Texture tex, int x, int y) {
+		super(new Sprite(tex));
 		this.setOrigin(this.getWidth() / 2, 25);
 		this.setPosition(x - this.getWidth() / 2, y);
 		
@@ -42,6 +42,10 @@ public class Cannon extends Sprite {
 		// add bubble
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		setAngle(0);
+	}
+	
+	public Cannon(int x, int y) {
+		this(new Texture("cannon.png"), x, y);
 	}
 	
 	/**
