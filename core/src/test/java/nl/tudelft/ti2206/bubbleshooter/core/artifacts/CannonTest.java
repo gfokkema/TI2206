@@ -13,26 +13,38 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Tests for the {@link Cannon} class
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class CannonTest {
 	@Mock Texture tex;
 	
 	private Cannon cannon;
 	
+	/**
+	 * Initialize our mock objects and the {@link Cannon}.
+	 */
 	@Before
-	public void setUp() throws InterruptedException {
+	public void setUp(){
 		Mockito.when(tex.getWidth()).thenReturn(20);
 		Mockito.when(tex.getWidth()).thenReturn(100);
 		
 		this.cannon = new Cannon(tex, 0, 0);
 	}
 
+	/**
+	 * Tests creation of a {@link Cannon}.
+	 */
 	@Test
 	public void testInitializeCannon() {
 		assertEquals(tex, cannon.getTexture());
 		assertEquals(new Vector2(-16, 0), cannon.getPointer().getOrigin());
 	}
 	
+	/**
+	 * Tests setting and getting the angle of a {@link Cannon}.
+	 */
 	@Test
 	public void testAngle() {
 		assertEquals(0,  cannon.getPointer().getAngle(), .001);
@@ -50,6 +62,9 @@ public class CannonTest {
 		assertEquals(60, cannon.getPointer().getAngle(), .001);
 	}
 	
+	/**
+	 * Tests setting the angle outside of the {@link Cannon} angle boundaries.
+	 */
 	@Test
 	public void testAngleOutsideOfBoundaries() {
 		cannon.setAngle(-70);
@@ -59,6 +74,9 @@ public class CannonTest {
 		assertEquals(60, cannon.getPointer().getAngle(), .001);
 	}
 	
+	/**
+	 * Tests projectile creation and location
+	 */
 	@Test
 	public void testProjectile() {
 		Projectile ammo = cannon.getProjectile();
@@ -68,6 +86,9 @@ public class CannonTest {
 		
 	}
 	
+	/**
+	 * Tests for shooting a projectile
+	 */
 	@Test
 	public void testShoot() {
 		Projectile ammo, fired;
@@ -80,6 +101,9 @@ public class CannonTest {
 		assertNotEquals(fired, cannon.projectile);
 	}
 
+	/**
+	 * Tests moving the projectile given it's velocity and direction
+	 */
 	@Test
 	public void testMove() {
 		Pointer pointer = cannon.getPointer();

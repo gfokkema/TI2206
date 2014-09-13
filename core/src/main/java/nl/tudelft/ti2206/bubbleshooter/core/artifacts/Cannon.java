@@ -22,9 +22,10 @@ public class Cannon extends Sprite {
 	private final int velocity = 5;
 	
 	/**
-	 * Cannon constructor
-	 * @param x coordinate
-	 * @param y coordinate
+	 * Constructs a {@link Cannon} using a specified {@link Texture}
+	 * @param tex	{@link Texture} to use 
+	 * @param x		coordinate
+	 * @param y 	coordinate
 	 */
 	public Cannon(Texture tex, int x, int y) {
 		super(new Sprite(tex));
@@ -38,7 +39,12 @@ public class Cannon extends Sprite {
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		setAngle(0);
 	}
-	
+
+	/**
+	 * Constructs a {@link Cannon} using the predefined {@link Texture}
+	 * @param x		coordinate
+	 * @param y 	coordinate
+	 */
 	public Cannon(int x, int y) {
 		this(new Texture("cannon.png"), x, y);
 	}
@@ -67,6 +73,10 @@ public class Cannon extends Sprite {
 		projectile.setBounds(new Circle(getBubblePos(), 16));
 	}
 	
+	/**
+	 * Returns the {@link Projectile} this {@link Cannon} is currently holding.
+	 * @return	{@link Projectile} of this {@link Cannon}
+	 */
 	public Projectile getProjectile() {
 		return this.projectile;
 	}
@@ -74,6 +84,7 @@ public class Cannon extends Sprite {
 		
 	/**
 	 * Shoot the actual bubble: pew pew!
+	 * @returns	{@link Projectile} that has been shot
 	 */
 	public Projectile shoot() {
 		Projectile fired = projectile;
@@ -106,6 +117,10 @@ public class Cannon extends Sprite {
 		return pointer;
 	}
 	
+	/**
+	 * Returns the location the {@link Projectile} should have, given the current {@link Cannon} direction.
+	 * @return
+	 */
 	private Vector2 getBubblePos() {
 		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
 						.add(pointer.getDirection().nor().scl(100));
