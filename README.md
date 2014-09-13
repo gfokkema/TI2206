@@ -1,4 +1,4 @@
-# TI2206 - Group X (Tetris)
+# TI2206 - Group 15 (Bubble Shooter)
 
 This team consists of the following students:
 
