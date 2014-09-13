@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
+import nl.tudelft.ti2206.bubbleshooter.BackgroundMusic;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
@@ -21,9 +22,13 @@ import com.badlogic.gdx.math.Rectangle;
  *
  */
 public class MainMenuScreen extends ScreenAdapter {
-	public static final String title = "Bubbleshooter";
+	public static final String title = "Bubble Shooter";
+	private final String BGMname = "lol.ogg";
+	BackgroundMusic BGM;
 	ArrayList<Button> buttons;
 	Launch game;
+	OptionsScreen options;
+	BubbleShooterScreen BBS;
 	
 	/**
 	 * Sets up the buttons to be displayed.
@@ -32,21 +37,24 @@ public class MainMenuScreen extends ScreenAdapter {
 	public MainMenuScreen(Launch game) {
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
-
+		BGM = new BackgroundMusic(BGMname);
+		options = new OptionsScreen(game, BGM);
+		BBS = new BubbleShooterScreen(game);
+		
 		//Add buttons, each with their own callback.
 		Button play = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 + 50, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> this.game.setScreen(new BubbleShooterScreen(game))
+				() -> this.game.setScreen(BBS)
 		);
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Settings",
-				() -> System.out.println("Check")
+				() -> this.game.setScreen(options)
 		);
 		Button quit = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
@@ -91,5 +99,26 @@ public class MainMenuScreen extends ScreenAdapter {
 				.ifPresent(Button::apply);
 		}
 	}
-
+	
+	/**
+	 * Play some main menu background music
+	 * This music will be played in the main menu screen and options screen
+	 */
+	@Override
+	public void show() {
+		BGM.getBGM().play();
+		
+	}
+	
+	/**
+	 * Hide is being called when the main menu screen is not the current screen.
+	 */
+	@Override
+	public void hide() {
+		BGM.getBGM().pause();
+	}
+	
+	public void applySettings() {
+		options.applySettings();
+	}
 }
