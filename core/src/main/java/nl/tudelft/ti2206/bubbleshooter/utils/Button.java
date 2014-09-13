@@ -36,6 +36,8 @@ public class Button {
 		this.font = font;
 		this.text = text;
 		this.SFX = new SoundEffect(SFXname);
+		// play once to initialize id, so the volume may be set.
+		SFX.setVolume(0.5f);
 		Pixmap button_pixels = new Pixmap((int)bounds.width, (int)bounds.height, Pixmap.Format.RGBA8888);
 		button_pixels.setColor(color);
 		button_pixels.fill();

@@ -25,7 +25,6 @@ public class Launch extends Game {
 		font = new BitmapFont();
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
-		
 	}
 	
 	/**

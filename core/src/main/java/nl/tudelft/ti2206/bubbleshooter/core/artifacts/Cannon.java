@@ -2,6 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
+import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
@@ -18,7 +20,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class Cannon extends Sprite {
 	Pointer pointer;
 	float angle;
-
+	Launch game;
+	float volume;
+	SoundEffect SFX;
 	Projectile projectile;
 	
 	private final float LEFT_BOUNDARY = 60;
@@ -28,20 +32,22 @@ public class Cannon extends Sprite {
 	
 	/**
 	 * Cannon constructor
+	 * @param game the current game session
 	 * @param x coordinate
 	 * @param y coordinate
 	 */
-	public Cannon(int x, int y) {
+	public Cannon(SoundEffect settings, int x, int y) {
 		super(new Sprite(new Texture("cannon.png")));
 		this.setOrigin(this.getWidth() / 2, 25);
 		this.setPosition(x - this.getWidth() / 2, y);
-		
 		pointer = new Pointer(new Vector2(x, y));
 		pointer.setOrigin(new Vector2(x - 16, y));
 		
 		// add bubble
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		setAngle(0);
+		SFX = settings;
+		Gdx.app.log("SFXVolkannon", "" + settings.getVolume());
 	}
 	
 	/**
@@ -83,6 +89,9 @@ public class Cannon extends Sprite {
 		fired.setDirection(new Vector2(pointer.direction));
 		
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
+		// wub wub :D
+		projectile.getSFX().setVolume(SFX.getVolume());
+		projectile.getSFX().play();
 		return fired;
 	}
 	

@@ -4,6 +4,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
 
 import java.util.Collection;
@@ -33,10 +34,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Creates a cannon, board and game.
 	 * @param game
 	 */
-	public BubbleShooterScreen(Launch game) {
+	public BubbleShooterScreen(Launch game, SoundEffect settings) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		this.cannon = new Cannon(Gdx.graphics.getWidth() / 2,100);
+		this.cannon = new Cannon(settings, Gdx.graphics.getWidth() / 2,100);
+		Gdx.app.log("SFXVolBSS", "" + settings.getVolume());
 	}
 	
 

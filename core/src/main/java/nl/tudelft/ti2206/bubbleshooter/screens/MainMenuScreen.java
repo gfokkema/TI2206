@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 import java.util.ArrayList;
 
 import nl.tudelft.ti2206.bubbleshooter.BackgroundMusic;
+import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
@@ -23,11 +24,12 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class MainMenuScreen extends ScreenAdapter {
 	public static final String title = "Bubble Shooter";
-	private final String BGMname = "lol.ogg";
+	private final String BGMname = "BGMenu.ogg";
 	BackgroundMusic BGM;
 	ArrayList<Button> buttons;
 	Launch game;
 	OptionsScreen options;
+	SoundEffect settings;
 	BubbleShooterScreen BBS;
 	
 	/**
@@ -39,7 +41,10 @@ public class MainMenuScreen extends ScreenAdapter {
 		this.buttons = new ArrayList<Button>();
 		BGM = new BackgroundMusic(BGMname);
 		options = new OptionsScreen(game, BGM);
-		BBS = new BubbleShooterScreen(game);
+		settings = options.getSFX();
+		settings.setVolume(0.5f);
+		Gdx.app.log("SFXVolMainmen", "" + options.getSFX().getVolume());
+		BBS = new BubbleShooterScreen(game, settings);
 		
 		//Add buttons, each with their own callback.
 		Button play = new Button(
@@ -47,7 +52,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> this.game.setScreen(BBS)
+				() -> {this.game.setScreen(BBS); Gdx.app.log("SFXVolMainPass", "" + settings.getVolume());}
 		);
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
@@ -107,7 +112,10 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		BGM.getBGM().play();
-		
+		// refresh the settings
+		settings = options.getSFX();
+		BBS = new BubbleShooterScreen(game, settings);
+		applySettings();
 	}
 	
 	/**

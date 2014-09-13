@@ -33,6 +33,8 @@ public class OptionsScreen extends ScreenAdapter {
 		this.game = game;
 		BGMvolume = this.BGM.getVolume();
 		this.buttons = new ArrayList<Button>();
+		SFX = new SoundEffect("BubbleSFX.wav");
+		SFXvolume = 0.5f;
 
 		//Add buttons, each with their own callback.
 		Button BGMvolup = new Button(
@@ -57,6 +59,7 @@ public class OptionsScreen extends ScreenAdapter {
 				"SFX Up!",
 				() -> SFXvolumeUp()
 		);
+		
 		Button SFXvoldown = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2 - 25, 100, 50),
 				new Color(0xFFFF00FF),
@@ -64,6 +67,7 @@ public class OptionsScreen extends ScreenAdapter {
 				"SFX Down!",
 				() -> SFXvolumeDown()
 		);
+		
 		Button back = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
 				new Color(0xFFFF00FF),
@@ -157,6 +161,8 @@ public class OptionsScreen extends ScreenAdapter {
 			b.getSFX().setVolume(SFXvolume); 
 			Gdx.app.log("SFXVol", "" +SFXvolume);
 		});
+		SFX.setVolume(SFXvolume);
+		Gdx.app.log("SFXVolCannon", "" + SFX.getVolume());
 	}
 	
 	/**
@@ -171,6 +177,8 @@ public class OptionsScreen extends ScreenAdapter {
 			b.getSFX().setVolume(SFXvolume); 
 			Gdx.app.log("SFXVol", "" +SFXvolume);
 		});
+		SFX.setVolume(SFXvolume);
+		Gdx.app.log("SFXVolCannon", "" + SFX.getVolume());
 	}
 	
 	/**
@@ -196,5 +204,13 @@ public class OptionsScreen extends ScreenAdapter {
 		game.mms.buttons.forEach((Button b) -> {
 			b.getSFX().setVolume(SFXvolume);
 		});
+	}
+	
+	/**
+	 * Get the SFX (with its settings) from the optionsscreen.
+	 * @return
+	 */
+	public SoundEffect getSFX() {
+		return SFX;
 	}
 }
