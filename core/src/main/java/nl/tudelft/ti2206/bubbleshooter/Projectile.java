@@ -3,22 +3,51 @@ package nl.tudelft.ti2206.bubbleshooter;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * This class represent a {@link Bubble} that has been shot by the {@link Cannon}.
+ * Since this {@link Bubble} has been shot, it has a velocity and a direction.
+ * It will also move across the board, untill it collides with a normal {@link Bubble}
+ * @author gerlof
+ *
+ */
 public class Projectile extends Bubble {
 	Vector2 direction;
 	int velocity;
 	
+	/**
+	 * Create a {@link Projectile} with the specified {@link Circle} bounding area,
+	 * the {@link Vector2} direction and with a velocity.
+	 * @param bounds	the {@link Circle} representing the location and bounding area
+	 * @param direction	the {@link Vector2} representing the direction this bubble moves in
+	 * @param velocity	the speed of this {@link Bubble}
+	 */
 	public Projectile(Circle bounds, Vector2 direction, int velocity) {
 		this.bounds = bounds;
 		this.direction = direction;
 		this.velocity = velocity;
 	}
 	
+	/**
+	 * Moves the {@link Projectile} along it's trajectory specified by direction.
+	 */
 	public void move() {
 		Vector2 dir = direction.nor().scl(velocity);
 		bounds.x += dir.x;
 		bounds.y += dir.y;
 	}
 	
+	/**
+	 * Returns an integer representing the current velocity of this {@link Projectile}.
+	 * @return	an integer representing this {@link Projectile}'s velocity
+	 */
+	public int getVelocity() {
+		return this.velocity;
+	}
+	
+	/**
+	 * Sets the current velocity of this {@link Projectile}
+	 * @param velocity	an integer representing this {@link Projectile}'s velocity
+	 */
 	public void setVelocity(int velocity) {
 		this.velocity = velocity;
 	}
