@@ -1,11 +1,15 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
 import static org.junit.Assert.*;
+
+import java.util.Collection;
+
 import nl.tudelft.ti2206.bubbleshooter.Board;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -293,5 +297,20 @@ public class BoardTest {
 		
 		b.setBounds(c2);
 		assertTrue(bubble.collides(b));
+	}
+
+	@Test
+	public void testGetColorGroup() {
+		//Add 3 Bubbles in a row.
+		board.add(new Bubble(Color.BLUE));
+		board.add(new Bubble(Color.BLUE));
+		board.add(new Bubble(Color.BLUE));
+		//Add one Bubble of a different color.
+		board.add(new Bubble(Color.RED));
+
+		Collection<Bubble> colorGroup = board.getColorGroup(0);
+		colorGroup.forEach(
+				(Bubble b) -> assertEquals(Color.BLUE, b.color)
+		);
 	}
 }
