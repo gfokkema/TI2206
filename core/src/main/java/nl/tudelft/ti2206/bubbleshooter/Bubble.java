@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 
 public class Bubble {
 	public enum Orientation {
@@ -62,6 +63,7 @@ public class Bubble {
 	 */
 	public Bubble() {
 		this.color = getRandomColor();
+		this.bounds = new Circle();
 	}
 
 	/**
@@ -83,10 +85,58 @@ public class Bubble {
 		return bounds.overlaps(b.bounds);
 	}
 	
+	/**
+	 * return color
+	 * @return color
+	 */
 	public Color getColor() {
 		return this.color;
 	}
 
+	/**
+	 * Gets the bounding circle of the bubble.
+	 * @return {@link Circle} containing center and radius.
+	 */
+	public Circle getCircle() {
+		return bounds;
+	}
+	
+	/**
+	 * Sets the bounding {@link Circle} of the bubble.
+	 * @param x the x coordinate - absolute position.
+	 * @param y the y coordinate - absolute position.
+	 * @param radius the radius of the circle.
+	 */
+	public void setCircle(float x, float y, float radius) {
+		bounds.set(x, y, radius);
+	}
+	
+	/**
+	 * Sets the bounding {@link Circle} of the bubble.
+	 * @param position the position as x and y coordinate.
+	 * @param radius radius the radius of the circle.
+	 */
+	public void setCircle(Vector2 position, float radius) {
+		bounds.set(position, radius);
+	}
+	
+	/**
+	 * Gets the position of the bubble.
+	 * @return vector2 with c and y coordinate.
+	 */
+	public Vector2 getPosition() {
+		return new Vector2(bounds.x, bounds.y);
+	}
+	
+	/**
+	 * Sets the position of the bubble.
+	 * radius stays the same.
+	 * @param position vector with x and y coordinate.
+	 */
+	public void setPosition(Vector2 position) {
+		bounds.set(position, bounds.radius);
+	}
+		
 	/**
 	 * Pick a ColorValue at random.
 	 * @return a randomly chosen ColorValue.
