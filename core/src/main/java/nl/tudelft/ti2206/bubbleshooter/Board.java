@@ -140,6 +140,16 @@ public class Board {
 		return result;
 	}
 
+	/**
+	 * Performs a depth-first search starting from the given index. Results
+	 * are added to the given {@link Map}.
+	 * Each node will be tested against the given {@link BiPredicate}, and
+	 * will only be added to the solution set if the test evaluates to true.
+	 * @param currentIndex The index of the node to start the search from.
+	 * @param condition The condition to test against against each potential result.
+	 * @param remove The solution set accumulator, which at the end contains all
+	 *               results.
+	 */
 	private void depthFirst(Integer currentIndex, BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
 		for(Orientation o : Bubble.orientations) {
 			int neighborIndex = o.fromIndex(currentIndex, this.width);
@@ -157,6 +167,12 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Remove all the {@link Bubble}s that are both in the given
+	 * {@link Collection} and on the grid.
+	 * @param bs The collection specifying the elements that should
+	 *           be removed.
+	 */
 	public void removeAll(Collection<Bubble> bs) {
 		bubbles.values().removeAll(bs);
 	}
@@ -229,6 +245,13 @@ public class Board {
 		return new Vector2(x, y);
 	}
 
+	/**
+	 * Get the index of the grid cell containing the given
+	 * {@link Vector2}.
+	 * @param loc The (x,y)-coordinate on the grid.
+	 * @return The index of the grid containing the given
+	 *         coordinate.
+	 */
 	public int getIndex(Vector2 loc) {
 		int x = (int)loc.x;
 		int y = (int)loc.y;
