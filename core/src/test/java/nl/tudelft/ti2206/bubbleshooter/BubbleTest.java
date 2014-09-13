@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
 import static org.junit.Assert.*;
+
 import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
 
 import org.junit.Before;
@@ -10,13 +11,22 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * In this class we will test the functionality of our Bubble class.
+ */
 public class BubbleTest {
 	private Bubble bubble;
+	
+/**
+ * A new bubble is initiated, to be used through the class.
+ */
 	@Before
 	public void setUp() {
 		this.bubble = new Bubble();
 	}
-
+/**
+ * Checked whether the bubbles are initiated with the given color.
+ */
 	@Test
 	public void testBubble() {
 		bubble = new Bubble(Color.RED);
@@ -28,7 +38,9 @@ public class BubbleTest {
 		bubble = new Bubble(Color.ORANGE);
 		assertEquals(Color.ORANGE, bubble.getColor());
 	}
-	
+/**
+ * Checked whether the circles are initiated with the given boundaries.
+ */
 	@Test
 	public void testBounds() {
 		Circle c = new Circle(0, 0, 10);
@@ -36,7 +48,9 @@ public class BubbleTest {
 		bubble.setBounds(c);
 		assertEquals(c, bubble.getBounds());
 	}
-	
+/**
+ * Checked whether the given vector is correctly initiated with given boundaries.
+ */
 	@Test
 	public void testPosition() {
 		Vector2 pos = new Vector2(10, 10), pos2 = new Vector2(20, 50);
@@ -51,7 +65,7 @@ public class BubbleTest {
 	}
 	
 	/**
-	 * Check whether with the given bounds, overlaps gives the right output.
+	 * Checked whether with the given bounds, overlaps gives the right output.
 	 */
 	@Test
 	public void testCollide() {
@@ -73,7 +87,9 @@ public class BubbleTest {
 		b.setBounds(c2);
 		assertTrue(b.collides(bubble));
 	}
-	
+/**
+ * Checks if the new the position, from given index with given orientation is.
+ */
 	@Test
 	public void testFromIndex() {
 		Orientation ori;
@@ -89,7 +105,9 @@ public class BubbleTest {
 		assertEquals(10, ori.fromIndex(14, 5));
 		assertEquals(10, ori.fromIndex(15, 6));
 	}
-	
+/**
+ * Checks whether the opposite orientation is correct
+ */
 	@Test
 	public void testOrientation() {
 		Orientation ori;
