@@ -1,7 +1,9 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[T1]{fontenc}
+\usepackage{hyperref}
 
-\title{TI2206 Software Engineering: Bubbleshooter}
+
+\title{TI2206 Software Engineering: Bubble Shooter}
 \author{Gerlof Fokkema 4257286 \\
 	Owen Huang 4317459 \\
 	Adam Iqbal 4293568 \\
@@ -14,42 +16,69 @@
 
 \newpage
 \section*{Functional}
+\textbf{\underline{Must-have features}}
 \begin{itemize}
-  \item User will be presented a menu after starting the application
+  \item When the user starts the application, a main menu with three buttons will be presented. Inside the user is able to do the following actions:
   \begin{itemize}
-    \item user can start a game
-    \item user can exit the application
+    \item When the user clicks on the \textit{play} button, then a new single player game is started.
+    \item When the user clicks the \textit{settings} button, then the user will change screens to the options menu.
+    \item When the user clicks the \textit{quit} button, then the application will terminate. This results in closing the application.
   \end{itemize}
-  \item User can play a game (single player mode)
+  \item Given the user has started a new single player game, by clicking on the \textit{play} button in the main menu, the user can do the following actions inside the single player game:
   \begin{itemize}
-    \item user can pause the game
-    \item user can exit the game (go back to main menu)
-    \item the player can shoot bubbles
-    \item the player can control the cannon
-    \item when three bubbles of the same color are adjacent these will disappear
-    \item bubbles stick to each other when the condition above does not hold
-    \item the player can form groups of the same color to score points
-    \item bubbles that aren't connected to the ceiling will fall to the floor
-    \item when the bubbles reach the floor the player loses and the game exits
+    \item When the user presses the \textit{left arrow key} the cannon will rotate to the left, the opposite will be done when the \textit{right arrow key} is pressed.
+    \item When the user presses the \textit{spacebar} button on the keyboard, the user will shoot a projectile in the direction the cannon is facing. \\
   \end{itemize}
+\end{itemize}
+
+\textbf{\underline{Should-have features}}
+\begin{itemize}
+\item Given the user has started a new single player game, the following game mechanics and events should apply:
+  \begin{itemize}
+    \item When the user enters the playfield, the user will be presented a field filled with bubbles.
+    \item Given that a projectile has been fired and it hits another bubble, the projectile will disappear along with the bubble if the color of both bubbles are the same and \textbf{at least} another bubble adjacent to the bubble that was hit, is also of that same color.
+    \item When the user has fired a projectile and it hits another bubble it will stick to that bubble, if the condition above does not hold.
+    \item Given that the user shoots a projectile all the way to the ceiling, it will stick to the ceiling when the above two rules do not hold.
+    \item Given that the user has fired, when the user is able to fire again a bubble of random color (out of a selection of five) will spawn as the new projectile.
+    \item Given that a bubble was hit and removed, if the adjacent bubbles do not connect to either the ceiling or other bubbles (that ultimately connect to the ceiling), then the bubble is removed. \\
+  \end{itemize}
+\end{itemize}
+
+\textbf{\underline{Could-have features}}
+\begin{itemize}
+  \item Given the user has started the application, background music will be played right away.
+  \item Given the user clicks on the settings button, the user will be presented the options menu, where the user can do the following actions:
+    \begin{itemize}
+    \item When the user clicks the \textit{Volume Up!} button, the background music volume will rise.
+    \item When the user clicks the \textit{Volume Down!} button, the background music volume will go down.
+    \item When the user clicks the \textit{SFX Up!} button, the sound effects volume will rise.
+    \item When the user clicks the \textit{SFX Down!} button, sound effects volume will go down.
+    \item When the user clicks the \textit{Back} button, the user will return to the main menu screen.
+    \end{itemize}
+   \item When a bubble reaches the floor (bottom of the screen) the player loses and the game ends. \\
+\end{itemize}
+
+\textbf{\underline{Won't-have features}}
+\begin{itemize}
+   \item Given the user has started a single player game, when the user presses the \textit{Escape} button, the game will pause.
+   \item Given the user has started a single player game, the user can exit the game (go back to main menu) by pressing the \textit{M} key on the keyboard.
 \end{itemize}
 
 \newpage
 \section*{Non-functional}
 \begin{itemize}
-  \item A simple version should be finished within 1 week (14/09/14).
+  \item A simple version should be finished within one week (13/09/14).
   \item The development team consists of five group members.
   \item The game must be written in Java using the following supporting tools:
   \begin{itemize}
     \item maven
     \item jUnit
     \item git
-    \item libgdx
   \end{itemize}
 
-  \item The development process will be using SCRUM
+  \item The development process (including the sprints) will be using SCRUM, with the help of the following web based tool:
   \begin{itemize}
-    \item ScrumDo
+    \item \href{https://www.scrumdo.com/}{ScrumDo}
   \end{itemize}
 
   \item Meetings
