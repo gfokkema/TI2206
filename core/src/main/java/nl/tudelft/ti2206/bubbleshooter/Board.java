@@ -128,7 +128,6 @@ public class Board {
 	/**
 	 * Traversal to find all of the nodes that should be removed.
 	 * If nothing should be removed, then nothing is returned.
-	 * @param b		the {@link Bubble} where it all starts
 	 * @return 		{@link Collection} that's either empty or filled with nodes that will be removed 
 	 */
 	public Collection<Bubble> getDisconnectedGroup() {
