@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ BoardTest.class, BubbleTest.class, CannonTest.class, PointerTest.class })
+@SuiteClasses({ BoardTest.class, BubbleTest.class, CannonTest.class, PointerTest.class,
+				ProjectileTest.class })
 public class AllTests {
 
 }
