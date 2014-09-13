@@ -80,4 +80,24 @@ public class CannonTest {
 		assertNotEquals(fired, cannon.projectile);
 	}
 
+	@Test
+	public void testMove() {
+		Pointer pointer = cannon.getPointer();
+		assertEquals(0, pointer.getAngle(), .001);
+		
+		cannon.left(0.1f);
+		assertEquals(10, pointer.getAngle(), .001);
+		
+		cannon.left(0.5f);
+		assertEquals(60, pointer.getAngle(), .001);
+		
+		cannon.left(1.0f);
+		assertEquals(60, pointer.getAngle(), .001);
+		
+		cannon.right(1.0f);
+		assertEquals(-40, pointer.getAngle(), .001);
+		
+		cannon.right(0.1f);
+		assertEquals(-50, pointer.getAngle(), .001);
+	}
 }

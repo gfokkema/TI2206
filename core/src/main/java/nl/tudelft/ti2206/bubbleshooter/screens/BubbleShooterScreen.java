@@ -105,6 +105,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE)) {
 			projectile = cannon.shoot();
 		}
-		cannon.handleInput();
+		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+			cannon.left(Gdx.graphics.getDeltaTime());
+		}
+		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			cannon.right(Gdx.graphics.getDeltaTime());
+		}
 	}
 }

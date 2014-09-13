@@ -2,10 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -87,18 +85,17 @@ public class Cannon extends Sprite {
 	}
 	
 	/**
-	 * Controls handleInput
+	 * Moves the cannon to the left
 	 */
-	public void handleInput() {
-		//if pressed left, turn cannon to the left
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-			setAngle(this.getRotation() + sensitivity*Gdx.graphics.getDeltaTime());
-		}
-		
-		//if pressed right, turn cannon to the right
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) { 
-			setAngle(this.getRotation() - sensitivity*Gdx.graphics.getDeltaTime());
-		}
+	public void left(float dt) {
+		setAngle(this.getRotation() + sensitivity * dt);
+	}
+	
+	/**
+	 * Moves the cannon to the right
+	 */
+	public void right(float dt) { 
+		setAngle(this.getRotation() - sensitivity * dt);
 	}
 	
 	/**
