@@ -35,28 +35,28 @@ public class CannonTest {
 	
 	@Test
 	public void testAngle() {
-		assertEquals(90,  cannon.getPointer().getAngle(), .001);
+		assertEquals(0,  cannon.getPointer().getAngle(), .001);
 		
 		cannon.setAngle(-45);
-		assertEquals(45, cannon.getPointer().getAngle(), .001);
+		assertEquals(-45, cannon.getPointer().getAngle(), .001);
 		
 		cannon.setAngle(45);
-		assertEquals(135, cannon.getPointer().getAngle(), .001);
+		assertEquals(45, cannon.getPointer().getAngle(), .001);
 		
 		cannon.setAngle(-60);
-		assertEquals(30, cannon.getPointer().getAngle(), .001);
+		assertEquals(-60, cannon.getPointer().getAngle(), .001);
 		
 		cannon.setAngle(60);
-		assertEquals(150, cannon.getPointer().getAngle(), .001);
+		assertEquals(60, cannon.getPointer().getAngle(), .001);
 	}
 	
 	@Test
 	public void testAngleOutsideOfBoundaries() {
 		cannon.setAngle(-70);
-		assertEquals(30, cannon.getPointer().getAngle(), .001);
+		assertEquals(-60, cannon.getPointer().getAngle(), .001);
 		
 		cannon.setAngle(70);
-		assertEquals(150, cannon.getPointer().getAngle(), .001);
+		assertEquals(60, cannon.getPointer().getAngle(), .001);
 	}
 	
 	@Test
