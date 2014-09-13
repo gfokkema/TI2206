@@ -39,7 +39,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		cannon = new Cannon(Gdx.graphics.getWidth()/2,100, board);
+		cannon = new Cannon(Gdx.graphics.getWidth()/2,100);
 		frame_count = 0;
 		fired = false;
 	}
@@ -75,7 +75,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.draw(fg, v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
 		});
 		
-		cannon.draw(game.batch);
+		cannon.draw(game.batch, board);
 		game.batch.setColor(current);
 		
 		game.batch.end();
@@ -85,6 +85,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Handle the input given by the player.
 	 */
 	private void handle_input() {
+		if(Gdx.input.justTouched()) {
+			int idx = board.getIndex(new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY()));
+			System.out.println(idx);
+			board.add(new Bubble(), idx);
+		}
 		// remove bubble test --> Key = R
 		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
 			testperformed = true;

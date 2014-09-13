@@ -40,9 +40,9 @@ public class Cannon {
 	 * @param x coordinate
 	 * @param y coordinate
 	 */
-	public Cannon(int x, int y, Board board) {
+	public Cannon(int x, int y) {
 		pointer = new Pointer(new Vector2(x, y));
-		this.board = board;
+		board = new Board(1,1);
 		
 		// texture for cannon + angle
 		image = new Texture("cannon.png");
@@ -102,8 +102,8 @@ public class Cannon {
 	 * draw attributes
 	 * @param batch
 	 */
-	public void draw(SpriteBatch batch) {
-		update();
+	public void draw(SpriteBatch batch, Board table) {
+		update(table);
 		sprite.draw(batch);
 		batch.setColor(projectile.getColor());
 		batch.draw(fg, projectile.getBounds().x, projectile.getBounds().y, 32, 32);
@@ -127,6 +127,7 @@ public class Cannon {
 		
 		//if pressed space, trigger shoot
 		if(Gdx.input.isKeyPressed(Keys.SPACE) && !board.collides(projectile)) {
+			Gdx.app.log("Collides 1","" + board.collides(projectile));
 			shoot();
 		}		
 	}
@@ -134,14 +135,15 @@ public class Cannon {
 	/**
 	 * Update attributes which are able to move
 	 */
-	private void update() {		
+	private void update(Board table) {		
+		
+		board = table;
+				
 		// if fired, check if the projectile hits the wall
 		// perform shoot
 		if(fired) {
-			if(board.collides(projectile) || projectile.getCircle().y > 480) {
-				Circle c = projectile.getBounds();
-				int idx = board.getIndex(new Vector2(c.x, c.y));
-				board.add(projectile, idx);
+			if(table.collides(projectile) || projectile.getCircle().y > Gdx.graphics.getHeight() ) {
+				board.add(projectile);
 				CreateProjectile();
 			}
 			
