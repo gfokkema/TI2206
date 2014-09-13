@@ -27,6 +27,8 @@ public class MainMenuScreen extends ScreenAdapter {
 	BackgroundMusic BGM;
 	ArrayList<Button> buttons;
 	Launch game;
+	OptionsScreen options;
+	BubbleShooterScreen BBS;
 	
 	/**
 	 * Sets up the buttons to be displayed.
@@ -36,6 +38,8 @@ public class MainMenuScreen extends ScreenAdapter {
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
 		BGM = new BackgroundMusic(BGMname);
+		options = new OptionsScreen(game, BGM);
+		BBS = new BubbleShooterScreen(game);
 		
 		//Add buttons, each with their own callback.
 		Button play = new Button(
@@ -43,14 +47,14 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> this.game.setScreen(new BubbleShooterScreen(game))
+				() -> this.game.setScreen(BBS)
 		);
 		Button settings = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Settings",
-				() -> this.game.setScreen(new OptionsScreen(game, BGM))
+				() -> this.game.setScreen(options)
 		);
 		Button quit = new Button(
 				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
@@ -103,6 +107,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		BGM.getBGM().play();
+		
 	}
 	
 	/**
@@ -111,5 +116,9 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void hide() {
 		BGM.getBGM().pause();
+	}
+	
+	public void applySettings() {
+		options.applySettings();
 	}
 }

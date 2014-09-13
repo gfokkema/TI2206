@@ -5,7 +5,7 @@ import com.badlogic.gdx.audio.Music;
 
 /**
  * Responsible for managing the background music.
- * @author Owen
+ * @author group-15
  *
  */
 public class BackgroundMusic {
@@ -18,7 +18,7 @@ public class BackgroundMusic {
 	/**
 	 * Create a new instance of background music, provided with the file name.
 	 * Supports .ogg, .mp3, .wave.
-	 * @param name
+	 * @param name the file name of the BGM
 	 */
 	public BackgroundMusic(String name) {
 		BGM = Gdx.audio.newMusic(Gdx.files.internal(name));

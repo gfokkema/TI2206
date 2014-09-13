@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.utils;
 
+import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.graphics.Color;
@@ -16,6 +17,8 @@ public class Button {
 	private BitmapFont font;
 	private String text;
 	private CallBack func;
+	SoundEffect SFX;
+	private final String SFXname = "ButtonSFX.wav";
 
 	/**
 	 * Functional interface which represents a callback function.
@@ -32,6 +35,7 @@ public class Button {
 		this.func = func;
 		this.font = font;
 		this.text = text;
+		this.SFX = new SoundEffect(SFXname);
 		Pixmap button_pixels = new Pixmap((int)bounds.width, (int)bounds.height, Pixmap.Format.RGBA8888);
 		button_pixels.setColor(color);
 		button_pixels.fill();
@@ -55,8 +59,8 @@ public class Button {
 	 * Apply the callback function
 	 */
 	public void apply() {
+		SFX.play();
 		func.apply();
-		//TODO: Play click sound
 	}
 
 	/**
@@ -66,5 +70,13 @@ public class Button {
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
 		font.draw(batch, text, sprite.getX(), sprite.getY());
+	}
+	
+	/**
+	 * Get the SFX of the button.
+	 * @return
+	 */
+	public SoundEffect getSFX() {
+		return SFX;
 	}
 }
