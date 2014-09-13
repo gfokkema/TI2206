@@ -4,7 +4,6 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
-import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Projectile;
 
 import java.util.Collection;
 import java.util.Map;
@@ -22,7 +21,7 @@ import com.badlogic.gdx.ScreenAdapter;
 
 public class BubbleShooterScreen extends ScreenAdapter {
 	Launch game;
-	Projectile projectile;
+	Bubble projectile;
 	Circle pCircle;
 	Cannon cannon;
 	Board board;
@@ -41,7 +40,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.game = game;
 		this.board = new Board(8, 15);
 		cannon = new Cannon(Gdx.graphics.getWidth()/2,100, board);
-		projectile = cannon.getProjectile();
 		frame_count = 0;
 		fired = false;
 	}
@@ -68,8 +66,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Color current = game.batch.getColor();
 		
 		handle_input();
-		handleInputCannon();
-		updateCannon();
 		game.batch.draw(bg, 0, 0);
 		Map<Integer, Bubble> bubbles = board.getBubbles();
 		bubbles.forEach((Integer k, Bubble v) -> {
@@ -89,6 +85,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Handle the input given by the player.
 	 */
 	private void handle_input() {
+		// remove bubble test --> Key = R
 		if(!testperformed && Gdx.input.isKeyPressed(Keys.R)) {
 			testperformed = true;
 			Collection<Bubble> remove = board.getColorGroup(0);
@@ -98,57 +95,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				board.removeAll(disconnected);
 			}
 		}
+		cannon.handleInput();
 	}
-	
-	/**
-	 * Update attributes which are able to move
-	 */
-	private void updateCannon() {		
-		// if fired, check if the projectile hits the wall
-		// perform shoot
-		if(fired) {
-			if(board.collides(projectile) || projectile.getCircle().y > 480) {
-				Circle c = projectile.getBounds();
-				int idx = board.getIndex(new Vector2(c.x, c.y));
-				board.add(projectile, idx);
-				projectile = cannon.CreateProjectile();
-				fired = false;
-			}
-			
-			if(projectile.getCircle().x < 190 || projectile.getCircle().x > Gdx.graphics.getWidth() - 190 - fg.getWidth()/2)
-				projectile.getDirection().setAngle(180 -projectile.getDirection().angle());
-			
-			projectile.move();
-		}
-		// else draw projectile on cannon
-		else {
-			projectile.setPosition(new Vector2(cannon.getPointer().getOrigin()).add(new Vector2(cannon.getPointer().getDirection()).scl(100)));
-			projectile.setDirection(cannon.getPointer().getDirection());
-		}
-	}
-	
-	/**
-	 * Controls handleInput
-	 */
-	public void handleInputCannon() {
-		//if pressed left, turn cannon to the left
-		if(Gdx.input.isKeyPressed(Keys.LEFT) && !fired) {
-			float angle = cannon.getAngle() + cannon.getSensitivity()*Gdx.graphics.getDeltaTime(); 
-			Gdx.app.log("angle", "" + cannon.getAngle());
-			cannon.setAngle(angle); 
-		}
-		
-		//if pressed right, turn cannon to the right
-		if(Gdx.input.isKeyPressed(Keys.RIGHT) && !fired) {
-			float angle = cannon.getAngle() - cannon.getSensitivity()*Gdx.graphics.getDeltaTime(); 
-			cannon.setAngle(angle); 
-		}
-		
-		//if pressed space, trigger shoot
-		if(Gdx.input.isKeyPressed(Keys.SPACE) && !board.collides(projectile)) {
-			projectile.setVelocity(cannon.getVelocity());
-			fired = true;	
-		}		
-	}
-
 }
