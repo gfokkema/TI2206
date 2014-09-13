@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 
 public class BubbleTest {
 	private Bubble bubble;
@@ -35,6 +36,20 @@ public class BubbleTest {
 		bubble.setBounds(c);
 		assertEquals(c, bubble.getBounds());
 	}
+	
+	@Test
+	public void testPosition() {
+		Vector2 pos = new Vector2(10, 10), pos2 = new Vector2(20, 50);
+		
+		bubble.setCircle(pos, 10);
+		assertEquals(pos, bubble.getPosition());
+		assertEquals(10, bubble.getBounds().radius, .001);
+		
+		bubble.setPosition(pos2);
+		assertEquals(pos2, bubble.getPosition());
+		assertEquals(10, bubble.getBounds().radius, .001);
+	}
+	
 	/**
 	 * Check whether with the given bounds, overlaps gives the right output.
 	 */
@@ -47,16 +62,16 @@ public class BubbleTest {
 		b.setBounds(c1);
 		
 		bubble.setBounds(c1);
-		assertTrue(bubble.bounds.overlaps(b.bounds));
+		assertTrue(b.collides(bubble));
 		
 		bubble.setBounds(c2);
-		assertTrue(bubble.bounds.overlaps(b.bounds));
+		assertTrue(b.collides(bubble));
 		
 		bubble.setBounds(c3);
-		assertFalse(bubble.bounds.overlaps(b.bounds));
+		assertFalse(b.collides(bubble));
 		
 		b.setBounds(c2);
-		assertTrue(bubble.bounds.overlaps(b.bounds));
+		assertTrue(b.collides(bubble));
 	}
 	
 	@Test

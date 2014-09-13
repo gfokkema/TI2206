@@ -317,7 +317,7 @@ public class BoardTest {
 		Collection<Bubble> colorGroup = board.getColorGroup(0);
 		assertEquals(3, colorGroup.size());
 		colorGroup.forEach(
-				(Bubble b) -> assertEquals(Color.BLUE, b.color)
+				(Bubble b) -> assertEquals(Color.BLUE, b.getColor())
 		);
 	}
 
@@ -336,7 +336,7 @@ public class BoardTest {
 		Collection<Bubble> disconnectedGroup = board.getDisconnectedGroup();
 		assertEquals(2, disconnectedGroup.size());
 		disconnectedGroup.forEach(
-				(Bubble b) -> assertEquals(Color.RED, b.color)
+				(Bubble b) -> assertEquals(Color.RED, b.getColor())
 		);
 	}
 }

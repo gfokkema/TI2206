@@ -110,7 +110,7 @@ public class Board {
 		HashMap<Integer, Bubble> sameColors = new HashMap<Integer, Bubble>();
 		depthFirst(
 				id,
-				(current, neighbor) -> bubbles.get(current).color == bubbles.get(neighbor).color,
+				(current, neighbor) -> bubbles.get(current).getColor() == bubbles.get(neighbor).getColor(),
 				sameColors
 		);
 		sameColors.put(id, bubbles.get(id));

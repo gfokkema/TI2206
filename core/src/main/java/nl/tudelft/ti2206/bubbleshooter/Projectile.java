@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * This class represent a {@link Bubble} that has been shot by the {@link Cannon}.
+ * This class represent a {@link Bubble} that has been shot.
  * Since this {@link Bubble} has been shot, it has a velocity and a direction.
  * It will also move across the board, untill it collides with a normal {@link Bubble}
  * @author gerlof
@@ -22,7 +22,7 @@ public class Projectile extends Bubble {
 	 * @param velocity	the speed of this {@link Bubble}
 	 */
 	public Projectile(Circle bounds, Vector2 direction, int velocity) {
-		this.bounds = bounds;
+		this.setBounds(bounds);
 		this.direction = direction;
 		this.velocity = velocity;
 	}
@@ -32,8 +32,8 @@ public class Projectile extends Bubble {
 	 */
 	public void move() {
 		Vector2 dir = direction.nor().scl(velocity);
-		bounds.x += dir.x;
-		bounds.y += dir.y;
+		this.getBounds().x += dir.x;
+		this.getBounds().y += dir.y;
 	}
 	
 	/**
