@@ -34,7 +34,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	
 	/**
 	 * Sets up the buttons to be displayed.
-	 * @param game the current game session
+	 * @param game the current game session.
 	 */
 	public MainMenuScreen(Launch game) {
 		this.game = game;
@@ -74,7 +74,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	}
 	
 	/**
-	 * Render the buttons
+	 * Render the buttons.
 	 */
 	@Override
 	public void render(float delta) {
@@ -106,7 +106,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	}
 	
 	/**
-	 * Play some main menu background music
+	 * Play some main menu background music.
 	 * This music will be played in the main menu screen and options screen
 	 */
 	@Override
@@ -115,7 +115,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		// refresh the settings
 		settings = options.getSFX();
 		BBS = new BubbleShooterScreen(game, settings);
-		applySettings();
+		options.applySettings();
 	}
 	
 	/**
@@ -124,9 +124,5 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void hide() {
 		BGM.getBGM().pause();
-	}
-	
-	public void applySettings() {
-		options.applySettings();
 	}
 }

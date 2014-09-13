@@ -6,7 +6,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * The bubble class creates bubbles used for the bubbles on the play-field.
+ * Bubbles on the field have an orientation (six directions - because of the hexagonal board).
+ * Furthermore bubbles possess a color and bounding circle (the latter can be compared to a "hit-box").
+ * @author group-15
+ *
+ */
 public class Bubble {
+	
+	/**
+	 * The possible orientations.
+	 */
 	public enum Orientation {
 		EAST(0, 1),			//+ 1
 		SOUTH_EAST(1, 0),	//+ width

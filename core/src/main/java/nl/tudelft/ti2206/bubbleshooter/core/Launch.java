@@ -6,6 +6,13 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * Initial launch class.
+ * Sets up some objects for later use.
+ * Goes directly to the main menu screen.
+ * @author group-15
+ *
+ */
 public class Launch extends Game {
 	/**
 	 * Initialize a spritebatch and bitmapfont for later use.

@@ -11,7 +11,7 @@ import com.badlogic.gdx.audio.Sound;
 public class SoundEffect {
 	
 	/**
-	 * Initialize SoundFX
+	 * Initialize SoundFX, volume and id.
 	 */
 	Sound SFX;
 	float SFXvol;

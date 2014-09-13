@@ -11,6 +11,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * The button class is responsible for creating the buttons in the menu screens.
+ * Clicking on a button will also play a sound effect.
+ * @author group-15
+ *
+ */
 public class Button {
 	private Texture tex;
 	private Sprite sprite;
@@ -23,8 +29,7 @@ public class Button {
 	/**
 	 * Functional interface which represents a callback function.
 	 * This is called in {@link MainMenuScreen}
-	 * @author skip
-	 *
+	 * 
 	 */
 	@FunctionalInterface
 	public interface CallBack {
