@@ -107,7 +107,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		// if fired, check if the projectile hits the wall
 		// perform shoot
 		if(fired) {
-			if(board.collides(projectile) || projectile.getCircle().y > 480) {
+			if(board.collision(projectile) || projectile.getCircle().y > 480) {
 				Circle c = projectile.getBounds();
 				int idx = board.getIndex(new Vector2(c.x, c.y));
 				board.add(projectile, idx);
@@ -145,7 +145,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		}
 		
 		//if pressed space, trigger shoot
-		if(Gdx.input.isKeyPressed(Keys.SPACE) && !board.collides(projectile)) {
+		if(Gdx.input.isKeyPressed(Keys.SPACE) && !board.collision(projectile)) {
 			projectile.setVelocity(cannon.getVelocity());
 			fired = true;	
 		}		

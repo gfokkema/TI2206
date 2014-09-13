@@ -61,7 +61,7 @@ public class Board {
      * @param b	{@link Bubble} that has been shot
      * @return 	true if there's a collision, false otherwise
      */
-	public boolean collides(Bubble b) {
+	public boolean collision(Bubble b) {
 		for (Bubble c : bubbles.values()) {
 			if (c.collides(b)) {
 				return true;
