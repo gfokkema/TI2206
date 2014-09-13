@@ -7,6 +7,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Bubbleshooter Parent</name>
+	<distributionManagement>
+		<site>
+			<id>mojo.website</id>
+			<name>Mojo Website</name>
+			<url>file:///srv/http/</url>
+		</site>
+	</distributionManagement>
 
 	<properties>
 		<gwt.version>2.6.0</gwt.version>
@@ -100,7 +107,27 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-						<plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.2.201409121644</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.3</version>
@@ -124,6 +151,11 @@
 								<configLocation>${basedir}/checkstyle.xml</configLocation>
 								<includeTestSourceDirectory> true </includeTestSourceDirectory>
 							</configuration>
+						</plugin>
+						<plugin>
+							  <groupId>org.jacoco</groupId>
+							  <artifactId>jacoco-maven-plugin</artifactId>
+							  <version>0.7.2.201409121644</version>
 						</plugin>
 					</reportPlugins>
 				</configuration>

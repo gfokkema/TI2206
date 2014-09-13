@@ -26,8 +26,7 @@ public class Pointer {
 	
 	/**
 	 * Instantiate a new vector with the cursor coordinates.
-	 * @param x
-	 * @param y
+	 * @param coordinate	{@link Vector2} with cursor coordinates
 	 */
 	public void setOrigin(Vector2 coordinate) {
 		origin = coordinate;
