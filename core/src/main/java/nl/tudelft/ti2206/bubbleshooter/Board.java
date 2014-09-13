@@ -87,10 +87,6 @@ public class Board {
 		return add(b, toIdx(i, j));
 	}
 	
-	public boolean add(Bubble b) {
-		return add(b, bubbles.size());
-	}
-	
 	/**
 	 * Returns a {@link Map} with the {@link Bubble} objects that are currently on the {@link Board}.
 	 * @return	{@link Map} with all {@link Bubble} objects

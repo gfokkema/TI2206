@@ -306,11 +306,11 @@ public class BoardTest {
 	@Test
 	public void testGetColorGroup() {
 		//Add 3 Bubbles in a row.
-		board.add(new Bubble(Color.BLUE));
-		board.add(new Bubble(Color.BLUE));
-		board.add(new Bubble(Color.BLUE));
+		board.add(new Bubble(Color.BLUE), 0);
+		board.add(new Bubble(Color.BLUE), 1);
+		board.add(new Bubble(Color.BLUE), 2);
 		//Add one Bubble of a different color.
-		board.add(new Bubble(Color.RED));
+		board.add(new Bubble(Color.RED), 3);
 		//Add one Bubble of the same color, but not adjacent.
 		board.add(new Bubble(Color.BLUE), 1, 2);
 
@@ -348,12 +348,12 @@ public class BoardTest {
 	public void testAddColorGroup(){
 
 		for (int i = 0; i < 4; i++) {
-			board.add( new Bubble(Color.RED));
-			}
+			board.add(new Bubble(Color.RED), i);
+		}
 		
 		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
 		colorGroupRed.forEach(
-				(Bubble b) -> assertEquals(Color.RED, b.getColor())
+			(Bubble b) -> assertEquals(Color.RED, b.getColor())
 		);
 	}	
 	
@@ -366,7 +366,7 @@ public class BoardTest {
 	public void testAddColorGroupWrongColorAddedAdjacent(){
 
 		for (int i = 0; i < 4; i++) {
-			board.add( new Bubble(Color.RED));
+			board.add(new Bubble(Color.RED), i);
 		}
 	
 		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
@@ -419,11 +419,9 @@ public class BoardTest {
 	@Test
 	public void testGetDisconnectedGroupEmpty() {
 		// Initialize four bubbles
-		board.add(new Bubble());
-		board.add(new Bubble());
-		board.add(new Bubble());
-		board.add(new Bubble());
-
+		for (int i = 0; i < 4; i++) {
+			board.add(new Bubble(), i);
+		}
 		Collection<Bubble> empty = board.getDisconnectedGroup();
 		assertTrue(empty.isEmpty());
 	}
