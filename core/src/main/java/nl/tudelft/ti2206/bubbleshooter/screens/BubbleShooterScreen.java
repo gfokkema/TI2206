@@ -15,6 +15,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 
@@ -66,10 +67,14 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		});
 		if (projectile != null) {
 			projectile.move();
+			if (projectile.getBounds().x - 16 < 190 || projectile.getBounds().x + 16 > 190 + board.getWidth() * 32) {
+				Vector2 dir = projectile.getDirection();
+				dir.x = -dir.x;
+			}
 			game.batch.setColor(projectile.getColor());
 			game.batch.draw(fg, projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
 			
-			if (board.collides(projectile)) {
+			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
 				int new_idx = board.getIndex(projectile.getPosition());
 				if (board.add(projectile, new_idx)) {
 					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
