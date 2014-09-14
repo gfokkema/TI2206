@@ -5,14 +5,21 @@ import nl.tudelft.ti2206.bubbleshooter.core.BubbleTest;
 import nl.tudelft.ti2206.bubbleshooter.core.CannonTest;
 import nl.tudelft.ti2206.bubbleshooter.core.PointerTest;
 import nl.tudelft.ti2206.bubbleshooter.core.ProjectileTest;
+import nl.tudelft.ti2206.bubbleshooter.engine.AssetsTest;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngineTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ BoardTest.class, BubbleTest.class, CannonTest.class, PointerTest.class,
-				ProjectileTest.class })
+@SuiteClasses({ AssetsTest.class,
+				BoardTest.class,
+				BubbleTest.class,
+				CannonTest.class,
+				PointerTest.class,
+				ProjectileTest.class,
+				SoundEngineTest.class })
 public class AllTests {
 
 }

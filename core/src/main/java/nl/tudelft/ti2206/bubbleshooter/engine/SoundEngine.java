@@ -21,10 +21,10 @@ public class SoundEngine {
 	}
 	
 	public void setBGMVolume(float f) {
-		if (f >= 0 && f <= 1) {
-			this.bgmvolume = f;
-			if (m != null) m.setVolume(f);
-		}
+		f = Math.max(0, Math.min(1, f));
+		
+		this.bgmvolume = f;
+		if (m != null) m.setVolume(f);
 	}
 	
 	public float getSFXVolume() {
@@ -32,7 +32,9 @@ public class SoundEngine {
 	}
 	
 	public void setSFXVolume(float f) {
-		if (f >= 0 && f <= 1) this.sfxvolume = f;
+		f = Math.max(0, Math.min(1, f));
+		
+		this.sfxvolume = f;
 	}
 	
 	public void play(MusicID id) {
