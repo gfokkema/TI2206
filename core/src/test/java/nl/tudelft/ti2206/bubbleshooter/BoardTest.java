@@ -1,11 +1,15 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
 import static org.junit.Assert.*;
+
+import java.util.Collection;
+
 import nl.tudelft.ti2206.bubbleshooter.Board;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -223,36 +227,20 @@ public class BoardTest {
 	}
 	
 	/**
-	 * Test adjacent out of bound cells, negative
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testAdjacentOutOfBounds_1() {
-		board.adjacent(-1, -2);
-	}
-	 */
-	
-	/**
-	 * Test adjacent out of bound cells, negative
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testAdjacentOutOfBounds_2() {
-		board.adjacent(0, -6);
-	}
-	 */
-	
-	/**
 	 * Test adjacent out of bound cells, positive
+	 */
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAdjacentOutOfBounds_3() {
 		board.adjacent(77, 83);
 	}
-	 */
 	
 	/**
 	 * Test adjacent out of bound cells, positive
+	 */
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAdjacentOutOfBounds_4() {
 		board.adjacent(83, 84);
 	}
-	 */
 	
 	/**
 	 * Test getters for width and height:
@@ -271,8 +259,8 @@ public class BoardTest {
 	
 	@Test
 	public void testAdd() {
-		assertTrue(board.add(new Bubble(), 40));
-		assertFalse(board.add(new Bubble(), 8));
+		assertTrue(board.add(new Bubble(), 0));
+		assertFalse(board.add(new Bubble(), 0));
 	}
 	
 	/**
@@ -309,5 +297,132 @@ public class BoardTest {
 		
 		b.setBounds(c2);
 		assertTrue(bubble.collides(b));
+	}
+
+	/**
+	 * Test that only adjacent Bubbles of the same colors
+	 * are returned.
+	 */
+	@Test
+	public void testGetColorGroup() {
+		//Add 3 Bubbles in a row.
+		board.add(new Bubble(Color.BLUE), 0);
+		board.add(new Bubble(Color.BLUE), 1);
+		board.add(new Bubble(Color.BLUE), 2);
+		//Add one Bubble of a different color.
+		board.add(new Bubble(Color.RED), 3);
+		//Add one Bubble of the same color, but not adjacent.
+		board.add(new Bubble(Color.BLUE), 1, 2);
+
+		Collection<Bubble> colorGroup = board.getColorGroup(0);
+		assertEquals(3, colorGroup.size());
+		colorGroup.forEach(
+				(Bubble b) -> assertEquals(Color.BLUE, b.getColor())
+		);
+	}
+
+	/**
+	 * Test to see if only Bubbles that are disconnected
+	 * from the ceiling are returned.
+	 */
+	@Test
+	public void testGetDisconnectedGroup() {
+		board.add(new Bubble(Color.BLUE), 1, 0);
+		board.add(new Bubble(Color.BLUE), 2, 0);
+		board.add(new Bubble(Color.BLUE), 3, 0);
+		board.add(new Bubble(Color.RED), 4, 2);
+		board.add(new Bubble(Color.RED), 5, 2);
+
+		Collection<Bubble> disconnectedGroup = board.getDisconnectedGroup();
+		assertEquals(2, disconnectedGroup.size());
+		disconnectedGroup.forEach(
+				(Bubble b) -> assertEquals(Color.RED, b.getColor())
+		);
+	}
+	
+	/**
+	 * Checks whether (adjacent on the board) add bubbles, of the same color,
+	 *  all get add.
+	 */
+	@Test
+	public void testAddColorGroup(){
+
+		for (int i = 0; i < 4; i++) {
+			board.add(new Bubble(Color.RED), i);
+		}
+		
+		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
+		colorGroupRed.forEach(
+			(Bubble b) -> assertEquals(Color.RED, b.getColor())
+		);
+	}	
+	
+
+/**
+ * Checks whether (adjacent on the board) add bubbles, of the same color,
+ *  all get add.
+ */
+	@Test
+	public void testAddColorGroupWrongColorAddedAdjacent(){
+
+		for (int i = 0; i < 4; i++) {
+			board.add(new Bubble(Color.RED), i);
+		}
+	
+		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
+		assertFalse(colorGroupRed.contains(Color.BLUE));
+
+	}	
+
+	
+	/**
+	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
+	 * all get add.
+	 * 
+	 */
+	@Test
+	public void testAddColorGroupNotAdjacent(){
+		
+		board.add(new Bubble(Color.BLUE),4);
+		board.add(new Bubble(Color.BLUE),5);
+		board.add(new Bubble(Color.RED),7);	
+		board.add(new Bubble(Color.BLUE), 10);
+		
+		Collection<Bubble> colorGroupBlue = board.getColorGroup(5);
+		colorGroupBlue.forEach(
+			(Bubble c) -> assertEquals(Color.BLUE, c.getColor())
+		);
+		
+	}
+	
+	/**
+	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
+	 * all get add and the other colored bubbles do not.
+	 * 
+	 */
+	@Test
+	public void testAddColorGroupWrongColorAdded(){
+		
+		board.add(new Bubble(Color.BLUE),4);
+		board.add(new Bubble(Color.BLUE),5);
+		board.add(new Bubble(Color.RED),7);	
+		board.add(new Bubble(Color.BLUE), 10);
+		
+		Collection<Bubble> colorGroupBlue = board.getColorGroup(5);
+		
+		assertFalse(colorGroupBlue.contains(Color.RED));
+	}
+
+	/**
+	 * Test whether an empty Collection is returned when all Bubbles are connected to the ceiling.
+	 */
+	@Test
+	public void testGetDisconnectedGroupEmpty() {
+		// Initialize four bubbles
+		for (int i = 0; i < 4; i++) {
+			board.add(new Bubble(), i);
+		}
+		Collection<Bubble> empty = board.getDisconnectedGroup();
+		assertTrue(empty.isEmpty());
 	}
 }

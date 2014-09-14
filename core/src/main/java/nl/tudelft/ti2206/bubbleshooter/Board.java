@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -29,14 +28,7 @@ public class Board {
 	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
-
-		bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
-		for (int i = 4; i < 40; i++) {
-			add(new Bubble(), i);
-		}
-		for (int i = 0; i < 4; i++) {
-			add(new Bubble(Color.RED), i);
-		}
+		this.bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
 	}
 	
 	/**
@@ -95,10 +87,6 @@ public class Board {
 		return add(b, toIdx(i, j));
 	}
 	
-	public boolean add(Bubble b) {
-		return add(b, bubbles.size());
-	}
-	
 	/**
 	 * Returns a {@link Map} with the {@link Bubble} objects that are currently on the {@link Board}.
 	 * @return	{@link Map} with all {@link Bubble} objects
@@ -118,7 +106,7 @@ public class Board {
 		HashMap<Integer, Bubble> sameColors = new HashMap<Integer, Bubble>();
 		depthFirst(
 				id,
-				(current, neighbor) -> bubbles.get(current).color == bubbles.get(neighbor).color,
+				(current, neighbor) -> bubbles.get(current).getColor() == bubbles.get(neighbor).getColor(),
 				sameColors
 		);
 		sameColors.put(id, bubbles.get(id));
@@ -151,12 +139,16 @@ public class Board {
 		removeAll(result);
 		return result;
 	}
-	
+
 	/**
-	 * Internal method for depth first search
-	 * @param currentIndex
-	 * @param condition
-	 * @param remove
+	 * Performs a depth-first search starting from the given index. Results
+	 * are added to the given {@link Map}.
+	 * Each node will be tested against the given {@link BiPredicate}, and
+	 * will only be added to the solution set if the test evaluates to true.
+	 * @param currentIndex The index of the node to start the search from.
+	 * @param condition The condition to test against against each potential result.
+	 * @param remove The solution set accumulator, which at the end contains all
+	 *               results.
 	 */
 	private void depthFirst(Integer currentIndex, BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
 		for(Orientation o : Bubble.orientations) {
@@ -174,10 +166,12 @@ public class Board {
 			}
 		}
 	}
-	
+
 	/**
-	 * Removes all the bubbles.
-	 * @param bs the collection in which all the to be removed bubbles are in.
+	 * Remove all the {@link Bubble}s that are both in the given
+	 * {@link Collection} and on the grid.
+	 * @param bs The collection specifying the elements that should
+	 *           be removed.
 	 */
 	public void removeAll(Collection<Bubble> bs) {
 		bubbles.values().removeAll(bs);
@@ -250,11 +244,13 @@ public class Board {
 
 		return new Vector2(x, y);
 	}
-	
+
 	/**
-	 * Gets the index.
-	 * @param loc 	the vector location.
-	 * @return 		the index.
+	 * Get the index of the grid cell containing the given
+	 * {@link Vector2}.
+	 * @param loc The (x,y)-coordinate on the grid.
+	 * @return The index of the grid containing the given
+	 *         coordinate.
 	 */
 	public int getIndex(Vector2 loc) {
 		int x = (int)loc.x;

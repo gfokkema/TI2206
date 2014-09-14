@@ -47,7 +47,10 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public BubbleShooterScreen(Launch game, SoundEffect settings) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		this.cannon = new Cannon(settings, Gdx.graphics.getWidth() / 2,100);
+		this.cannon = new Cannon(settings, Gdx.graphics.getWidth() / 2,15);
+		for (int i = 0; i < 40; i++) {
+			board.add(new Bubble(), i);
+		}
 	}
 	
 	/**
@@ -100,9 +103,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				projectile = null;
 			}
 		}
-		
-		game.batch.setColor(cannon.getBubble().getColor());
-		game.batch.draw(fg, cannon.getBubble().getBounds().x - 16, cannon.getBubble().getBounds().y - 16, 32, 32);
+		game.batch.setColor(cannon.getProjectile().getColor());
+		game.batch.draw(fg, cannon.getProjectile().getBounds().x - 16, cannon.getProjectile().getBounds().y - 16, 32, 32);
 		game.batch.setColor(current);
 		
 		cannon.draw(game.batch);
@@ -116,6 +118,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE)) {
 			projectile = cannon.shoot();
 		}
-		cannon.handleInput();
+		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+			cannon.left(Gdx.graphics.getDeltaTime());
+		}
+		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			cannon.right(Gdx.graphics.getDeltaTime());
+		}
 	}
 }

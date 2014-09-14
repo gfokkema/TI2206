@@ -4,10 +4,10 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * The bubble that will be shot (projectile).
- * When shot the projectile will move along its direction.
- * The projectile also plays a sound effect when shot.
- * @author group-15
+ * This class represent a {@link Bubble} that has been shot.
+ * Since this {@link Bubble} has been shot, it has a velocity and a direction.
+ * It will also move across the board, untill it collides with a normal {@link Bubble}
+ * @author gerlof
  *
  */
 public class Projectile extends Bubble {
@@ -17,13 +17,14 @@ public class Projectile extends Bubble {
 	private final String SFXname = "BubbleSFX.wav";
 	
 	/**
-	 * Constructor for projectile
-	 * @param bounds the bounding circle of the projectile (hit-box)
-	 * @param direction the direction of the projectile.
-	 * @param velocity the velocity in which the projectile will move.
+	 * Create a {@link Projectile} with the specified {@link Circle} bounding area,
+	 * the {@link Vector2} direction and with a velocity.
+	 * @param bounds	the {@link Circle} representing the location and bounding area
+	 * @param direction	the {@link Vector2} representing the direction this bubble moves in
+	 * @param velocity	the speed of this {@link Bubble}
 	 */
 	public Projectile(Circle bounds, Vector2 direction, int velocity) {
-		this.bounds = bounds;
+		this.setBounds(bounds);
 		this.direction = direction;
 		this.velocity = velocity;
 		SFX = new SoundEffect(SFXname);
@@ -31,17 +32,25 @@ public class Projectile extends Bubble {
 	}
 	
 	/**
-	 * Move the projectile.
+	 * Moves the {@link Projectile} along it's trajectory specified by direction.
 	 */
 	public void move() {
 		Vector2 dir = direction.nor().scl(velocity);
-		bounds.x += dir.x;
-		bounds.y += dir.y;
+		this.getBounds().x += dir.x;
+		this.getBounds().y += dir.y;
 	}
 	
 	/**
-	 * Sets the velocity of the projectile.
-	 * @param velocity the velocity
+	 * Returns an integer representing the current velocity of this {@link Projectile}.
+	 * @return	an integer representing this {@link Projectile}'s velocity
+	 */
+	public int getVelocity() {
+		return this.velocity;
+	}
+	
+	/**
+	 * Sets the current velocity of this {@link Projectile}
+	 * @param velocity	an integer representing this {@link Projectile}'s velocity
 	 */
 	public void setVelocity(int velocity) {
 		this.velocity = velocity;

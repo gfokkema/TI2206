@@ -42,24 +42,6 @@ public class Pointer {
 	}
 	
 	/**
-	 * Set the direction of a vector (a point)
-	 * Calls {@link #setDirection}.
-	 * @param coordinate
-	 */
-	public void setPointDirection(Vector2 coordinate) {
-		Vector2 direction = coordinate.sub(origin);
-		setDirection(direction);
-	}
-	
-	/**
-	 * Get the original coordinate from the direction.
-	 * @return original point
-	 */
-	public Vector2 getCoordinateDirection() {
-		return getOrigin().add(getDirection());
-	}
-	
-	/**
 	 * Retrieve the direction.
 	 * @return direction
 	 */
@@ -80,7 +62,7 @@ public class Pointer {
 	 * @return angle of normal.
 	 */
 	public float getAngle() {
-		return direction.angle();
+		return direction.angle() - 90;
 	}
 	
 	/**
