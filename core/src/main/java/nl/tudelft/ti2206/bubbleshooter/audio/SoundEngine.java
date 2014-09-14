@@ -36,7 +36,7 @@ public class SoundEngine {
 	}
 	
 	public void play(MusicID id) {
-		if (m != null) m.stop();
+		if (m != null && !m.equals(assets.get(id))) m.stop();
 		m = assets.get(id);
 		m.setLooping(true);
 		m.setVolume(bgmvolume);
@@ -48,6 +48,6 @@ public class SoundEngine {
 	}
 	
 	public void pause() {
-		m.stop();
+		m.pause();
 	}
 }

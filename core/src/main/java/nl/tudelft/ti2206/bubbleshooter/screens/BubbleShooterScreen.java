@@ -81,7 +81,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.draw(game.assets.get(TextureID.BUBBLE), projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
 			
 			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
-				game.engine.play(SoundID.BUBBLE);
 				int new_idx = board.getIndex(projectile.getPosition());
 				if (board.add(projectile, new_idx)) {
 					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
@@ -119,11 +118,11 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	
 	@Override
 	public void show() {
-		game.engine.play(MusicID.GAME);
+		// game.engine.play(MusicID.GAME);
 	}
 	
 	@Override
 	public void hide() {
-		game.engine.pause();
+		// game.engine.pause();
 	}
 }
