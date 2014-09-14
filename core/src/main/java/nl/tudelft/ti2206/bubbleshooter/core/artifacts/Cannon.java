@@ -119,14 +119,8 @@ public class Cannon extends Sprite {
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Controls handleInput.
-	 * Whenever the left arrow key is pressed, the cannon's angle grows (goes "left").
-	 * Whenever the right arrow key is pressed, the cannnon's angle shrinks (goes "right").
-=======
 	 * Moves the cannon to the left
 	 * @param dt	the amount to move
->>>>>>> master
 	 */
 	public void left(float dt) {
 		setAngle(this.getRotation() + sensitivity * dt);
@@ -149,13 +143,8 @@ public class Cannon extends Sprite {
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Get the position of the bubble.
-	 * @return Vector2 the position of the bubble.
-=======
 	 * Returns the location the {@link Projectile} should have, given the current {@link Cannon} direction.
-	 * @return
->>>>>>> master
+	 * @return	Vector2 the position of the bubble.
 	 */
 	private Vector2 getBubblePos() {
 		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
