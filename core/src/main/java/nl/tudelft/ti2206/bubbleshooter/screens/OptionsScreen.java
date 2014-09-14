@@ -6,6 +6,7 @@ import nl.tudelft.ti2206.bubbleshooter.Launch;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
+import nl.tudelft.ti2206.bubbleshooter.utils.Button.CallBack;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -43,8 +44,14 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Volume Up!",
-				() -> { game.engine.setBGMVolume(game.engine.getBGMVolume() + volumeStep); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		BGMvolup.setCallback(BGMvolup.new CallBack(game) {
+			@Override
+			public void apply() {
+				game.engine.setBGMVolume(game.engine.getBGMVolume() + volumeStep); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		// Button that turns the BGM volume down!
 		Button BGMvoldown = new Button(
@@ -52,8 +59,14 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Volume Down!",
-				() -> { game.engine.setBGMVolume(game.engine.getBGMVolume() - volumeStep); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		BGMvoldown.setCallback(BGMvoldown.new CallBack(game) {
+			@Override
+			public void apply() {
+				game.engine.setBGMVolume(game.engine.getBGMVolume() - volumeStep); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		// Button that turns the SFX volume up!
 		Button SFXvolup = new Button(
@@ -61,8 +74,14 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"SFX Up!",
-				() -> { game.engine.setSFXVolume(game.engine.getSFXVolume() + volumeStep); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		SFXvolup.setCallback(SFXvolup.new CallBack(game) {
+			@Override
+			public void apply() {
+				game.engine.setSFXVolume(game.engine.getSFXVolume() + volumeStep); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		// Button that turns the SFX volume down!
 		Button SFXvoldown = new Button(
@@ -70,8 +89,14 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"SFX Down!",
-				() -> { game.engine.setSFXVolume(game.engine.getSFXVolume() - volumeStep); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		SFXvoldown.setCallback(SFXvoldown.new CallBack(game) {
+			@Override
+			public void apply() {
+				game.engine.setSFXVolume(game.engine.getSFXVolume() - volumeStep); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		// Button that sends the player back to the main menu.
 		Button back = new Button(
@@ -79,8 +104,14 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Back",
-				() -> { game.setScreen(game.mms); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		back.setCallback(back.new CallBack(game) {
+			@Override
+			public void apply() {
+				game.setScreen(game.mms); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		//Add buttons, each with their own callback.
 		buttons.add(BGMvolup);
@@ -103,7 +134,9 @@ public class OptionsScreen extends ScreenAdapter {
 		game.font.setColor(new Color(0xFFFF00FF));
 		game.font.draw(game.batch, title, Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2 + 125);
 
-		buttons.forEach((Button b) -> b.draw(game.batch));
+		for (Button b : buttons) {
+			b.draw(game.batch);
+		}
 		game.batch.end();
 	}
 
@@ -116,10 +149,9 @@ public class OptionsScreen extends ScreenAdapter {
 		if (left_down) {
 			int x = Gdx.input.getX();
 			int y = Gdx.graphics.getHeight() - Gdx.input.getY();
-			buttons.stream()
-				.filter((Button b) -> b.hit(x,y))
-				.findFirst()
-				.ifPresent(Button::apply);
+			for (Button b : buttons) {
+				if (b.hit(x, y)) b.apply();
+			}
 		}
 	}
 	

@@ -1,16 +1,21 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import nl.tudelft.ti2206.bubbleshooter.Launch;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
+import nl.tudelft.ti2206.bubbleshooter.utils.Button.CallBack;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
@@ -53,8 +58,14 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> { this.game.setScreen(BBS); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		play.setCallback(play.new CallBack(game) {
+			@Override
+			public void apply() {
+				game.setScreen(BBS); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		// The settings button sends the player to the options menu.
 		Button settings = new Button(
@@ -62,8 +73,14 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Settings",
-				() -> {this.game.setScreen(options); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		settings.setCallback(settings.new CallBack(game) {
+			@Override
+			public void apply() {
+				game.setScreen(options); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		// The quit button used to terminate the game.
 		Button quit = new Button(
@@ -71,8 +88,14 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Quit",
-				() -> {Gdx.app.exit(); game.engine.play(SoundID.BUTTON); }
+				null
 		);
+		quit.setCallback(quit.new CallBack(game) {
+			@Override
+			public void apply() {
+				Gdx.app.exit(); game.engine.play(SoundID.BUTTON);
+			}
+		});
 		
 		// Add buttons, each with their own callback.
 		buttons.add(play);
@@ -93,7 +116,9 @@ public class MainMenuScreen extends ScreenAdapter {
 		game.font.setColor(new Color(0xFFFF00FF));
 		game.font.draw(game.batch, title, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 125);
 
-		buttons.forEach((Button b) -> b.draw(game.batch));
+		for (Button b : buttons) {
+			b.draw(game.batch);
+		}
 		game.batch.end();
 	}
 
@@ -106,10 +131,9 @@ public class MainMenuScreen extends ScreenAdapter {
 		if (left_down) {
 			int x = Gdx.input.getX();
 			int y = Gdx.graphics.getHeight() - Gdx.input.getY();
-			buttons.stream()
-				.filter((Button b) -> b.hit(x,y))
-				.findFirst()
-				.ifPresent(Button::apply);
+			for (Button b : buttons) {
+				if (b.hit(x, y)) b.apply();
+			}
 		}
 	}
 	

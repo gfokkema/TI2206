@@ -104,9 +104,15 @@ public class Board {
 	public Collection<Bubble> getColorGroup(int id) {
 		// Search for bubbles of the same color
 		HashMap<Integer, Bubble> sameColors = new HashMap<Integer, Bubble>();
+		BiPredicate<Integer, Integer> predicate = new BiPredicate<Integer, Integer>() {
+			@Override
+			public boolean test(Integer current, Integer neighbor) {
+				return bubbles.get(current).getColor() == bubbles.get(neighbor).getColor();
+			}
+		};
 		depthFirst(
 				id,
-				(current, neighbor) -> bubbles.get(current).getColor() == bubbles.get(neighbor).getColor(),
+				predicate,
 				sameColors
 		);
 		sameColors.put(id, bubbles.get(id));
@@ -127,9 +133,15 @@ public class Board {
 				continue;
 			}
 			connectedToCeiling.put(ceilingIndex, bubbles.get(ceilingIndex));
+			BiPredicate<Integer, Integer> predicate = new BiPredicate<Integer, Integer>() {
+				@Override
+				public boolean test(Integer t, Integer u) {
+					return true;
+				};
+			};
 			depthFirst(
 					ceilingIndex,
-					(current, neighbor) -> true,
+					predicate,
 					connectedToCeiling
 			);
 		}

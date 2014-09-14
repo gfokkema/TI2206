@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.function.BiConsumer;
 
 import nl.tudelft.ti2206.bubbleshooter.Launch;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
@@ -64,12 +66,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		
 		// Draw all the bubbles
 		Color current = game.batch.getColor();
-		board.getBubbles().forEach((Integer k, Bubble v) -> {
+		for (Bubble v : board.getBubbles().values()) {
 			game.batch.setColor(v.getColor());
 			
 			// translate from the midpoint to the bottom left
 			game.batch.draw(game.assets.get(TextureID.BUBBLE), v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
-		});
+		}
 		
 		if (projectile != null) {
 			if (projectile.getBounds().x - 16 < 190 || projectile.getBounds().x + 16 > 190 + board.getWidth() * 32) {

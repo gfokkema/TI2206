@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.utils;
 
+import nl.tudelft.ti2206.bubbleshooter.Launch;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.graphics.Color;
@@ -28,9 +29,12 @@ public class Button {
 	 * This is called in {@link MainMenuScreen}
 	 * 
 	 */
-	@FunctionalInterface
-	public interface CallBack {
-		public void apply();
+	public abstract class CallBack {
+		protected Launch game;
+		public CallBack(Launch game) {
+			this.game = game;
+		};
+		public abstract void apply();
 	}
 
 	/**
@@ -78,5 +82,9 @@ public class Button {
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
 		font.draw(batch, text, sprite.getX(), sprite.getY());
+	}
+	
+	public void setCallback(CallBack func) {
+		this.func = func;
 	}
 }

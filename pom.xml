@@ -16,6 +16,8 @@
 	</distributionManagement>
 
 	<properties>
+		<android.version>4.1.1.4</android.version>
+		<android.maven.version>3.8.1</android.maven.version>
 		<gwt.version>2.6.0</gwt.version>
 		<gwt.maven.version>2.6.0</gwt.maven.version>
 	</properties>
@@ -28,6 +30,13 @@
 				<version>1.2.0</version>
 			</dependency>
 
+			<!-- android-specific dependencies -->
+			<dependency>
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-backend-android</artifactId>
+				<version>1.2.0</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.badlogicgames.gdx</groupId>
 				<artifactId>gdx-platform</artifactId>
@@ -35,7 +44,6 @@
 				<classifier>natives-armeabi</classifier>
 				<scope>provided</scope>
 			</dependency>
-
 
 			<!-- desktop-specific dependencies -->
 			<dependency>
@@ -103,8 +111,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -164,6 +172,12 @@
 	</build>
 
 	<profiles>
+		<profile>
+			<id>android</id>
+			<modules>
+				<module>android</module>
+			</modules>
+		</profile>
 		<profile>
 			<id>desktop</id>
 			<activation>

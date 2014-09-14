@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
+import java.util.function.BiConsumer;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
@@ -269,9 +270,12 @@ public class BoardTest {
 	 */
 	@Test
 	public void testBoundingBoxes() {
-		board.getBubbles().forEach((Integer k, Bubble v) -> {
-			assertEquals(board.getLoc(k).x, v.getBounds().x, .0001);
-			assertEquals(board.getLoc(k).y, v.getBounds().y, .0001);
+		board.getBubbles().forEach(new BiConsumer<Integer, Bubble>() {
+			@Override
+			public void accept(Integer k, Bubble v) {
+				assertEquals(board.getLoc(k).x, v.getBounds().x, .0001);
+				assertEquals(board.getLoc(k).y, v.getBounds().y, .0001);
+			}
 		});
 	}
 	
@@ -317,9 +321,7 @@ public class BoardTest {
 
 		Collection<Bubble> colorGroup = board.getColorGroup(0);
 		assertEquals(3, colorGroup.size());
-		colorGroup.forEach(
-				(Bubble b) -> assertEquals(Color.BLUE, b.getColor())
-		);
+		for (Bubble b : colorGroup) assertEquals(Color.BLUE, b.getColor());
 	}
 
 	/**
@@ -336,9 +338,7 @@ public class BoardTest {
 
 		Collection<Bubble> disconnectedGroup = board.getDisconnectedGroup();
 		assertEquals(2, disconnectedGroup.size());
-		disconnectedGroup.forEach(
-				(Bubble b) -> assertEquals(Color.RED, b.getColor())
-		);
+		for (Bubble b : disconnectedGroup) assertEquals(Color.RED, b.getColor());
 	}
 	
 	/**
@@ -353,9 +353,7 @@ public class BoardTest {
 		}
 		
 		Collection<Bubble> colorGroupRed = board.getColorGroup(0);
-		colorGroupRed.forEach(
-			(Bubble b) -> assertEquals(Color.RED, b.getColor())
-		);
+		for (Bubble b : colorGroupRed) assertEquals(Color.RED, b.getColor());
 	}	
 	
 
@@ -390,10 +388,7 @@ public class BoardTest {
 		board.add(new Bubble(Color.BLUE), 10);
 		
 		Collection<Bubble> colorGroupBlue = board.getColorGroup(5);
-		colorGroupBlue.forEach(
-			(Bubble c) -> assertEquals(Color.BLUE, c.getColor())
-		);
-		
+		for (Bubble c : colorGroupBlue) assertEquals(Color.BLUE, c.getColor());
 	}
 	
 	/**
