@@ -5,6 +5,7 @@ import java.util.Collection;
 import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.audio.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
@@ -106,6 +107,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	private void handle_input() {
 		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE)) {
 			projectile = cannon.shoot();
+			game.engine.play(SoundID.CANNON);
 		}
 		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
 			cannon.left(Gdx.graphics.getDeltaTime());
@@ -113,5 +115,15 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			cannon.right(Gdx.graphics.getDeltaTime());
 		}
+	}
+	
+	@Override
+	public void show() {
+		game.engine.play(MusicID.GAME);
+	}
+	
+	@Override
+	public void hide() {
+		game.engine.pause();
 	}
 }
