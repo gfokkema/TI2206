@@ -55,10 +55,10 @@ public class Button {
 	}
 
 	/**
-	 * Determines whether the button is hit at coordinates x and y.
-	 * @param x
-	 * @param y
-	 * @return
+	 * Determines whether the {@link Button} is hit at coordinates x and y.
+	 * @param x	x-coordinate
+	 * @param y	y-coordinate
+	 * @return	true if the {@link Button} is hit, false otherwise
 	 */
 	public boolean hit(int x, int y) {
 		return sprite.getBoundingRectangle().contains(x, y);
@@ -73,7 +73,7 @@ public class Button {
 
 	/**
 	 * Draws the button and the text
-	 * @param batch
+	 * @param batch	{@link SpriteBatch} to use for drawing
 	 */
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);

@@ -37,7 +37,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	/**
 	 * Constructor of BubbleShooterScreen
 	 * Creates a cannon, board and game.
-	 * @param game
+	 * @param game	the parent {@link Launch} instance
 	 */
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;

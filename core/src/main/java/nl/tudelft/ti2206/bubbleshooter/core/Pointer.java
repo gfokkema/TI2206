@@ -19,6 +19,7 @@ public class Pointer {
 	/**
 	 * Constructor for pointer.
 	 * Sets the origin and a given standard direction (up).
+	 * @param origin	{@link Vector2} representing this {@link Pointer}'s origin
 	 */
 	public Pointer(Vector2 origin) {
 		setOrigin(origin);
@@ -35,7 +36,7 @@ public class Pointer {
 	
 	/**
 	 * Set the direction of the vector.
-	 * @param vector
+	 * @param vector	{@link Vector2} representing a direction
 	 */
 	public void setDirection(Vector2 vector) {
 		this.direction = vector.nor();
@@ -67,8 +68,8 @@ public class Pointer {
 	
 	/**
 	 * Set the angle of the normal.
-	 * pointer with angle 0 points up
-	 * @param degrees
+	 * A {@link Pointer} with angle 0 points up.
+	 * @param degrees	angle in degrees
 	 */
 	public void setAngle(float degrees) {
 		direction.setAngle(degrees + 90);

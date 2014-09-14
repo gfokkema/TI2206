@@ -14,7 +14,7 @@ public class BubbleshooterDesktop {
 	
 	/**
 	 * Setting up some basic settings.
-	 * @param args
+	 * @param args	command line arguments
 	 */
 	public static void main (String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();

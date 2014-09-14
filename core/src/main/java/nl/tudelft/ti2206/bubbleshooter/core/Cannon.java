@@ -28,7 +28,6 @@ public class Cannon extends Sprite {
 	/**
 	 * Constructs a {@link Cannon} using a specified {@link Texture}
 	 * @param tex		{@link Texture} to use
-	 * @param settings	{@link SoundAsset} to use
 	 * @param x			coordinate
 	 * @param y 		coordinate
 	 */
