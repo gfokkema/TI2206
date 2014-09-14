@@ -2,14 +2,14 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.Collection;
 
-import nl.tudelft.ti2206.bubbleshooter.Board;
-import nl.tudelft.ti2206.bubbleshooter.Bubble;
-import nl.tudelft.ti2206.bubbleshooter.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.MusicID;
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.core.Launch;
-import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.Launch;
+import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

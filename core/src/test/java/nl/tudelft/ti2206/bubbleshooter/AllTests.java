@@ -1,7 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
-import nl.tudelft.ti2206.bubbleshooter.core.artifacts.CannonTest;
-import nl.tudelft.ti2206.bubbleshooter.core.artifacts.PointerTest;
+import nl.tudelft.ti2206.bubbleshooter.core.BoardTest;
+import nl.tudelft.ti2206.bubbleshooter.core.BubbleTest;
+import nl.tudelft.ti2206.bubbleshooter.core.CannonTest;
+import nl.tudelft.ti2206.bubbleshooter.core.PointerTest;
+import nl.tudelft.ti2206.bubbleshooter.core.ProjectileTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

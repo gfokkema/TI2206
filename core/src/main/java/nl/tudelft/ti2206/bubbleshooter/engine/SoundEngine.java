@@ -1,7 +1,7 @@
-package nl.tudelft.ti2206.bubbleshooter.audio;
+package nl.tudelft.ti2206.bubbleshooter.engine;
 
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.MusicID;
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 
 import com.badlogic.gdx.audio.Music;
 

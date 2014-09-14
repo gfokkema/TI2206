@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
+package nl.tudelft.ti2206.bubbleshooter.core;
 
 import com.badlogic.gdx.math.Vector2;
 

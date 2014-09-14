@@ -1,7 +1,8 @@
-package nl.tudelft.ti2206.bubbleshooter;
+package nl.tudelft.ti2206.bubbleshooter.core;
 
 import static org.junit.Assert.*;
-import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble.Orientation;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -3,7 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.java;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Launch;
+import nl.tudelft.ti2206.bubbleshooter.Launch;
 
 /**
  * Bubbleshooter Desktop contain the specifications needed for launching Bubble Shooter on PC.

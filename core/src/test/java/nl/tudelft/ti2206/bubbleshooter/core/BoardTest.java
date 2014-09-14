@@ -1,8 +1,11 @@
-package nl.tudelft.ti2206.bubbleshooter;
+package nl.tudelft.ti2206.bubbleshooter.core;
 
 import static org.junit.Assert.*;
 
 import java.util.Collection;
+
+import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 
 import org.junit.Before;
 import org.junit.Test;

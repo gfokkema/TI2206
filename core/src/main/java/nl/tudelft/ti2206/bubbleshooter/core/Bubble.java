@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter;
+package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.util.Random;
 

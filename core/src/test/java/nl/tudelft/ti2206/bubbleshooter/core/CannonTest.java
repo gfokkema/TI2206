@@ -1,7 +1,9 @@
-package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
+package nl.tudelft.ti2206.bubbleshooter.core;
 
 import static org.junit.Assert.*;
-import nl.tudelft.ti2206.bubbleshooter.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.core.Pointer;
+import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 
 import org.junit.Before;
 import org.junit.Test;

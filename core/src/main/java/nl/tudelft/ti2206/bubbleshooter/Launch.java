@@ -1,10 +1,10 @@
-package nl.tudelft.ti2206.bubbleshooter.core;
+package nl.tudelft.ti2206.bubbleshooter;
 
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets;
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.MusicID;
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.audio.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;

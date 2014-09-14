@@ -1,6 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
-
-import nl.tudelft.ti2206.bubbleshooter.Projectile;
+package nl.tudelft.ti2206.bubbleshooter.core;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;

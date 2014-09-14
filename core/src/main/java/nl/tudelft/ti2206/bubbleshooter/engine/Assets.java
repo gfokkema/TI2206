@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.audio;
+package nl.tudelft.ti2206.bubbleshooter.engine;
 
 import java.util.EnumMap;
 
