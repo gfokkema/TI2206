@@ -2,7 +2,6 @@ package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import static org.junit.Assert.*;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,6 @@ import com.badlogic.gdx.math.Vector2;
 @RunWith(MockitoJUnitRunner.class)
 public class CannonTest {
 	@Mock Texture tex;
-	@Mock SoundEffect sound;
 	
 	private Cannon cannon;
 	
@@ -32,7 +30,7 @@ public class CannonTest {
 		Mockito.when(tex.getWidth()).thenReturn(20);
 		Mockito.when(tex.getWidth()).thenReturn(100);
 		
-		this.cannon = new Cannon(tex, sound, 0, 0);
+		this.cannon = new Cannon(tex, 0, 0);
 	}
 
 	/**

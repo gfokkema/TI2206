@@ -13,8 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 public class Projectile extends Bubble {
 	Vector2 direction;
 	int velocity;
-	SoundEffect SFX;
-	private final String SFXname = "BubbleSFX.wav";
 	
 	/**
 	 * Create a {@link Projectile} with the specified {@link Circle} bounding area,
@@ -27,8 +25,6 @@ public class Projectile extends Bubble {
 		this.setBounds(bounds);
 		this.direction = direction;
 		this.velocity = velocity;
-		SFX = new SoundEffect(SFXname);
-		SFX.setVolume(0.5f);
 	}
 	
 	/**
@@ -70,13 +66,5 @@ public class Projectile extends Bubble {
 	 */
 	public Vector2 getDirection() {
 		return direction;
-	}
-	
-	/**
-	 * Get the SFX of the projectile.
-	 * @return
-	 */
-	public SoundEffect getSFX() {
-		return SFX;
 	}
 }

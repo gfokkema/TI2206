@@ -2,8 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
-import nl.tudelft.ti2206.bubbleshooter.BackgroundMusic;
-import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
@@ -19,7 +19,6 @@ import com.badlogic.gdx.math.Rectangle;
  *
  */
 public class OptionsScreen extends ScreenAdapter {
-	
 	/**
 	 * Variable initialization.
 	 * Set the screen title.
@@ -28,23 +27,15 @@ public class OptionsScreen extends ScreenAdapter {
 	private final float volumeStep = 0.1f;
 
 	Launch game;
-	BackgroundMusic BGM;
-	SoundEffect SFX;
-	float BGMvolume;
-	float SFXvolume;
 	ArrayList<Button> buttons;
 	
 	/**
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
 	 */
-	public OptionsScreen(Launch game, BackgroundMusic BGM) {
-		this.BGM = BGM;
+	public OptionsScreen(Launch game) {
 		this.game = game;
-		BGMvolume = this.BGM.getVolume();
 		this.buttons = new ArrayList<Button>();
-		SFX = new SoundEffect("BubbleSFX.wav");
-		SFXvolume = 0.5f;
 
 		// Button that turns the BGM volume up!
 		Button BGMvolup = new Button(
@@ -52,7 +43,7 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Volume Up!",
-				() -> BGMvolumeUp()
+				() -> { game.engine.setBGMVolume(game.engine.getBGMVolume() + volumeStep); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// Button that turns the BGM volume down!
@@ -61,7 +52,7 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Volume Down!",
-				() -> BGMvolumeDown()
+				() -> { game.engine.setBGMVolume(game.engine.getBGMVolume() - volumeStep); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// Button that turns the SFX volume up!
@@ -70,7 +61,7 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"SFX Up!",
-				() -> SFXvolumeUp()
+				() -> { game.engine.setSFXVolume(game.engine.getSFXVolume() + volumeStep); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// Button that turns the SFX volume down!
@@ -79,7 +70,7 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"SFX Down!",
-				() -> SFXvolumeDown()
+				() -> { game.engine.setSFXVolume(game.engine.getSFXVolume() - volumeStep); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// Button that sends the player back to the main menu.
@@ -88,7 +79,7 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Back",
-				() -> this.game.setScreen(game.mms)
+				() -> { this.game.setScreen(game.mms); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		//Add buttons, each with their own callback.
@@ -138,7 +129,7 @@ public class OptionsScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void show() {
-		BGM.getBGM().play();
+		game.engine.play(MusicID.MENU);
 	}
 	
 	/**
@@ -146,84 +137,6 @@ public class OptionsScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void hide() {
-		BGM.getBGM().pause();
-	}
-	
-	/**
-	 * Raise the BGM volume.
-	 */
-	public void BGMvolumeUp() {
-		this.BGM.setVolume(BGMvolume+=volumeStep);
-		BGMcheckVolume();
-	}
-	
-	/**
-	 * Lower the BGM volume.
-	 */
-	public void BGMvolumeDown() {
-		this.BGM.setVolume(BGMvolume-=volumeStep);
-		BGMcheckVolume();
-	}
-	
-	
-	/**
-	 * Raise the SFX volume.
-	 */
-	public void SFXvolumeUp() {
-		buttons.forEach((Button b) -> {
-			this.SFX = b.getSFX(); 
-			SFXvolume = this.SFX.getVolume();
-			SFXvolume+=volumeStep;
-			SFXcheckVolume();
-			b.getSFX().setVolume(SFXvolume); 
-		});
-		SFX.setVolume(SFXvolume);
-	}
-	
-	/**
-	 * Lower the SFX volume.
-	 */
-	public void SFXvolumeDown() {
-		buttons.forEach((Button b) -> {
-			this.SFX = b.getSFX(); 
-			SFXvolume = this.SFX.getVolume();
-			SFXvolume-=volumeStep;
-			SFXcheckVolume();
-			b.getSFX().setVolume(SFXvolume); 
-		});
-		SFX.setVolume(SFXvolume);
-	}
-	
-	/**
-	 * Set volume boundaries for BGM, so it stays within the [0,1] interval.
-	 */
-	public void BGMcheckVolume() {
-		if(BGMvolume < 0) BGMvolume = 0;
-		if(BGMvolume > 1) BGMvolume = 1;
-	}
-	
-	/**
-	 * Set volume boundaries for SFX, so it stays within the [0,1] interval.
-	 */
-	public void SFXcheckVolume() {
-		if(SFXvolume < 0) SFXvolume = 0;
-		if(SFXvolume > 1) SFXvolume = 1;
-	}
-	
-	/**
-	 * Apply the settings set in the options screen to other screens.
-	 */
-	public void applySettings() {
-		game.mms.buttons.forEach((Button b) -> {
-			b.getSFX().setVolume(SFXvolume);
-		});
-	}
-	
-	/**
-	 * Get the SFX (with its settings) from the optionsscreen.
-	 * @return SFX the SFX alongside with all the (changed) settings.
-	 */
-	public SoundEffect getSFX() {
-		return SFX;
+		game.engine.pause();
 	}
 }

@@ -1,7 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +20,6 @@ public class Cannon extends Sprite {
 	 */
 	Pointer pointer;
 	float volume;
-	SoundEffect SFX;
 	Projectile projectile;
 	
 	private final float LEFT_BOUNDARY = 60;
@@ -32,11 +30,11 @@ public class Cannon extends Sprite {
 	/**
 	 * Constructs a {@link Cannon} using a specified {@link Texture}
 	 * @param tex		{@link Texture} to use
-	 * @param settings	{@link SoundEffect} to use
+	 * @param settings	{@link SoundAsset} to use
 	 * @param x			coordinate
 	 * @param y 		coordinate
 	 */
-	public Cannon(Texture tex, SoundEffect settings, int x, int y) {
+	public Cannon(Texture tex, int x, int y) {
 		super(new Sprite(tex));
 		this.setOrigin(this.getWidth() / 2, 25);
 		this.setPosition(x - this.getWidth() / 2, y);
@@ -46,26 +44,15 @@ public class Cannon extends Sprite {
 		// add bubble
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		setAngle(0);
-		SFX = settings;
 	}
 	
-	/**
-	 * Constructs a {@link Cannon} using the predefined {@link SoundEffect}
-	 * @param settings	{@link SoundEffect} to use
-	 * @param x			coordinate
-	 * @param y 		coordinate
-	 */
-	public Cannon(SoundEffect settings, int x, int y) {
-		this(new Texture("cannon.png"), settings, x, y);
-	}
-
 	/**
 	 * Constructs a {@link Cannon} using the predefined {@link Texture}
 	 * @param x		coordinate
 	 * @param y 	coordinate
 	 */
 	public Cannon(int x, int y) {
-		this(null, x, y);
+		this(new Texture("cannon.png"), x, y);
 	}
 	
 	/**
@@ -111,10 +98,6 @@ public class Cannon extends Sprite {
 		fired.setDirection(new Vector2(pointer.direction));
 		
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
-		
-		// "wub wub" - plays the projectile sound upon firing.
-		projectile.getSFX().setVolume(SFX.getVolume());
-		projectile.getSFX().play();
 		return fired;
 	}
 	

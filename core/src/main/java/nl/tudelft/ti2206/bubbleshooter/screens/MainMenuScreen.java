@@ -2,13 +2,17 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
-import nl.tudelft.ti2206.bubbleshooter.BackgroundMusic;
-import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
+
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.audio.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.math.Rectangle;
@@ -23,19 +27,16 @@ import com.badlogic.gdx.math.Rectangle;
  *
  */
 public class MainMenuScreen extends ScreenAdapter {
-	
 	/**
 	 * Variable initialization.
 	 * Set the title of the screen.
 	 * Set the BGM used.
 	 */
 	public static final String title = "Bubble Shooter";
-	private final String BGMname = "BGMenu.ogg";
-	BackgroundMusic BGM;
-	ArrayList<Button> buttons;
 	Launch game;
+	
+	ArrayList<Button> buttons;
 	OptionsScreen options;
-	SoundEffect settings;
 	BubbleShooterScreen BBS;
 	
 	/**
@@ -45,11 +46,10 @@ public class MainMenuScreen extends ScreenAdapter {
 	public MainMenuScreen(Launch game) {
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
-		BGM = new BackgroundMusic(BGMname);
-		options = new OptionsScreen(game, BGM);
-		settings = options.getSFX();
-		settings.setVolume(0.5f);
-		BBS = new BubbleShooterScreen(game, settings);
+
+		options = new OptionsScreen(game);
+		BBS = new BubbleShooterScreen(game);
+		
 		
 		// The play button which sends the player to the bubble shooter game screen
 		Button play = new Button(
@@ -57,7 +57,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> this.game.setScreen(BBS)
+				() -> { this.game.setScreen(BBS); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// The settings button sends the player to the options menu.
@@ -66,7 +66,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Settings",
-				() -> this.game.setScreen(options)
+				() -> {this.game.setScreen(options); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// The quit button used to terminate the game.
@@ -75,7 +75,7 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Quit",
-				() -> Gdx.app.exit()
+				() -> {Gdx.app.exit(); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// Add buttons, each with their own callback.
@@ -123,12 +123,8 @@ public class MainMenuScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void show() {
-		BGM.getBGM().play();
-		
-		// refresh the settings
-		settings = options.getSFX();
-		BBS = new BubbleShooterScreen(game, settings);
-		options.applySettings();
+		game.engine.play(MusicID.MENU);
+		BBS = new BubbleShooterScreen(game);
 	}
 	
 	/**
@@ -136,6 +132,6 @@ public class MainMenuScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void hide() {
-		BGM.getBGM().pause();
+		// game.engine.pause()
 	}
 }

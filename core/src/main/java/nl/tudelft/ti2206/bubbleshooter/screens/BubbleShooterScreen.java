@@ -1,9 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
-import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.SoundEffect;
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
 
 import java.util.Collection;
@@ -35,19 +36,21 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	Projectile projectile;
 	Cannon cannon;
 	Board board;
-	Texture bg = new Texture("back_one_player.png");
-	Texture fg = new Texture("Bubble-Blue.png");
-	boolean testperformed = false;
+	Texture fg, bg;
 
 	/**
 	 * Constructor of BubbleShooterScreen
 	 * Creates a cannon, board and game.
 	 * @param game
 	 */
-	public BubbleShooterScreen(Launch game, SoundEffect settings) {
+	public BubbleShooterScreen(Launch game) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		this.cannon = new Cannon(settings, Gdx.graphics.getWidth() / 2,15);
+		
+		fg = game.assets.get(TextureID.BUBBLE);
+		bg = game.assets.get(TextureID.BACKGROUND);
+		
+		this.cannon = new Cannon(Gdx.graphics.getWidth() / 2,15);
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
@@ -92,6 +95,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.draw(fg, projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
 			
 			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
+				game.engine.play(SoundID.BUBBLE);
 				int new_idx = board.getIndex(projectile.getPosition());
 				if (board.add(projectile, new_idx)) {
 					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
