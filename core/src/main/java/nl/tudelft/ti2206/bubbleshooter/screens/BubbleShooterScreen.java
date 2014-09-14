@@ -1,24 +1,21 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.util.Collection;
+
+import nl.tudelft.ti2206.bubbleshooter.Board;
 import nl.tudelft.ti2206.bubbleshooter.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.audio.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.core.artifacts.Cannon;
 
-import java.util.Collection;
-import java.util.Map;
-
-import nl.tudelft.ti2206.bubbleshooter.core.Launch;
-
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 
 /**
  * The bubble shooter screen is the screen where the actual game is being played.
@@ -26,8 +23,7 @@ import com.badlogic.gdx.ScreenAdapter;
  * @author group-15
  *
  */
-public class BubbleShooterScreen extends ScreenAdapter {
-	
+public class BubbleShooterScreen extends ScreenAdapter {	
 	/**
 	 * Variable initialization.
 	 * The defined textures are used for the bubble and the board.
@@ -36,7 +32,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	Projectile projectile;
 	Cannon cannon;
 	Board board;
-	Texture fg, bg;
 
 	/**
 	 * Constructor of BubbleShooterScreen
@@ -46,43 +41,33 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
 		this.board = new Board(8, 15);
+		this.cannon = new Cannon(game.assets.get(TextureID.CANNON), Gdx.graphics.getWidth() / 2, 15);
 		
-		fg = game.assets.get(TextureID.BUBBLE);
-		bg = game.assets.get(TextureID.BACKGROUND);
-		
-		this.cannon = new Cannon(Gdx.graphics.getWidth() / 2,15);
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
 	}
-	
-	/**
-	 * Used for resizing the screen.
-	 */
-	@Override
-	public void resize (int width, int height) {
-	}
-	
+
 	/**
 	 * Render everything on the bubble shooter screen
 	 */
 	@Override
 	public void render (float delta) {
+		handle_input();
+		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		game.batch.begin();
-		handle_input();
-		game.batch.draw(bg, 0, 0);
+		game.batch.draw(game.assets.get(TextureID.BACKGROUND), 0, 0);
 		
 		// Draw all the bubbles
 		Color current = game.batch.getColor();
-		Map<Integer, Bubble> bubbles = board.getBubbles();
-		bubbles.forEach((Integer k, Bubble v) -> {
+		board.getBubbles().forEach((Integer k, Bubble v) -> {
 			game.batch.setColor(v.getColor());
 			
 			// translate from the midpoint to the bottom left
-			game.batch.draw(fg, v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
+			game.batch.draw(game.assets.get(TextureID.BUBBLE), v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
 		});
 		
 		if (projectile != null) {
@@ -92,7 +77,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			}
 			projectile.move();
 			game.batch.setColor(projectile.getColor());
-			game.batch.draw(fg, projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
+			game.batch.draw(game.assets.get(TextureID.BUBBLE), projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
 			
 			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
 				game.engine.play(SoundID.BUBBLE);
@@ -108,7 +93,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			}
 		}
 		game.batch.setColor(cannon.getProjectile().getColor());
-		game.batch.draw(fg, cannon.getProjectile().getBounds().x - 16, cannon.getProjectile().getBounds().y - 16, 32, 32);
+		game.batch.draw(game.assets.get(TextureID.BUBBLE), cannon.getProjectile().getBounds().x - 16, cannon.getProjectile().getBounds().y - 16, 32, 32);
 		game.batch.setColor(current);
 		
 		cannon.draw(game.batch);

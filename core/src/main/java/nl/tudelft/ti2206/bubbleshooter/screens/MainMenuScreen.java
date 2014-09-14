@@ -2,17 +2,13 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
-
-import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.audio.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.audio.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.audio.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.core.Launch;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.math.Rectangle;
@@ -124,7 +120,6 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		game.engine.play(MusicID.MENU);
-		BBS = new BubbleShooterScreen(game);
 	}
 	
 	/**
@@ -132,6 +127,6 @@ public class MainMenuScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void hide() {
-		// game.engine.pause()
+		game.engine.pause();
 	}
 }

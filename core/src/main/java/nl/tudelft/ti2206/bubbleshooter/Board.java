@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
+import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
+
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
-
-import nl.tudelft.ti2206.bubbleshooter.Bubble.Orientation;
 
 /**
  * The {@link Board} class represents the playing field which contains all the {@link Bubble} objects.

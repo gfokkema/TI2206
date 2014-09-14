@@ -2,10 +2,10 @@ package nl.tudelft.ti2206.bubbleshooter.core.artifacts;
 
 import nl.tudelft.ti2206.bubbleshooter.Projectile;
 
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Create a cannon which can shoot bubbles!
@@ -44,15 +44,6 @@ public class Cannon extends Sprite {
 		// add bubble
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
 		setAngle(0);
-	}
-	
-	/**
-	 * Constructs a {@link Cannon} using the predefined {@link Texture}
-	 * @param x		coordinate
-	 * @param y 	coordinate
-	 */
-	public Cannon(int x, int y) {
-		this(new Texture("cannon.png"), x, y);
 	}
 	
 	/**
