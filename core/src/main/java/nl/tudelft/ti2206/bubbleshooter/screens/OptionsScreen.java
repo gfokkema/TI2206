@@ -79,7 +79,7 @@ public class OptionsScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Back",
-				() -> { this.game.setScreen(game.mms); game.engine.play(SoundID.BUTTON); }
+				() -> { game.setScreen(game.mms); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		//Add buttons, each with their own callback.
