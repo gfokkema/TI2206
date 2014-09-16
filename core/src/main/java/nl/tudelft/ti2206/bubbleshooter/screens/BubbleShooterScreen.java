@@ -103,7 +103,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Handle the input given by the player.
 	 */
 	private void handle_input() {
-		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE)) {
+		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE) && !board.collides(cannon.getProjectile())) {
 			projectile = cannon.shoot();
 			game.engine.play(SoundID.CANNON);
 		}
