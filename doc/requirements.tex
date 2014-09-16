@@ -2,8 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{hyperref}
 
-
-\title{TI2206 Software Engineering: Bubble Shooter}
+\title{TI2206 Software Engineering: Bubble Shooter \\ EWI/EEMCS}
 \author{Gerlof Fokkema 4257286 \\
 	Owen Huang 4317459 \\
 	Adam Iqbal 4293568 \\
@@ -14,7 +13,10 @@
 \begin{document}
 \maketitle
 
+\thispagestyle{empty}
 \newpage
+\setcounter{page}{1}
+
 \section*{Functional}
 \textbf{\underline{Must-have features}}
 \begin{itemize}
@@ -27,10 +29,24 @@
   \item Given the user has started a new single player game, by clicking on the \textit{play} button in the main menu, the user can do the following actions inside the single player game:
   \begin{itemize}
     \item When the user presses the \textit{left arrow key} the cannon will rotate to the left, the opposite will be done when the \textit{right arrow key} is pressed.
-    \item When the user presses the \textit{spacebar} button on the keyboard, the user will shoot a projectile in the direction the cannon is facing. \\
+    \item When the user presses the \textit{spacebar} button on the keyboard, the user will shoot a projectile in the direction the cannon is facing.
+  \end{itemize}
+
+  \item Players should be able to play against another player over an internet connection.
+  \item Up to two players have to be able to play together:
+  \begin{itemize}
+    \item A screen with two Boards is presented, thus each player has a separate board.
+    \item Players can shoot Bubbles to the Board of their opponent through a hole.
+  \end{itemize}
+
+  \item The game mode will be \lbrack Insert game mode\rbrack.
+  \begin{itemize}
+    \item The player with the highest score after the time limit wins.
+    \item If a players bubble reaching the bottom of the board within the time limit then the player immediately loses. \\
   \end{itemize}
   \end{itemize}
 
+\newpage
 \noindent
 \textbf{\underline{Should-have features}}
 \begin{itemize}
@@ -59,7 +75,8 @@
     \end{itemize}
    \item Given the player has started a single player game, when a bubble reaches the floor (bottom of the screen) the player loses and the game ends.
    \item Given the player has started a single player game, when all bubbles are removed the player wins!
-   \item Given the user has started a single player game, when the user presses the \textit{Escape} button, the game will pause. \\
+   \item Given the user has started a single player game, when the user presses the \textit{Escape} button, the game will pause
+   \item The players are able to select multiple game modes. \\
 \end{itemize}
 \noindent
 \textbf{\underline{Won't-have features}}
@@ -86,12 +103,15 @@
 
   \item Meetings
   \begin{itemize}
-    \item Friday 20:00 - 05/09/2014 (Daily sprint)
-    \item Monday 20:00 - 08/09/2014 (Daily sprint)
-    \item Tuesday 9:45 - 09/09/2014 (Sprint planning)
-    \item Wednesday 20:00 - 10/09/2014 (Daily sprint)
-    \item Friday 20:00 - 12/09/2014 (Sprint review)
-    \item Tuesday 9:45 - 16/09/2014 (Sprint retrospective)
+    \item Friday	20:00 - 05/09/2014 (Daily sprint)
+    \item Monday	20:00 - 08/09/2014 (Daily sprint)
+    \item Tuesday	 9:45 - 09/09/2014 (Sprint planning)
+    \item Wednesday	20:00 - 10/09/2014 (Daily sprint)
+    \item Friday	20:00 - 12/09/2014 (Sprint review)
+    \item Tuesday	 9:45 - 16/09/2014 (Sprint retrospective + Sprint planning)
+    \item Wednesday	20:00 - 17/09/2014 (Daily sprint)
+    \item Friday	20:00 - 19/09/2014 (Daily sprint)
+    \item Saturday	20:00 - 18/09/2014 (Daily sprint)
   \end{itemize}
 
   \item The game must support the following OS:
