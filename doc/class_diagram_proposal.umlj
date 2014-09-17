@@ -147,7 +147,7 @@
 											"top": 803,
 											"width": 126,
 											"height": 13,
-											"text": "-mode: GameMode",
+											"text": "-mode: BSMode",
 											"horizontalAlignment": 0
 										}
 									],
@@ -307,7 +307,7 @@
 											"top": 493,
 											"width": 131,
 											"height": 13,
-											"text": "«libgdx screen»"
+											"text": "«libgdx»"
 										},
 										{
 											"_type": "LabelView",
@@ -3337,7 +3337,7 @@
 							}
 						}
 					],
-					"stereotype": "libgdx screen",
+					"stereotype": "libgdx",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
@@ -3879,7 +3879,9 @@
 							},
 							"name": "mode",
 							"visibility": "private",
-							"type": "GameMode"
+							"type": {
+								"$ref": "AAAAAAFIhbl4RrpdjcY="
+							}
 						}
 					],
 					"operations": [
