@@ -7,12 +7,12 @@ import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 
 public class BubbleshooterHtml extends GwtApplication {
-	@Override
+	
 	public ApplicationListener getApplicationListener () {
 		return new Launch();
 	}
 	
-	@Override
+	
 	public GwtApplicationConfiguration getConfig () {
 		return new GwtApplicationConfiguration(480, 320);
 	}
