@@ -7132,6 +7132,7 @@
 										"$ref": "AAAAAAFIiYXujEz4AmU="
 									},
 									"name": "sequence_diagram",
+									"defaultDiagram": true,
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
