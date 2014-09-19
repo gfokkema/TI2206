@@ -20,71 +20,116 @@
 \section*{Functional}
 \textbf{\underline{Must-have features}}
 \begin{itemize}
-  \item When the user starts the application, a main menu with three buttons will be presented. Inside the user is able to do the following actions:
+  \item When the user starts the application,
+        a main menu with three buttons will be presented.
+        Inside the user is able to do the following actions:
   \begin{itemize}
-    \item When the user clicks on the \textit{play} button, then a new single player game is started.
-    \item When the user clicks on the \textit{multiplay} button, then a new multi player game is started.
-    \item When the user clicks the \textit{settings} button, then the user will change screens to the options menu.
-    \item When the user clicks the \textit{quit} button, then the application will terminate. This results in closing the application.
+    \item When the user clicks on the \textit{play} button,
+          then a new single player game is started.
+    \item When the user clicks on the \textit{multiplay} button,
+          then a new multi player game is started.
+    \item When the user clicks the \textit{settings} button,
+          then the user will change screens to the options menu.
+    \item When the user clicks the \textit{quit} button,
+          then the application will terminate.
+          This results in closing the application.
   \end{itemize}
 
-  \item The following generic game rules will apply, independent of single- or multiplayer mode:
+  \item The following generic game rules will apply,
+        independent of single- or multiplayer mode:
   \begin{itemize}
-    \item When the user enters the playfield, the user will be presented a field filled with bubbles.
-    \item When the user has fired a projectile and it hits another bubble, the projectile will stick to that bubble.
-    \item When the user shoots a projectile and it hits the ceiling, the projectile will stick to the ceiling.
-    \item When a group of at least 3 adjacent bubbles with the same color can be formed has been formed by shooting a projectile, this group of bubbles will disappear and the users score will increase.
-    \item Given that the user has fired, when the user is able to fire again a bubble of random color (out of a selection of five) will spawn as the new projectile.
-    \item Given that a bubble was hit and removed, if the adjacent bubbles do not connect to either the ceiling or other bubbles (that ultimately connect to the ceiling), then the bubble is removed, and the users score will increase.
-    \item When a bubble reaches the floor (bottom of the screen) the player loses and the game ends.
+    \item When the user enters the playfield,
+          the user will be presented a field filled with bubbles.
+    \item When the user has fired a projectile and it hits another bubble,
+          the projectile will stick to that bubble.
+    \item When the user shoots a projectile and it hits the ceiling,
+          the projectile will stick to the ceiling.
+    \item When a group of at least 3 adjacent bubbles with the same color
+          has been formed by shooting a projectile,
+          this group of bubbles will disappear and the users score will increase with: \\
+          \textit{2 * bubbles - 3} points.
+    \item Given that the user has fired,
+          when the user is able to fire again a bubble of random color
+          (out of a selection of five) will spawned as the new projectile.
+    \item Given that a bubble was hit and removed,
+          if the adjacent bubbles do not connect to either the ceiling or
+          other bubbles (that ultimately connect to the ceiling),
+          then the bubble is removed, and the users score will increase.
+    \item When a bubble reaches the floor (bottom of the screen),
+          the player loses and the game ends.
   \end{itemize}
 
-  \item Given the user has started a new single player game, by clicking on the \textit{play} button in the main menu, the user can do the following actions inside the single player game:
+  \newpage
+  \item Given the user has started a new game,
+        by clicking on the \textit{play} button in the main menu,
+        the user can do the following actions inside the single player game:
   \begin{itemize}
-    \item When the user presses the \textit{left arrow key} the cannon will rotate to the left, the opposite will be done when the \textit{right arrow key} is pressed.
-    \item When the user presses the \textit{spacebar} button on the keyboard, the user will shoot a projectile in the direction the cannon is facing.
+    \item When the user presses the \textit{left arrow key},
+          the cannon will rotate to the left.
+    \item When the user presses the \textit{right arrow key},
+          the cannon will rotate to the right.
+    \item When the user presses the \textit{spacebar} button on the keyboard,
+          the user will shoot a projectile in the direction the cannon is facing.
   \end{itemize}
 
   \item Given the user has started a new multi player game, by clicking on the \textit{multiplay} button in the main menu, the user will be presented with a multi player game:
   \begin{itemize}
     \item Up to two players have to be able to play together.
     \item A screen with two Boards is presented, thus each player has a separate board.
-    \item Players can shoot Bubbles to the Board of their opponent through the wall separating the boards.
+    \item Players can shoot Bubbles to the Board of their opponent
+          through the wall separating the boards.
     \item The game mode will be \textit{sudden death}.
     \begin{itemize}
       \item The player with the highest score after the time limit wins.
-      \item If a players bubbles reach the bottom of the board within the time limit then the player immediately loses.
+      \item If a players bubbles reach the bottom of the board within the time limit
+            then the player immediately loses.
     \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\newpage
 \noindent
 \textbf{\underline{Should-have features}}
 \begin{itemize}
-   \item Given the user has started a single player game, the user can exit the game (go back to main menu) by pressing the \textit{M} key on the keyboard.
-   \item Given the player has started a single player game, when all bubbles are removed the player wins!
+   \item Given the user has started a single player game,
+         the user can exit the game (go back to main menu) by pressing
+         the \textit{M} key on the keyboard.
+   \item Given the player has started a single player game,
+         when all bubbles are removed the player wins!
 \end{itemize}
 
 \noindent
 \textbf{\underline{Could-have features}}
 \begin{itemize}
-  \item Given the user has started the application, clicking on a button will play a sound effect.
-  \item Given the user has started the application, background music will be played right away.
-  \item Given the user clicks on the settings button, the user will be presented the options menu, where the user can do the following actions:
+  \item Given the user has started the application and is in the menu,
+  		clicking on a button will play a sound effect.
+  \item Given the user has started the application,
+  		background music will be played right away.
+  \item Given the user clicks on the settings button,
+		the user will be presented the options menu,
+		where the user can do the following actions:
   \begin{itemize}
-    \item When the user clicks the \textit{Volume Up!} button, the background music volume will rise.
-    \item When the user clicks the \textit{Volume Down!} button, the background music volume will go down.
-    \item When the user clicks the \textit{SFX Up!} button, the sound effects volume will rise.
-    \item When the user clicks the \textit{SFX Down!} button, the sound effects volume will go down.
-    \item When the user clicks the \textit{Back} button, the user will return to the main menu screen.
+    \item When the user clicks the \textit{Volume Up!} button,
+          the background music volume will rise.
+    \item When the user clicks the \textit{Volume Down!} button,
+          the background music volume will go down.
+    \item When the user clicks the \textit{SFX Up!} button,
+          the sound effects volume will rise.
+    \item When the user clicks the \textit{SFX Down!} button,
+          the sound effects volume will go down.
+    \item When the user clicks the \textit{Back} button, 
+          the user will return to the main menu screen.
   \end{itemize}
-  \item Given the user has started a single player game, when the user presses the \textit{Escape} button, the game will pause
+  \item Given the user has started a single player game,
+        when the user presses the \textit{Escape} button, the game will pause
+\end{itemize}
+
+\noindent
+\textbf{\underline{Won't-have features}}
+\begin{itemize}
+  \item Given a user has started a game, the user can gather and fire power ups.
 \end{itemize}
 
 \newpage
-\noindent
-\textbf{\underline{Won't-have features}}
 \section*{Non-functional}
 \begin{itemize}
   \item A simple version should be finished within one week (13/09/14).
@@ -96,7 +141,8 @@
     \item git
   \end{itemize}
 
-  \item The development process (including the sprints) will be using SCRUM, with the help of the following web based tool:
+  \item The development process (including the sprints) will be using SCRUM,
+        with the help of the following web based tool:
   \begin{itemize}
     \item \href{https://www.scrumdo.com/}{ScrumDo}
   \end{itemize}
