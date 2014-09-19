@@ -46,7 +46,7 @@
           the projectile will stick to the ceiling.
     \item When a group of at least 3 adjacent bubbles with the same color
           has been formed by shooting a projectile,
-          this group of bubbles will disappear and the users score will increase with: \\
+          this group of bubbles will disappear and the user's score will increase with: \\
           \textit{2 * bubbles - 3} points.
     \item Given that the user has fired,
           when the user is able to fire again a bubble of random color
@@ -54,7 +54,7 @@
     \item Given that a bubble was hit and removed,
           if the adjacent bubbles do not connect to either the ceiling or
           other bubbles (that ultimately connect to the ceiling),
-          then the bubble is removed, and the users score will increase.
+          then the bubble is removed, and the user's score will increase.
     \item When a bubble reaches the floor (bottom of the screen),
           the player loses and the game ends.
   \end{itemize}
@@ -74,6 +74,13 @@
 
   \item Given the user has started a new multi player game, by clicking on the \textit{multiplay} button in the main menu, the user will be presented with a multi player game:
   \begin{itemize}
+    \item After starting a multiplayer game from the menu,
+          the player can choose to host a server or to join a server.
+    \begin{itemize}
+      \item When the user chooses to host a server, the game will wait until another player connects.
+      \item When the user chooses to join a server, the user will be presented with a dialog,
+            where he can enter an IP address and join an existing game.
+    \end{itemize}
     \item Up to two players have to be able to play together.
     \item A screen with two Boards is presented, thus each player has a separate board.
     \item Players can shoot Bubbles to the Board of their opponent
