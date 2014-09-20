@@ -46,6 +46,7 @@ public class Launch extends Game {
 		assets.load(SoundID.BUTTON, "ButtonSFX.wav");
 		assets.load(SoundID.CANNON, "BubbleSFX.wav");
 		assets.load(TextureID.BACKGROUND, "BG_dark_full.png");
+		assets.load(TextureID.BORDER, "MPborder.png");
 		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
 		assets.load(TextureID.CANNON, "cannon.png");
 		assets.finish();

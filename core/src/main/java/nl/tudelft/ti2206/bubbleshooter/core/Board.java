@@ -31,7 +31,7 @@ public class Board extends BSDrawable {
 	 */
 	public Board(int width, int height) {
 		this.grid = new Grid(width, height);
-		this.cannon = new Cannon(130, 15);
+		this.cannon = new Cannon(160, 15);
 		this.bubbles = new HashMap<Integer,Bubble>(grid.getWidth() * grid.getHeight());
 	}
 	
@@ -46,7 +46,7 @@ public class Board extends BSDrawable {
 		}
 		
 		if (b.getBounds().y + 16 > 480) return true;
-		if (b.getBounds().x - 16 < 0 || b.getBounds().x + 16 > grid.getWidth() * 32) {
+		if (b.getBounds().x - 16 < 32 || b.getBounds().x + 16 > grid.getWidth() * 32 + 32) {
 			Vector2 dir = b.getDirection();
 			dir.x = -dir.x;
 		}
@@ -208,12 +208,12 @@ public class Board extends BSDrawable {
 
 	@Override
 	public TextureID getTexture() {
-		return TextureID.BACKGROUND;
+		return TextureID.BORDER;
 	}
 
 	@Override
 	public int getWidth() {
-		return 260;
+		return 320;
 	}
 
 	@Override
