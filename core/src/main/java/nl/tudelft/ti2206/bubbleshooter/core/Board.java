@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble.Orientation;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -15,8 +17,8 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * The {@link Board} class represents the playing field which contains all the {@link Bubble} objects.
  */
-public class Board {
-	private int width = 8, height = 20;
+public class Board extends BSDrawable {
+	private Grid grid;
 	private HashMap<Integer,Bubble> bubbles;
 
 	/**
@@ -26,25 +28,8 @@ public class Board {
 	 * @param height	the height of the board in bubbles
 	 */
 	public Board(int width, int height) {
-		this.width = width;
-		this.height = height;
-		this.bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
-	}
-	
-	/**
-	 * Returns the width of the {@link Board}.
-	 * @return	width in bubbles
-	 */
-	public int getWidth() {
-		return width;
-	}
-	
-	/**
-	 * Returns the height of the {@link Board}.
-	 * @return	height in bubbles
-	 */
-	public int getHeight() {
-		return height;
+		this.grid = new Grid(width, height);
+		this.bubbles = new HashMap<Integer,Bubble>(grid.getWidth() * grid.getHeight());
 	}
 	
     /**
@@ -52,9 +37,16 @@ public class Board {
      * @param b	{@link Bubble} that has been shot
      * @return 	true if there's a collision, false otherwise
      */
-	public boolean collides(Bubble b) {
+	public boolean collides(Projectile b) {
 		for (Bubble v : bubbles.values()) {
 			if (v.collides(b)) return true;
+		}
+		
+		if (b.getBounds().y + 16 > 480) return true;
+		
+		if (b.getBounds().x - 16 < 0 || b.getBounds().x + 16 > grid.getWidth() * 32) {
+			Vector2 dir = b.getDirection();
+			dir.x = -dir.x;
 		}
 		return false;
 	}
@@ -72,8 +64,13 @@ public class Board {
 		bubbles.put(idx, b);
 		
 		// Update the bounds of the circle
-		b.setBounds(new Circle(getLoc(idx), 16));
+		b.setBounds(new Circle(grid.getLoc(idx), 16));
 		return true;
+	}
+	
+	public int add(Bubble b) {
+		int new_idx = grid.getIndex(b.getMidPoint());
+		return add(b, new_idx) ? new_idx : -1;
 	}
 	
 	/**
@@ -84,17 +81,16 @@ public class Board {
 	 * @return		true if the {@link Board} has been added successfully, false otherwise
 	 */
 	public boolean add(Bubble b, int i, int j) {
-		return add(b, toIdx(i, j));
+		return add(b, grid.toIdx(i, j));
 	}
 	
-	/**
-	 * Returns a {@link Map} with the {@link Bubble} objects that are currently on the {@link Board}.
-	 * @return	{@link Map} with all {@link Bubble} objects
-	 */
-	public Map<Integer, Bubble> getBubbles() {
-		return bubbles;
+	public Collection<BSDrawable> getDrawables() {
+		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
+		drawables.add(this);
+		drawables.addAll(bubbles.values());
+		return drawables;
 	}
-
+	
 	/**
 	 * Get a {@link Collection} of all {@link Bubble} objects
 	 * adjacent to the given {@link Bubble} that have the same color.
@@ -121,7 +117,7 @@ public class Board {
 	public Collection<Bubble> getDisconnectedGroup() {
 		// The same Map will be used for each depth-first search.
 		HashMap<Integer, Bubble> connectedToCeiling = new HashMap<Integer, Bubble>();
-		for(int ceilingIndex = 0; ceilingIndex < width; ceilingIndex++) {
+		for(int ceilingIndex = 0; ceilingIndex < grid.getWidth(); ceilingIndex++) {
 			if(!bubbles.containsKey(ceilingIndex)) {
 				//There's no bubble here
 				continue;
@@ -152,8 +148,8 @@ public class Board {
 	 */
 	private void depthFirst(Integer currentIndex, BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
 		for(Orientation o : Bubble.orientations) {
-			int neighborIndex = o.fromIndex(currentIndex, this.width);
-			if (!adjacent(currentIndex, neighborIndex))	continue;
+			int neighborIndex = o.fromIndex(currentIndex, grid.getWidth());
+			if (!grid.adjacent(currentIndex, neighborIndex))	continue;
 			// Check if there's a neighbor Bubble.
 			if (!bubbles.containsKey(neighborIndex))	continue;
 
@@ -177,90 +173,18 @@ public class Board {
 		bubbles.values().removeAll(bs);
 	}
 
-	/**
-	 * Checks whether two {@link Bubble} objects are adjacent to each other
-	 * @param a		{@link Bubble} object a
-	 * @param b		{@link Bubble} object b
-	 * @return		true if a and b are adjacent, false otherwise
-	 */
-	public boolean adjacent(int a, int b) {
-		if (a > b) { int temp = a; a = b; b = temp; }
-		if (b < 0)	return false;
-		if (a < 0)	return false;
-		
-		Vector2 xy_a = toXY(a);
-		Vector2 xy_b = toXY(b);
-		
-		return	xy_a.y == xy_b.y && b - a == 1 ||
-				xy_b.y - xy_a.y == 1 && b - a > 0 &&
-					((b - a) == width || (b - a) == width - 1);
+	@Override
+	public TextureID getTexture() {
+		return TextureID.BACKGROUND;
 	}
 
-	/**
-	 * Converts a given hexagonal xy-coordinate into an index value
-	 * @param x		hexagonal x-coordinate
-	 * @param y		hexagonal y-coordinate
-	 * @return		the board index
-	 */
-	public int toIdx(int x, int y) {
-		if (x < 0 || y < 0 || x >= width - y % 2 || y >= height)
-			throw new IndexOutOfBoundsException();
-		
-		return y * width - y / 2 + x;
+	@Override
+	public int getWidth() {
+		return 640;
 	}
 
-	/**
-	 * Converts a given board index into a hexagonal xy-coordinate
-	 * @param idx	the board index
-	 * @return		{@link Vector2} representing the hexagonal xy-coordinates
-	 */
-	public Vector2 toXY(int idx) {
-		int rowset = (width * 2 - 1);
-		
-		int y_even = idx / rowset;
-		int y = y_even * 2 + (idx - y_even * rowset) / width;
-		int x = idx - toIdx(0, y);
-		
-		if (idx < 0 || y >= height) throw new IndexOutOfBoundsException();
-		return new Vector2(x, y);
-	}
-	
-	/**
-	 * Returns the topleft xy-coordinates of a bubble
-	 * @param idx	the index of the bubble on the board
-	 * @return		{@link Vector2} representing xy-coordinates
-	 */
-	public Vector2 getLoc(int idx) {
-		int odd = (idx % (width * 2 - 1)) / width;
-		Vector2 xy = toXY(idx);
-		
-		int x = (int)xy.x * 32	+ odd * 16;
-		int y = (int)xy.y * 28;
-		
-		// offset the game field with 190 px and correct from left -> mid
-		x = 190 + x + 16;
-		// flip the coordinate system and correct from top -> mid
-		y = 480 - (y + 16);
-
-		return new Vector2(x, y);
-	}
-
-	/**
-	 * Get the index of the grid cell containing the given
-	 * {@link Vector2}.
-	 * @param loc The (x,y)-coordinate on the grid.
-	 * @return The index of the grid containing the given
-	 *         coordinate.
-	 */
-	public int getIndex(Vector2 loc) {
-		int x = (int)loc.x;
-		int y = (int)loc.y;
-		x = x - 190;
-		y = 480 - y;
-		int y_id = y / 28;
-		int x_id = x - (y_id & 1) * 16;
-		x_id /= 32;
-		
-		return toIdx(x_id, y_id);
+	@Override
+	public int getHeight() {
+		return 480;
 	}
 }

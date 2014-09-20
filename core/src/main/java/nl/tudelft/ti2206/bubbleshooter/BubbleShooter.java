@@ -5,12 +5,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerProcessor;
+import nl.tudelft.ti2206.bubbleshooter.mode.ZenMode;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;
@@ -49,6 +51,7 @@ public class BubbleShooter extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		engine = new SoundEngine(assets);
+		game_mode = new ZenMode(this);
 		
 		assets.load(MusicID.GAME, "BGMenu.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
@@ -64,7 +67,7 @@ public class BubbleShooter extends Game {
 		this.setScreen(mms);
 	}
 
-	public Collection<Sprite> getDrawables() {
+	public Collection<BSDrawable> getDrawables() {
 		return game_mode.getDrawables();
 	}
 

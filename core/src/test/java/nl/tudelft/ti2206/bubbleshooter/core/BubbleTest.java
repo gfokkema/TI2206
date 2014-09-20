@@ -56,11 +56,11 @@ public class BubbleTest {
 		Vector2 pos = new Vector2(10, 10), pos2 = new Vector2(20, 50);
 		
 		bubble.setCircle(pos, 10);
-		assertEquals(pos, bubble.getPosition());
+		assertEquals(pos, bubble.getMidPoint());
 		assertEquals(10, bubble.getBounds().radius, .001);
 		
 		bubble.setPosition(pos2);
-		assertEquals(pos2, bubble.getPosition());
+		assertEquals(pos2, bubble.getMidPoint());
 		assertEquals(10, bubble.getBounds().radius, .001);
 	}
 	

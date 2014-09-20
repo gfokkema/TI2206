@@ -14,8 +14,11 @@ public class SinglePlayerProcessor extends InputAdapter {
 	public boolean keyDown(int keyCode) {
 		switch (keyCode) {
 		case Keys.SPACE:
-			mode.projectile = mode.cannon.shoot();
-			return true;
+			if (mode.projectile == null) {
+				mode.projectile = mode.cannon.shoot();
+				return true;
+			}
+			return false;
 		case Keys.LEFT:
 			mode.cannon.left(Gdx.graphics.getDeltaTime());
 			return true;

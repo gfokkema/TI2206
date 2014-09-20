@@ -1,15 +1,13 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-
-
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * The bubble shooter screen is the screen where the actual game is being played.
@@ -38,12 +36,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		game.batch.begin();
-		game.batch.draw(game.assets.get(TextureID.BACKGROUND), 0, 0);
 		
 		// Draw all game sprites.
-		game.getDrawables().forEach((Sprite s) -> {
-			s.draw(game.batch);
-		});
+		game.getDrawables().forEach((BSDrawable b) -> draw(new Vector2(190,0), b));
 
 		game.batch.end();
 	}
@@ -56,5 +51,18 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	@Override
 	public void hide() {
 		// game.engine.pause();
+	}
+	
+	public void draw(Vector2 offset, BSDrawable drawable) {
+		Vector2 position = drawable.getPosition();
+		Vector2 origin = drawable.getOrigin();
+		
+		game.batch.setColor(drawable.getColor());
+		game.batch.draw(new TextureRegion(game.assets.get(drawable.getTexture())),
+						offset.x + position.x, offset.y + position.y,
+						origin.x, origin.y,
+						drawable.getWidth(), drawable.getHeight(),
+						1, 1,
+						drawable.getRotation());
 	}
 }
