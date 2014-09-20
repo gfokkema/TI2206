@@ -8,14 +8,17 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble.Orientation;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * The {@link Board} class represents the playing field which contains all the {@link Bubble} objects.
  */
-public class Board {
+public class Board extends BSDrawable {
 	private int width = 8, height = 20;
 	private HashMap<Integer,Bubble> bubbles;
 
@@ -35,7 +38,7 @@ public class Board {
 	 * Returns the width of the {@link Board}.
 	 * @return	width in bubbles
 	 */
-	public int getWidth() {
+	public int getBoardWidth() {
 		return width;
 	}
 	
@@ -43,7 +46,7 @@ public class Board {
 	 * Returns the height of the {@link Board}.
 	 * @return	height in bubbles
 	 */
-	public int getHeight() {
+	public int getBoardHeight() {
 		return height;
 	}
 	
@@ -262,5 +265,20 @@ public class Board {
 		x_id /= 32;
 		
 		return toIdx(x_id, y_id);
+	}
+
+	@Override
+	public TextureID getTexture() {
+		return TextureID.BACKGROUND;
+	}
+
+	@Override
+	public int getWidth() {
+		return 640;
+	}
+
+	@Override
+	public int getHeight() {
+		return 480;
 	}
 }

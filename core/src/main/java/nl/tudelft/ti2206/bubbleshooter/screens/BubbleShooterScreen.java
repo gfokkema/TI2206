@@ -7,6 +7,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
@@ -15,6 +16,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -59,28 +62,21 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		game.batch.begin();
-		game.batch.draw(game.assets.get(TextureID.BACKGROUND), 0, 0);
-		
-		// Draw all the bubbles
-		Color current = game.batch.getColor();
-		board.getBubbles().forEach((Integer k, Bubble v) -> {
-			game.batch.setColor(v.getColor());
-			
-			// translate from the midpoint to the bottom left
-			game.batch.draw(game.assets.get(TextureID.BUBBLE), v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
-		});
+		board.draw(game);
+		board.getBubbles().forEach((Integer k, Bubble v) -> v.draw(game));
+		cannon.getProjectile().draw(game);
+		cannon.draw(game.batch);
 		
 		if (projectile != null) {
-			if (projectile.getBounds().x - 16 < 190 || projectile.getBounds().x + 16 > 190 + board.getWidth() * 32) {
+			if (projectile.getBounds().x - 16 < 190 || projectile.getBounds().x + 16 > 190 + board.getBoardWidth() * 32) {
 				Vector2 dir = projectile.getDirection();
 				dir.x = -dir.x;
 			}
 			projectile.move();
-			game.batch.setColor(projectile.getColor());
-			game.batch.draw(game.assets.get(TextureID.BUBBLE), projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
+			projectile.draw(game);
 			
 			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
-				int new_idx = board.getIndex(projectile.getPosition());
+				int new_idx = board.getIndex(projectile.getMidPoint());
 				if (board.add(projectile, new_idx)) {
 					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
 					if (sameColors.size() >= 3) {
@@ -91,11 +87,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				projectile = null;
 			}
 		}
-		game.batch.setColor(cannon.getProjectile().getColor());
-		game.batch.draw(game.assets.get(TextureID.BUBBLE), cannon.getProjectile().getBounds().x - 16, cannon.getProjectile().getBounds().y - 16, 32, 32);
-		game.batch.setColor(current);
-		
-		cannon.draw(game.batch);
 		game.batch.end();
 	}
 	
