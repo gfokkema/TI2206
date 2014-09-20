@@ -42,7 +42,7 @@ public class Board {
 		
 		if (b.getBounds().y + 16 > 480) return true;
 		
-		if (b.getBounds().x - 16 < 190 || b.getBounds().x + 16 > 190 + grid.getWidth() * 32) {
+		if (b.getBounds().x - 16 < 0 || b.getBounds().x + 16 > grid.getWidth() * 32) {
 			Vector2 dir = b.getDirection();
 			dir.x = -dir.x;
 		}

@@ -24,7 +24,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class BubbleShooterScreen extends ScreenAdapter {
-	Vector2 offset = new Vector2(190,0);
+	Vector2 offset = new Vector2(0,0);
 	
 	/**
 	 * Variable initialization.
@@ -43,7 +43,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		this.cannon = new Cannon(game.assets.get(TextureID.CANNON), Gdx.graphics.getWidth() / 2, 15);
+		this.cannon = new Cannon(game.assets.get(TextureID.CANNON), (Gdx.graphics.getWidth() - 380) / 2, 15);
 		
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
@@ -69,13 +69,19 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			game.batch.setColor(v.getColor());
 			
 			// translate from the midpoint to the bottom left
-			game.batch.draw(game.assets.get(TextureID.BUBBLE), v.getBounds().x - 16, v.getBounds().y - 16, 32, 32);
+			game.batch.draw(game.assets.get(TextureID.BUBBLE),
+							v.getBounds().x - 16 + offset.x,
+							v.getBounds().y - 16 + offset.y,
+							32, 32);
 		});
 		
 		if (projectile != null) {
 			projectile.move();
 			game.batch.setColor(projectile.getColor());
-			game.batch.draw(game.assets.get(TextureID.BUBBLE), projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
+			game.batch.draw(game.assets.get(TextureID.BUBBLE),
+							projectile.getBounds().x - 16 + offset.x,
+							projectile.getBounds().y - 16 + offset.y,
+							32, 32);
 			
 			if (board.collides(projectile)) {
 				int new_idx = board.add(projectile);
@@ -90,7 +96,10 @@ public class BubbleShooterScreen extends ScreenAdapter {
 			}
 		}
 		game.batch.setColor(cannon.getProjectile().getColor());
-		game.batch.draw(game.assets.get(TextureID.BUBBLE), cannon.getProjectile().getBounds().x - 16, cannon.getProjectile().getBounds().y - 16, 32, 32);
+		game.batch.draw(game.assets.get(TextureID.BUBBLE),
+						cannon.getProjectile().getBounds().x - 16 + offset.x,
+						cannon.getProjectile().getBounds().y - 16 + offset.y,
+						32, 32);
 		game.batch.setColor(current);
 		
 		cannon.draw(game.batch);

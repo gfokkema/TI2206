@@ -90,7 +90,7 @@ public class Grid {
 		int y = (int)xy.y * 28;
 		
 		// offset the game field with 190 px and correct from left -> mid
-		x = 190 + x + 16;
+		x = x + 16;
 		// flip the coordinate system and correct from top -> mid
 		y = 480 - (y + 16);
 
@@ -107,7 +107,6 @@ public class Grid {
 	public int getIndex(Vector2 loc) {
 		int x = (int)loc.x;
 		int y = (int)loc.y;
-		x = x - 190;
 		y = 480 - y;
 		int y_id = y / 28;
 		int x_id = x - (y_id & 1) * 16;
