@@ -11,7 +11,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble.Orientation;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -20,6 +20,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Board extends BSDrawable {
 	private Grid grid;
+	Projectile projectile;
+	Cannon cannon;
 	private HashMap<Integer,Bubble> bubbles;
 
 	/**
@@ -30,6 +32,7 @@ public class Board extends BSDrawable {
 	 */
 	public Board(int width, int height) {
 		this.grid = new Grid(width, height);
+		this.cannon = new Cannon((Gdx.graphics.getWidth() - 380) / 2, 15);
 		this.bubbles = new HashMap<Integer,Bubble>(grid.getWidth() * grid.getHeight());
 	}
 	
@@ -70,7 +73,7 @@ public class Board extends BSDrawable {
 	}
 	
 	public int add(Bubble b) {
-		int new_idx = grid.getIndex(b.getPosition());
+		int new_idx = grid.getIndex(b.getMidPoint());
 		if (!add(b, new_idx)) return -1;
 		return new_idx;
 	}
@@ -92,6 +95,30 @@ public class Board extends BSDrawable {
 	 */
 	public Map<Integer, Bubble> getBubbles() {
 		return bubbles;
+	}
+	
+	public Cannon getCannon() {
+		return cannon;
+	}
+	
+	public Projectile getProjectile() {
+		return projectile;
+	}
+	
+	public void move() {
+		projectile.move();
+		if (collides(projectile)){
+			add(projectile);
+			projectile = null;
+		}
+	}
+	
+	public boolean shoot() {
+		if (projectile == null) {
+			projectile = cannon.shoot();
+			return true;
+		}
+		return false;
 	}
 
 	/**

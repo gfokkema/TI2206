@@ -1,7 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,14 +13,14 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class Cannon extends Sprite {
+public class Cannon extends BSDrawable {
 	
 	/**
 	 * Variable initialization.
 	 */
 	Pointer pointer;
-	float volume;
 	Projectile projectile;
+	Vector2 position;
 	
 	private final float LEFT_BOUNDARY = 60;
 	private final float RIGHT_BOUNDARY = -60;
@@ -31,10 +33,8 @@ public class Cannon extends Sprite {
 	 * @param x			coordinate
 	 * @param y 		coordinate
 	 */
-	public Cannon(Texture tex, int x, int y) {
-		super(new Sprite(tex));
-		this.setOrigin(this.getWidth() / 2, 25);
-		this.setPosition(x - this.getWidth() / 2, y);
+	public Cannon(int x, int y) {
+		position = new Vector2(x - 50, y);
 		pointer = new Pointer(new Vector2(x, y));
 		pointer.setOrigin(new Vector2(x - 16, y));
 		
@@ -61,7 +61,6 @@ public class Cannon extends Sprite {
 		}
 		
 		// rotate the actual rotation difference.
-		this.setRotation(degrees);
 		pointer.setAngle(degrees);
 		
 		projectile.setBounds(new Circle(getBubblePos(), 16));
@@ -120,5 +119,35 @@ public class Cannon extends Sprite {
 	private Vector2 getBubblePos() {
 		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
 						.add(pointer.getDirection().nor().scl(100));
+	}
+
+	@Override
+	public TextureID getTexture() {
+		return TextureID.CANNON;
+	}
+	
+	@Override
+	public Vector2 getPosition() {
+		return position;
+	}
+	
+	@Override
+	public Vector2 getOrigin() {
+		return new Vector2(50, 16);
+	}
+
+	@Override
+	public int getWidth() {
+		return 100;
+	}
+
+	@Override
+	public int getHeight() {
+		return 100;
+	}
+	
+	@Override
+	public float getRotation() {
+		return pointer.getAngle();
 	}
 }

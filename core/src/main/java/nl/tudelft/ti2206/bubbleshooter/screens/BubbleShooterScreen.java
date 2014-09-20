@@ -32,8 +32,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * The defined textures are used for the bubble and the board.
 	 */
 	Launch game;
-	Projectile projectile;
-	Cannon cannon;
 	Board board;
 
 	/**
@@ -44,7 +42,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		this.cannon = new Cannon(game.assets.get(TextureID.CANNON), (Gdx.graphics.getWidth() - 380) / 2, 15);
 		
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
@@ -64,9 +61,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		game.batch.begin();
 		draw(board);
 		board.getBubbles().forEach((Integer k, Bubble v) -> draw(v));
-		draw(cannon.getProjectile());
-		cannon.draw(game.batch);
-		
+		draw(board.getCannon().getProjectile());
+		draw(board.getCannon());
+		if (board.getProjectile() != null) {
+			draw(board.getProjectile());
+			board.move();
+		}
 		game.batch.end();
 	}
 	
@@ -74,15 +74,14 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Handle the input given by the player.
 	 */
 	private void handle_input() {
-		if (projectile == null && Gdx.input.isKeyPressed(Keys.SPACE) && !board.collides(cannon.getProjectile())) {
-			projectile = cannon.shoot();
-			game.engine.play(SoundID.CANNON);
+		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+			if (board.shoot()) game.engine.play(SoundID.CANNON);
 		}
 		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-			cannon.left(Gdx.graphics.getDeltaTime());
+			board.getCannon().left(Gdx.graphics.getDeltaTime());
 		}
 		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			cannon.right(Gdx.graphics.getDeltaTime());
+			board.getCannon().right(Gdx.graphics.getDeltaTime());
 		}
 	}
 	
