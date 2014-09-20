@@ -138,7 +138,7 @@ public class Board {
 		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
 		// Remove all of the bubbles that are not connected to the ceiling.
 		result.removeAll(connectedToCeiling.values());
-		removeAll(result);
+		//removeAll(result);
 		return result;
 	}
 

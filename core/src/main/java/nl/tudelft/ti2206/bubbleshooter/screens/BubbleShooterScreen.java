@@ -89,6 +89,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 					}
 				}
 				projectile = null;
+				
 			}
 		}
 		game.batch.setColor(cannon.getProjectile().getColor());
