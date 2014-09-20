@@ -1,24 +1,19 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerProcessor;
-import nl.tudelft.ti2206.bubbleshooter.mode.ZenMode;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -38,7 +33,10 @@ public class BubbleShooter extends Game {
 	public MainMenuScreen mms;
 	public SoundEngine engine;
 	public SpriteBatch batch;
-	public static Map<Integer, Consumer<SinglePlayerProcessor>> keyBindings;
+	public static Map<Integer, Function<SinglePlayerProcessor, Boolean>> keyDownBindings
+		= new HashMap<Integer, Function<SinglePlayerProcessor, Boolean>>();
+	public static Map<Integer, Function<SinglePlayerProcessor, Boolean>> keyUpBindings
+		= new HashMap<Integer, Function<SinglePlayerProcessor, Boolean>>();
 	
 	/**
 	 * Create the spritebatch and bitmapfont.

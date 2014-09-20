@@ -16,6 +16,8 @@ public class ZenMode implements BSMode {
 	Board board;
 	Cannon cannon;
 	Projectile projectile;
+	boolean cannonLeft;
+	boolean cannonRight;
 
 	public ZenMode(BubbleShooter game) {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
@@ -39,6 +41,12 @@ public class ZenMode implements BSMode {
 
 	@Override
 	public void update(float deltaTime) {
+		if (cannonLeft) {
+			cannon.left(Gdx.graphics.getDeltaTime());
+		} else if (cannonRight) {
+			cannon.right(Gdx.graphics.getDeltaTime());
+		}
+
 		if (projectile == null) return;
 
 		projectile.move();
