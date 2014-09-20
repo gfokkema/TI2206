@@ -2,6 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.ZenMode;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -11,12 +13,12 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * The bubble shooter screen is the screen where the actual game is being played.
- * The screen contains a board (on which bubbles are drawn), and a cannon.
  * @author group-15
  *
  */
 public class BubbleShooterScreen extends ScreenAdapter {	
 	BubbleShooter game;
+	BSMode game_mode;
 
 	/**
 	 * Constructor of BubbleShooterScreen
@@ -25,6 +27,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 */
 	public BubbleShooterScreen(BubbleShooter game) {
 		this.game = game;
+		game_mode = new ZenMode(game);
 	}
 
 	/**
@@ -34,12 +37,10 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		
+		game_mode.update(delta);
 		game.batch.begin();
-		
 		// Draw all game sprites.
-		game.getDrawables().forEach((BSDrawable b) -> draw(new Vector2(190,0), b));
-
+		game_mode.getDrawables().forEach((BSDrawable b) -> draw(new Vector2(190,0), b));
 		game.batch.end();
 	}
 	

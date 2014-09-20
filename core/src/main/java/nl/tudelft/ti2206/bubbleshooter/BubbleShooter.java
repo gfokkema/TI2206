@@ -38,7 +38,6 @@ public class BubbleShooter extends Game {
 	public MainMenuScreen mms;
 	public SoundEngine engine;
 	public SpriteBatch batch;
-	private BSMode game_mode;
 	public static Map<Integer, Consumer<SinglePlayerProcessor>> keyBindings;
 	
 	/**
@@ -51,7 +50,6 @@ public class BubbleShooter extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		engine = new SoundEngine(assets);
-		game_mode = new ZenMode(this);
 		
 		assets.load(MusicID.GAME, "BGMenu.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
@@ -65,16 +63,6 @@ public class BubbleShooter extends Game {
 		
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
-	}
-
-	public Collection<BSDrawable> getDrawables() {
-		return game_mode.getDrawables();
-	}
-
-	@Override
-	public void render() {
-		game_mode.update(Gdx.graphics.getDeltaTime());
-		this.getScreen().render(Gdx.graphics.getDeltaTime());
 	}
 
 	/**
