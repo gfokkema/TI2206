@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.Launch;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.Gdx;
@@ -36,8 +37,21 @@ public class AbstractScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(stage);
+		game.engine.play(MusicID.MENU);
 	}
 	
+	/**
+	 * Play some main menu background music.
+	 * This music will be played in the main menu screen and options screen
+	 */
+	@Override
+	public void hide() {
+		game.engine.pause();
+	}
+	
+	/**
+	 * Hide is being called when the main menu screen is not the current screen.
+	 */
 	@Override
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
