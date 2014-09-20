@@ -44,8 +44,6 @@ public class MainMenuScreen extends ScreenAdapter {
 		this.buttons = new ArrayList<Button>();
 
 		options = new OptionsScreen(game);
-		BBS = new BubbleShooterScreen(game);
-		
 		
 		// The play button which sends the player to the bubble shooter game screen
 		Button play = new Button(
@@ -53,12 +51,21 @@ public class MainMenuScreen extends ScreenAdapter {
 				new Color(0xFFFF00FF),
 				game.font,
 				"Play!",
-				() -> { this.game.setScreen(BBS); game.engine.play(SoundID.BUTTON); }
+				() -> { BBS = new BubbleShooterScreen(game); this.game.setScreen(BBS); game.engine.play(SoundID.BUTTON); }
+		);
+		
+		// The play button which sends the player to the bubble shooter game screen
+		Button multiplay = new Button(
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
+				new Color(0xFFFF00FF),
+				game.font,
+				"Play!",
+				() -> { this.game.setScreen(new MultiPlayerScreen(game)); game.engine.play(SoundID.BUTTON); }
 		);
 		
 		// The settings button sends the player to the options menu.
 		Button settings = new Button(
-				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 25, 200, 50),
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Settings",
@@ -67,7 +74,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		
 		// The quit button used to terminate the game.
 		Button quit = new Button(
-				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 100, 200, 50),
+				new Rectangle(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2 - 175, 200, 50),
 				new Color(0xFFFF00FF),
 				game.font,
 				"Quit",
@@ -75,6 +82,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		);
 		
 		// Add buttons, each with their own callback.
+		buttons.add(multiplay);
 		buttons.add(play);
 		buttons.add(settings);
 		buttons.add(quit);
