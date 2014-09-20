@@ -1,18 +1,16 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
-
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * In this class we will test the functionality of our Board class.

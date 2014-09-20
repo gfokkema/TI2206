@@ -32,7 +32,7 @@ public class CannonTest {
 		Mockito.when(tex.getWidth()).thenReturn(20);
 		Mockito.when(tex.getWidth()).thenReturn(100);
 		
-		this.cannon = new Cannon(tex, 0, 0);
+		this.cannon = new Cannon(0, 0);
 	}
 
 	/**
@@ -40,7 +40,6 @@ public class CannonTest {
 	 */
 	@Test
 	public void testInitializeCannon() {
-		assertEquals(tex, cannon.getTexture());
 		assertEquals(new Vector2(-16, 0), cannon.getPointer().getOrigin());
 	}
 	
@@ -81,8 +80,7 @@ public class CannonTest {
 	 */
 	@Test
 	public void testProjectile() {
-		Projectile ammo = cannon.getProjectile();
-		Vector2 pos = cannon.projectile.getPosition();
+		Vector2 pos = cannon.getProjectile().getMidPoint();
 		assertEquals(cannon.getPointer().direction.add(0, 16), pos);
 		
 		

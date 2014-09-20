@@ -32,7 +32,7 @@ public class Board extends BSDrawable {
 	 */
 	public Board(int width, int height) {
 		this.grid = new Grid(width, height);
-		this.cannon = new Cannon((Gdx.graphics.getWidth() - 380) / 2, 15);
+		this.cannon = new Cannon(130, 15);
 		this.bubbles = new HashMap<Integer,Bubble>(grid.getWidth() * grid.getHeight());
 	}
 	
@@ -74,8 +74,7 @@ public class Board extends BSDrawable {
 	
 	public int add(Bubble b) {
 		int new_idx = grid.getIndex(b.getMidPoint());
-		if (!add(b, new_idx)) return -1;
-		return new_idx;
+		return add(b, new_idx) ? new_idx : -1;
 	}
 	
 	/**
@@ -108,8 +107,14 @@ public class Board extends BSDrawable {
 	public void move() {
 		projectile.move();
 		if (collides(projectile)){
-			add(projectile);
+			int new_idx = add(projectile);
 			projectile = null;
+			
+			Collection<Bubble> sameColors = getColorGroup(new_idx);
+			if (sameColors.size() >= 3) {
+				removeAll(sameColors);
+				removeAll(getDisconnectedGroup());
+			}
 		}
 	}
 	
