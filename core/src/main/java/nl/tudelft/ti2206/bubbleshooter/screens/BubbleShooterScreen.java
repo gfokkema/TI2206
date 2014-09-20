@@ -7,16 +7,14 @@ import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -62,9 +60,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		game.batch.begin();
-		board.draw(game);
-		board.getBubbles().forEach((Integer k, Bubble v) -> v.draw(game));
-		cannon.getProjectile().draw(game);
+		draw(board);
+		board.getBubbles().forEach((Integer k, Bubble v) -> draw(v));
+		draw(cannon.getProjectile());
 		cannon.draw(game.batch);
 		
 		if (projectile != null) {
@@ -73,7 +71,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				dir.x = -dir.x;
 			}
 			projectile.move();
-			projectile.draw(game);
+			draw(projectile);
 			
 			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
 				int new_idx = board.getIndex(projectile.getMidPoint());
@@ -114,5 +112,18 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	@Override
 	public void hide() {
 		// game.engine.pause();
+	}
+	
+	public void draw(BSDrawable drawable) {
+		Vector2 position = drawable.getPosition();
+		Vector2 origin = drawable.getOrigin();
+		
+		game.batch.setColor(drawable.getColor());
+		game.batch.draw(new TextureRegion(game.assets.get(drawable.getTexture())),
+						position.x, position.y,
+						origin.x, origin.y,
+						drawable.getWidth(), drawable.getHeight(),
+						1, 1,
+						drawable.getRotation());
 	}
 }
