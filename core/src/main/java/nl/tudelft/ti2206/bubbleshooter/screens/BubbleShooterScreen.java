@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 import java.util.HashMap;
 
 import nl.tudelft.ti2206.bubbleshooter.Launch;
+import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
@@ -29,6 +30,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	Launch game;
 	HashMap<Vector2, Board> boards;
 	Board board;
+	Background bg;
 
 	/**
 	 * Constructor of BubbleShooterScreen
@@ -47,6 +49,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 				b.add(new Bubble(), i);
 			}
 		});
+		this.bg = new Background();
 	}
 
 	/**
@@ -60,6 +63,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		game.batch.begin();
+		draw(new Vector2(0,0), bg);
 		boards.forEach((Vector2 offset, Board board) -> {
 			board.update();
 			board.getDrawables().forEach((BSDrawable d) -> {
