@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Board {
 	private int width = 8, height = 20;
 	private HashMap<Integer,Bubble> bubbles;
+	Score score;
 
 	/**
 	 * Constructs a {@link Board} that can hold {@link Bubble} objects.
@@ -29,6 +30,7 @@ public class Board {
 		this.width = width;
 		this.height = height;
 		this.bubbles = new HashMap<Integer,Bubble>(this.width * this.height);
+		this.score = new Score();
 	}
 	
 	/**
@@ -174,6 +176,7 @@ public class Board {
 	 *           be removed.
 	 */
 	public void removeAll(Collection<Bubble> bs) {
+		score.update(bs);
 		bubbles.values().removeAll(bs);
 	}
 
@@ -262,5 +265,9 @@ public class Board {
 		x_id /= 32;
 		
 		return toIdx(x_id, y_id);
+	}
+	
+	public Score getScore(){
+		return this.score;
 	}
 }

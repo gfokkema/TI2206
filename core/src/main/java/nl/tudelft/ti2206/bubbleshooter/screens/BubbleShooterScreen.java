@@ -60,7 +60,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		
 		game.batch.begin();
 		game.batch.draw(game.assets.get(TextureID.BACKGROUND), 0, 0);
-		
+	
 		// Draw all the bubbles
 		Color current = game.batch.getColor();
 		board.getBubbles().forEach((Integer k, Bubble v) -> {
@@ -96,6 +96,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		game.batch.setColor(current);
 		
 		cannon.draw(game.batch);
+		game.font.draw(game.batch, Integer.toString(board.getScore().getScore()), 20, 20);
 		game.batch.end();
 	}
 	

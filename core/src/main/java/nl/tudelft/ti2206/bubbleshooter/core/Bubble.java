@@ -68,6 +68,7 @@ public class Bubble {
 	};
 	private Color color;
 	private Circle bounds;
+	private int points;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
@@ -75,6 +76,7 @@ public class Bubble {
 	public Bubble() {
 		this.color = getRandomColor();
 		this.bounds = new Circle();
+		setPoints(10);
 	}
 
 	/**
@@ -152,5 +154,21 @@ public class Bubble {
 	 */
 	public void setBounds(Circle c) {
 		this.bounds = c;
+	}
+	
+	/**
+	 * Set the value of a bubble.
+	 * @param points
+	 */
+	public void setPoints(int points){
+		this.points = points;
+	}
+	
+	/**
+	 * Set the value of a bubble.
+	 * @param points
+	 */
+	public int getPoints(){
+		return this.points;
 	}
 }
