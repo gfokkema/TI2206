@@ -46,7 +46,6 @@ public class Board extends BSDrawable {
 		}
 		
 		if (b.getBounds().y + 16 > 480) return true;
-		
 		if (b.getBounds().x - 16 < 0 || b.getBounds().x + 16 > grid.getWidth() * 32) {
 			Vector2 dir = b.getDirection();
 			dir.x = -dir.x;
@@ -214,7 +213,7 @@ public class Board extends BSDrawable {
 
 	@Override
 	public int getWidth() {
-		return 640;
+		return 260;
 	}
 
 	@Override

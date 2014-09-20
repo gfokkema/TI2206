@@ -40,8 +40,8 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.board = new Board(8, 15);
 		
 		this.boards = new HashMap<Vector2, Board>();
-		this.boards.put(new Vector2(0, 0), board);
-		this.boards.put(new Vector2(320, 0), new Board(8, 15));
+		this.boards.put(new Vector2(30, 0), board);
+		this.boards.put(new Vector2(350, 0), new Board(8, 15));
 		this.boards.values().forEach((Board b) -> {
 			for (int i = 0; i < 40; i++) {
 				b.add(new Bubble(), i);
