@@ -27,9 +27,6 @@ public class MainMenuScreen extends AbstractScreen {
 	 */
 	public static final String title = "Bubble Shooter";
 
-	OptionsScreen options;
-	BubbleShooterScreen BBS;
-
 	/**
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session.
