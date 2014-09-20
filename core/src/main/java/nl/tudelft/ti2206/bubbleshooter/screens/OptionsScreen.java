@@ -2,7 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
-import nl.tudelft.ti2206.bubbleshooter.Launch;
+import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
@@ -26,14 +26,14 @@ public class OptionsScreen extends ScreenAdapter {
 	public static final String title = "Options";
 	private final float volumeStep = 0.1f;
 
-	Launch game;
+	BubbleShooter game;
 	ArrayList<Button> buttons;
 	
 	/**
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
 	 */
-	public OptionsScreen(Launch game) {
+	public OptionsScreen(BubbleShooter game) {
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
 

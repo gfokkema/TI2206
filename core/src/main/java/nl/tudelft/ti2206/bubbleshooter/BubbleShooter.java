@@ -1,14 +1,22 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
+import java.util.Collection;
+import java.util.Map;
+import java.util.function.Consumer;
+
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -18,7 +26,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author group-15
  *
  */
-public class Launch extends Game {
+public class BubbleShooter extends Game {
 	/**
 	 * Initialize a spritebatch and bitmapfont for later use.
 	 * Assign the initial music being used
@@ -28,6 +36,8 @@ public class Launch extends Game {
 	public MainMenuScreen mms;
 	public SoundEngine engine;
 	public SpriteBatch batch;
+	private BSMode game_mode;
+	public static Map<Integer, Consumer<SinglePlayerProcessor>> keyBindings;
 	
 	/**
 	 * Create the spritebatch and bitmapfont.
@@ -53,7 +63,17 @@ public class Launch extends Game {
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
 	}
-	
+
+	public Collection<Sprite> getDrawables() {
+		return game_mode.getDrawables();
+	}
+
+	@Override
+	public void render() {
+		game_mode.update(Gdx.graphics.getDeltaTime());
+		this.getScreen().render(Gdx.graphics.getDeltaTime());
+	}
+
 	/**
 	 * Clean up afterwards.
 	 */

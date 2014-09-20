@@ -2,7 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.ArrayList;
 
-import nl.tudelft.ti2206.bubbleshooter.Launch;
+import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.utils.Button;
@@ -29,7 +29,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	 * Set the BGM used.
 	 */
 	public static final String title = "Bubble Shooter";
-	Launch game;
+	BubbleShooter game;
 	
 	ArrayList<Button> buttons;
 	OptionsScreen options;
@@ -39,7 +39,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session.
 	 */
-	public MainMenuScreen(Launch game) {
+	public MainMenuScreen(BubbleShooter game) {
 		this.game = game;
 		this.buttons = new ArrayList<Button>();
 
