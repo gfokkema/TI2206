@@ -4,7 +4,6 @@ import nl.tudelft.ti2206.bubbleshooter.Launch;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -31,12 +30,12 @@ public class AbstractScreen extends ScreenAdapter {
 		TextureRegionDrawable drawable = new TextureRegionDrawable(region);
 		table.background(drawable);
 		table.setFillParent(true);
+		stage.addActor(table);
 	}
 	
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(stage);
-		stage.addActor(table);
 	}
 	
 	@Override
@@ -51,8 +50,6 @@ public class AbstractScreen extends ScreenAdapter {
 		
 	    stage.act(delta);
 	    stage.draw();
-	    
-	    if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
 	}
 	
 	@Override

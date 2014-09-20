@@ -1,7 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.Launch;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -14,11 +17,6 @@ public class MultiPlayerScreen extends AbstractScreen {
 	 */
 	public MultiPlayerScreen(Launch game) {
 		super(game);
-	}
-	
-	@Override
-	public void show() {
-		super.show();
 		
 		TextButtonStyle style = new TextButtonStyle();
 		style.font = game.font;
@@ -29,17 +27,25 @@ public class MultiPlayerScreen extends AbstractScreen {
 		host.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				game.engine.play(SoundID.BUTTON);
 				game.setScreen(new HostGameScreen(game));
 			}
 		});
 		join.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				game.engine.play(SoundID.BUTTON);
 				game.setScreen(new JoinGameScreen(game));
 			}
 		});
 		
 		table.add(host).expandX().center().row();
 		table.add(join).expandX().center().row();
+	}
+	
+	@Override
+	public void render(float delta) {
+		super.render(delta);
+		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
 	}
 }
