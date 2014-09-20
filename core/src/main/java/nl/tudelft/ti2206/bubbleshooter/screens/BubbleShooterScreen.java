@@ -61,7 +61,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		
 		game.batch.begin();
 		boards.forEach((Vector2 offset, Board board) -> {
-			board.move();
+			board.update();
 			board.getDrawables().forEach((BSDrawable d) -> {
 				draw(offset, d);
 			});

@@ -19,8 +19,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Board extends BSDrawable {
 	private Grid grid;
-	Projectile projectile;
-	Cannon cannon;
+	private Cannon cannon;
+	private Projectile projectile;
 	private HashMap<Integer,Bubble> bubbles;
 
 	/**
@@ -70,11 +70,6 @@ public class Board extends BSDrawable {
 		return true;
 	}
 	
-	public int add(Bubble b) {
-		int new_idx = grid.getIndex(b.getMidPoint());
-		return add(b, new_idx) ? new_idx : -1;
-	}
-	
 	/**
 	 * Add a {@link Bubble} to the {@link Board} on a specific hex index.
 	 * @param b	{@link Bubble} that has to be added
@@ -84,6 +79,15 @@ public class Board extends BSDrawable {
 	 */
 	public boolean add(Bubble b, int i, int j) {
 		return add(b, grid.toIdx(i, j));
+	}
+	
+	public int add(Bubble b) {
+		int new_idx = grid.getIndex(b.getMidPoint());
+		return add(b, new_idx) ? new_idx : -1;
+	}
+	
+	public Cannon getCannon() {
+		return cannon;
 	}
 	
 	public Collection<BSDrawable> getDrawables() {
@@ -96,11 +100,15 @@ public class Board extends BSDrawable {
 		return drawables;
 	}
 	
-	public Cannon getCannon() {
-		return cannon;
+	public boolean shoot() {
+		if (projectile == null) {
+			projectile = cannon.shoot();
+			return true;
+		}
+		return false;
 	}
 	
-	public void move() {
+	public void update() {
 		if (projectile == null) return;
 		
 		projectile.move();
@@ -114,14 +122,6 @@ public class Board extends BSDrawable {
 				removeAll(getDisconnectedGroup());
 			}
 		}
-	}
-	
-	public boolean shoot() {
-		if (projectile == null) {
-			projectile = cannon.shoot();
-			return true;
-		}
-		return false;
 	}
 
 	/**
