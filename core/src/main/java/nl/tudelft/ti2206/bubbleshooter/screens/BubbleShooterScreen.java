@@ -23,7 +23,9 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class BubbleShooterScreen extends ScreenAdapter {	
+public class BubbleShooterScreen extends ScreenAdapter {
+	Vector2 offset = new Vector2(190,0);
+	
 	/**
 	 * Variable initialization.
 	 * The defined textures are used for the bubble and the board.
@@ -71,17 +73,13 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		});
 		
 		if (projectile != null) {
-			if (projectile.getBounds().x - 16 < 190 || projectile.getBounds().x + 16 > 190 + board.getWidth() * 32) {
-				Vector2 dir = projectile.getDirection();
-				dir.x = -dir.x;
-			}
 			projectile.move();
 			game.batch.setColor(projectile.getColor());
 			game.batch.draw(game.assets.get(TextureID.BUBBLE), projectile.getBounds().x - 16, projectile.getBounds().y - 16, 32, 32);
 			
-			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
-				int new_idx = board.getIndex(projectile.getPosition());
-				if (board.add(projectile, new_idx)) {
+			if (board.collides(projectile)) {
+				int new_idx = board.add(projectile);
+				if (new_idx >= 0) {
 					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
 					if (sameColors.size() >= 3) {
 						board.removeAll(sameColors);
