@@ -24,7 +24,9 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class BubbleShooterScreen extends ScreenAdapter {	
+public class BubbleShooterScreen extends ScreenAdapter {
+	Vector2 offset = new Vector2(190,0);
+	
 	/**
 	 * Variable initialization.
 	 * The defined textures are used for the bubble and the board.
@@ -42,7 +44,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public BubbleShooterScreen(Launch game) {
 		this.game = game;
 		this.board = new Board(8, 15);
-		this.cannon = new Cannon(game.assets.get(TextureID.CANNON), Gdx.graphics.getWidth() / 2, 15);
+		this.cannon = new Cannon(game.assets.get(TextureID.CANNON), (Gdx.graphics.getWidth() - 380) / 2, 15);
 		
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
@@ -65,26 +67,6 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		draw(cannon.getProjectile());
 		cannon.draw(game.batch);
 		
-		if (projectile != null) {
-			if (projectile.getBounds().x - 16 < 190 || projectile.getBounds().x + 16 > 190 + board.getBoardWidth() * 32) {
-				Vector2 dir = projectile.getDirection();
-				dir.x = -dir.x;
-			}
-			projectile.move();
-			draw(projectile);
-			
-			if (board.collides(projectile) || projectile.getBounds().y + 16 > 480) {
-				int new_idx = board.getIndex(projectile.getMidPoint());
-				if (board.add(projectile, new_idx)) {
-					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
-					if (sameColors.size() >= 3) {
-						board.removeAll(sameColors);
-						board.removeAll(board.getDisconnectedGroup());
-					}
-				}
-				projectile = null;
-			}
-		}
 		game.batch.end();
 	}
 	
@@ -120,7 +102,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		
 		game.batch.setColor(drawable.getColor());
 		game.batch.draw(new TextureRegion(game.assets.get(drawable.getTexture())),
-						position.x, position.y,
+						offset.x + position.x, offset.y + position.y,
 						origin.x, origin.y,
 						drawable.getWidth(), drawable.getHeight(),
 						1, 1,
