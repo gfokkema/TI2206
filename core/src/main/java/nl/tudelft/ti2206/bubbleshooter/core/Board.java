@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble.Orientation;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
@@ -147,7 +146,7 @@ public class Board extends BSDrawable {
 	 *               results.
 	 */
 	private void depthFirst(Integer currentIndex, BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
-		for(Orientation o : Bubble.orientations) {
+		for(Orientation o : Orientation.values()) {
 			int neighborIndex = o.fromIndex(currentIndex, grid.getWidth());
 			if (!grid.adjacent(currentIndex, neighborIndex))	continue;
 			// Check if there's a neighbor Bubble.
