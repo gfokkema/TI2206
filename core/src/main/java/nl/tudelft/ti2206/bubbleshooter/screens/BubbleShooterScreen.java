@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.util.HashMap;
+
 import nl.tudelft.ti2206.bubbleshooter.Launch;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
@@ -20,13 +22,12 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class BubbleShooterScreen extends ScreenAdapter {
-	Vector2 offset = new Vector2(190,0);
-	
 	/**
 	 * Variable initialization.
 	 * The defined textures are used for the bubble and the board.
 	 */
 	Launch game;
+	HashMap<Vector2, Board> boards;
 	Board board;
 
 	/**
@@ -38,9 +39,14 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		this.game = game;
 		this.board = new Board(8, 15);
 		
-		for (int i = 0; i < 40; i++) {
-			board.add(new Bubble(), i);
-		}
+		this.boards = new HashMap<Vector2, Board>();
+		this.boards.put(new Vector2(0, 0), board);
+		this.boards.put(new Vector2(320, 0), new Board(8, 15));
+		this.boards.values().forEach((Board b) -> {
+			for (int i = 0; i < 40; i++) {
+				b.add(new Bubble(), i);
+			}
+		});
 	}
 
 	/**
@@ -54,14 +60,12 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		game.batch.begin();
-		draw(board);
-		board.getBubbles().forEach((Integer k, Bubble v) -> draw(v));
-		draw(board.getCannon().getProjectile());
-		draw(board.getCannon());
-		if (board.getProjectile() != null) {
-			draw(board.getProjectile());
+		boards.forEach((Vector2 offset, Board board) -> {
 			board.move();
-		}
+			board.getDrawables().forEach((BSDrawable d) -> {
+				draw(offset, d);
+			});
+		});
 		game.batch.end();
 	}
 	
@@ -90,7 +94,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		// game.engine.pause();
 	}
 	
-	public void draw(BSDrawable drawable) {
+	public void draw(Vector2 offset, BSDrawable drawable) {
 		Vector2 position = drawable.getPosition();
 		Vector2 origin = drawable.getOrigin();
 		

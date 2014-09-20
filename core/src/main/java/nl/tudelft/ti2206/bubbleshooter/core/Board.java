@@ -11,7 +11,6 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble.Orientation;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -88,23 +87,23 @@ public class Board extends BSDrawable {
 		return add(b, grid.toIdx(i, j));
 	}
 	
-	/**
-	 * Returns a {@link Map} with the {@link Bubble} objects that are currently on the {@link Board}.
-	 * @return	{@link Map} with all {@link Bubble} objects
-	 */
-	public Map<Integer, Bubble> getBubbles() {
-		return bubbles;
+	public Collection<BSDrawable> getDrawables() {
+		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
+		drawables.add(this);
+		drawables.add(cannon);
+		drawables.add(cannon.getProjectile());
+		if (projectile != null) drawables.add(projectile);
+		drawables.addAll(bubbles.values());
+		return drawables;
 	}
 	
 	public Cannon getCannon() {
 		return cannon;
 	}
 	
-	public Projectile getProjectile() {
-		return projectile;
-	}
-	
 	public void move() {
+		if (projectile == null) return;
+		
 		projectile.move();
 		if (collides(projectile)){
 			int new_idx = add(projectile);
