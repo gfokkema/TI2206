@@ -1,7 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
-import java.io.Serializable;
-
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
