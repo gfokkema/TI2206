@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 
 	private Background bg;
 	private Board board2;
-	private Cannon cannon2 = new Cannon(160, 15);
+	private Cannon cannon2;
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
 
@@ -38,16 +37,14 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		bg = new Background();
 
 		this.offset1 = new Vector2(0, 0);
-
 		this.offset2 = new Vector2(320, 0);
-		setCannon(cannon2);
 
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
 
 		writeBoard(board);
-
+		writeCannon(cannon);
 	}
 
 	@Override
@@ -63,7 +60,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 			drawables1.add(projectile);
 		odraw.put(offset1, drawables1);
 
-		if (board2 != null) {
+		if (board2 != null && cannon2 != null) {
 			Collection<BSDrawable> drawables2 = board2.getDrawables();
 			drawables2.add(cannon2);
 			drawables2.add(cannon2.getProjectile());
@@ -78,12 +75,16 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	public boolean update(float deltaTime) {
 		// FIXME: do not send board every frame
 		writeBoard(board);
-		writeCannon(cannon2);
+		writeCannon(cannon);
 		return super.update(deltaTime);
 	}
 
 	public synchronized void setBoard(Board board) {
 		this.board2 = board;
+	}
+	
+	public synchronized void setCannon(Cannon cn) {
+		this.cannon2 = cn;
 	}
 
 	public void writeBoard(Board board) {
@@ -92,11 +93,8 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 			out.flush();
 			out.reset();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-	}
-
-	public synchronized void setCannon(Cannon cn) {
-		this.cannon2 = cn;
 	}
 
 	public void writeCannon(Cannon cn) {
@@ -105,7 +103,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 			out.flush();
 			out.reset();
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -117,9 +115,10 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 				if (o instanceof Board) {
 					setBoard((Board) o);
 				} else if (o instanceof Cannon) {
-					setCannon(((Cannon) o));
+					setCannon((Cannon) o);
 				}
 			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}

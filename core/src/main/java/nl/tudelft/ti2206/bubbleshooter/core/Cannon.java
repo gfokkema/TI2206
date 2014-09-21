@@ -16,11 +16,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class Cannon extends BSDrawable implements Serializable {
-	
 	private static final long serialVersionUID = 687534278195329047L;
-	/**
-	 * 
-	 */
 	/**
 	 * Variable initialization.
 	 */

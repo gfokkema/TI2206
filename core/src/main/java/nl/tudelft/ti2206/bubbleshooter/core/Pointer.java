@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import java.io.Serializable;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -8,8 +10,8 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class Pointer {
-	
+public class Pointer implements Serializable {
+	private static final long serialVersionUID = -6490893625035999503L;
 	/**
 	 * Vector intialization.
 	 */
