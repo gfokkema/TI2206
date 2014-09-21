@@ -1,41 +1,42 @@
 package nl.tudelft.ti2206.bubbleshooter.multiplayer;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import nl.tudelft.ti2206.bubbleshooter.core.Board;
 
 public class BubbleShooterServer {
 
 	public static void main(String[] args) throws IOException {
 
 		ServerSocket gameListener = new ServerSocket(getIP.getPort());
-		ArrayList<Socket> socketList;
+		// ArrayList<Socket> socketList;
 
 		try {
-			socketList = new ArrayList<Socket>();
+			// socketList = new ArrayList<Socket>();
 			while (true) {
-				Socket socket = gameListener.accept();
-				socketList.add(socket);
-				try {
-					Socket socket1 = gameListener.accept();
+				// Socket socket = gameListener.accept();
+				// socketList.add(socket);
+				// try {
+				Socket socket1 = gameListener.accept();
+				InputStream is = socket1.getInputStream();
+				ObjectInputStream ois = new ObjectInputStream(is);
+				Board br = (Board) ois.readObject();
 
-					InputStreamReader is = new InputStreamReader(
-							socket1.getInputStream());
-					BufferedReader br = new BufferedReader(is);
-
-					br.close();
-					is.close();
-					socket1.close();
-				} catch (Exception iox) {
-					System.out
-							.println("It isn't working, maybe later it will, maybe it will not. *For Windows-users: ERROR: PRESS OK");
-				}
+				is.close();
+				ois.close();
+				socket1.close();
+				gameListener.close();
+				// } catch (Exception iox) {
+				// System.out
+				// .println("It isn't working, maybe later it will, maybe it will not. *For Windows-users: ERROR: PRESS OK");
+				// }
 
 			}
 		} catch (Exception iox) {
