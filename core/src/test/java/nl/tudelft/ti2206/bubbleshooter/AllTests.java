@@ -10,6 +10,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.ProjectileTest;
 import nl.tudelft.ti2206.bubbleshooter.engine.AssetsTest;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngineTest;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessorTest;
+import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerModeTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -24,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
 				GridTest.class,
 				PointerTest.class,
 				ProjectileTest.class,
+				SinglePlayerModeTest.class,
 				SinglePlayerProcessorTest.class,
 				SoundEngineTest.class })
 public class AllTests {

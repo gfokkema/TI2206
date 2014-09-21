@@ -25,22 +25,26 @@ public abstract class BSMode {
 	private EndingCondition end;
 	private int score;
 
-	public BSMode(EndingCondition end) {
-		this.board = new Board(8, 15);
-		this.cannon = new Cannon(160,15);
+	public BSMode(EndingCondition end, Board board, Cannon cannon) {
+		this.board = board;
+		this.cannon = cannon;
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
 		this.end = end;
 		this.score = 0;
 	}
+	
+	public BSMode(EndingCondition end) {
+		this(end, new Board(8, 15), new Cannon(160,15));
+	}
 
 	public boolean update(float deltaTime) {
 		if (cannonLeft) {
-			cannon.left(Gdx.graphics.getDeltaTime());
+			cannon.left(deltaTime);
 		}
 		if (cannonRight) {
-			cannon.right(Gdx.graphics.getDeltaTime());
+			cannon.right(deltaTime);
 		}
 
 		if (projectile != null) {
