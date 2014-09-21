@@ -127,18 +127,14 @@ public class MultiPlayerMode implements BSMode, Runnable {
 	}
 	
 	public synchronized void setBoard(Board board) {
-		System.out.println("Old board: " + this.board2);
-		this.board2 = null;
 		this.board2 = board;
-		System.out.println("Received board: " + this.board2);
 	}
 	
-	public synchronized void writeBoard(Board board) {
+	public void writeBoard(Board board) {
 		try {
 			out.writeObject(board);
 			out.flush();
 			out.reset();
-			System.out.println("wrote board: " + board);
 		} catch (Exception e) {}
 	}
 	
@@ -150,9 +146,7 @@ public class MultiPlayerMode implements BSMode, Runnable {
 				if (o instanceof Board) {
 					setBoard((Board)o);
 				}
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+			} catch (Exception e) {}
 		}
 	}
 }
