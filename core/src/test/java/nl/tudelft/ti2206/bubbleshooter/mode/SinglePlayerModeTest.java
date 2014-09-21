@@ -2,7 +2,6 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Matchers.anyInt;
@@ -37,12 +36,12 @@ public class SinglePlayerModeTest {
 	@Before
 	public void setUp() {
 		mode = new SinglePlayerMode(end, board, cannon);
-		Mockito.when(end.check(mode)).thenReturn(false);
+		Mockito.when(end.check(mode)).thenReturn(-1);
 	}
 	
 	@Test
 	public void testUpdate() {
-		assertTrue(mode.update(.02f));
+		assertEquals(mode.update(.02f), -1);
 	}
 	
 	@Test
@@ -109,9 +108,9 @@ public class SinglePlayerModeTest {
 	
 	@Test
 	public void testEndCondition() {
-		Mockito.when(end.check(mode)).thenReturn(true);
+		Mockito.when(end.check(mode)).thenReturn(-1);
 		
-		assertFalse(mode.update(.02f));
+		assertEquals(-1, mode.update(.02f));
 	}
 
 	@Test

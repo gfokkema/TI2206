@@ -49,12 +49,17 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 		new Thread(this).start();
 	}
 	
+	/**
+	 *  Implements the escape key on your keyboard for our UI which brings the user back to the main menu.
+	 */
 	@Override
 	public void render(float delta) {
 		super.render(delta);
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
 	}
-
+	/**
+	 * Implements our server socket with datastreams.
+	 */
 	@Override
 	public void run() {
 		try {
@@ -70,6 +75,6 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			System.out.println(iox.getMessage());
 			Gdx.app.exit();
 		}
-		Gdx.app.postRunnable(() ->game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new ZenCondition(), br, bw))));
+		Gdx.app.postRunnable(() -> game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new ZenCondition(), br, bw))));
 	}
 }

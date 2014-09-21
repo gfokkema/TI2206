@@ -16,11 +16,12 @@ public class TimerCondition implements EndingCondition {
 	}
 
 	@Override
-	public boolean check(BSMode mode) {
+	public int check(BSMode mode) {
 		Duration deltaTime = Duration.between(epoch, ZonedDateTime.now());
-		if (gameLength.compareTo(deltaTime) < 0) return true;
+		if (mode.board.isEmpty()) return 1;
+		if (gameLength.compareTo(deltaTime) < 0) return -1;
 		obs.drawTimer(gameLength.minus(deltaTime));
-		return false;
+		return 0;
 	}
 
 	@Override

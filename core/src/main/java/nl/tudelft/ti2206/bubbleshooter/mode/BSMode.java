@@ -38,7 +38,7 @@ public abstract class BSMode {
 		this(end, new Board(8, 15), new Cannon(160,15));
 	}
 
-	public boolean update(float deltaTime) {
+	public int update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(deltaTime);
 		}
@@ -66,7 +66,7 @@ public abstract class BSMode {
 				}
 			}
 		}
-		return !end.check(this);
+		return end.check(this);
 	}
 
 	public void addStatsObserver(StatsObserver o) {

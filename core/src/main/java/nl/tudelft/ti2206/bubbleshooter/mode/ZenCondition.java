@@ -5,8 +5,8 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 public class ZenCondition implements EndingCondition {
 
 	@Override
-	public boolean check(BSMode mode) {
-		return mode.board.isEmpty();
+	public int check(BSMode mode) {
+		return mode.board.isEmpty() ? 1 : 0;
 	}
 
 	@Override

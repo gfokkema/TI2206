@@ -8,7 +8,7 @@ public interface EndingCondition {
 	 * Check whether the game should end
 	 * @return true if the game should end.
 	 */
-	public boolean check(BSMode mode);
+	public int check(BSMode mode);
 
 	public void addStatsObserver(StatsObserver o);
 }

@@ -57,12 +57,18 @@ public class JoinGameScreen extends AbstractScreen {
 		table.add(connect).expandX().center().row();
 	}
 	
+	/**
+	 * Implements the escape key on your keyboard for our UI which brings the user back to the main menu.
+	 */
 	@Override
 	public void render(float delta) {
 		super.render(delta);
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
 	}
-	
+	/**
+	 * Implements our client socket wih datastreams.
+	 * @param ip
+	 */
 	public void connect(String ip) {
 		try {
 			Socket socket = new Socket(ip, 8008);
