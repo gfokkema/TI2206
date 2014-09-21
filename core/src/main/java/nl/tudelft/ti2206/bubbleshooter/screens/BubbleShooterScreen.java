@@ -1,9 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.util.Collection;
+
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.ZenMode;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -25,9 +26,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	 * Creates a cannon, board and game.
 	 * @param game	the parent {@link BubbleShooter} instance
 	 */
-	public BubbleShooterScreen(BubbleShooter game) {
+	public BubbleShooterScreen(BubbleShooter game, BSMode game_mode) {
 		this.game = game;
-		game_mode = new ZenMode(game);
+		this.game_mode = game_mode;
 	}
 
 	/**
@@ -40,7 +41,9 @@ public class BubbleShooterScreen extends ScreenAdapter {
 		game_mode.update(delta);
 		game.batch.begin();
 		// Draw all game sprites.
-		game_mode.getDrawables().forEach((BSDrawable b) -> draw(new Vector2(190,0), b));
+		game_mode.getDrawables().forEach((Vector2 o, Collection<BSDrawable> c) -> {
+			c.forEach((BSDrawable d) -> draw(o, d));
+		});
 		game.batch.end();
 	}
 	

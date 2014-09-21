@@ -1,32 +1,36 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import java.util.Collection;
+import java.util.HashMap;
 
-import com.badlogic.gdx.Gdx;
-
-import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+
 public class MultiPlayerMode implements BSMode {
-	private BubbleShooter game;
 	private Board board1, board2;
 	private Cannon cannon1, cannon2;
 	private Projectile projectile1, projectile2;
+	private Vector2 offset1, offset2;
 	// FUGLY, doesn't belong here...
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	public MultiPlayerMode(BubbleShooter game) {
+	public MultiPlayerMode() {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
-		this.game = game;
+		
+		this.offset1 = new Vector2(0, 0);
 		this.board1 = new Board(8, 15);
+		this.cannon1 = new Cannon(128, 15);
+		
+		this.offset2 = new Vector2(320, 0);
 		this.board2 = new Board(8, 15);
-		this.cannon1 = new Cannon(130, 15);
-		this.cannon2 = new Cannon(380, 15);
+		this.cannon2 = new Cannon(128, 15);
 		
 		for (int i = 0; i < 40; i++) {
 			board1.add(new Bubble(), i);
@@ -35,17 +39,20 @@ public class MultiPlayerMode implements BSMode {
 	}
 
 	@Override
-	public Collection<BSDrawable> getDrawables() {
-		Collection<BSDrawable> drawables = board1.getDrawables();
-		drawables.add(cannon1);
-		drawables.add(cannon1.getProjectile());
-		if (projectile1 != null) drawables.add(projectile1);
+	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
+		HashMap<Vector2, Collection<BSDrawable>> odraw = new HashMap<>();
+		Collection<BSDrawable> drawables1 = board1.getDrawables();
+		drawables1.add(cannon1);
+		drawables1.add(cannon1.getProjectile());
+		if (projectile1 != null) drawables1.add(projectile1);
+		odraw.put(offset1, drawables1);
 		
-		drawables.addAll(board2.getDrawables());
-		drawables.add(cannon2);
-		drawables.add(cannon2.getProjectile());
-		if (projectile2 != null) drawables.add(projectile2);
-		return drawables;
+		Collection<BSDrawable> drawables2 = board2.getDrawables();
+		drawables2.add(cannon2);
+		drawables2.add(cannon2.getProjectile());
+		if (projectile2 != null) drawables2.add(projectile2);
+		odraw.put(offset2, drawables2);
+		return odraw;
 	}
 
 	@Override

@@ -1,30 +1,31 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import java.util.Collection;
+import java.util.HashMap;
 
-import com.badlogic.gdx.Gdx;
-
-import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+
 public class ZenMode implements BSMode {
-	private BubbleShooter game;
 	private Board board;
 	private Cannon cannon;
 	private Projectile projectile;
+	private Vector2 offset;
 	// FUGLY, doesn't belong here...
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	public ZenMode(BubbleShooter game) {
+	public ZenMode() {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
-		this.game = game;
 		this.board = new Board(8, 15);
 		this.cannon = new Cannon(130,15);
+		this.offset = new Vector2(140, 0);
 		
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
@@ -32,12 +33,14 @@ public class ZenMode implements BSMode {
 	}
 
 	@Override
-	public Collection<BSDrawable> getDrawables() {
+	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
+		HashMap<Vector2, Collection<BSDrawable>> odraw = new HashMap<>();
 		Collection<BSDrawable> drawables = board.getDrawables();
 		drawables.add(cannon);
 		drawables.add(cannon.getProjectile());
 		if (projectile != null) drawables.add(projectile);
-		return drawables;
+		odraw.put(offset, drawables);
+		return odraw;
 	}
 
 	@Override

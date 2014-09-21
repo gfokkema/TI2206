@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -24,6 +25,7 @@ public class HostGameScreen extends AbstractScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		if (Gdx.input.isKeyPressed(Keys.S)) game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode()));
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
 	}
 }
