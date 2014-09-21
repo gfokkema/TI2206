@@ -1,8 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 
