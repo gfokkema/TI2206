@@ -11,6 +11,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 public abstract class BSMode {
 	protected Board board;
@@ -20,7 +21,9 @@ public abstract class BSMode {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
+	private StatsObserver obs;
 	private EndingCondition end;
+	private int score;
 
 	public BSMode(EndingCondition end) {
 		this.board = new Board(8, 15);
@@ -29,6 +32,7 @@ public abstract class BSMode {
 			board.add(new Bubble(), i);
 		}
 		this.end = end;
+		this.score = 0;
 	}
 
 	public boolean update(float deltaTime) {
@@ -50,12 +54,21 @@ public abstract class BSMode {
 					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
 					if (sameColors.size() >= 3) {
 						board.removeAll(sameColors);
-						board.removeAll(board.getDisconnectedGroup());
+						Collection<Bubble> disconnected = board.getDisconnectedGroup();
+						board.removeAll(disconnected);
+
+						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
+						this.obs.drawScore(score);
 					}
 				}
 			}
 		}
 		return !end.check(this);
+	}
+
+	public void addStatsObserver(StatsObserver o) {
+		this.obs = o;
+		end.addStatsObserver(o);
 	}
 
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();

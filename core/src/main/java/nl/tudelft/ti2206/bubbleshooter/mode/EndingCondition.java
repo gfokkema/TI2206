@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
+
 public interface EndingCondition {
 
 	/**
@@ -7,4 +9,6 @@ public interface EndingCondition {
 	 * @return true if the game should end.
 	 */
 	public boolean check(BSMode mode);
+
+	public void addStatsObserver(StatsObserver o);
 }
