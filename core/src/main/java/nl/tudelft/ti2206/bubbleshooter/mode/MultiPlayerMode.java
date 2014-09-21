@@ -42,13 +42,13 @@ public class MultiPlayerMode implements BSMode, Runnable {
 		this.cannon1 = new Cannon(160, 15);
 		
 		this.offset2 = new Vector2(320, 0);
-		this.board2 = new Board(8, 15);
 		this.cannon2 = new Cannon(160, 15);
 		
 		for (int i = 0; i < 40; i++) {
 			board1.add(new Bubble(), i);
-			board2.add(new Bubble(), i);
 		}
+		
+		writeBoard(board1);
 	}
 
 	@Override
@@ -63,22 +63,18 @@ public class MultiPlayerMode implements BSMode, Runnable {
 		if (projectile1 != null) drawables1.add(projectile1);
 		odraw.put(offset1, drawables1);
 		
-		Collection<BSDrawable> drawables2 = board2.getDrawables();
-		drawables2.add(cannon2);
-		drawables2.add(cannon2.getProjectile());
-		if (projectile2 != null) drawables2.add(projectile2);
-		odraw.put(offset2, drawables2);
+		if (board2 != null) {
+			Collection<BSDrawable> drawables2 = board2.getDrawables();
+			drawables2.add(cannon2);
+			drawables2.add(cannon2.getProjectile());
+			if (projectile2 != null) drawables2.add(projectile2);
+			odraw.put(offset2, drawables2);
+		}
 		return odraw;
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		try {
-			out.writeObject(board1);
-			out.flush();
-			System.out.println("wrote board!");
-		} catch (Exception e) {}
-		
 		if (cannonLeft) {
 			cannon1.left(Gdx.graphics.getDeltaTime());
 		}
@@ -101,6 +97,8 @@ public class MultiPlayerMode implements BSMode, Runnable {
 				board1.removeAll(sameColors);
 				board1.removeAll(board1.getDisconnectedGroup());
 			}
+			
+			writeBoard(board1);
 		}
 	}
 	
@@ -128,16 +126,29 @@ public class MultiPlayerMode implements BSMode, Runnable {
 		this.cannonRight = right;
 	}
 	
+	public synchronized void setBoard(Board board) {
+		System.out.println("Old board: " + this.board2);
+		this.board2 = null;
+		this.board2 = board;
+		System.out.println("Received board: " + this.board2);
+	}
+	
+	public synchronized void writeBoard(Board board) {
+		try {
+			out.writeObject(board);
+			out.flush();
+			out.reset();
+			System.out.println("wrote board: " + board);
+		} catch (Exception e) {}
+	}
+	
 	@Override
 	public void run() {
 		while (true) {
 			try {
 				Object o = in.readObject();
 				if (o instanceof Board) {
-					board2 = (Board)o;
-					System.out.println("received board!");
-				} else {
-					System.out.println("received something!");
+					setBoard((Board)o);
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
