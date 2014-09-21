@@ -60,8 +60,9 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			ServerSocket serverSocket = new ServerSocket(8008);
 			Socket socket = serverSocket.accept();
 
-			br = new ObjectInputStream(socket.getInputStream());
 			bw = new ObjectOutputStream(socket.getOutputStream());
+			bw.flush();
+			br = new ObjectInputStream(socket.getInputStream());
 			
 			System.out.println("SERVER CONNECTED!");
 		} catch (Exception iox) {

@@ -66,8 +66,9 @@ public class JoinGameScreen extends AbstractScreen {
 		try {
 			Socket socket = new Socket(ip, 8008);
 
-			br = new ObjectInputStream(socket.getInputStream());
 			bw = new ObjectOutputStream(socket.getOutputStream());
+			bw.flush();
+			br = new ObjectInputStream(socket.getInputStream());
 			
 			System.out.println("CLIENT CONNECTED!");
 		} catch (Exception e) {
