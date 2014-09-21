@@ -77,6 +77,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		// FIXME: do not send board every frame
 		writeBoard(board);
 		writeCannon(cannon);
+		writeProjectile(projectile2);
 		return super.update(deltaTime);
 	}
 
@@ -86,6 +87,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	
 	public synchronized void setCannon(Cannon cn) {
 		this.cannon2 = cn;
+	}
+	public synchronized void setProjectile(Projectile pj){
+		this.projectile2 = pj;
 	}
 
 	public void writeBoard(Board board) {
@@ -107,6 +111,17 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public void writeProjectile(Projectile pj){
+		try{
+			out.writeObject(pj);
+			out.flush();
+			out.reset();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
 
 	@Override
 	public void run() {
@@ -117,6 +132,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 					setBoard((Board) o);
 				} else if (o instanceof Cannon) {
 					setCannon((Cannon) o);
+				}
+				else if(o instanceof Projectile){
+					setProjectile((Projectile)o);
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
