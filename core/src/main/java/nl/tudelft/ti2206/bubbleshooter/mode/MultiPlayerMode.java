@@ -1,7 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,8 +17,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class MultiPlayerMode extends BSMode implements Runnable {
-	private BufferedReader in;
-	private BufferedWriter out;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 	
 	private Background bg;
 	private Board board2;
@@ -29,7 +29,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	public MultiPlayerMode(BufferedReader in, BufferedWriter out) {
+	public MultiPlayerMode(ObjectInputStream in, ObjectOutputStream out) {
 		super();
 		this.in = in;
 		this.out = out;
@@ -41,12 +41,13 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		this.offset1 = new Vector2(0, 0);
 		
 		this.offset2 = new Vector2(320, 0);
-		this.board2 = new Board(8, 15);
 		this.cannon2 = new Cannon(160, 15);
 		
 		for (int i = 0; i < 40; i++) {
-			board2.add(new Bubble(), i);
+			board.add(new Bubble(), i);
 		}
+		
+		writeBoard(board);
 	}
 
 	@Override
@@ -61,25 +62,43 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		if (projectile != null) drawables1.add(projectile);
 		odraw.put(offset1, drawables1);
 		
-		Collection<BSDrawable> drawables2 = board2.getDrawables();
-		drawables2.add(cannon2);
-		drawables2.add(cannon2.getProjectile());
-		if (projectile2 != null) drawables2.add(projectile2);
-		odraw.put(offset2, drawables2);
+		if (board2 != null) {
+			Collection<BSDrawable> drawables2 = board2.getDrawables();
+			drawables2.add(cannon2);
+			drawables2.add(cannon2.getProjectile());
+			if (projectile2 != null) drawables2.add(projectile2);
+			odraw.put(offset2, drawables2);
+		}
 		return odraw;
 	}
-
+	
+	@Override
+	public boolean update(float deltaTime) {
+		if (super.update(deltaTime)) writeBoard(board);
+		return false;
+	}
+	
+	public synchronized void setBoard(Board board) {
+		this.board2 = board;
+	}
+	
+	public void writeBoard(Board board) {
+		try {
+			out.writeObject(board);
+			out.flush();
+			out.reset();
+		} catch (Exception e) {}
+	}
+	
 	@Override
 	public void run() {
 		while (true) {
 			try {
-				out.write("TESTING\r\n");
-				out.flush();
-				System.out.println("DEBUG: wrote something");
-				System.out.println(in.readLine());
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+				Object o = in.readObject();
+				if (o instanceof Board) {
+					setBoard((Board)o);
+				}
+			} catch (Exception e) {}
 		}
 	}
 }

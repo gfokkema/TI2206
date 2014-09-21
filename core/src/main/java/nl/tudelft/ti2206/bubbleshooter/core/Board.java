@@ -19,8 +19,8 @@ import com.badlogic.gdx.math.Vector2;
  * {@link Bubble} objects.
  */
 public class Board extends BSDrawable implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private Grid grid;
+	private static final long serialVersionUID = -4815917036827285256L;
+	private transient Grid grid;
 	private HashMap<Integer, Bubble> bubbles;
 
 	/**
@@ -127,8 +127,8 @@ public class Board extends BSDrawable implements Serializable {
 		HashMap<Integer, Bubble> sameColors = new HashMap<Integer, Bubble>();
 		depthFirst(
 				id,
-				(current, neighbor) -> bubbles.get(current).getColor() == bubbles
-						.get(neighbor).getColor(), sameColors);
+				(current, neighbor) -> bubbles.get(current).getColor().equals(bubbles
+						.get(neighbor).getColor()), sameColors);
 		sameColors.put(id, bubbles.get(id));
 		return sameColors.values();
 	}

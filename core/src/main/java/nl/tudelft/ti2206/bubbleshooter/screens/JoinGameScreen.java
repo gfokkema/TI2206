@@ -1,9 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
@@ -23,8 +21,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class JoinGameScreen extends AbstractScreen {
-	private BufferedReader br = null;
-	private BufferedWriter bw = null;
+	private ObjectInputStream br = null;
+	private ObjectOutputStream bw = null;
 	
 	/**
 	 * Sets up the buttons to be displayed.
@@ -68,11 +66,10 @@ public class JoinGameScreen extends AbstractScreen {
 		try {
 			Socket socket = new Socket(ip, 8008);
 
-			InputStreamReader is = new InputStreamReader(socket.getInputStream());
-			br = new BufferedReader(is);
+			bw = new ObjectOutputStream(socket.getOutputStream());
+			bw.flush();
+			br = new ObjectInputStream(socket.getInputStream());
 			
-			OutputStreamWriter os = new OutputStreamWriter(socket.getOutputStream());
-			bw = new BufferedWriter(os);
 			System.out.println("CLIENT CONNECTED!");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

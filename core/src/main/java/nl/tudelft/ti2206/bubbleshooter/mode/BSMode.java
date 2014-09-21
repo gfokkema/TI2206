@@ -28,7 +28,7 @@ public abstract class BSMode {
 		}
 	}
 
-	public void update(float deltaTime) {
+	public boolean update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(Gdx.graphics.getDeltaTime());
 		}
@@ -50,8 +50,10 @@ public abstract class BSMode {
 						board.removeAll(board.getDisconnectedGroup());
 					}
 				}
+				return true;
 			}
 		}
+		return false;
 	}
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();
 
