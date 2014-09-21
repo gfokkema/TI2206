@@ -12,12 +12,13 @@ import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 public class ZenMode implements BSMode {
-	BubbleShooter game;
-	Board board;
-	Cannon cannon;
-	Projectile projectile;
-	boolean cannonLeft;
-	boolean cannonRight;
+	private BubbleShooter game;
+	private Board board;
+	private Cannon cannon;
+	private Projectile projectile;
+	// FUGLY, doesn't belong here...
+	protected boolean cannonLeft;
+	protected boolean cannonRight;
 
 	public ZenMode(BubbleShooter game) {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
@@ -63,5 +64,29 @@ public class ZenMode implements BSMode {
 				board.removeAll(board.getDisconnectedGroup());
 			}
 		}
+	}
+	
+	@Override
+	public Cannon getCannon() {
+		return cannon;
+	}
+
+	@Override
+	public Projectile getProjectile() {
+		return projectile;
+	}
+	@Override
+	public void setProjectile(Projectile projectile) {
+		this.projectile = projectile;
+	}
+
+	@Override
+	public void cannonLeft(boolean left) {
+		this.cannonLeft = left;
+	}
+
+	@Override
+	public void cannonRight(boolean right) {
+		this.cannonRight = right;
 	}
 }
