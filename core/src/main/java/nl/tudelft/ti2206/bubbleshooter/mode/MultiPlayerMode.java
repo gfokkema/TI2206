@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,7 +16,10 @@ import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class MultiPlayerMode implements BSMode {
+public class MultiPlayerMode implements BSMode, Runnable {
+	private BufferedReader in;
+	private BufferedWriter out;
+	
 	private Background bg;
 	private Board board1, board2;
 	private Cannon cannon1, cannon2;
@@ -24,7 +29,11 @@ public class MultiPlayerMode implements BSMode {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	public MultiPlayerMode() {
+	public MultiPlayerMode(BufferedReader in, BufferedWriter out) {
+		this.in = in;
+		this.out = out;
+		new Thread(this).start();
+		
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
 		bg = new Background();
 		
@@ -110,5 +119,19 @@ public class MultiPlayerMode implements BSMode {
 	@Override
 	public void cannonRight(boolean right) {
 		this.cannonRight = right;
+	}
+	
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				out.write("TESTING\r\n");
+				out.flush();
+				System.out.println("DEBUG: wrote something");
+				System.out.println(in.readLine());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 }

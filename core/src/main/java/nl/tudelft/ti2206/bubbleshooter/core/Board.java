@@ -12,11 +12,14 @@ import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.Json.Serializable;
+import com.badlogic.gdx.utils.JsonValue;
 
 /**
  * The {@link Board} class represents the playing field which contains all the {@link Bubble} objects.
  */
-public class Board extends BSDrawable {
+public class Board extends BSDrawable implements Serializable {
 	private Grid grid;
 	private HashMap<Integer,Bubble> bubbles;
 
@@ -184,5 +187,16 @@ public class Board extends BSDrawable {
 	@Override
 	public int getHeight() {
 		return 480;
+	}
+
+	@Override
+	public void write(Json json) {
+		
+	}
+
+	@Override
+	public void read(Json json, JsonValue jsonData) {
+		// TODO Auto-generated method stub
+		
 	}
 }
