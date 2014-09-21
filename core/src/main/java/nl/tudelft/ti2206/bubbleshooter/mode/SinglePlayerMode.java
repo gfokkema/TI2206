@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
+import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 
@@ -14,12 +16,18 @@ import com.badlogic.gdx.math.Vector2;
 public class SinglePlayerMode extends BSMode {
 	private Background bg;
 	private Vector2 offset;
-
+	
+	public SinglePlayerMode(EndingCondition end, Board board, Cannon cannon) {
+		super(end, board, cannon);
+		this.bg = new Background();
+		this.offset = new Vector2(140, 0);
+	}
+	
 	public SinglePlayerMode(EndingCondition end) {
 		super(end);
-		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
-		bg = new Background();
+		this.bg = new Background();
 		this.offset = new Vector2(140, 0);
+		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
 	}
 
 	@Override

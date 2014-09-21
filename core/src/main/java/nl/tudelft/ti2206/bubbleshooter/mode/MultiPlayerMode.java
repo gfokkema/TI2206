@@ -27,6 +27,12 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
 
+	/**
+	 * 
+	 * @param end
+	 * @param in
+	 * @param out
+	 */
 	public MultiPlayerMode(EndingCondition end, ObjectInputStream in,
 			ObjectOutputStream out) {
 		super(end);
@@ -48,6 +54,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		writeCannon(cannon);
 	}
 
+	/**
+ * 
+ */
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
 		HashMap<Vector2, Collection<BSDrawable>> odraw = new HashMap<>();
@@ -72,6 +81,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		return odraw;
 	}
 
+	/**
+	 * Updates every frame the cannon,board and projectile.
+	 */
 	@Override
 	public int update(float deltaTime) {
 		// FIXME: do not send board every frame
@@ -81,18 +93,38 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		return super.update(deltaTime);
 	}
 
+	/**
+	 * Setter for Opponent board.
+	 * 
+	 * @param board
+	 */
 	public synchronized void setBoardOpp(Board board) {
 		this.board2 = board;
 	}
-	
+
+	/**
+	 * Setter for oppponent cannon.
+	 * 
+	 * @param cn
+	 */
 	public synchronized void setCannonOpp(Cannon cn) {
 		this.cannon2 = cn;
 	}
-	
-	public synchronized void setProjectileOpp(Projectile pj){
+
+	/**
+	 * seetter for opponent projectile.
+	 * 
+	 * @param pj
+	 */
+	public synchronized void setProjectileOpp(Projectile pj) {
 		this.projectile2 = pj;
 	}
 
+	/**
+	 * Output stream method for Board
+	 * 
+	 * @param board
+	 */
 	public void writeBoard(Board board) {
 		try {
 			out.writeObject(board);
@@ -103,6 +135,11 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		}
 	}
 
+	/**
+	 * Output stream method for Cannon.
+	 * 
+	 * @param cn
+	 */
 	public void writeCannon(Cannon cn) {
 		try {
 			out.writeObject(cn);
@@ -112,21 +149,28 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	public void writeProjectile(Projectile pj){
-		try{
+
+	/**
+	 * output stream method for projectile
+	 * 
+	 * @param pj
+	 */
+	public void writeProjectile(Projectile pj) {
+		try {
 			if (projectile == null)
 				out.writeObject("reset");
 			else
 				out.writeObject(pj);
 			out.flush();
 			out.reset();
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
+	/**
+	 * runnable that copes with read input by sockets.
+	 */
 	@Override
 	public void run() {
 		while (true) {
@@ -138,7 +182,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 					setCannonOpp((Cannon) o);
 				} else if (o instanceof Projectile) {
 					setProjectileOpp((Projectile) o);
-				} else if (o instanceof String && ((String)o).equals("reset")) {
+				} else if (o instanceof String && ((String) o).equals("reset")) {
 					setProjectileOpp(null);
 				}
 			} catch (Exception e) {
