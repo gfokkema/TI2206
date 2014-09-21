@@ -3,15 +3,14 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.util.Collection;
 import java.util.HashMap;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
-
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
+
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class BSMode {
 	protected Board board;
