@@ -42,8 +42,7 @@ public class Board extends BSDrawable {
 		}
 		
 		if (b.getBounds().y + 16 > 480) return true;
-		
-		if (b.getBounds().x - 16 < 0 || b.getBounds().x + 16 > grid.getWidth() * 32) {
+		if (b.getBounds().x - 16 < 32 || b.getBounds().x + 16 > grid.getWidth() * 32 + 32) {
 			Vector2 dir = b.getDirection();
 			dir.x = -dir.x;
 		}
@@ -67,11 +66,6 @@ public class Board extends BSDrawable {
 		return true;
 	}
 	
-	public int add(Bubble b) {
-		int new_idx = grid.getIndex(b.getMidPoint());
-		return add(b, new_idx) ? new_idx : -1;
-	}
-	
 	/**
 	 * Add a {@link Bubble} to the {@link Board} on a specific hex index.
 	 * @param b	{@link Bubble} that has to be added
@@ -83,13 +77,18 @@ public class Board extends BSDrawable {
 		return add(b, grid.toIdx(i, j));
 	}
 	
+	public int add(Bubble b) {
+		int new_idx = grid.getIndex(b.getMidPoint());
+		return add(b, new_idx) ? new_idx : -1;
+	}
+		
 	public Collection<BSDrawable> getDrawables() {
 		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
 		drawables.add(this);
 		drawables.addAll(bubbles.values());
 		return drawables;
-	}
-	
+	}	
+
 	/**
 	 * Get a {@link Collection} of all {@link Bubble} objects
 	 * adjacent to the given {@link Bubble} that have the same color.
@@ -174,12 +173,12 @@ public class Board extends BSDrawable {
 
 	@Override
 	public TextureID getTexture() {
-		return TextureID.BACKGROUND;
+		return TextureID.BORDER;
 	}
 
 	@Override
 	public int getWidth() {
-		return 640;
+		return 320;
 	}
 
 	@Override

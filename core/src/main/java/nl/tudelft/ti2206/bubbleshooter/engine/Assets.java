@@ -31,6 +31,7 @@ public class Assets {
 	 */
 	public enum TextureID {
 		BACKGROUND,
+		BORDER,
 		BUBBLE,
 		BUTTON,
 		CANNON

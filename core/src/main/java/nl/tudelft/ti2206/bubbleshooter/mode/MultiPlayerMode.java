@@ -1,8 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class MultiPlayerMode implements BSMode {
+	private Background bg;
 	private Board board1, board2;
 	private Cannon cannon1, cannon2;
 	private Projectile projectile1, projectile2;
@@ -23,14 +26,15 @@ public class MultiPlayerMode implements BSMode {
 
 	public MultiPlayerMode() {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
+		bg = new Background();
 		
 		this.offset1 = new Vector2(0, 0);
 		this.board1 = new Board(8, 15);
-		this.cannon1 = new Cannon(128, 15);
+		this.cannon1 = new Cannon(160, 15);
 		
 		this.offset2 = new Vector2(320, 0);
 		this.board2 = new Board(8, 15);
-		this.cannon2 = new Cannon(128, 15);
+		this.cannon2 = new Cannon(160, 15);
 		
 		for (int i = 0; i < 40; i++) {
 			board1.add(new Bubble(), i);
@@ -41,7 +45,10 @@ public class MultiPlayerMode implements BSMode {
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
 		HashMap<Vector2, Collection<BSDrawable>> odraw = new HashMap<>();
-		Collection<BSDrawable> drawables1 = board1.getDrawables();
+		ArrayList<BSDrawable> drawables1 = new ArrayList<>();
+		drawables1.add(bg);
+		
+		drawables1.addAll(board1.getDrawables());
 		drawables1.add(cannon1);
 		drawables1.add(cannon1.getProjectile());
 		if (projectile1 != null) drawables1.add(projectile1);

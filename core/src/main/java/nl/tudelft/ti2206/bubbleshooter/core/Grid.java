@@ -86,7 +86,7 @@ public class Grid {
 		int odd = (idx % (width * 2 - 1)) / width;
 		Vector2 xy = toXY(idx);
 		
-		int x = (int)xy.x * 32	+ odd * 16;
+		int x = (int)xy.x * 32	+ odd * 16 + 32;
 		int y = (int)xy.y * 28;
 		
 		// offset the game field with 190 px and correct from left -> mid
@@ -107,6 +107,7 @@ public class Grid {
 	public int getIndex(Vector2 loc) {
 		int x = (int)loc.x;
 		int y = (int)loc.y;
+		x = x - 32;
 		y = 480 - y;
 		int y_id = y / 28;
 		int x_id = x - (y_id & 1) * 16;

@@ -1,8 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class ZenMode implements BSMode {
+	private Background bg;
 	private Board board;
 	private Cannon cannon;
 	private Projectile projectile;
@@ -23,6 +26,7 @@ public class ZenMode implements BSMode {
 
 	public ZenMode() {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
+		bg = new Background();
 		this.board = new Board(8, 15);
 		this.cannon = new Cannon(130,15);
 		this.offset = new Vector2(140, 0);
@@ -35,6 +39,10 @@ public class ZenMode implements BSMode {
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
 		HashMap<Vector2, Collection<BSDrawable>> odraw = new HashMap<>();
+		Collection<BSDrawable> drawablesbg = new ArrayList<>();
+		drawablesbg.add(bg);
+		odraw.put(new Vector2(0, 0), drawablesbg);
+		
 		Collection<BSDrawable> drawables = board.getDrawables();
 		drawables.add(cannon);
 		drawables.add(cannon.getProjectile());
