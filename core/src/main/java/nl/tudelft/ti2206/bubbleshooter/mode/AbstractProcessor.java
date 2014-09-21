@@ -27,5 +27,6 @@ public abstract class AbstractProcessor extends InputAdapter {
 	public abstract boolean cannonLeft();
 	public abstract boolean cannonRight();
 	public abstract boolean cannonShoot();
-	public abstract boolean cannonStopMoving();
+	public abstract boolean cannonStopLeft();
+	public abstract boolean cannonStopRight();
 }

@@ -55,7 +55,8 @@ public class ZenMode implements BSMode {
 	public void update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(Gdx.graphics.getDeltaTime());
-		} else if (cannonRight) {
+		}
+		if (cannonRight) {
 			cannon.right(Gdx.graphics.getDeltaTime());
 		}
 

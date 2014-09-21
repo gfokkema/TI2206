@@ -75,7 +75,8 @@ public class MultiPlayerMode implements BSMode, Runnable {
 	public void update(float deltaTime) {
 		if (cannonLeft) {
 			cannon1.left(Gdx.graphics.getDeltaTime());
-		} else if (cannonRight) {
+		}
+		if (cannonRight) {
 			cannon1.right(Gdx.graphics.getDeltaTime());
 		}
 

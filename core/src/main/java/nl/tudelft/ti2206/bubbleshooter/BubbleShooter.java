@@ -45,8 +45,8 @@ public class BubbleShooter extends Game {
 		keyDownBindings.put(Keys.RIGHT, AbstractProcessor::cannonRight);
 		keyDownBindings.put(Keys.SPACE, AbstractProcessor::cannonShoot);
 
-		keyUpBindings.put(Keys.LEFT, AbstractProcessor::cannonStopMoving);
-		keyUpBindings.put(Keys.RIGHT, AbstractProcessor::cannonStopMoving);
+		keyUpBindings.put(Keys.LEFT, AbstractProcessor::cannonStopLeft);
+		keyUpBindings.put(Keys.RIGHT, AbstractProcessor::cannonStopRight);
 	}
 
 	/**

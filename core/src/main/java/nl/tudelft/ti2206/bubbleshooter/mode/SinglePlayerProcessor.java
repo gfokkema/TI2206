@@ -24,8 +24,12 @@ public class SinglePlayerProcessor extends AbstractProcessor {
 		return true;
 	}
 
-	public boolean cannonStopMoving() {
+	public boolean cannonStopLeft() {
 		mode.cannonLeft(false);
+		return true;
+	}
+
+	public boolean cannonStopRight() {
 		mode.cannonRight(false);
 		return true;
 	}
