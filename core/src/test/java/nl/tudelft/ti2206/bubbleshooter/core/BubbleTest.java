@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,6 +39,17 @@ public class BubbleTest {
 		bubble = new Bubble(Color.ORANGE);
 		assertEquals(Color.ORANGE, bubble.getColor());
 	}
+	
+	/**
+	 * Test whether the defaults of a bubble are instantiated correctly.
+	 */
+	@Test
+	public void testDefaults() {
+		assertEquals(32, bubble.getWidth());
+		assertEquals(32, bubble.getHeight());
+		assertEquals(TextureID.BUBBLE, bubble.getTexture());
+	}
+	
 	/**
 	 * Checked whether the circles are initiated with the given boundaries.
 	 */

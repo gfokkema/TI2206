@@ -1,9 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
-import static org.junit.Assert.*;
-import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
-import nl.tudelft.ti2206.bubbleshooter.core.Pointer;
-import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+
+import static nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 /**
  * Tests for the {@link Cannon} class
@@ -36,11 +36,16 @@ public class CannonTest {
 	}
 
 	/**
-	 * Tests creation of a {@link Cannon}.
+	 * Tests creation and initialization of default values of the {@link Cannon} class.
 	 */
 	@Test
 	public void testInitializeCannon() {
 		assertEquals(new Vector2(-16, 0), cannon.getPointer().getOrigin());
+		assertEquals(100, cannon.getWidth());
+		assertEquals(100, cannon.getHeight());
+		assertEquals(TextureID.CANNON, cannon.getTexture());
+		assertEquals(new Vector2(-50, 0), cannon.getPosition());
+		assertEquals(new Vector2(50, 16), cannon.getOrigin());
 	}
 	
 	/**
