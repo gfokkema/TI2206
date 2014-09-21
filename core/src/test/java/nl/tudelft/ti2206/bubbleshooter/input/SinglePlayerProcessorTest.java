@@ -13,6 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.badlogic.gdx.Input.Keys;
 
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.never;
 
 /**
@@ -122,5 +123,27 @@ public class SinglePlayerProcessorTest {
 	public void testRightUp() {
 		input.keyUp(Keys.RIGHT);
 		Mockito.verify(mode).cannonRight(false);
+	}
+	
+	/**
+	 * Test an invalid keydown binding.
+	 */
+	@Test
+	public void testInvalidKeyDown() {
+		input.keyDown(Keys.BACKSLASH);
+		Mockito.verify(mode, never()).cannonLeft(anyBoolean());
+		Mockito.verify(mode, never()).cannonRight(anyBoolean());
+		Mockito.verify(cannon, never()).shoot();
+	}
+	
+	/**
+	 * Test an invalid keyup binding.
+	 */
+	@Test
+	public void testInvalidKeyUp() {
+		input.keyUp(Keys.BACKSLASH);
+		Mockito.verify(mode, never()).cannonLeft(anyBoolean());
+		Mockito.verify(mode, never()).cannonRight(anyBoolean());
+		Mockito.verify(cannon, never()).shoot();
 	}
 }
