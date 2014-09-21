@@ -9,6 +9,7 @@ import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.ZenCondition;
 import nl.tudelft.ti2206.bubbleshooter.multiplayer.getIP;
 
 import com.badlogic.gdx.Gdx;
@@ -72,6 +73,6 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			System.out.println(iox.getMessage());
 			Gdx.app.exit();
 		}
-		game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(br, bw)));
+		game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new ZenCondition(), br, bw)));
 	}
 }

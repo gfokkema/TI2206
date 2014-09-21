@@ -20,15 +20,18 @@ public abstract class BSMode {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	public BSMode() {
+	private EndingCondition end;
+
+	public BSMode(EndingCondition end) {
 		this.board = new Board(8, 15);
 		this.cannon = new Cannon(160,15);
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
+		this.end = end;
 	}
 
-	public void update(float deltaTime) {
+	public boolean update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(Gdx.graphics.getDeltaTime());
 		}
@@ -52,7 +55,9 @@ public abstract class BSMode {
 				}
 			}
 		}
+		return !end.check(this);
 	}
+
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();
 
 	public Cannon getCannon() {

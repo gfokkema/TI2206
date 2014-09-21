@@ -25,12 +25,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	private Cannon cannon2;
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
-	// FUGLY, doesn't belong here...
-	protected boolean cannonLeft;
-	protected boolean cannonRight;
 
-	public MultiPlayerMode(BufferedReader in, BufferedWriter out) {
-		super();
+	public MultiPlayerMode(EndingCondition end, BufferedReader in, BufferedWriter out) {
+		super(end);
 		this.in = in;
 		this.out = out;
 		new Thread(this).start();
