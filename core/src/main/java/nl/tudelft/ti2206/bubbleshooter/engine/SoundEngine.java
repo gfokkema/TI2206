@@ -19,8 +19,8 @@ public class SoundEngine {
 	private float sfxvolume = 0.5f;
 	
 	/**
-	 * Construct a {@link SoundEngine} using the given {@link Assets}.
-	 * @param assets	{@link Assets} containing all sounds
+	 * Construct a {@link SoundEngine} using the given {@link Assets} manager.
+	 * @param assets	{@link Assets} manager containing all sounds
 	 */
 	public SoundEngine(Assets assets) {
 		this.assets = assets;
@@ -65,7 +65,7 @@ public class SoundEngine {
 	
 	/**
 	 * This method will start playback of the background music identified by {@link MusicID}. 
-	 * @param id	{@link MusicID} that refers to music in {@link Asset}
+	 * @param id	{@link MusicID} that refers to music in {@link Assets}
 	 */
 	public void play(MusicID id) {
 		if (m != null && !m.equals(assets.get(id))) m.stop();
@@ -77,7 +77,7 @@ public class SoundEngine {
 	
 	/**
 	 * This method will start playback of the sound effect identified by {@link SoundID}. 
-	 * @param id	{@link SoundID} that refers to a sound effect in {@link Asset}
+	 * @param id	{@link SoundID} that refers to a sound effect in {@link Assets}
 	 */
 	public void play(SoundID id) {
 		assets.get(id).play(sfxvolume);

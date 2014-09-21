@@ -30,8 +30,7 @@ public class Cannon extends BSDrawable implements Serializable {
 	private final int velocity = 5;
 	
 	/**
-	 * Constructs a {@link Cannon} using a specified {@link Texture}
-	 * @param tex		{@link Texture} to use
+	 * Constructs a {@link Cannon} using a specified at the specified location.
 	 * @param x			coordinate
 	 * @param y 		coordinate
 	 */

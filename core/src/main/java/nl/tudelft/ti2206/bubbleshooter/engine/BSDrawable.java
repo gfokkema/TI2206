@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class BSDrawable {
 	/**
 	 * This method returns the {@link TextureID} of the concrete object it represents.
-	 * @return	{@link TextureID} representing a {@link Texture}
+	 * @return	{@link TextureID} representing a texture
 	 */
 	public abstract TextureID getTexture();
 	
