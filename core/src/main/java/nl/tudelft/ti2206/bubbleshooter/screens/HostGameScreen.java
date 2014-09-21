@@ -9,6 +9,7 @@ import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
+import nl.tudelft.ti2206.bubbleshooter.multiplayer.getIP;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -27,8 +28,21 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 	public HostGameScreen(BubbleShooter game) {
 		super(game);
 		
+		String extip = "unknown";
+		String intip = "unknown";
+		try {
+			extip = getIP.getExternIP();
+			intip = getIP.getLocalIP();
+		} catch (Exception e) {}
+		
 		LabelStyle style = new LabelStyle(game.font, Color.WHITE);
+		
+		Label extiplabel = new Label("External IP: " + extip, style);
+		Label intiplabel = new Label("Internal IP: " + intip, style);
 		Label label = new Label("Please wait for a player to connect", style);
+		
+		table.add(extiplabel).expandX().center().row();
+		table.add(intiplabel).expandX().center().row();
 		table.add(label).expandX().center().row();
 		
 		new Thread(this).start();
