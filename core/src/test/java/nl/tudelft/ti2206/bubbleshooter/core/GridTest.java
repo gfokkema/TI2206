@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +27,7 @@ public class GridTest {
 	public void setUp() {
 		grid = new Grid(6, 15);
 	}
-	
+
 	/**
 	 * Test retrieving indices for the first row (even row).
 	 */
@@ -107,7 +109,7 @@ public class GridTest {
 		xy = new Vector2(5, 0);
 		assertEquals(xy, grid.toXY(5));
 	}
-	
+
 	/**
 	 * Test retrieving xy coords for the second row (odd row).
 	 */
@@ -121,7 +123,7 @@ public class GridTest {
 		xy = new Vector2(2, 1);
 		assertEquals(xy, grid.toXY(8));
 	}
-	
+
 	/**
 	 * Test retrieving xy coords for some other boundary cases.
 	 */
@@ -137,7 +139,7 @@ public class GridTest {
 		xy = new Vector2(5, 14);
 		assertEquals(xy, grid.toXY(82));
 	}
-	
+
 	/**
 	 * Test retrieving indices for idx out of bounds, negative.
 	 */
@@ -145,7 +147,7 @@ public class GridTest {
 	public void testToXYOutOfBounds_1() {
 		grid.toXY(-1);
 	}
-	
+
 	/**
 	 * Test retrieving indices for idx out of bounds, positive.
 	 */
@@ -155,7 +157,7 @@ public class GridTest {
 		Vector2 xy = new Vector2(5, 14);
 		assertEquals(xy, grid.toXY(82));
 	}
-	
+
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testToXYOutOfBounds_3() {
 		// Value outside of bounds
@@ -172,7 +174,7 @@ public class GridTest {
 		assertTrue(grid.adjacent(6, 7));
 		assertTrue(grid.adjacent(8, 7));
 	}
-	
+
 	/**
 	 * Test adjacency for cells in NE and NW direction
 	 */
@@ -187,7 +189,7 @@ public class GridTest {
 		assertFalse(grid.adjacent(16, 11));
 		assertTrue(grid.adjacent(20, 15));
 	}
-	
+
 	/**
 	 * Test adjacency for cells in NE and NW direction
 	 */
@@ -202,7 +204,7 @@ public class GridTest {
 		assertFalse(grid.adjacent(27, 33));
 		assertTrue(grid.adjacent(0, 6));
 	}
-	
+
 	/**
 	 * Test non-adjacent cells in random directions
 	 */
@@ -215,7 +217,7 @@ public class GridTest {
 		assertFalse(grid.adjacent(15, 26));
 		assertFalse(grid.adjacent(15, 27));
 	}
-	
+
 	/**
 	 * Test adjacent out of bound cells, positive
 	 */
@@ -223,7 +225,7 @@ public class GridTest {
 	public void testAdjacentOutOfBounds_3() {
 		grid.adjacent(77, 83);
 	}
-	
+
 	/**
 	 * Test adjacent out of bound cells, positive
 	 */
@@ -231,7 +233,7 @@ public class GridTest {
 	public void testAdjacentOutOfBounds_4() {
 		grid.adjacent(83, 84);
 	}
-	
+
 	/**
 	 * Test getters for width and height:
 	 *	getWidth()
@@ -241,7 +243,7 @@ public class GridTest {
 	public void testGetWidthHeight() {
 		assertEquals(6, grid.getWidth());
 		assertEquals(15, grid.getHeight());
-		
+
 		grid = new Grid(20, 4);
 		assertEquals(20, grid.getWidth());
 		assertEquals(4, grid.getHeight());

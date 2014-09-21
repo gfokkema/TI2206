@@ -39,7 +39,7 @@ public class BubbleTest {
 		bubble = new Bubble(Color.ORANGE);
 		assertEquals(Color.ORANGE, bubble.getColor());
 	}
-	
+
 	/**
 	 * Test whether the defaults of a bubble are instantiated correctly.
 	 */
@@ -49,7 +49,7 @@ public class BubbleTest {
 		assertEquals(32, bubble.getHeight());
 		assertEquals(TextureID.BUBBLE, bubble.getTexture());
 	}
-	
+
 	/**
 	 * Checked whether the circles are initiated with the given boundaries.
 	 */

@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.engine;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
@@ -26,9 +26,9 @@ public class AssetsTest {
 	@Mock Music music;
 	@Mock Sound sound;
 	@Mock Texture texture;
-	
+
 	private Assets assets;
-	
+
 	/**
 	 * Set up our mocks and our asset loader.
 	 */
@@ -39,7 +39,7 @@ public class AssetsTest {
 		Mockito.when(loader.get("test.wav")).thenReturn(sound);
 		Mockito.when(loader.get("test.png")).thenReturn(texture);
 	}
-	
+
 	/**
 	 * Test loading and retrieving a {@link Music} file.
 	 */
@@ -47,10 +47,10 @@ public class AssetsTest {
 	public void testLoadMusic() {
 		assets.load(MusicID.GAME, "test.ogg");
 		Mockito.verify(loader).load("test.ogg", Music.class);
-		
+
 		assertEquals(music, assets.get(MusicID.GAME));
 	}
-	
+
 	/**
 	 * Test loading and retrieving a {@link Sound} file.
 	 */
@@ -58,10 +58,10 @@ public class AssetsTest {
 	public void testLoadSound() {
 		assets.load(SoundID.BUBBLE, "test.wav");
 		Mockito.verify(loader).load("test.wav", Sound.class);
-		
+
 		assertEquals(sound, assets.get(SoundID.BUBBLE));
 	}
-	
+
 	/**
 	 * Test loading and retrieving a {@link Texture} file.
 	 */
@@ -69,10 +69,10 @@ public class AssetsTest {
 	public void testLoadTexture() {
 		assets.load(TextureID.BUBBLE, "test.png");
 		Mockito.verify(loader).load("test.png", Texture.class);
-		
+
 		assertEquals(texture, assets.get(TextureID.BUBBLE));
 	}
-	
+
 	/**
 	 * Test blocking the thread until loading finishes.
 	 */
