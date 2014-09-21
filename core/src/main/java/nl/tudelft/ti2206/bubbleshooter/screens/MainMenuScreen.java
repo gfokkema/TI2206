@@ -49,7 +49,7 @@ public class MainMenuScreen extends AbstractScreen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.engine.play(SoundID.BUTTON);
-				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(new TimerCondition(Duration.ofMinutes(1L)))));
+				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(new TimerCondition(Duration.ofMinutes(2L)))));
 			}
 		});
 		multiplay.addListener(new ClickListener() {
