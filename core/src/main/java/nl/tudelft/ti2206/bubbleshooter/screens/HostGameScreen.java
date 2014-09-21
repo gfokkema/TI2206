@@ -32,6 +32,8 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 		String intip = "unknown";
 		try {
 			extip = getIP.getExternIP();
+		} catch (Exception e) {}
+		try {
 			intip = getIP.getLocalIP();
 		} catch (Exception e) {}
 		
