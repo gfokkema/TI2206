@@ -11,8 +11,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.badlogic.gdx.Input.Keys;
+
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.never;
 
+/**
+ * Test input processing for Single Player keybindings
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class SinglePlayerProcessorTest {
 	private SinglePlayerProcessor input;
@@ -21,12 +27,18 @@ public class SinglePlayerProcessorTest {
 	@Mock Cannon cannon;
 	@Mock Projectile projectile;
 	
+	/**
+	 * Initialize some common mocks and variables.
+	 */
 	@Before
 	public void setUp() {
 		input = new SinglePlayerProcessor(mode);
 		Mockito.when(mode.getCannon()).thenReturn(cannon);
 	}
 
+	/**
+	 * Test shooting the cannon from our inputprocessor.
+	 */
 	@Test
 	public void testShoot() {
 		input.cannonShoot();
@@ -34,6 +46,9 @@ public class SinglePlayerProcessorTest {
 		Mockito.verify(cannon).shoot();
 	}
 	
+	/**
+	 * Test shooting the cannon from our inputprocessor while a projectile is already in play.
+	 */
 	@Test
 	public void testShootProjectileInPlay() {
 		Mockito.when(mode.getProjectile()).thenReturn(projectile);
@@ -41,6 +56,9 @@ public class SinglePlayerProcessorTest {
 		Mockito.verify(cannon, never()).shoot();
 	}
 	
+	/**
+	 * Test rotating the cannon to the left from our inputprocessor.
+	 */
 	@Test
 	public void testCannonLeft() {
 		input.cannonLeft();
@@ -50,6 +68,9 @@ public class SinglePlayerProcessorTest {
 		Mockito.verify(mode).cannonLeft(false);
 	}
 	
+	/**
+	 * Test rotating the cannon to the right from our inputprocessor.
+	 */
 	@Test
 	public void testCannonRight() {
 		input.cannonRight();
@@ -57,5 +78,72 @@ public class SinglePlayerProcessorTest {
 		
 		input.cannonStopRight();
 		Mockito.verify(mode).cannonRight(false);
+	}
+	
+	/**
+	 * Test the keybinding for shooting the cannon.
+	 */
+	@Test
+	public void testSpaceDown() {
+		input.keyDown(Keys.SPACE);
+		Mockito.verify(cannon).shoot();
+	}
+	
+	/**
+	 * Test the keybinding for rotating the cannon to the left.
+	 */
+	@Test
+	public void testLeftDown() {
+		input.keyDown(Keys.LEFT);
+		Mockito.verify(mode).cannonLeft(true);
+	}
+	
+	/**
+	 * Test the keybinding for rotating the cannon to the right.
+	 */
+	@Test
+	public void testRightDown() {
+		input.keyDown(Keys.RIGHT);
+		Mockito.verify(mode).cannonRight(true);
+	}
+	
+	/**
+	 * Test the keybinding for stopping rotating the cannon to the left.
+	 */
+	@Test
+	public void testLeftUp() {
+		input.keyUp(Keys.LEFT);
+		Mockito.verify(mode).cannonLeft(false);
+	}
+	
+	/**
+	 * Test the keybinding for stopping rotating the cannon to the right.
+	 */
+	@Test
+	public void testRightUp() {
+		input.keyUp(Keys.RIGHT);
+		Mockito.verify(mode).cannonRight(false);
+	}
+	
+	/**
+	 * Test an invalid keydown binding.
+	 */
+	@Test
+	public void testInvalidKeyDown() {
+		input.keyDown(Keys.BACKSLASH);
+		Mockito.verify(mode, never()).cannonLeft(anyBoolean());
+		Mockito.verify(mode, never()).cannonRight(anyBoolean());
+		Mockito.verify(cannon, never()).shoot();
+	}
+	
+	/**
+	 * Test an invalid keyup binding.
+	 */
+	@Test
+	public void testInvalidKeyUp() {
+		input.keyUp(Keys.BACKSLASH);
+		Mockito.verify(mode, never()).cannonLeft(anyBoolean());
+		Mockito.verify(mode, never()).cannonRight(anyBoolean());
+		Mockito.verify(cannon, never()).shoot();
 	}
 }
