@@ -38,7 +38,7 @@ public class BubbleShooterScreen extends ScreenAdapter {
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		game_mode.update(delta);
+		if (!game_mode.update(delta)) game.setScreen(game.mms);
 		game.batch.begin();
 		// Draw all game sprites.
 		game_mode.getDrawables().forEach((Vector2 o, Collection<BSDrawable> c) -> {

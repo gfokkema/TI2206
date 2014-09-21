@@ -2,7 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.mode.ZenMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.ZenCondition;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -46,7 +47,7 @@ public class MainMenuScreen extends AbstractScreen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.engine.play(SoundID.BUTTON);
-				game.setScreen(new BubbleShooterScreen(game, new ZenMode()));
+				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(new ZenCondition())));
 			}
 		});
 		multiplay.addListener(new ClickListener() {

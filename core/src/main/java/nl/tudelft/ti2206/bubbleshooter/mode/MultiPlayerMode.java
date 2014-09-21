@@ -25,12 +25,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	private Cannon cannon2;
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
-	// FUGLY, doesn't belong here...
-	protected boolean cannonLeft;
-	protected boolean cannonRight;
 
-	public MultiPlayerMode(ObjectInputStream in, ObjectOutputStream out) {
-		super();
+	public MultiPlayerMode(EndingCondition end, ObjectInputStream in, ObjectOutputStream out) {
+		super(end);
 		this.in = in;
 		this.out = out;
 		new Thread(this).start();
@@ -74,8 +71,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	
 	@Override
 	public boolean update(float deltaTime) {
-		if (super.update(deltaTime)) writeBoard(board);
-		return false;
+		// FIXME: do not send board every frame
+		writeBoard(board);
+		return super.update(deltaTime);
 	}
 	
 	public synchronized void setBoard(Board board) {

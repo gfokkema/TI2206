@@ -10,12 +10,12 @@ import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class ZenMode extends BSMode {
+public class SinglePlayerMode extends BSMode {
 	private Background bg;
 	private Vector2 offset;
 
-	public ZenMode() {
-		super();
+	public SinglePlayerMode(EndingCondition end) {
+		super(end);
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
 		bg = new Background();
 		this.offset = new Vector2(140, 0);

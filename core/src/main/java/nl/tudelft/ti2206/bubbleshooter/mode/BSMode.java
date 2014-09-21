@@ -20,12 +20,15 @@ public abstract class BSMode {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	public BSMode() {
+	private EndingCondition end;
+
+	public BSMode(EndingCondition end) {
 		this.board = new Board(8, 15);
 		this.cannon = new Cannon(160,15);
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
+		this.end = end;
 	}
 
 	public boolean update(float deltaTime) {
@@ -50,11 +53,11 @@ public abstract class BSMode {
 						board.removeAll(board.getDisconnectedGroup());
 					}
 				}
-				return true;
 			}
 		}
-		return false;
+		return !end.check(this);
 	}
+
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();
 
 	public Cannon getCannon() {
