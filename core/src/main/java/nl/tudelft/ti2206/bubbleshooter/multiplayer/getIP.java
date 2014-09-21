@@ -4,19 +4,28 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.net.UnknownHostException;
 
 public class getIP {
 
 	public static String getLocalIP() throws UnknownHostException {
-		String ip = Inet4Address.getLocalHost().getHostAddress().toString();
+		String ip = InetAddress.getLocalHost().getHostAddress().toString();
 		System.out.println("Local IP =" + ip);
 		return ip;
 
 	}
 
-	//Werd me teveel try catch blokjes, daarom de I/O
+	public static int getPort() {
+		int port = 6969;
+		// testen of poort in gebruik is, moet nog ertussen!
+		return port;
+	}
+
+	// Werd me teveel try catch blokjes, daarom de I/O
 	public static String getExternIP() throws IOException {
 		URL externIP = new URL("http://checkip.amazonaws.com");
 		BufferedReader read = null;

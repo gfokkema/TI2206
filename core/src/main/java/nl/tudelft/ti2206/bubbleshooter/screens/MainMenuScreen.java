@@ -1,7 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 
 import com.badlogic.gdx.Gdx;
@@ -75,24 +74,5 @@ public class MainMenuScreen extends AbstractScreen {
 		table.add(multiplay).expandX().center().row();
 		table.add(options).expandX().center().row();
 		table.add(quit).expandX().center().row();
-	}
-	
-	/**
-	 * Play some main menu background music.
-	 * This music will be played in the main menu screen and options screen
-	 */
-	@Override
-	public void show() {
-		super.show();
-		game.engine.play(MusicID.MENU);
-	}
-	
-	/**
-	 * Hide is being called when the main menu screen is not the current screen.
-	 */
-	@Override
-	public void hide() {
-		super.hide();
-		game.engine.pause();
 	}
 }
