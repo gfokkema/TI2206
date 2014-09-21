@@ -1,9 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,8 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 public class HostGameScreen extends AbstractScreen implements Runnable {
-	private BufferedReader br = null;
-	private BufferedWriter bw = null;
+	private ObjectInputStream br = null;
+	private ObjectOutputStream bw = null;
 	
 	/**
 	 * Sets up the buttons to be displayed.
@@ -62,11 +60,9 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			ServerSocket serverSocket = new ServerSocket(8008);
 			Socket socket = serverSocket.accept();
 
-			InputStreamReader is = new InputStreamReader(socket.getInputStream());
-			br = new BufferedReader(is);
+			br = new ObjectInputStream(socket.getInputStream());
+			bw = new ObjectOutputStream(socket.getOutputStream());
 			
-			OutputStreamWriter os = new OutputStreamWriter(socket.getOutputStream());
-			bw = new BufferedWriter(os);
 			System.out.println("SERVER CONNECTED!");
 		} catch (Exception iox) {
 			System.out.println(iox.getMessage());

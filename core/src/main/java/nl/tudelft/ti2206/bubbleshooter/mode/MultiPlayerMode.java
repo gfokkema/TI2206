@@ -1,7 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,8 +17,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class MultiPlayerMode implements BSMode, Runnable {
-	private BufferedReader in;
-	private BufferedWriter out;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 	
 	private Background bg;
 	private Board board1, board2;
@@ -29,7 +29,7 @@ public class MultiPlayerMode implements BSMode, Runnable {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	public MultiPlayerMode(BufferedReader in, BufferedWriter out) {
+	public MultiPlayerMode(ObjectInputStream in, ObjectOutputStream out) {
 		this.in = in;
 		this.out = out;
 		new Thread(this).start();
@@ -96,6 +96,9 @@ public class MultiPlayerMode implements BSMode, Runnable {
 				board1.removeAll(board1.getDisconnectedGroup());
 			}
 		}
+		try {
+			out.writeObject(board1);
+		} catch (Exception e) {}
 	}
 	
 	@Override
@@ -126,10 +129,9 @@ public class MultiPlayerMode implements BSMode, Runnable {
 	public void run() {
 		while (true) {
 			try {
-				out.write("TESTING\r\n");
-				out.flush();
-				System.out.println("DEBUG: wrote something");
-				System.out.println(in.readLine());
+				Object o = in.readObject();
+				if (o instanceof Board)
+					board2 = (Board)o;
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
