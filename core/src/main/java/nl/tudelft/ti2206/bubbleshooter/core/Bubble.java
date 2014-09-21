@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
@@ -16,22 +17,23 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class Bubble extends BSDrawable {
-	protected static Color[] colors = {
-		Color.RED,
-		Color.GREEN,
-		Color.BLUE,
-		Color.PURPLE,
-		Color.YELLOW
+public class Bubble extends BSDrawable implements Serializable {
+	private static final long serialVersionUID = -3647601554787437036L;
+	protected static int[] colors = {
+		Color.rgba8888(Color.RED),
+		Color.rgba8888(Color.GREEN),
+		Color.rgba8888(Color.BLUE),
+		Color.rgba8888(Color.PURPLE),
+		Color.rgba8888(Color.YELLOW)
 	};
-	private Color color;
+	private int color;
 	private Circle bounds;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
 	 */
 	public Bubble() {
-		this.color = getRandomColor();
+		this.color = Color.rgba8888(getRandomColor());
 		this.bounds = new Circle();
 	}
 
@@ -42,7 +44,7 @@ public class Bubble extends BSDrawable {
 	 * @param c - the Color of the Bubble.
 	 */
 	protected Bubble(Color c) {
-		this.color = c;
+		this.color = Color.rgba8888(c);
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class Bubble extends BSDrawable {
 	 * @return a randomly chosen ColorValue.
 	 */
 	protected Color getRandomColor() {
-		return colors[(new Random()).nextInt(colors.length)];
+		return new Color(colors[(new Random()).nextInt(colors.length)]);
 	}
 	
 	/**
@@ -134,6 +136,6 @@ public class Bubble extends BSDrawable {
 	 */
 	@Override
 	public Color getColor() {
-		return this.color;
+		return new Color(color);
 	}
 }

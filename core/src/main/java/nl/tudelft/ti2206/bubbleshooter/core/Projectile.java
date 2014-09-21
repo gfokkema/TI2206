@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class Projectile extends Bubble {
+	private static final long serialVersionUID = -4014441150246221939L;
 	Vector2 direction;
 	int velocity;
 	
