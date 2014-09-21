@@ -70,6 +70,6 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			System.out.println(iox.getMessage());
 			Gdx.app.exit();
 		}
-		game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new ZenCondition(), br, bw)));
+		Gdx.app.postRunnable(() ->game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new ZenCondition(), br, bw))));
 	}
 }
