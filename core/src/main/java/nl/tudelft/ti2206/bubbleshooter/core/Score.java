@@ -2,6 +2,9 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.util.Collection;
 
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+
 /**
  * The score class, responsible for keeping track of the score.
  * Each board has their own score.

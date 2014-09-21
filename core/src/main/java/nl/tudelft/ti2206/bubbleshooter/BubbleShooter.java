@@ -1,10 +1,15 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;
@@ -18,7 +23,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author group-15
  *
  */
-public class Launch extends Game {
+public class BubbleShooter extends Game {
 	/**
 	 * Initialize a spritebatch and bitmapfont for later use.
 	 * Assign the initial music being used
@@ -28,6 +33,10 @@ public class Launch extends Game {
 	public MainMenuScreen mms;
 	public SoundEngine engine;
 	public SpriteBatch batch;
+	public static Map<Integer, Function<SinglePlayerProcessor, Boolean>> keyDownBindings
+		= new HashMap<Integer, Function<SinglePlayerProcessor, Boolean>>();
+	public static Map<Integer, Function<SinglePlayerProcessor, Boolean>> keyUpBindings
+		= new HashMap<Integer, Function<SinglePlayerProcessor, Boolean>>();
 	
 	/**
 	 * Create the spritebatch and bitmapfont.
@@ -45,7 +54,8 @@ public class Launch extends Game {
 		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
 		assets.load(SoundID.BUTTON, "ButtonSFX.wav");
 		assets.load(SoundID.CANNON, "BubbleSFX.wav");
-		assets.load(TextureID.BACKGROUND, "BG_dark_full.png");
+		assets.load(TextureID.BACKGROUND, "BG_back.png");
+		assets.load(TextureID.BORDER, "MPborder.png");
 		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
 		assets.load(TextureID.CANNON, "cannon.png");
 		assets.finish();
@@ -53,7 +63,7 @@ public class Launch extends Game {
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
 	}
-	
+
 	/**
 	 * Clean up afterwards.
 	 */
