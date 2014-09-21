@@ -28,7 +28,7 @@ public class ZenMode implements BSMode {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
 		bg = new Background();
 		this.board = new Board(8, 15);
-		this.cannon = new Cannon(130,15);
+		this.cannon = new Cannon(160,15);
 		this.offset = new Vector2(140, 0);
 		
 		for (int i = 0; i < 40; i++) {
