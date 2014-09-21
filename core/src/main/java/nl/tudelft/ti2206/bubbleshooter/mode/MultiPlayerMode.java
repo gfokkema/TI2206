@@ -73,7 +73,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	}
 
 	@Override
-	public boolean update(float deltaTime) {
+	public int update(float deltaTime) {
 		// FIXME: do not send board every frame
 		writeBoard(board);
 		writeCannon(cannon);

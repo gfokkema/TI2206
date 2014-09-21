@@ -35,7 +35,7 @@ public abstract class BSMode {
 		this.score = 0;
 	}
 
-	public boolean update(float deltaTime) {
+	public int update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(Gdx.graphics.getDeltaTime());
 		}
@@ -63,7 +63,7 @@ public abstract class BSMode {
 				}
 			}
 		}
-		return !end.check(this);
+		return end.check(this);
 	}
 
 	public void addStatsObserver(StatsObserver o) {
