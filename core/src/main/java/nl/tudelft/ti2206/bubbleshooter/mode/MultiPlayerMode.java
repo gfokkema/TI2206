@@ -115,7 +115,10 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	
 	public void writeProjectile(Projectile pj){
 		try{
-			out.writeObject(pj);
+			if (projectile == null)
+				out.writeObject("reset");
+			else
+				out.writeObject(pj);
 			out.flush();
 			out.reset();
 		}
@@ -133,8 +136,10 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 					setBoardOpp((Board) o);
 				} else if (o instanceof Cannon) {
 					setCannonOpp((Cannon) o);
-				} else if (o instanceof Projectile){
+				} else if (o instanceof Projectile) {
 					setProjectileOpp((Projectile) o);
+				} else if (o instanceof String && ((String)o).equals("reset")) {
+					setProjectileOpp(null);
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

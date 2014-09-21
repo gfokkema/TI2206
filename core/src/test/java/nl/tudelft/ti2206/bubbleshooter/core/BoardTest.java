@@ -52,6 +52,7 @@ public class BoardTest {
 		assertEquals(new Vector2(0, 0), board.getPosition());
 		assertEquals(new Vector2(0, 0), board.getOrigin());
 		assertEquals(Color.WHITE, board.getColor());
+		assertEquals(0, board.getRotation(), .001);
 
 	}
 
