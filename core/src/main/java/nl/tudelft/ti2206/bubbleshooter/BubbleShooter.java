@@ -9,10 +9,11 @@ import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerProcessor;
+import nl.tudelft.ti2206.bubbleshooter.mode.AbstractProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -33,11 +34,21 @@ public class BubbleShooter extends Game {
 	public MainMenuScreen mms;
 	public SoundEngine engine;
 	public SpriteBatch batch;
-	public static Map<Integer, Function<SinglePlayerProcessor, Boolean>> keyDownBindings
-		= new HashMap<Integer, Function<SinglePlayerProcessor, Boolean>>();
-	public static Map<Integer, Function<SinglePlayerProcessor, Boolean>> keyUpBindings
-		= new HashMap<Integer, Function<SinglePlayerProcessor, Boolean>>();
-	
+	public static Map<Integer, Function<AbstractProcessor, Boolean>> keyDownBindings
+		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
+	public static Map<Integer, Function<AbstractProcessor, Boolean>> keyUpBindings
+		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
+
+	// Initialize the keybindings.
+	static {
+		keyDownBindings.put(Keys.LEFT, AbstractProcessor::cannonLeft);
+		keyDownBindings.put(Keys.RIGHT, AbstractProcessor::cannonRight);
+		keyDownBindings.put(Keys.SPACE, AbstractProcessor::cannonShoot);
+
+		keyUpBindings.put(Keys.LEFT, AbstractProcessor::cannonStopMoving);
+		keyUpBindings.put(Keys.RIGHT, AbstractProcessor::cannonStopMoving);
+	}
+
 	/**
 	 * Create the spritebatch and bitmapfont.
 	 * Set the main-menu screen
