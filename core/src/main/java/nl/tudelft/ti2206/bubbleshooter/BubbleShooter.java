@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
-import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.mode.AbstractProcessor;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.input.AbstractProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;

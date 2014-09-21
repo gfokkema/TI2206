@@ -1,7 +1,8 @@
-package nl.tudelft.ti2206.bubbleshooter.mode;
+package nl.tudelft.ti2206.bubbleshooter.input;
 
 import static nl.tudelft.ti2206.bubbleshooter.BubbleShooter.keyDownBindings;
 import static nl.tudelft.ti2206.bubbleshooter.BubbleShooter.keyUpBindings;
+import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 
 import com.badlogic.gdx.InputAdapter;
 

@@ -1,4 +1,6 @@
-package nl.tudelft.ti2206.bubbleshooter.mode;
+package nl.tudelft.ti2206.bubbleshooter.input;
+
+import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 
 public class SinglePlayerProcessor extends AbstractProcessor {
 
