@@ -33,6 +33,7 @@ public abstract class BSMode extends Observable {
 		}
 		this.end = end;
 		this.score = 0;
+		
 	}
 	
 	public BSMode(EndingCondition end) {
@@ -63,6 +64,10 @@ public abstract class BSMode extends Observable {
 
 						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
 						this.obs.drawScore(score);
+						
+						// score changed, notify observers
+						setChanged();
+						notifyObservers(score);
 					}
 				}
 			}

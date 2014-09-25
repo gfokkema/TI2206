@@ -52,6 +52,8 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 		this.game = game;
 		this.game_mode = game_mode;
 		game_mode.addStatsObserver(this);
+		game_mode.addObserver(game.logger);
+		
 	}
 
 	/**

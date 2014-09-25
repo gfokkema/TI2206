@@ -4,8 +4,6 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 
-import com.badlogic.gdx.Gdx;
-
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
