@@ -8,7 +8,6 @@ import java.net.Socket;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerCondition;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.ZenCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.getIP;
 
 import com.badlogic.gdx.Gdx;

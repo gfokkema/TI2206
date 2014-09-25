@@ -62,8 +62,8 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		int winOrLose = game_mode.update(delta);
-		if (winOrLose < 0) game.setScreen(new GameLostScreen(game));
-		else if (winOrLose > 0) game.setScreen(new GameWonScreen(game));
+		if (winOrLose < 0) game.setScreen(new GameEndedScreen(game, "YOU LOST!", game_mode.getScore()));
+		else if (winOrLose > 0) game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
 
 		game.batch.begin();
 		// Draw all game sprites.

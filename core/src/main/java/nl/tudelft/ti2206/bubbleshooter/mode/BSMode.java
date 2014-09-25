@@ -96,4 +96,8 @@ public abstract class BSMode {
 	public void cannonRight(boolean right) {
 		this.cannonRight = right;
 	}
+	
+	public int getScore() {
+		return score;
+	}
 }
