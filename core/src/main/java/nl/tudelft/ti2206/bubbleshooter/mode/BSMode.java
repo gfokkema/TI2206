@@ -44,13 +44,16 @@ public abstract class BSMode {
 	public int update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(deltaTime);
+			BSModeObserver.notifyCannonAngle(cannon.getRotation());
 		}
 		if (cannonRight) {
 			cannon.right(deltaTime);
+			BSModeObserver.notifyCannonAngle(cannon.getRotation());
 		}
 
 		if (projectile != null) {
 			projectile.move();
+			BSModeObserver.notifyProjectilePosition(projectile.getPosition());
 			//NOTE: collides has side-effects!
 			if (board.collides(projectile)) {
 				int new_idx = board.add(projectile);

@@ -38,6 +38,8 @@ public class SinglePlayerModeTest {
 	public void setUp() {
 		mode = new SinglePlayerMode(end, board, cannon);
 		Mockito.when(end.check(mode)).thenReturn(-1);
+		mode.addStatsObserver(obs);
+		mode.addBSModeObserver(BSMode);
 	}
 	
 	@Test
@@ -100,8 +102,6 @@ public class SinglePlayerModeTest {
 		Mockito.when(colorgroup.size()).thenReturn(5);
 		Mockito.when(board.getColorGroup(anyInt())).thenReturn(colorgroup);
 		
-		mode.addStatsObserver(obs);
-		mode.addBSModeObserver(BSMode);
 		mode.setProjectile(bubble);
 		mode.update(.02f);
 		Mockito.verify(board).add(bubble);
