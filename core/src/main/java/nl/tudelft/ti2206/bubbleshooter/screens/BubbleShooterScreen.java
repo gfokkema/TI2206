@@ -6,7 +6,6 @@ import java.util.Collection;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-import nl.tudelft.ti2206.bubbleshooter.util.BSModeObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
@@ -53,7 +52,6 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 		this.game = game;
 		this.game_mode = game_mode;
 		game_mode.addStatsObserver(this);
-		game_mode.addBSModeObserver(game.logger);
 	}
 
 	/**

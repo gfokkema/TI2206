@@ -8,7 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
-import nl.tudelft.ti2206.bubbleshooter.util.BSModeObserver;
+import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +21,6 @@ public abstract class BSMode {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	private BSModeObserver BSModeObserver;
 	private StatsObserver obs;
 	private EndingCondition end;
 	private int score;
@@ -44,16 +43,16 @@ public abstract class BSMode {
 	public int update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(deltaTime);
-			BSModeObserver.notifyCannonAngle(cannon.getRotation());
+			Logger.print("Cannon rotation left", "" + cannon.getRotation());
 		}
 		if (cannonRight) {
 			cannon.right(deltaTime);
-			BSModeObserver.notifyCannonAngle(cannon.getRotation());
+			Logger.print("Cannon rotation right", "" + cannon.getRotation());
 		}
 
 		if (projectile != null) {
 			projectile.move();
-			BSModeObserver.notifyProjectilePosition(projectile.getPosition());
+			Logger.print("projectile position", projectile.getPosition().toString());
 			//NOTE: collides has side-effects!
 			if (board.collides(projectile)) {
 				int new_idx = board.add(projectile);
@@ -68,7 +67,7 @@ public abstract class BSMode {
 
 						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
 						this.obs.drawScore(score);
-						BSModeObserver.notifyScore(score);
+						Logger.print("New score", "" + score);
 						// score changed, notify observers
 					}
 				}
@@ -80,10 +79,6 @@ public abstract class BSMode {
 	public void addStatsObserver(StatsObserver o) {
 		this.obs = o;
 		end.addStatsObserver(o);
-	}
-	
-	public void addBSModeObserver(BSModeObserver o) {
-		this.BSModeObserver = o;
 	}
 
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();

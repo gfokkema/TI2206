@@ -12,7 +12,6 @@ import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.util.BSModeObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import org.junit.Before;
@@ -32,14 +31,12 @@ public class SinglePlayerModeTest {
 	@Mock EndingCondition end;
 	@Mock Projectile bubble;
 	@Mock StatsObserver obs;
-	@Mock BSModeObserver BSMode;
 	
 	@Before
 	public void setUp() {
 		mode = new SinglePlayerMode(end, board, cannon);
 		Mockito.when(end.check(mode)).thenReturn(-1);
 		mode.addStatsObserver(obs);
-		mode.addBSModeObserver(BSMode);
 	}
 	
 	@Test
