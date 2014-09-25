@@ -7,7 +7,7 @@ public class Logger {
 	public static void print(String tag, String message) {
 		try {
 			Gdx.app.log(tag, message);
-		} catch(NullPointerException e) {
+		} catch(Exception e) {
 			System.out.println(e);
 		}
 	}

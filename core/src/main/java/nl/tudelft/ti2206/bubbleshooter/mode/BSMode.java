@@ -52,7 +52,7 @@ public abstract class BSMode {
 
 		if (projectile != null) {
 			projectile.move();
-			Logger.print("projectile position", projectile.getPosition().toString());
+			Logger.print("projectile position", "");
 			//NOTE: collides has side-effects!
 			if (board.collides(projectile)) {
 				int new_idx = board.add(projectile);
