@@ -17,14 +17,23 @@ public class SinglePlayerCondition implements EndingCondition {
 	public SinglePlayerCondition(Duration gameLength) {
 		this.gameLength = gameLength;
 		epoch = ZonedDateTime.now();
+		
 	}
 
 	@Override
 	public int check(BSMode mode) {
 		HashMap<Integer, Bubble> bubbles = mode.board.getBubbles();
-		int max = (mode.board.getGrid().getWidth()-1)* mode.board.getGrid().getHeight() - 1;
 		
-		for(int i = max-mode.board.getGrid().getWidth(); i <= max; i++)
+		int width = mode.board.getGrid().getWidth();
+		int height = mode.board.getGrid().getHeight();
+		
+		int max = (int) ((2*width -1) * Math.floor(height/2));
+		if (Math.floor(height/2) == height/2)
+			width--;
+		else
+			max += width;
+
+		for(int i = max-width; i <= max; i++)
 			if(bubbles.containsKey(i)) return -1; 
 				
 		Duration deltaTime = Duration.between(epoch, ZonedDateTime.now());

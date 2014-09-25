@@ -10,12 +10,19 @@ public class MultiPlayerCondition implements EndingCondition {
 	@Override
 	public int check(BSMode mode) {
 		
-		if(mode.board.isEmpty()) return -1;
+		if(mode.board.isEmpty()) return 1;
 		
 		HashMap<Integer, Bubble> bubbles = mode.board.getBubbles();
-		int max = (mode.board.getGrid().getWidth()-1)* mode.board.getGrid().getHeight() - 1;
+		int width = mode.board.getGrid().getWidth();
+		int height = mode.board.getGrid().getHeight();
 		
-		for(int i = max-mode.board.getGrid().getWidth(); i <= max; i++)
+		int max = (int) ((2*width -1) * Math.floor(height/2));
+		if (Math.floor(height/2) == height/2)
+			width--;
+		else
+			max += width;
+				
+		for(int i = max-width; i <= max; i++)
 			if(bubbles.containsKey(i)) return -1; 
 		
 		return 0;
