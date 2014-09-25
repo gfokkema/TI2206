@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerCondition;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.ZenCondition;
@@ -75,6 +76,6 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			System.out.println(iox.getMessage());
 			Gdx.app.exit();
 		}
-		Gdx.app.postRunnable(() -> game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new ZenCondition(), br, bw))));
+		Gdx.app.postRunnable(() -> game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new MultiPlayerCondition(), br, bw))));
 	}
 }

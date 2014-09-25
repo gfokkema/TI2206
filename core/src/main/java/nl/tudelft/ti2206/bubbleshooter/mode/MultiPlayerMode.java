@@ -201,9 +201,13 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 					setCannonOpp((Cannon) o);
 				} else if (o instanceof Projectile) {
 					setProjectileOpp((Projectile) o);
-				} else if (o instanceof String && ((String) o).equals("reset")) {
-					setProjectileOpp(null);
-				}
+				} 
+				/*
+				 * else if (o instanceof String && ((String) o).equals("reset")) {
+				 * setProjectileOpp(null);
+				 * }
+				 */
+
 				setConditionOpp(in.readInt());
 				
 			} catch (Exception e) {
