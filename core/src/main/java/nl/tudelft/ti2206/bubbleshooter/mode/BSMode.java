@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Observable;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
@@ -12,7 +13,7 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class BSMode {
+public abstract class BSMode extends Observable {
 	protected Board board;
 	protected Cannon cannon;
 	protected Projectile projectile;
@@ -24,7 +25,7 @@ public abstract class BSMode {
 	private EndingCondition end;
 	private int score;
 
-	public BSMode(EndingCondition end, Board board, Cannon cannon) {
+	public BSMode(EndingCondition end, Board board, Cannon cannon)  {
 		this.board = board;
 		this.cannon = cannon;
 		for (int i = 0; i < 40; i++) {
