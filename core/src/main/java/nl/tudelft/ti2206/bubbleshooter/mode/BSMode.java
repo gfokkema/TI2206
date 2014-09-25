@@ -79,6 +79,10 @@ public abstract class BSMode {
 	public Cannon getCannon() {
 		return cannon;
 	}
+	
+	public Board getBoard() {
+		return board;
+	}
 
 	public Projectile getProjectile() {
 		return projectile;
