@@ -4,8 +4,8 @@ import java.time.Duration;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.TimerCondition;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -49,7 +49,7 @@ public class MainMenuScreen extends AbstractScreen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.engine.play(SoundID.BUTTON);
-				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(new TimerCondition(Duration.ofMinutes(2L)))));
+				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(new SinglePlayerCondition(Duration.ofMinutes(2L)))));
 			}
 		});
 		multiplay.addListener(new ClickListener() {

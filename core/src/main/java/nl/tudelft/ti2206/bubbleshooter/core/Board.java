@@ -218,6 +218,14 @@ public class Board extends BSDrawable implements Serializable {
 	public int getHeight() {
 		return 480;
 	}
+	
+	public HashMap<Integer, Bubble> getBubbles() {
+		return bubbles;
+	}
+	
+	public Grid getGrid() {
+		return grid;
+	}
 
 	public boolean isEmpty() {
 		return bubbles.isEmpty();
