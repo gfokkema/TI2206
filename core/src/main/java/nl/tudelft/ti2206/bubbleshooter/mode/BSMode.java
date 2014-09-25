@@ -2,18 +2,18 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Observable;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.util.BSModeObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class BSMode extends Observable {
+public abstract class BSMode {
 	protected Board board;
 	protected Cannon cannon;
 	protected Projectile projectile;
@@ -21,6 +21,7 @@ public abstract class BSMode extends Observable {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
+	private BSModeObserver BSModeObserver;
 	private StatsObserver obs;
 	private EndingCondition end;
 	private int score;
@@ -64,10 +65,8 @@ public abstract class BSMode extends Observable {
 
 						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
 						this.obs.drawScore(score);
-						
+						BSModeObserver.notifyScore(score);
 						// score changed, notify observers
-						setChanged();
-						notifyObservers(score);
 					}
 				}
 			}
@@ -78,6 +77,10 @@ public abstract class BSMode extends Observable {
 	public void addStatsObserver(StatsObserver o) {
 		this.obs = o;
 		end.addStatsObserver(o);
+	}
+	
+	public void addBSModeObserver(BSModeObserver o) {
+		this.BSModeObserver = o;
 	}
 
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();
