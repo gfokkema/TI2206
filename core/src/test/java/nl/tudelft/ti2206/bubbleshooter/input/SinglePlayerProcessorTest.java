@@ -46,7 +46,7 @@ public class SinglePlayerProcessorTest {
 	@Test
 	public void testShoot() {
 		input.cannonShoot();
-		Mockito.verify(mode, times(2)).getCannon();
+		Mockito.verify(mode, times(3)).getCannon();
 		Mockito.verify(cannon).shoot();
 	}
 	
