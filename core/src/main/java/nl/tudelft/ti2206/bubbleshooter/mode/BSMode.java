@@ -100,7 +100,7 @@ public abstract class BSMode {
 	public void setProjectile(Projectile projectile) {
 		if (this.projectile != null) this.projectile.deleteObservers();
 		this.projectile = projectile;
-		projectile.addObserver(Logger.getLogger());
+		this.projectile.addObserver(Logger.getLogger());
 	}
 
 	// FUGLY, doesn't belong here...
