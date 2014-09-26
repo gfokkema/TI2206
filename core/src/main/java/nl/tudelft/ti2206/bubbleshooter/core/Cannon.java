@@ -90,7 +90,7 @@ public class Cannon extends BSDrawable implements Serializable {
 		fired.setVelocity(velocity);
 		fired.setDirection(new Vector2(pointer.direction));
 		
-		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
+		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
 		setChanged();
 		notifyObservers("Cannon has been shot!");
 		return fired;
@@ -126,7 +126,7 @@ public class Cannon extends BSDrawable implements Serializable {
 	 */
 	private Vector2 getBubblePos() {
 		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
-						.add(pointer.getDirection().nor().scl(100));
+						.add(pointer.getDirection().cpy().nor().scl(100));
 	}
 
 	@Override

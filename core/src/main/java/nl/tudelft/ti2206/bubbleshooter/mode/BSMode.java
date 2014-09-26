@@ -30,6 +30,7 @@ public abstract class BSMode {
 		board.addObserver(Logger.getLogger());
 		this.cannon = cannon;
 		cannon.addObserver(Logger.getLogger());
+		setProjectile(cannon.getProjectile());
 		
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
@@ -52,27 +53,25 @@ public abstract class BSMode {
 			cannon.right(deltaTime);
 			//Logger.print("Cannon rotation right", "" + cannon.getRotation());
 		}
+		
+		if (projectile == null || projectile == cannon.getProjectile()) return end.check(this);
 
-		if (projectile != null) {
+		projectile.move();
+		//NOTE: collides has side-effects!
+		if (board.collides(projectile)) {
+			int new_idx = board.add(projectile);
+			setProjectile(cannon.getProjectile());
 			projectile.move();
-			//Logger.print("projectile position", "");
-			//NOTE: collides has side-effects!
-			if (board.collides(projectile)) {
-				int new_idx = board.add(projectile);
-				projectile = null;
 
-				if(new_idx != -1) {
-					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
-					if (sameColors.size() >= 3) {
-						board.removeAll(sameColors);
-						Collection<Bubble> disconnected = board.getDisconnectedGroup();
-						board.removeAll(disconnected);
+			if(new_idx != -1) {
+				Collection<Bubble> sameColors = board.getColorGroup(new_idx);
+				if (sameColors.size() >= 3) {
+					board.removeAll(sameColors);
+					Collection<Bubble> disconnected = board.getDisconnectedGroup();
+					board.removeAll(disconnected);
 
-						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
-						this.obs.drawScore(score);
-						//Logger.print("New score", "" + score);
-						// score changed, notify observers
-					}
+					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
+					this.obs.drawScore(score);
 				}
 			}
 		}
@@ -99,6 +98,7 @@ public abstract class BSMode {
 	}
 
 	public void setProjectile(Projectile projectile) {
+		if (this.projectile != null) this.projectile.deleteObservers();
 		this.projectile = projectile;
 		projectile.addObserver(Logger.getLogger());
 	}

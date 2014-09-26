@@ -58,6 +58,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 
 		writeDrawable(board);
 		writeDrawable(cannon);
+		writeDrawable(cannon.getProjectile());
 		
 		board.addObserver(this);
 		cannon.addObserver(this);
@@ -76,18 +77,17 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		drawables1.add(cannon);
 		drawables1.add(cannon.getProjectile());
 		cannon.getProjectile().addObserver(this);
-		if (projectile != null)
-			drawables1.add(projectile);
+		if (projectile != cannon.getProjectile()) drawables1.add(projectile);
 		odraw.put(offset1, drawables1);
 
-		if (board2 != null && cannon2 != null) {
-			Collection<BSDrawable> drawables2 = board2.getDrawables();
-			drawables2.add(cannon2);
-			drawables2.add(cannon2.getProjectile());
-			if (projectile2 != null)
-				drawables2.add(projectile2);
-			odraw.put(offset2, drawables2);
-		}
+		if (board2 == null || cannon2 == null || projectile2 == null) return odraw;
+		
+		Collection<BSDrawable> drawables2 = board2.getDrawables();
+		drawables2.add(cannon2);
+		drawables2.add(cannon2.getProjectile());
+		if (projectile2 != cannon2.getProjectile()) drawables2.add(projectile2);
+		odraw.put(offset2, drawables2);
+		
 		return odraw;
 	}
 
@@ -117,6 +117,12 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	public synchronized void setCannonOpp(Cannon cn) {
 		this.cannon2 = cn;
 	}
+	
+	@Override
+	public void setProjectile(Projectile projectile) {
+		super.setProjectile(projectile);
+		projectile.addObserver(this);
+	}
 
 	/**
 	 * seetter for opponent projectile.
@@ -125,7 +131,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 */
 	public synchronized void setProjectileOpp(Projectile pj) {
 		this.projectile2 = pj;
-		pj.addObserver(this);
 	}
 	
 	public synchronized void setConditionOpp(int condition) {
@@ -167,12 +172,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 					setCannonOpp((Cannon) o);
 				} else if (o instanceof Projectile) {
 					setProjectileOpp((Projectile) o);
-				} 
-				/*
-				 * else if (o instanceof String && ((String) o).equals("reset")) {
-				 * setProjectileOpp(null);
-				 * }
-				 */
+				}
 
 				setConditionOpp(in.readInt());
 				

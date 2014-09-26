@@ -11,7 +11,6 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.input.AbstractProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
-import nl.tudelft.ti2206.bubbleshooter.util.FileLogger;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.ScreenLogger;
 
