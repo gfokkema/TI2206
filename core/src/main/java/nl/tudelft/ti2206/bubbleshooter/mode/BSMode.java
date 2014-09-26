@@ -27,7 +27,10 @@ public abstract class BSMode {
 
 	public BSMode(EndingCondition end, Board board, Cannon cannon)  {
 		this.board = board;
+		board.addObserver(Logger.getLogger());
 		this.cannon = cannon;
+		cannon.addObserver(Logger.getLogger());
+		
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
@@ -43,16 +46,16 @@ public abstract class BSMode {
 	public int update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(deltaTime);
-			Logger.print("Cannon rotation left", "" + cannon.getRotation());
+			//Logger.print("Cannon rotation left", "" + cannon.getRotation());
 		}
 		if (cannonRight) {
 			cannon.right(deltaTime);
-			Logger.print("Cannon rotation right", "" + cannon.getRotation());
+			//Logger.print("Cannon rotation right", "" + cannon.getRotation());
 		}
 
 		if (projectile != null) {
 			projectile.move();
-			Logger.print("projectile position", "");
+			//Logger.print("projectile position", "");
 			//NOTE: collides has side-effects!
 			if (board.collides(projectile)) {
 				int new_idx = board.add(projectile);
@@ -67,7 +70,7 @@ public abstract class BSMode {
 
 						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
 						this.obs.drawScore(score);
-						Logger.print("New score", "" + score);
+						//Logger.print("New score", "" + score);
 						// score changed, notify observers
 					}
 				}
@@ -97,6 +100,7 @@ public abstract class BSMode {
 
 	public void setProjectile(Projectile projectile) {
 		this.projectile = projectile;
+		projectile.addObserver(Logger.getLogger());
 	}
 
 	// FUGLY, doesn't belong here...

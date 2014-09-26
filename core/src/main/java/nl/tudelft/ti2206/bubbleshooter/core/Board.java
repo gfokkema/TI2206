@@ -82,6 +82,10 @@ public class Board extends BSDrawable implements Serializable {
 
 		// Update the bounds of the circle
 		b.setBounds(new Circle(grid.getLoc(idx), 16));
+		
+		setChanged();
+		notifyObservers("Bubble has been added to index " + idx + ".");
+		
 		return true;
 	}
 
@@ -155,7 +159,6 @@ public class Board extends BSDrawable implements Serializable {
 		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
 		// Remove all of the bubbles that are not connected to the ceiling.
 		result.removeAll(connectedToCeiling.values());
-		removeAll(result);
 		return result;
 	}
 
@@ -202,6 +205,8 @@ public class Board extends BSDrawable implements Serializable {
 	 */
 	public void removeAll(Collection<Bubble> bs) {
 		bubbles.values().removeAll(bs);
+		setChanged();
+		notifyObservers(bs.size() + " bubbles have been removed.");
 	}
 
 	@Override
