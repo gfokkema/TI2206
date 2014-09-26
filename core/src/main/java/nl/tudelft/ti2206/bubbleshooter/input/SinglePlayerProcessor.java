@@ -21,7 +21,7 @@ public class SinglePlayerProcessor extends AbstractProcessor {
 	 */
 	@Override
 	public boolean cannonShoot() {
-		if (mode.getProjectile() == null) {
+		if (mode.getProjectile() == null && !mode.getBoard().collides(mode.getCannon().getProjectile())) {
 			mode.setProjectile(mode.getCannon().shoot());
 			return true;
 		}

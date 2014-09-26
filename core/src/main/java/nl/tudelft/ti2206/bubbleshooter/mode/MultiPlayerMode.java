@@ -26,6 +26,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	private Cannon cannon2;
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
+	private int condition2;
 
 	/**
 	 * 
@@ -45,6 +46,8 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
+		
+		this.condition2 = 0;
 
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
@@ -90,7 +93,8 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		writeBoard(board);
 		writeCannon(cannon);
 		writeProjectile(projectile);
-		return super.update(deltaTime);
+		if (super.update(deltaTime) != 0) writeCondition(super.update(deltaTime));
+		return super.update(deltaTime) + condition2;
 	}
 
 	/**
@@ -119,7 +123,22 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	public synchronized void setProjectileOpp(Projectile pj) {
 		this.projectile2 = pj;
 	}
+	
+	public synchronized void setConditionOpp(int condition) {
+		this.condition2 = condition;
+	}
 
+	public void writeCondition(int condition) {
+		try {
+			Gdx.app.log("condition", "" + condition);
+			out.writeInt(-1*condition);
+			out.flush();
+			out.reset();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	/**
 	 * Output stream method for Board
 	 * 
@@ -182,9 +201,15 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 					setCannonOpp((Cannon) o);
 				} else if (o instanceof Projectile) {
 					setProjectileOpp((Projectile) o);
-				} else if (o instanceof String && ((String) o).equals("reset")) {
-					setProjectileOpp(null);
-				}
+				} 
+				/*
+				 * else if (o instanceof String && ((String) o).equals("reset")) {
+				 * setProjectileOpp(null);
+				 * }
+				 */
+
+				setConditionOpp(in.readInt());
+				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

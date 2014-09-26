@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.input;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.Input.Keys;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 
 /**
  * Test input processing for Single Player keybindings
@@ -26,6 +28,7 @@ public class SinglePlayerProcessorTest {
 	@Mock BSMode mode;
 	@Mock Cannon cannon;
 	@Mock Projectile projectile;
+	@Mock Board board;
 	
 	/**
 	 * Initialize some common mocks and variables.
@@ -34,6 +37,7 @@ public class SinglePlayerProcessorTest {
 	public void setUp() {
 		input = new SinglePlayerProcessor(mode);
 		Mockito.when(mode.getCannon()).thenReturn(cannon);
+		Mockito.when(mode.getBoard()).thenReturn(board);
 	}
 
 	/**
@@ -42,7 +46,7 @@ public class SinglePlayerProcessorTest {
 	@Test
 	public void testShoot() {
 		input.cannonShoot();
-		Mockito.verify(mode).getCannon();
+		Mockito.verify(mode, times(2)).getCannon();
 		Mockito.verify(cannon).shoot();
 	}
 	

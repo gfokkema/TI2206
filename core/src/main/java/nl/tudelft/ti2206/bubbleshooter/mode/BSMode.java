@@ -79,6 +79,10 @@ public abstract class BSMode {
 	public Cannon getCannon() {
 		return cannon;
 	}
+	
+	public Board getBoard() {
+		return board;
+	}
 
 	public Projectile getProjectile() {
 		return projectile;
@@ -95,5 +99,9 @@ public abstract class BSMode {
 
 	public void cannonRight(boolean right) {
 		this.cannonRight = right;
+	}
+	
+	public int getScore() {
+		return score;
 	}
 }

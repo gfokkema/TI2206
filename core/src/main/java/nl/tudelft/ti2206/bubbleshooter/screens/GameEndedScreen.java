@@ -8,15 +8,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 
-public class GameLostScreen extends AbstractScreen {
+public class GameEndedScreen extends AbstractScreen {
 
-	public GameLostScreen(BubbleShooter game) {
+	public GameEndedScreen(BubbleShooter game, String message, int score) {
 		super(game);
 		LabelStyle labelstyle = new LabelStyle(game.font, Color.WHITE);
-		Label lost = new Label("You LOST!", labelstyle);
+		Label messageLabel = new Label(message, labelstyle);
+		Label scoreLabel = new Label("Your score: " + score, labelstyle);
 		Label info = new Label("Press ESC to return", labelstyle);
-		lost.setScale(5);
-		table.add(lost).expandX().center().row();
+		messageLabel.setScale(5);
+		table.add(messageLabel).expandX().center().row();
+		table.add(scoreLabel).expandX().center().row();
 		table.add(info).expandX().center().row();
 	}
 
