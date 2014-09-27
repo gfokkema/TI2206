@@ -31,5 +31,6 @@ public class getIP {
 		BufferedReader read = new BufferedReader(new InputStreamReader(externIP.openStream()));
 		return read.readLine();
 	}
+	
 }
 	
