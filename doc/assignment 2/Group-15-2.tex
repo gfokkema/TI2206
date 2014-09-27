@@ -63,6 +63,7 @@ In order to include logging in the project, it is important to carefully think a
 \captionof{figure}{Global layout of the implementation of the logger}
 \end{minipage}
 %###################################### EXERCISE 2 ###################################### 
+\newpage
 \section{Design Patterns \\}
 In this section three design patterns are elaborated with fully in depth explanations. Furthermore these patterns come with a visual depiction of how they were implemented in the project. \\
 
@@ -79,6 +80,8 @@ The timer is triggered by a change in time and the score by removing bubbles. So
 }
 \captionof{figure}{Stats Observer class diagram}
 \end{minipage}
+
+\newpage
 \item The sequence diagram for the \textit{Stats Observer} can be found in \textbf{Fig. 3}.
 \begin{minipage}{\linewidth}
 \makebox[\linewidth]{
@@ -94,7 +97,15 @@ The timer is triggered by a change in time and the score by removing bubbles. So
 \item The second pattern we used is the \textit{Strategy} pattern, which we applied on the \textit{EndingCondition} interface, which is to be used by the \textit{BSMode} class. \\
 The pattern is applied here because one should favor object composition over inheritance. We could for example have used inheritance, and make a subclass of \textit{BSMode} for each game mode. However, a lot of the game logic is the same, and really the only difference is how the  game should end.\\
 Using the \textit{EndingCondition} class, we get a greater amount of flexibility: we pass the desired \textit{EndingCondition} to the constructor of a \textit{BSMode} class, and automatically the logic for the end of the game is done for us, by means of polymorphism.\\
-\item
+
+\item The class diagram for the \textit{Ending Condition Strategy} can be found in \textbf{Fig. 4}. \\
+\begin{minipage}{\linewidth}
+\makebox[\linewidth]{
+\includegraphics[width = \textwidth]{endingcondition_class}
+}
+\captionof{figure}{Ending Condition Strategy class diagram}
+\end{minipage}
+
 \item
 \end{enumerate}
 
@@ -102,8 +113,20 @@ Using the \textit{EndingCondition} class, we get a greater amount of flexibility
 \subsection{Pattern 3: Singleton for Assets}
 \begin{enumerate}
 \item The Singleton pattern makes sure that there is only one instance of \textit{Assets} and it can be accessed globally. This is useful because we only need one instance of \textit{Assets} and we only need to load the assets once with the same instance. The loading happens when the application is initiated, in the very beginning before the user even sees anything. So, by applying the singleton pattern, it provides easy access for the class responsible for the initial launching of the application.
-\item
-\item
+\item The class diagram for the \textit{Assets Singleton} can be found in \textbf{Fig. 6}.
+\begin{minipage}{\linewidth}
+\makebox[\linewidth]{
+\includegraphics[width = \textwidth]{assets_class}
+}
+\captionof{figure}{Assets Singleton class diagram}
+\end{minipage}
+\item The sequence diagram for the \textit{Assets Singleton} can be found in \textbf{Fig. 7}.
+\begin{minipage}{\linewidth}
+\makebox[\linewidth]{
+\includegraphics[width = \textwidth]{assets_sequence}
+}
+\captionof{figure}{Assets Singleton class diagram}
+\end{minipage}
 \end{enumerate}
 
 
