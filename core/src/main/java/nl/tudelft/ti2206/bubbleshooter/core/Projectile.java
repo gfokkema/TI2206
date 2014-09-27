@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
  * {@link Bubble} has been shot, it has a velocity and a direction. It will also
  * move across the board, untill it collides with a normal {@link Bubble}
  * 
- * @author gerlof
+ * @author group-15
  *
  */
 public class Projectile extends Bubble {
