@@ -85,7 +85,7 @@ public class CannonTest {
 	@Test
 	public void testProjectile() {
 		Vector2 pos = cannon.getProjectile().getMidPoint();
-		assertEquals(cannon.getPointer().direction.add(0, 16), pos);
+		assertEquals(cannon.getPointer().direction.cpy().scl(100).add(0, 16), pos);
 
 
 	}

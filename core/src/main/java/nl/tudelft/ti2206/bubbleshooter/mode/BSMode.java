@@ -8,6 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
@@ -39,12 +40,17 @@ public abstract class BSMode {
 	 */
 	public BSMode(EndingCondition end, Board board, Cannon cannon) {
 		this.board = board;
+		board.addObserver(Logger.getLogger());
 		this.cannon = cannon;
+		cannon.addObserver(Logger.getLogger());
+		setProjectile(cannon.getProjectile());
+		
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
 		this.end = end;
 		this.score = 0;
+		
 	}
 	
 	/**
@@ -67,28 +73,31 @@ public abstract class BSMode {
 	public int update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(deltaTime);
+			//Logger.print("Cannon rotation left", "" + cannon.getRotation());
 		}
 		if (cannonRight) {
 			cannon.right(deltaTime);
+			//Logger.print("Cannon rotation right", "" + cannon.getRotation());
 		}
+		
+		if (projectile == null || projectile == cannon.getProjectile()) return end.check(this);
 
-		if (projectile != null) {
+		projectile.move();
+		//NOTE: collides has side-effects!
+		if (board.collides(projectile)) {
+			int new_idx = board.add(projectile);
+			setProjectile(cannon.getProjectile());
 			projectile.move();
-			//NOTE: collides has side-effects!
-			if (board.collides(projectile)) {
-				int new_idx = board.add(projectile);
-				projectile = null;
 
-				if(new_idx != -1) {
-					Collection<Bubble> sameColors = board.getColorGroup(new_idx);
-					if (sameColors.size() >= 3) {
-						board.removeAll(sameColors);
-						Collection<Bubble> disconnected = board.getDisconnectedGroup();
-						board.removeAll(disconnected);
+			if(new_idx != -1) {
+				Collection<Bubble> sameColors = board.getColorGroup(new_idx);
+				if (sameColors.size() >= 3) {
+					board.removeAll(sameColors);
+					Collection<Bubble> disconnected = board.getDisconnectedGroup();
+					board.removeAll(disconnected);
 
-						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
-						this.obs.drawScore(score);
-					}
+					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
+					this.obs.drawScore(score);
 				}
 			}
 		}
@@ -138,7 +147,9 @@ public abstract class BSMode {
 	 * @param projectile the {@link Projectile}.
 	 */
 	public void setProjectile(Projectile projectile) {
+		if (this.projectile != null) this.projectile.deleteObservers();
 		this.projectile = projectile;
+		this.projectile.addObserver(Logger.getLogger());
 	}
 
 	// FUGLY, doesn't belong here...

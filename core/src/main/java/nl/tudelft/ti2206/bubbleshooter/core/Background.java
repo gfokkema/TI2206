@@ -34,5 +34,4 @@ public class Background extends BSDrawable {
 	public int getHeight() {
 		return 480;
 	}
-
 }

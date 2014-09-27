@@ -11,6 +11,8 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.input.AbstractProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
+import nl.tudelft.ti2206.bubbleshooter.util.Logger;
+import nl.tudelft.ti2206.bubbleshooter.util.ScreenLogger;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input.Keys;
@@ -59,6 +61,7 @@ public class BubbleShooter extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		engine = new SoundEngine(assets);
+		Logger.getLogger().addLog(new ScreenLogger());
 		
 		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");

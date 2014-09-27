@@ -1,9 +1,12 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Observer;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -64,6 +67,9 @@ public class Cannon extends BSDrawable implements Serializable {
 		pointer.setAngle(degrees);
 		
 		projectile.setBounds(new Circle(getBubblePos(), 16));
+		
+		setChanged();
+		notifyObservers("Cannon angle is now " + degrees + " degrees.");
 	}
 	
 	/**
@@ -84,7 +90,9 @@ public class Cannon extends BSDrawable implements Serializable {
 		fired.setVelocity(velocity);
 		fired.setDirection(new Vector2(pointer.direction));
 		
-		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
+		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
+		setChanged();
+		notifyObservers("Cannon has been shot!");
 		return fired;
 	}
 	
@@ -100,7 +108,7 @@ public class Cannon extends BSDrawable implements Serializable {
 	 * Moves the cannon to the right
 	 * @param dt	the amount to move
 	 */
-	public void right(float dt) { 
+	public void right(float dt) {
 		setAngle(this.getRotation() - sensitivity * dt);
 	}
 	
@@ -118,7 +126,7 @@ public class Cannon extends BSDrawable implements Serializable {
 	 */
 	private Vector2 getBubblePos() {
 		return new Vector2(pointer.origin.x + 16, pointer.origin.y + 16)
-						.add(pointer.getDirection().nor().scl(100));
+						.add(pointer.getDirection().cpy().nor().scl(100));
 	}
 
 	/**

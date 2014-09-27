@@ -104,6 +104,8 @@ public class Bubble extends BSDrawable implements Serializable {
 	 */
 	public void setBounds(Circle c) {
 		this.bounds = c;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**

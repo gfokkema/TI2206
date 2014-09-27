@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import java.util.Date;
+
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -42,6 +44,9 @@ public class Projectile extends Bubble {
 		Vector2 dir = direction.nor().scl(velocity);
 		this.getBounds().x += dir.x;
 		this.getBounds().y += dir.y;
+		
+		setChanged();
+		notifyObservers("New position: " + this.getBounds().x + "," + this.getBounds().y);
 	}
 
 	/**

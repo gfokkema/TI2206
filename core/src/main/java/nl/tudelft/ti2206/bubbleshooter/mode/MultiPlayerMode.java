@@ -1,10 +1,13 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import java.io.EOFException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
@@ -23,7 +26,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class MultiPlayerMode extends BSMode implements Runnable {
+public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 
@@ -59,8 +62,12 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 			board.add(new Bubble(), i);
 		}
 
-		writeBoard(board);
-		writeCannon(cannon);
+		writeDrawable(board);
+		writeDrawable(cannon);
+		writeDrawable(cannon.getProjectile());
+		
+		board.addObserver(this);
+		cannon.addObserver(this);
 	}
 
 	/**
@@ -76,18 +83,18 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		drawables1.addAll(board.getDrawables());
 		drawables1.add(cannon);
 		drawables1.add(cannon.getProjectile());
-		if (projectile != null)
-			drawables1.add(projectile);
+		cannon.getProjectile().addObserver(this);
+		if (projectile != cannon.getProjectile()) drawables1.add(projectile);
 		odraw.put(offset1, drawables1);
 
-		if (board2 != null && cannon2 != null) {
-			Collection<BSDrawable> drawables2 = board2.getDrawables();
-			drawables2.add(cannon2);
-			drawables2.add(cannon2.getProjectile());
-			if (projectile2 != null)
-				drawables2.add(projectile2);
-			odraw.put(offset2, drawables2);
-		}
+		if (board2 == null || cannon2 == null || projectile2 == null) return odraw;
+		
+		Collection<BSDrawable> drawables2 = board2.getDrawables();
+		drawables2.add(cannon2);
+		drawables2.add(cannon2.getProjectile());
+		if (projectile2 != cannon2.getProjectile()) drawables2.add(projectile2);
+		odraw.put(offset2, drawables2);
+		
 		return odraw;
 	}
 
@@ -96,11 +103,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	 */
 	@Override
 	public int update(float deltaTime) {
-		// FIXME: do not send board every frame
-		writeBoard(board);
-		writeCannon(cannon);
-		writeProjectile(projectile);
-		if (super.update(deltaTime) != 0) writeCondition(super.update(deltaTime));
+		//if (super.update(deltaTime) != 0) writeCondition(super.update(deltaTime));
 		return super.update(deltaTime) + condition2;
 	}
 
@@ -118,6 +121,12 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	 */
 	public synchronized void setCannonOpp(Cannon cn) {
 		this.cannon2 = cn;
+	}
+	
+	@Override
+	public void setProjectile(Projectile projectile) {
+		super.setProjectile(projectile);
+		projectile.addObserver(this);
 	}
 
 	/**
@@ -143,55 +152,17 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 			out.flush();
 			out.reset();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
-	/**
-	 * Output stream method for Board
-	 * 
-	 * @param board
-	 */
-	public void writeBoard(Board board) {
+	public void writeDrawable(BSDrawable d) {
 		try {
-			out.writeObject(board);
+			out.writeObject(d);
 			out.flush();
 			out.reset();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	/**
-	 * Output stream method for Cannon.
-	 * 
-	 * @param cn
-	 */
-	public void writeCannon(Cannon cn) {
-		try {
-			out.writeObject(cn);
-			out.flush();
-			out.reset();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	/**
-	 * Output stream method for projectile
-	 * 
-	 * @param pj
-	 */
-	public void writeProjectile(Projectile pj) {
-		try {
-			if (projectile == null)
-				out.writeObject("reset");
-			else
-				out.writeObject(pj);
-			out.flush();
-			out.reset();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -210,18 +181,20 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 					setCannonOpp((Cannon) o);
 				} else if (o instanceof Projectile) {
 					setProjectileOpp((Projectile) o);
-				} 
-				/*
-				 * else if (o instanceof String && ((String) o).equals("reset")) {
-				 * setProjectileOpp(null);
-				 * }
-				 */
+				}
 
 				setConditionOpp(in.readInt());
 				
+			} catch (EOFException e) {
+				
 			} catch (Exception e) {
-				System.out.println("exceptie");
+				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof BSDrawable) writeDrawable((BSDrawable) o);
 	}
 }
