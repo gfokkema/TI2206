@@ -37,6 +37,8 @@ public class Assets {
 		CANNON
 	}
 	
+	private static Assets assets = null;
+	
 	AssetManager loader;
 	EnumMap<MusicID, String> music;
 	EnumMap<SoundID, String> sounds;
@@ -46,7 +48,7 @@ public class Assets {
 	 * Initializes the {@link Assets} class that holds all external assets for Bubbleshooter.
 	 * @param loader	the {@link AssetManager} to use
 	 */
-	public Assets(AssetManager loader) {
+	private Assets(AssetManager loader) {
 		this.loader = loader;
 		music = new EnumMap<MusicID, String>(MusicID.class);
 		sounds = new EnumMap<SoundID, String>(SoundID.class);
@@ -56,8 +58,27 @@ public class Assets {
 	/**
 	 * Initializes the {@link Assets} class that holds all external assets for Bubbleshooter.
 	 */
-	public Assets() {
+	private Assets() {
 		this(new AssetManager());
+	}
+	
+	/**
+	 * Singleton pattern for a global asset manager.
+	 * @return	the unique instance of {@link Assets}
+	 */
+	public synchronized static Assets getAssets() {
+		if (assets == null) assets = new Assets();
+		
+		return assets;
+	}
+	
+	/**
+	 * Set the assetmanager we should use.
+	 * This can be used for changing themes between levels.
+	 * @param loader	the {@link AssetManager} to use
+	 */
+	public void setAssetManager(AssetManager loader) {
+		this.loader = loader;
 	}
 	
 	/**
