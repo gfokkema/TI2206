@@ -98,6 +98,7 @@ The timer is triggered by a change in time and the score by removing bubbles. So
 The pattern is applied here because one should favor object composition over inheritance. We could for example have used inheritance, and make a subclass of \textit{BSMode} for each game mode. However, a lot of the game logic is the same, and really the only difference is how the  game should end.\\
 Using the \textit{EndingCondition} class, we get a greater amount of flexibility: we pass the desired \textit{EndingCondition} to the constructor of a \textit{BSMode} class, and automatically the logic for the end of the game is done for us, by means of polymorphism.\\
 
+\newpage
 \item The class diagram for the \textit{Ending Condition Strategy} can be found in \textbf{Fig. 4}. \\
 \begin{minipage}{\linewidth}
 \makebox[\linewidth]{
@@ -106,13 +107,21 @@ Using the \textit{EndingCondition} class, we get a greater amount of flexibility
 \captionof{figure}{Ending Condition Strategy class diagram}
 \end{minipage}
 
-\item
+\item The sequence diagram for the \textit{Ending Condition Strategy} can be found in \textbf{Fig. 5}. \\
+\begin{minipage}{\linewidth}
+\makebox[\linewidth]{
+\includegraphics[width = \textwidth]{endingcondition_seq}
+}
+\captionof{figure}{Ending Condition Strategy sequence diagram}
+\end{minipage}
 \end{enumerate}
 
 %~~~~~~~~~~~~~~~~~~~~~ Design Pattern 3 ~~~~~~~~~~~~~~~~~~~~~~
 \subsection{Pattern 3: Singleton for Assets}
 \begin{enumerate}
 \item The Singleton pattern makes sure that there is only one instance of \textit{Assets} and it can be accessed globally. This is useful because we only need one instance of \textit{Assets} and we only need to load the assets once with the same instance. The loading happens when the application is initiated, in the very beginning before the user even sees anything. So, by applying the singleton pattern, it provides easy access for the class responsible for the initial launching of the application.
+
+\newpage
 \item The class diagram for the \textit{Assets Singleton} can be found in \textbf{Fig. 6}.
 \begin{minipage}{\linewidth}
 \makebox[\linewidth]{
@@ -120,20 +129,22 @@ Using the \textit{EndingCondition} class, we get a greater amount of flexibility
 }
 \captionof{figure}{Assets Singleton class diagram}
 \end{minipage}
+
 \item The sequence diagram for the \textit{Assets Singleton} can be found in \textbf{Fig. 7}.
 \begin{minipage}{\linewidth}
 \makebox[\linewidth]{
 \includegraphics[width = \textwidth]{assets_sequence}
 }
-\captionof{figure}{Assets Singleton class diagram}
+\captionof{figure}{Assets Singleton sequence diagram}
 \end{minipage}
 \end{enumerate}
 
 
-%###################################### EXERCISE 3 ###################################### 
+%###################################### EXERCISE 3 ######################################
+\newpage
 \section{Optional - One more design pattern \\}
 In this section an additional design pattern is implemented and elaborated.
-%~~~~~~~~~~~~~~~~~~~~~ Extra Pattern 3 ~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~ Extra Pattern 4 ~~~~~~~~~~~~~~~~~~~~~~
 \subsection{Pattern 3:  Observer for Networking}
 \begin{enumerate}
 \item For the third pattern, we chose to use the \textit{Observer} pattern again to improve our networking code. \\
@@ -141,14 +152,14 @@ When playing against another player, the remote client only has to know about ch
 Therefore it makes sense to use the \textit{Observer} pattern for sending our state to the remote client. \\
 We were able to improve networking performance by changing all \textit{BSDrawable} objects into \textit{Observable} objects and by letting the \textit{MultiPlayerMode} class listen to changes made to them.
 Now the \textit{MultiPlayerMode} only sends \textit{BSDrawable} objects over the network when they have changed.
-\item The class diagram for the \textit{Networking Observer} can be found in \textbf{Fig. TBD}. \\
+
+\item The class diagram for the \textit{Networking Observer} can be found in \textbf{Fig. 8}. \\
 \begin{minipage}{\linewidth}
 \makebox[\linewidth]{
 \includegraphics[width = \textwidth]{networking}
 }
 \captionof{figure}{Networking Observer class diagram}
 \end{minipage}
-\item
 \end{enumerate}
 
 \end{document}
