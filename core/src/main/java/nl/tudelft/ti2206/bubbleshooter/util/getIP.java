@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
@@ -32,3 +32,4 @@ public class getIP {
 		return read.readLine();
 	}
 }
+	

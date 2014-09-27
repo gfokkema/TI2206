@@ -194,6 +194,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	public void run() {
 		while (true) {
 			try {
+
 				Object o = in.readObject();
 				if (o instanceof Board) {
 					setBoardOpp((Board) o);
@@ -211,7 +212,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 				setConditionOpp(in.readInt());
 				
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				System.out.println("exceptie");
 			}
 		}
 	}
