@@ -14,7 +14,14 @@
 .project
 .settings/
 target/
-bin/
+bin
+
+# unwanted TeX crap
+*.aux
+*.log
+*.synctex.gz
+*.toc
+*.out
 
 # OSX crap
 .DS_Store
