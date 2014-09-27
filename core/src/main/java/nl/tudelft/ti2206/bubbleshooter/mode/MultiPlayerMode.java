@@ -17,6 +17,12 @@ import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Multiplayer mode for playing with your friends!
+ * This mode allows an user to player across the network to play to each other.
+ * @author group-15
+ *
+ */
 public class MultiPlayerMode extends BSMode implements Runnable {
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
@@ -29,10 +35,10 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	private int condition2;
 
 	/**
-	 * 
-	 * @param end
-	 * @param in
-	 * @param out
+	 * The Multiplayer mode constructor.
+	 * @param end the {@link EndingCondition}.
+	 * @param in the {@link ObjectInputStream}.
+	 * @param out the {@link ObjectOutputStream}.
 	 */
 	public MultiPlayerMode(EndingCondition end, ObjectInputStream in,
 			ObjectOutputStream out) {
@@ -58,8 +64,9 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	}
 
 	/**
- * 
- */
+	 * Gets the drawables for the multiplayer-game.
+	 * @return a hash-map containing all the drawables.
+	 */
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
 		HashMap<Vector2, Collection<BSDrawable>> odraw = new HashMap<>();
@@ -98,8 +105,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	}
 
 	/**
-	 * Setter for Opponent board.
-	 * 
+	 * Setter for opponent's board.
 	 * @param board
 	 */
 	public synchronized void setBoardOpp(Board board) {
@@ -107,8 +113,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	}
 
 	/**
-	 * Setter for oppponent cannon.
-	 * 
+	 * Setter for oppponent's cannon.
 	 * @param cn
 	 */
 	public synchronized void setCannonOpp(Cannon cn) {
@@ -116,8 +121,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	}
 
 	/**
-	 * seetter for opponent projectile.
-	 * 
+	 * Setter for opponent projectile.
 	 * @param pj
 	 */
 	public synchronized void setProjectileOpp(Projectile pj) {
@@ -128,6 +132,10 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 		this.condition2 = condition;
 	}
 
+	/**
+	 * Writes the condition.
+	 * @param condition
+	 */
 	public void writeCondition(int condition) {
 		try {
 			Gdx.app.log("condition", "" + condition);
@@ -170,7 +178,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	}
 
 	/**
-	 * output stream method for projectile
+	 * Output stream method for projectile
 	 * 
 	 * @param pj
 	 */
@@ -188,7 +196,7 @@ public class MultiPlayerMode extends BSMode implements Runnable {
 	}
 
 	/**
-	 * runnable that copes with read input by sockets.
+	 * Runnable that copes with read input by sockets.
 	 */
 	@Override
 	public void run() {

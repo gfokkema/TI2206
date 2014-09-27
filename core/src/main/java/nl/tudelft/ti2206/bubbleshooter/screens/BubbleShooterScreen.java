@@ -76,16 +76,27 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 		stage.draw();
 	}
 	
+	/**
+	 * Show is being called upon entering the screen.
+	 */
 	@Override
 	public void show() {
 		 game.engine.play(MusicID.GAME);
 	}
 	
+	/**
+	 * Hide is being called when exiting the screen.
+	 */
 	@Override
 	public void hide() {
 		// game.engine.pause();
 	}
 	
+	/**
+	 * Draw the various elements.
+	 * @param offset an offset to which something is drawn.
+	 * @param drawable the {@link BSDrawable}.
+	 */
 	public void draw(Vector2 offset, BSDrawable drawable) {
 		Vector2 position = drawable.getPosition();
 		Vector2 origin = drawable.getOrigin();
@@ -99,12 +110,18 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 						drawable.getRotation());
 	}
 
+	/**
+	 * Draw the timer onto the playing-field.
+	 */
 	@Override
 	public void drawTimer(Duration duration) {
 		String timeString = "Time left: " + duration.toMinutes() + ":" + (duration.getSeconds()%60);
 		timerField.setText(timeString);
 	}
 
+	/**
+	 * Draw the score onto the playing-field.
+	 */
 	@Override
 	public void drawScore(int score) {
 		scoreField.setText("Score:" + score);

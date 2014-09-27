@@ -90,6 +90,9 @@ public class OptionsScreen extends AbstractScreen {
 		table.add(sfxgroup).expandX().center().row();
 	}
 	
+	/**
+	 * Render the things onto the screen.
+	 */
 	@Override
 	public void render(float delta) {
 		super.render(delta);

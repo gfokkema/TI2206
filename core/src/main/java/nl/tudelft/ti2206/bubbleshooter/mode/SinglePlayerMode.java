@@ -13,16 +13,32 @@ import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Single-Player mode.
+ * This is one of the modes the user is able to play.
+ * @author group-15
+ *
+ */
 public class SinglePlayerMode extends BSMode {
 	private Background bg;
 	private Vector2 offset;
 	
+	/**
+	 * Constructor for the Single-Player mode.
+	 * @param end the used {@link EndingCondition}.
+	 * @param board the used {@link Board}.
+	 * @param cannon the used {@link Cannon}.
+	 */
 	public SinglePlayerMode(EndingCondition end, Board board, Cannon cannon) {
 		super(end, board, cannon);
 		this.bg = new Background();
 		this.offset = new Vector2(140, 0);
 	}
 	
+	/**
+	 * Secondary constructor.
+	 * @param end the used {@link EndingCondition}.
+	 */
 	public SinglePlayerMode(EndingCondition end) {
 		super(end);
 		this.bg = new Background();
@@ -30,6 +46,9 @@ public class SinglePlayerMode extends BSMode {
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
 	}
 
+	/**
+	 * Gets the drawables for the Single-Player mode.
+	 */
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
 		HashMap<Vector2, Collection<BSDrawable>> odraw = new HashMap<>();

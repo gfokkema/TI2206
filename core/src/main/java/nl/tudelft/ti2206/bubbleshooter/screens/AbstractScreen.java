@@ -13,6 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * Abstraction of the various screens.
+ * @author group-15
+ *
+ */
 public class AbstractScreen extends ScreenAdapter {
 	protected BubbleShooter game;
 	protected Stage stage;
@@ -34,6 +39,9 @@ public class AbstractScreen extends ScreenAdapter {
 		stage.addActor(table);
 	}
 	
+	/**
+	 * Show is being called upon entering the screen.
+	 */
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(stage);
@@ -57,6 +65,9 @@ public class AbstractScreen extends ScreenAdapter {
 		stage.getViewport().update(width, height, true);
 	}
 	
+	/**
+	 * Render the screen.
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
@@ -66,6 +77,9 @@ public class AbstractScreen extends ScreenAdapter {
 	    stage.draw();
 	}
 	
+	/**
+	 * Dispose of the stage.
+	 */
 	@Override
 	public void dispose() {
 		stage.dispose();

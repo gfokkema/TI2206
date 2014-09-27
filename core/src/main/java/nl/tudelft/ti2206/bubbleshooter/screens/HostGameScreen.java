@@ -16,6 +16,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
+/**
+ * The screen shown when hosting a multi-player game.
+ * @author group-15
+ *
+ */
 public class HostGameScreen extends AbstractScreen implements Runnable {
 	private ObjectInputStream br = null;
 	private ObjectOutputStream bw = null;

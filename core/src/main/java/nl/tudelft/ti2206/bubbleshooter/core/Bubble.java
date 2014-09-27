@@ -106,6 +106,10 @@ public class Bubble extends BSDrawable implements Serializable {
 		this.bounds = c;
 	}
 
+	/**
+	 * Returns the texture of this {@link Bubble}.
+	 * @return {@link #Texture} of this {@link Bubble}.
+	 */
 	@Override
 	public TextureID getTexture() {
 		return TextureID.BUBBLE;
@@ -120,19 +124,27 @@ public class Bubble extends BSDrawable implements Serializable {
 		return new Vector2(bounds.x - 16, bounds.y - 16);
 	}
 
+	/**
+	 * Returns the width of this {@link Bubble}.
+	 * @return width of this {@link Bubble}.
+	 */
 	@Override
 	public int getWidth() {
 		return 32;
 	}
 
+	/**
+	 * Returns the height of this {@link Bubble}.
+	 * @return height of this {@link Bubble}.
+	 */
 	@Override
 	public int getHeight() {
 		return 32;
 	}
 	
 	/**
-	 * return color
-	 * @return color
+	 * Return the color of this {@link Bubble}.
+	 * @return color of this {@link Bubble}.
 	 */
 	@Override
 	public Color getColor() {

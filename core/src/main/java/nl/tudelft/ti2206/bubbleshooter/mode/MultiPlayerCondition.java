@@ -7,6 +7,13 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 public class MultiPlayerCondition implements EndingCondition {
 
+	/**
+	 * The check being run to determine whether a multiplayer game should end.
+	 * Returns a 1 if the board is empty.
+	 * Returns a 0 if neither the board is empty nor the user hit the bottom of the playing-field.
+	 * Return a -1 if the user hit the bottom of the playing-field.
+	 * @return an integer to mark three different kinds of events.
+	 */
 	@Override
 	public int check(BSMode mode) {
 		
@@ -28,6 +35,9 @@ public class MultiPlayerCondition implements EndingCondition {
 		return 0;
 	}
 
+	/**
+	 * Empty {@link StatsObserver} add.
+	 */
 	@Override
 	public void addStatsObserver(StatsObserver o) {
 	}

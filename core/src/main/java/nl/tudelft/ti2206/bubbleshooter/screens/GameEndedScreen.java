@@ -8,8 +8,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 
+/**
+ * The screen shown when the game has ended: lose/win.
+ * @author group-15
+ *
+ */
 public class GameEndedScreen extends AbstractScreen {
 
+	/**
+	 * The Game ending screen.
+	 * @param game the current {@link BubbleShooter} game.
+	 * @param message the message shown.
+	 * @param score the final score.
+	 */
 	public GameEndedScreen(BubbleShooter game, String message, int score) {
 		super(game);
 		LabelStyle labelstyle = new LabelStyle(game.font, Color.WHITE);
@@ -22,6 +33,9 @@ public class GameEndedScreen extends AbstractScreen {
 		table.add(info).expandX().center().row();
 	}
 
+	/**
+	 * Render the things onto the screen.
+	 */
 	@Override
 	public void render(float delta) {
 		super.render(delta);

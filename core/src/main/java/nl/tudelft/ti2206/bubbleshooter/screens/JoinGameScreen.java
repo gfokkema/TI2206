@@ -21,6 +21,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+/**
+ * The screen shown when joining a multi-player game.
+ * @author group-15
+ *
+ */
 public class JoinGameScreen extends AbstractScreen {
 	private ObjectInputStream br = null;
 	private ObjectOutputStream bw = null;

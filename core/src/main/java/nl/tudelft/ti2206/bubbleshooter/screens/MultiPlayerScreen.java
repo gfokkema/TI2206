@@ -10,7 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+/**
+ * The screen shown when selecting to play a multi-player game.
+ * The options are to host or to join a multi-player game.
+ * @author group-15
+ *
+ */
 public class MultiPlayerScreen extends AbstractScreen {
+	
 	/**
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
@@ -43,6 +50,9 @@ public class MultiPlayerScreen extends AbstractScreen {
 		table.add(join).expandX().center().row();
 	}
 	
+	/**
+	 * Render the things onto the screen.
+	 */
 	@Override
 	public void render(float delta) {
 		super.render(delta);

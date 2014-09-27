@@ -2,6 +2,11 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * The type of {@link Grid} a board uses.
+ * @author group-15
+ *
+ */
 public class Grid {
 	private int width = 8, height = 20;
 	

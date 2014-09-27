@@ -121,31 +121,55 @@ public class Cannon extends BSDrawable implements Serializable {
 						.add(pointer.getDirection().nor().scl(100));
 	}
 
+	/**
+	 * Returns the texture of this {@link Cannon}.
+	 * @return {@link #Texture} of this {@link Cannon}
+	 */
 	@Override
 	public TextureID getTexture() {
 		return TextureID.CANNON;
 	}
 	
+	/**
+	 * Returns the position of this {@link Cannon}.
+	 * @return {@link #position} of this {@link Cannon}.
+	 */
 	@Override
 	public Vector2 getPosition() {
 		return position;
 	}
 	
+	/**
+	 * Returns the origin of this {@link Cannon}.
+	 * @return the origin of this {@link Cannon}.
+	 */
 	@Override
 	public Vector2 getOrigin() {
 		return new Vector2(50, 16);
 	}
 
+	/**
+	 * Returns the width of this {@link Cannon}.
+	 * @return the width of this {@link Cannon}.
+	 */
 	@Override
 	public int getWidth() {
 		return 100;
 	}
 
+	/**
+	 * Returns the height of this {@link Cannon}.
+	 * @return the height of this {@link Cannon}.
+	 */
 	@Override
 	public int getHeight() {
 		return 100;
 	}
 	
+	/**
+	 * Returns the angle of this {@link Cannon}.
+	 * @return the angle of thie {@link Cannon}.
+	 */
 	@Override
 	public float getRotation() {
 		return pointer.getAngle();
