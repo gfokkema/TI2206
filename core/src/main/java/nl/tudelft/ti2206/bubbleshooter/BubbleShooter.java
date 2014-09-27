@@ -60,7 +60,7 @@ public class BubbleShooter extends Game {
 		font = new BitmapFont();
 		engine = new SoundEngine(assets);
 		
-		assets.load(MusicID.GAME, "BGMenu.ogg");
+		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
 		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
 		assets.load(SoundID.BUTTON, "ButtonSFX.wav");

@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.Collection;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
@@ -77,7 +78,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 	
 	@Override
 	public void show() {
-		// game.engine.play(MusicID.GAME);
+		 game.engine.play(MusicID.GAME);
 	}
 	
 	@Override
