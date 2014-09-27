@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>630</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>title: endingcondition
+_current:BSS~id1_|_mode:BSMode~id2_|_end:EndingCondition~id3_
+id1-&gt;&gt;id2:id1,id2:update()
+id1&lt;.id2:id1,id2:return
+id2-&gt;&gt;id3:id2,id3:end.check(this)
+id2&lt;.id3:id2,id3:win/lose/continue
+id1&lt;.id2:id1,id2:win/lose/continue
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>100</x>
+      <y>160</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+layer=2
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
