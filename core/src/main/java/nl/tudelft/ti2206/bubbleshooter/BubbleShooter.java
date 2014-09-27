@@ -57,7 +57,7 @@ public class BubbleShooter extends Game {
 	 */
 	@Override
 	public void create() {
-		assets = new Assets();
+		assets = Assets.getAssets();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		engine = new SoundEngine(assets);

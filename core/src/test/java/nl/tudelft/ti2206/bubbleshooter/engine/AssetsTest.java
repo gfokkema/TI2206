@@ -34,7 +34,8 @@ public class AssetsTest {
 	 */
 	@Before
 	public void setUp() {
-		assets = new Assets(loader);
+		assets = Assets.getAssets();
+		assets.setAssetManager(loader);
 		Mockito.when(loader.get("test.ogg")).thenReturn(music);
 		Mockito.when(loader.get("test.wav")).thenReturn(sound);
 		Mockito.when(loader.get("test.png")).thenReturn(texture);
