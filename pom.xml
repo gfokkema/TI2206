@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.tudelft.ti2206.bubbleshooter</groupId>
 	<artifactId>bubbleshooter</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 	<packaging>pom</packaging>
 	<name>Bubbleshooter Parent</name>
 	<distributionManagement>
