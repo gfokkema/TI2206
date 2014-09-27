@@ -14,8 +14,10 @@ import java.net.UnknownHostException;
 public class getIP {
 	/**
 	 * This method retrieves your local IP address using Java.
-	 * @return						a String with your local IP address
-	 * @throws UnknownHostException	when this method could not determine your IP
+	 * 
+	 * @return a String with your local IP address
+	 * @throws UnknownHostException
+	 *             when this method could not determine your IP
 	 */
 	public static String getLocalIP() throws UnknownHostException {
 		return InetAddress.getLocalHost().getHostAddress().toString();
@@ -23,12 +25,31 @@ public class getIP {
 
 	/**
 	 * This method retrieves your external IP by using an amazon service.
-	 * @return				a String with your external IP address
-	 * @throws IOException	when this method could not determine your IP
+	 * 
+	 * @return a String with your external IP address
+	 * @throws IOException
+	 *             when this method could not determine your IP
 	 */
 	public static String getExternIP() throws IOException {
 		URL externIP = new URL("http://checkip.amazonaws.com");
-		BufferedReader read = new BufferedReader(new InputStreamReader(externIP.openStream()));
+		BufferedReader read = new BufferedReader(new InputStreamReader(
+				externIP.openStream()));
 		return read.readLine();
 	}
+
+
+	/**
+	 * This method retrieves your loopback/machine IP address using Java.
+	 * 
+	 * @return a String with your loopback/machine IP address
+	 * @throws UnknownHostException
+	 *             when this method could not determine your IP on your machine
+	 */
+	@SuppressWarnings("static-access")
+	public static String getLoopbackIP() throws UnknownHostException {
+
+		return InetAddress.getLocalHost().getLoopbackAddress().toString();
+		
+	}
+
 }
