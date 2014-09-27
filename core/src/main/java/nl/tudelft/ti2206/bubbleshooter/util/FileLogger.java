@@ -4,9 +4,19 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The file logger.
+ * Responsible for logging to the file.
+ * @author group-15
+ *
+ */
 public class FileLogger implements LogStrategy {
 	private BufferedWriter bw;
 	
+	/**
+	 * Constructor for FileLogger
+	 * @param filename the filename
+	 */
 	public FileLogger(String filename) {
 		try {
 			bw = new BufferedWriter(new FileWriter(filename, false));
@@ -15,6 +25,9 @@ public class FileLogger implements LogStrategy {
 		}
 	}
 	
+	/**
+	 * Write to the file.
+	 */
 	@Override
 	public void write(String msg) {
 		try {

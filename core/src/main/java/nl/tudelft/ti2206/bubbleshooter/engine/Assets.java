@@ -37,6 +37,9 @@ public class Assets {
 		CANNON
 	}
 	
+	/**
+	 * Singleton for assets.
+	 */
 	private static Assets assets = null;
 	
 	AssetManager loader;

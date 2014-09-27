@@ -99,7 +99,19 @@ Using the \textit{EndingCondition} class, we get a greater amount of flexibility
 \end{enumerate}
 
 %~~~~~~~~~~~~~~~~~~~~~ Design Pattern 3 ~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Pattern 3: Observer for Networking}
+\subsection{Pattern 3: Singleton for Assets}
+\begin{enumerate}
+\item The Singleton pattern makes sure that there is only one instance of \textit{Assets} and it can be accessed globally. This is useful because we only need one instance of \textit{Assets} and we only need to load the assets once with the same instance. The loading happens when the application is initiated, in the very beginning before the user even sees anything. So, by applying the singleton pattern, it provides easy access for the class responsible for the initial launching of the application.
+\item
+\item
+\end{enumerate}
+
+
+%###################################### EXERCISE 3 ###################################### 
+\section{Optional - One more design pattern \\}
+In this section an additional design pattern is implemented and elaborated.
+%~~~~~~~~~~~~~~~~~~~~~ Extra Pattern 3 ~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Pattern 3:  Observer for Networking}
 \begin{enumerate}
 \item For the third pattern, we chose to use the \textit{Observer} pattern again to improve our networking code. \\
 When playing against another player, the remote client only has to know about changes in the current state of the host.
@@ -115,15 +127,5 @@ Now the \textit{MultiPlayerMode} only sends \textit{BSDrawable} objects over the
 \end{minipage}
 \item
 \end{enumerate}
-
-%###################################### EXERCISE 3 ###################################### 
-\section{Optional - One more design pattern}
-\subsection{Pattern 3: Singleton for Assets}
-\begin{enumerate}
-\item
-\item
-\item
-\end{enumerate}
-
 
 \end{document}
