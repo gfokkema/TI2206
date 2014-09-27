@@ -92,6 +92,13 @@
             then the player immediately loses.
     \end{itemize}
   \end{itemize}
+         \item The game should be logged into a file, given a game has started, including the following elements:
+   \begin{itemize}
+      \item When the user has pressed the \textit{left} or \textit{right arrow key} causing the cannon to rotate to the left or right, the new angle after rotation will be logged.
+      \item When there is a projectile in the field, shot by the user by pressing the \textit{spacebar}, the positions of the projectile will be logged during its travel.
+      \item When a projectile collides with a bubble on the board, the index of the grid (having a position), to which it will stick to is logged.
+   \end{itemize}
+   \item Unexpected exceptions should all be logged into a file, given that the application has started.
 \end{itemize}
 
 \noindent
@@ -99,35 +106,35 @@
 \begin{itemize}
    \item Given the user has started a single player game,
          the user can exit the game (go back to main menu) by pressing
-         the \textit{M} key on the keyboard.
+         the \textit{ESC} key on the keyboard.
    \item Given the player has started a single player game,
          when all bubbles are removed the player wins!
 \end{itemize}
-
-\noindent
+\noindent 
 \textbf{\underline{Could-have features}}
 \begin{itemize}
   \item Given the user has started the application and is in the menu,
   		clicking on a button will play a sound effect.
   \item Given the user has started the application,
   		background music will be played right away.
+  \item	The user should be able to select the background music and background wallpapers.
   \item Given the user clicks on the settings button,
 		the user will be presented the options menu,
 		where the user can do the following actions:
   \begin{itemize}
-    \item When the user clicks the \textit{Volume Up!} button,
+    \item When the user clicks the \textit{+} button below the \textit{Change Volume},
           the background music volume will rise.
-    \item When the user clicks the \textit{Volume Down!} button,
+    \item When the user clicks the \textit{-} button below the \textit{Change Volume},
           the background music volume will go down.
-    \item When the user clicks the \textit{SFX Up!} button,
+    \item When the user clicks the \textit{+} button below the \textit{Change SFX},
           the sound effects volume will rise.
-    \item When the user clicks the \textit{SFX Down!} button,
+    \item When the user clicks the \textit{-} button below the \textit{Change SFX},
           the sound effects volume will go down.
-    \item When the user clicks the \textit{Back} button, 
+    \item When the user presses the \textit{ESC} key, 
           the user will return to the main menu screen.
   \end{itemize}
   \item Given the user has started a single player game,
-        when the user presses the \textit{Escape} button, the game will pause
+        when the user presses the \textit{ESC} key, the game will pause.
 \end{itemize}
 
 \noindent
@@ -151,7 +158,7 @@
   \item The development process (including the sprints) will be using SCRUM,
         with the help of the following web based tool:
   \begin{itemize}
-    \item \href{https://www.scrumdo.com/}{ScrumDo}
+    \item \href{https://www.scrumdo.org/}{ScrumDo}
   \end{itemize}
 
   \item Meetings
@@ -163,8 +170,13 @@
     \item Friday	20:00 - 12/09/2014 (Sprint review)
     \item Tuesday	 9:45 - 16/09/2014 (Sprint retrospective + Sprint planning)
     \item Wednesday	20:00 - 17/09/2014 (Daily sprint)
-    \item Friday	20:00 - 19/09/2014 (Daily sprint)
-    \item Saturday	20:00 - 18/09/2014 (Daily sprint)
+    \item Friday	20:00 - 18/09/2014 (Daily sprint)
+    \item Saturday	20:00 - 20/09/2014 (Daily sprint)
+    \item Tuesday	 9:45 - 23/09/2014 (Sprint retrospective + Sprint planning)
+    \item Wednesday	20:00 - 24/09/2014 (Daily sprint)
+    \item Friday	20:00 - 26/09/2014 (Daily sprint)
+    \item Saturday	18:00 - 27/09/2014 (Daily sprint)
+ 
   \end{itemize}
 
   \item The game must support the following OS:
