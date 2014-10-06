@@ -9,7 +9,11 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
  * @author group-15
  *
  */
-public class BelowLineCondition extends EndingCondition {
+public class BelowLineCondition extends EndingDecorator {
+
+	public BelowLineCondition(EndingCondition end) {
+		super(end);
+	}
 
 	/**
 	 * The actual {@link EndingCondition} for the Single-Player mode.
@@ -30,6 +34,7 @@ public class BelowLineCondition extends EndingCondition {
 		for(int i = max-width; i <= max; i++)
 			if(bubbles.containsKey(i)) return -1; 
 		
-		return 0;
+		return super.check(mode);
 	}
+
 }

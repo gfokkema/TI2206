@@ -6,7 +6,9 @@ import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.mode.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.BelowLineCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 
 import com.badlogic.gdx.Gdx;
@@ -87,6 +89,8 @@ public class JoinGameScreen extends AbstractScreen {
 			System.out.println(e.getMessage());
 			Gdx.app.exit();
 		}
-		game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(new BelowLineCondition(), br, bw)));
+		EndingCondition basic = new BasicCondition();
+		EndingCondition belowLine = new BelowLineCondition(basic);
+		game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(belowLine, br, bw)));
 	}
 }
