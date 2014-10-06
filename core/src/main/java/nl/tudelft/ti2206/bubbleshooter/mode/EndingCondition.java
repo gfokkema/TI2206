@@ -9,17 +9,20 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
  * @author group-15
  *
  */
-public interface EndingCondition {
+public abstract class EndingCondition {
+	StatsObserver obs;
 
 	/**
 	 * Check whether the game should end
 	 * @return true if the game should end.
 	 */
-	public int check(BSMode mode);
+	public abstract int check(BSMode mode);
 
 	/**
 	 * Add the {@link StatsObserver}.
 	 * @param o the {@link StatsObserver}.
 	 */
-	public void addStatsObserver(StatsObserver o);
+	public void addStatsObserver(StatsObserver o) {
+		this.obs = o;
+	}
 }
