@@ -19,13 +19,24 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Bubble extends BSDrawable implements Serializable {
 	private static final long serialVersionUID = -3647601554787437036L;
-	protected static int[] colors = {
-		Color.rgba8888(Color.RED),
-		Color.rgba8888(Color.GREEN),
-		Color.rgba8888(Color.BLUE),
-		Color.rgba8888(Color.PURPLE),
-		Color.rgba8888(Color.YELLOW)
-	};
+	
+	public enum BubbleColors {
+		RED(Color.RED),
+		GREEN(Color.GREEN),
+		BLUE(Color.BLUE),
+		PURPLE(Color.PURPLE),
+		YELLOW(Color.YELLOW);
+		
+		private Color color;
+		private BubbleColors(Color color) {
+			this.color = color;
+		}
+		
+		public Color getColor() {
+			return color;
+		}
+	}
+	
 	private int color;
 	private Circle bounds;
 	
@@ -43,7 +54,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	 * it's protected and can only be used in the same package.
 	 * @param c - the Color of the Bubble.
 	 */
-	protected Bubble(Color c) {
+	public Bubble(Color c) {
 		this.color = Color.rgba8888(c);
 	}
 
@@ -79,7 +90,8 @@ public class Bubble extends BSDrawable implements Serializable {
 	 * @return a randomly chosen ColorValue.
 	 */
 	protected Color getRandomColor() {
-		return new Color(colors[(new Random()).nextInt(colors.length)]);
+		BubbleColors[] colors = BubbleColors.values();
+		return colors[(new Random()).nextInt(colors.length)].getColor();
 	}
 	
 	/**

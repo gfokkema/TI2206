@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -8,6 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
@@ -38,29 +40,22 @@ public abstract class BSMode {
 	 * @param board the used {@link Board} for the game.
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
-	public BSMode(EndingCondition end, Board board, Cannon cannon) {
-		this.board = board;
+	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
+		try {
+			this.board = factory.parseFile("levels/arcadeboard.txt").get(0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		board.addObserver(Logger.getLogger());
+		
 		this.cannon = cannon;
 		cannon.addObserver(Logger.getLogger());
 		setProjectile(cannon.getProjectile());
 		
-		for (int i = 0; i < 40; i++) {
-			board.add(new Bubble(), i);
-		}
 		this.end = end;
 		this.score = 0;
 		
-	}
-	
-	/**
-	 * Secondary constructor which will be called in the various game-modes.
-	 * Only giving a {@link EndingCondition} should be enough; 
-	 * board and cannon are no different in different game-modes.
-	 * @param end the {@link EndingCondition} to which the game will end.
-	 */
-	public BSMode(EndingCondition end) {
-		this(end, new Board(8, 15), new Cannon(160,15));
 	}
 
 	/**

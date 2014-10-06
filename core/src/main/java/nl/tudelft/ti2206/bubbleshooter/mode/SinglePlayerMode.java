@@ -8,6 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 
 import com.badlogic.gdx.Gdx;
@@ -29,8 +30,8 @@ public class SinglePlayerMode extends BSMode {
 	 * @param board the used {@link Board}.
 	 * @param cannon the used {@link Cannon}.
 	 */
-	public SinglePlayerMode(EndingCondition end, Board board, Cannon cannon) {
-		super(end, board, cannon);
+	public SinglePlayerMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
+		super(end, factory, cannon);
 		this.bg = new Background();
 		this.offset = new Vector2(140, 0);
 	}
@@ -39,10 +40,8 @@ public class SinglePlayerMode extends BSMode {
 	 * Secondary constructor.
 	 * @param end the used {@link EndingCondition}.
 	 */
-	public SinglePlayerMode(EndingCondition end) {
-		super(end);
-		this.bg = new Background();
-		this.offset = new Vector2(140, 0);
+	public SinglePlayerMode(EndingCondition end, BoardFactory factory) {
+		this(end, factory, new Cannon(160,15));
 		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
 	}
 
