@@ -6,7 +6,6 @@ import java.time.ZonedDateTime;
 public class TimerCondition extends EndingDecorator {
 	private Duration gameLength;
 	private ZonedDateTime epoch;
-	private EndingCondition end;
 
 	public TimerCondition(EndingCondition end, Duration gameLength) {
 		super(end);
