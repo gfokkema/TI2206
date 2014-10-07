@@ -50,6 +50,8 @@ public abstract class BoardFactory {
 		for (int y = 1; y < lines.length; y++) {
 			String[] bubbles = lines[y].split("  ");
 			for (int x = 0 + (y - 1) % 2; x < bubbles.length && x < board.getWidth(); x++) {
+				if (bubbles[x].equals("--")) continue;
+				
 				int colorvalue = Integer.parseInt(bubbles[x]);
 				board.add(new Bubble(colors[colorvalue].getColor()), x - (y - 1) % 2, y - 1);
 			}
