@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 /**
@@ -10,19 +11,33 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
  *
  */
 public abstract class EndingCondition {
-	StatsObserver obs;
+	StatsObserver statsObs;
+	EndingObserver endingObs;
 
 	/**
 	 * Check whether the game should end
-	 * @return true if the game should end.
 	 */
-	public abstract int check(BSMode mode);
+	public abstract void check(BSMode mode);
+
+	/**
+	 * Called when the level is lost.
+	 */
+	public abstract void lost();
+
+	/**
+	 * Called when the level is won.
+	 */
+	public abstract void won();
 
 	/**
 	 * Add the {@link StatsObserver}.
 	 * @param o the {@link StatsObserver}.
 	 */
 	public void addStatsObserver(StatsObserver o) {
-		this.obs = o;
+		this.statsObs = o;
+	}
+
+	public void addEndingObserver(EndingObserver o) {
+		this.endingObs = o;
 	}
 }

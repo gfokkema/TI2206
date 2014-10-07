@@ -11,8 +11,18 @@ public class BasicCondition extends EndingCondition {
 	 * Check if the {@link Board} is empty.
 	 */
 	@Override
-	public int check(BSMode mode) {
-		return mode.board.isEmpty() ? 1 : 0;
+	public void check(BSMode mode) {
+		if (mode.board.isEmpty()) this.lost();
+	}
+
+	@Override
+	public void lost() {
+		endingObs.lost();
+	}
+
+	@Override
+	public void won() {
+		endingObs.won();
 	}
 
 }

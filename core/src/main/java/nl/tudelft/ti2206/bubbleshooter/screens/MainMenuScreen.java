@@ -47,15 +47,14 @@ public class MainMenuScreen extends AbstractScreen {
 		TextButton multiplay = new TextButton("Multi player", style);
 		TextButton options = new TextButton("Options", style);
 		TextButton quit = new TextButton("Quit", style);
-
-		EndingCondition basic = new BasicCondition();
-		EndingCondition belowLine = new BelowLineCondition(basic);
-		EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
 		
 		singleplay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.engine.play(SoundID.BUTTON);
+				EndingCondition basic = new BasicCondition();
+				EndingCondition belowLine = new BelowLineCondition(basic);
+				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
 				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(timed)));
 			}
 		});

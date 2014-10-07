@@ -15,12 +15,11 @@ public class TimerCondition extends EndingDecorator {
 	}
 
 	@Override
-	public int check(BSMode mode) {
+	public void check(BSMode mode) {
 		Duration deltaTime = Duration.between(epoch, ZonedDateTime.now());
-		if (mode.board.isEmpty()) return 1;
-		if (gameLength.compareTo(deltaTime) < 0) return -1;
-		obs.drawTimer(gameLength.minus(deltaTime));
-		return super.check(mode);
+		if (gameLength.compareTo(deltaTime) < 0) this.lost();
+		statsObs.drawTimer(gameLength.minus(deltaTime));
+		super.check(mode);
 	}
 
 }

@@ -19,7 +19,7 @@ public class BelowLineCondition extends EndingDecorator {
 	 * The actual {@link EndingCondition} for the Single-Player mode.
 	 */
 	@Override
-	public int check(BSMode mode) {
+	public void check(BSMode mode) {
 		HashMap<Integer, Bubble> bubbles = mode.board.getBubbles();
 		
 		int width = mode.board.getGrid().getWidth();
@@ -32,9 +32,9 @@ public class BelowLineCondition extends EndingDecorator {
 			max += width;
 
 		for(int i = max-width; i <= max; i++)
-			if(bubbles.containsKey(i)) return -1; 
+			if(bubbles.containsKey(i)) this.lost();
 		
-		return super.check(mode);
+		super.check(mode);
 	}
 
 }
