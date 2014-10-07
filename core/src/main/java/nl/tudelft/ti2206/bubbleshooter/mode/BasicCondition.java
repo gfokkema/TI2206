@@ -12,7 +12,7 @@ public class BasicCondition extends EndingCondition {
 	 */
 	@Override
 	public void check(BSMode mode) {
-		if (mode.board.isEmpty()) this.lost();
+		if (mode.board.isEmpty()) this.won();
 	}
 
 	@Override
