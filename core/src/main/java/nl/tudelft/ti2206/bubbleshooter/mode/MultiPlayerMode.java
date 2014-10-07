@@ -181,7 +181,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	public void run() {
 		while (true) {
 			try {
-
 				Object o = in.readObject();
 				if (o instanceof Board) {
 					setBoardOpp((Board) o);

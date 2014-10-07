@@ -44,7 +44,6 @@ public abstract class BSMode {
 		try {
 			this.board = factory.parseFile("levels/arcadeboard.txt").get(0);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		board.addObserver(Logger.getLogger());

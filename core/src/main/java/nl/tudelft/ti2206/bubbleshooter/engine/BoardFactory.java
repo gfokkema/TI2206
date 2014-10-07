@@ -14,7 +14,16 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * This is the abstract factory for our Boards.
+ */
 public abstract class BoardFactory {
+	/**
+	 * Create a Board list from a file
+	 * @param res	internal path to the file
+	 * @return		list of Boards
+	 * @throws IOException	when the file could not be read
+	 */
 	public List<Board> parseFile(String res) throws IOException {
 		InputStream in = Gdx.files.internal(res).read();
 		InputStreamReader is = new InputStreamReader(in);
@@ -23,6 +32,12 @@ public abstract class BoardFactory {
 		return parseFile(br);
 	}
 	
+	/**
+	 * Create a Board list from a {@link BufferedReader}
+	 * @param br	{@link BufferedReader} containing 1 or more Boards
+	 * @return		list of Boards
+	 * @throws IOException	when the stream could not be read or is invalid
+	 */
 	public List<Board> parseFile(BufferedReader br) throws IOException {
 		ArrayList<Board> boards = new ArrayList<>();
 		
@@ -39,23 +54,41 @@ public abstract class BoardFactory {
 		return boards;
 	}
 	
+	/**
+	 * Parse a String containing the full specification of a single {@link Board}
+	 * @param s		a String containing the full specification of 1 {@link Board}
+	 * @return		list of Boards
+	 * @throws IOException	when the stream could not be read or is invalid
+	 */
 	public Board parseLevel(String s) throws IOException {
 		String[] lines = s.split("\\r?\\n");
 		String[] dimensions = lines[0].split("x");
 		int[] dim = { Integer.parseInt(dimensions[0]), Integer.parseInt(dimensions[1]) };
 		
 		Board board = new Board(dim[0], dim[1]);
-		BubbleColors[] colors = Bubble.BubbleColors.values();
-		
 		for (int y = 1; y < lines.length; y++) {
+			lines[y] = lines[y].trim();
 			String[] bubbles = lines[y].split("  ");
-			for (int x = 0 + (y - 1) % 2; x < bubbles.length && x < board.getWidth(); x++) {
-				if (bubbles[x].equals("--")) continue;
-				
-				int colorvalue = Integer.parseInt(bubbles[x]);
-				board.add(new Bubble(colors[colorvalue].getColor()), x - (y - 1) % 2, y - 1);
+			
+			for (int x = 0; x < bubbles.length && x < board.getWidth() - (y - 1) % 2; x++) {
+				add(board, bubbles[x], x, y - 1);
 			}
 		}
 		return board;
+	}
+	
+	/**
+	 * Add a bubble to a board with the specified index.
+	 * This method can be overridden by subclasses to add factory specific behaviour.
+	 * @param board		the Board to add the Bubble to
+	 * @param bubble	The Bubble to add to the Board
+	 * @param i			the x-coordinate in the Grid
+	 * @param j			the y-coordinate in the Grid
+	 */
+	private void add(Board board, String bubble, int i, int j) {
+		if (bubble.equals("--")) return;
+		
+		int colorvalue = Integer.parseInt(bubble);
+		board.add(new Bubble(BubbleColors.values()[colorvalue].getColor()), i, j);
 	}
 }
