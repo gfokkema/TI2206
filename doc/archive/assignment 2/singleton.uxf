@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>120</y>
+      <w>300</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>Assets
+--
+_-assets: Assets_
+-music: EnumMap&lt;MusicID, String&gt;
+-sounds: EnumMap&lt;SoundID, String&gt;
+-textures: EnumMap&lt;TextureID, String&gt;
+--
+-Assets()
+_+getAssets(): Assets_
++get(id: MusicID): Music
++get(id: SoundID): Sound
++get(id: TextureID): Texture
++load(id: MusicID, handle: String)
++load(id: SoundID, handle: String)
++load(id: TextureID, handle: String)
++finish()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1230</x>
+      <y>130</y>
+      <w>140</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+MusicID
+--
+ GAME
+ MENU</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1230</x>
+      <y>240</y>
+      <w>140</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+SoundID
+--
+ BUBBLE
+ BUTTON
+ CANNON</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1230</x>
+      <y>370</y>
+      <w>140</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+SoundID
+--
+ BACKGROUND
+ BORDER
+ BUBBLE
+ BUTTON
+ CANNON</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1120</x>
+      <y>140</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1120</x>
+      <y>170</y>
+      <w>130</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1120</x>
+      <y>200</y>
+      <w>130</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>340</y>
+      <w>340</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>BubbleShooterScreen
+--
++BubbleShooterScreen(game: BubbleShooter,
+                                      game_mode: BSMode)
++draw(offset: Vector2, drawable: BSDrawable)
++drawTimer(duration: Duration)
++drawScore(score: int)
++hide()
++render(delta: float)
++show()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>120</y>
+      <w>300</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>/AbstractScreen/
+--
++AbstractScreen(game: BubbleShooter)
++dispose()
++hide()
++resize(width: int, height: int)
++render(delta: float)
++show()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>160</y>
+      <w>280</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=Loads textures / music / sound 1
+m2=0..*</panel_attributes>
+    <additional_attributes>260.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>220</y>
+      <w>280</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+
+m1=
+m2=0..*</panel_attributes>
+    <additional_attributes>260.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+</diagram>
