@@ -105,9 +105,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 * Updates every frame the cannon,board and projectile.
 	 */
 	@Override
-	public int update(float deltaTime) {
-		//if (super.update(deltaTime) != 0) writeCondition(super.update(deltaTime));
-		return super.update(deltaTime) + condition2;
+	public void update(float deltaTime) {
+		//return super.update(deltaTime) + condition2;
 	}
 
 	/**

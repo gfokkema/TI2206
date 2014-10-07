@@ -7,6 +7,7 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
@@ -26,7 +27,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  * @author group-15
  *
  */
-public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver {
+public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver, EndingObserver {
 	BubbleShooter game;
 	BSMode game_mode;
 	private Stage stage;
@@ -53,6 +54,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 		this.game = game;
 		this.game_mode = game_mode;
 		game_mode.addStatsObserver(this);
+		game_mode.addEndingObserver(this);
 	}
 
 	/**
@@ -62,10 +64,8 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		int winOrLose = game_mode.update(delta);
-		if (winOrLose < 0) game.setScreen(new GameEndedScreen(game, "YOU LOST!", game_mode.getScore()));
-		else if (winOrLose > 0) game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
 
+		game_mode.update(delta);
 		game.batch.begin();
 		// Draw all game sprites.
 		game_mode.getDrawables().forEach((Vector2 o, Collection<BSDrawable> c) -> {
@@ -125,5 +125,15 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver 
 	@Override
 	public void drawScore(int score) {
 		scoreField.setText("Score:" + score);
+	}
+
+	@Override
+	public void lost() {
+		game.setScreen(new GameEndedScreen(game, "YOU LOST!", game_mode.getScore()));
+	}
+
+	@Override
+	public void won() {
+		game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
 	}
 }

@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -10,6 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
+import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
@@ -31,6 +31,7 @@ public abstract class BSMode {
 	protected boolean cannonRight;
 
 	private StatsObserver obs;
+
 	private EndingCondition end;
 	private int score;
 
@@ -60,7 +61,7 @@ public abstract class BSMode {
 	 * @param deltaTime
 	 * @return boolean check if the game should end.
 	 */
-	public int update(float deltaTime) {
+	public void update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(deltaTime);
 			//Logger.print("Cannon rotation left", "" + cannon.getRotation());
@@ -70,7 +71,10 @@ public abstract class BSMode {
 			//Logger.print("Cannon rotation right", "" + cannon.getRotation());
 		}
 		
-		if (projectile == null || projectile == cannon.getProjectile()) return end.check(this);
+		if (projectile == null || projectile == cannon.getProjectile()) {
+			end.check(this);
+			return;
+		}
 
 		projectile.move();
 		//NOTE: collides has side-effects!
@@ -91,7 +95,7 @@ public abstract class BSMode {
 				}
 			}
 		}
-		return end.check(this);
+		end.check(this);
 	}
 
 	/**
@@ -101,6 +105,10 @@ public abstract class BSMode {
 	public void addStatsObserver(StatsObserver o) {
 		this.obs = o;
 		end.addStatsObserver(o);
+	}
+
+	public void addEndingObserver(EndingObserver obs) {
+		end.addEndingObserver(obs);
 	}
 
 	/**
@@ -158,4 +166,5 @@ public abstract class BSMode {
 	public int getScore() {
 		return score;
 	}
+
 }
