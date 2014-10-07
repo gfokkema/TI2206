@@ -3,7 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 import java.time.Duration;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeFactory;
+import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
@@ -50,7 +50,7 @@ public class MainMenuScreen extends AbstractScreen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.engine.play(SoundID.BUTTON);
-				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(new SinglePlayerCondition(Duration.ofMinutes(2L)), new ArcadeFactory())));
+				game.setScreen(new BubbleShooterScreen(game, new SinglePlayerMode(new SinglePlayerCondition(Duration.ofMinutes(2L)), new ArcadeBoardFactory())));
 			}
 		});
 		multiplay.addListener(new ClickListener() {

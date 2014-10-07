@@ -43,9 +43,7 @@ public class SinglePlayerModeTest {
 		Mockito.when(boards.get(0)).thenReturn(board);
 		Mockito.when(cannon.getProjectile()).thenReturn(cbubble);
 		Mockito.when(end.check(mode)).thenReturn(-1);
-		
-		Mockito.when(factory.parseFile(any(String.class))).thenReturn(boards);
-		Mockito.when(factory.parseLevel(any())).thenReturn(board);
+		Mockito.when(factory.makeLevels()).thenReturn(boards);
 		
 		mode = new SinglePlayerMode(end, factory, cannon);
 		mode.addStatsObserver(obs);

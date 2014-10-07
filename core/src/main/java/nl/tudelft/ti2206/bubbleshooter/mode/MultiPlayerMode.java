@@ -1,7 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import java.io.EOFException;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -60,11 +59,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		
 		this.condition2 = 0;
 		
-		try {
-			board = factory.parseFile("levels/mpboard.txt").get(0);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.board = factory.makeLevels().get(0);
 
 		writeDrawable(board);
 		writeDrawable(cannon);

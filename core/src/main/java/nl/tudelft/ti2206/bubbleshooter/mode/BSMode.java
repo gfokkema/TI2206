@@ -41,11 +41,7 @@ public abstract class BSMode {
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
 	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		try {
-			this.board = factory.parseFile("levels/arcadeboard.txt").get(0);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.board = factory.makeLevels().get(0);
 		board.addObserver(Logger.getLogger());
 		
 		this.cannon = cannon;
