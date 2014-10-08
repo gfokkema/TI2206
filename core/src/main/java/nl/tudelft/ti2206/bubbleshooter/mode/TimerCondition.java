@@ -9,14 +9,21 @@ public class TimerCondition extends EndingDecorator {
 
 	public TimerCondition(EndingCondition end, Duration gameLength) {
 		super(end);
-		this.end = end;
-		this.gameLength = gameLength;
-		epoch = ZonedDateTime.now();
+		this.setDuration(gameLength);
+	}
+
+	protected Duration getDeltaTime() {
+		return Duration.between(epoch, ZonedDateTime.now());
+	}
+
+	protected void setDuration(Duration newGameLength) {
+		this.gameLength = newGameLength;
+		this.epoch = ZonedDateTime.now();
 	}
 
 	@Override
 	public void check(BSMode mode) {
-		Duration deltaTime = Duration.between(epoch, ZonedDateTime.now());
+		Duration deltaTime = getDeltaTime();
 		if (gameLength.compareTo(deltaTime) < 0) this.lost();
 		statsObs.drawTimer(gameLength.minus(deltaTime));
 		super.check(mode);
