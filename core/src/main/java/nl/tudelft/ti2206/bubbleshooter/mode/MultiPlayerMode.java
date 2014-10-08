@@ -11,10 +11,11 @@ import java.util.Observer;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
+import nl.tudelft.ti2206.bubbleshooter.engine.MPBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 
 import com.badlogic.gdx.Gdx;
@@ -43,9 +44,9 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 * @param in the {@link ObjectInputStream}.
 	 * @param out the {@link ObjectOutputStream}.
 	 */
-	public MultiPlayerMode(EndingCondition end, ObjectInputStream in,
-			ObjectOutputStream out) {
-		super(end);
+	public MultiPlayerMode(EndingCondition end, BoardFactory factory, Cannon cannon, ObjectInputStream in, ObjectOutputStream out) {
+		super(end, factory, cannon);
+		
 		this.in = in;
 		this.out = out;
 		new Thread(this).start();
@@ -57,10 +58,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		this.offset2 = new Vector2(320, 0);
 		
 		this.condition2 = 0;
-
-		for (int i = 0; i < 40; i++) {
-			board.add(new Bubble(), i);
-		}
+		
+		this.board = factory.makeLevels().get(0);
 
 		writeDrawable(board);
 		writeDrawable(cannon);
@@ -68,6 +67,10 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		
 		board.addObserver(this);
 		cannon.addObserver(this);
+	}
+	
+	public MultiPlayerMode(EndingCondition end, ObjectInputStream in, ObjectOutputStream out) {
+		this(end, new MPBoardFactory(), new Cannon(160,15), in, out);
 	}
 
 	/**
@@ -102,9 +105,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 * Updates every frame the cannon,board and projectile.
 	 */
 	@Override
-	public int update(float deltaTime) {
-		//if (super.update(deltaTime) != 0) writeCondition(super.update(deltaTime));
-		return super.update(deltaTime) + condition2;
+	public void update(float deltaTime) {
+		//return super.update(deltaTime) + condition2;
 	}
 
 	/**
@@ -173,7 +175,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	public void run() {
 		while (true) {
 			try {
-
 				Object o = in.readObject();
 				if (o instanceof Board) {
 					setBoardOpp((Board) o);
