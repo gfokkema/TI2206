@@ -3,6 +3,8 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import java.io.Serializable;
 import java.util.Random;
 
+import org.junit.Test;
+
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
@@ -37,6 +39,21 @@ public class Bubble extends BSDrawable implements Serializable {
 		}
 	}
 	
+	public enum BubbleType {
+		STONE(new StoneBubble()),
+		WILDCARD(new WildcardBubble()),
+		MICHAELBAY(new MichaelBayBubble());
+		
+		private Bubble bubble;
+		private BubbleType(Bubble type) {
+		 this.bubble = type;
+		}
+		
+		public Bubble getType() {
+			return bubble;
+		}
+	}
+	
 	private int color;
 	private Circle bounds;
 	
@@ -57,6 +74,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	public Bubble(Color c) {
 		this.color = Color.rgba8888(c);
 	}
+	
 
 	/**
 	 * Check if this Bubble collides with b.

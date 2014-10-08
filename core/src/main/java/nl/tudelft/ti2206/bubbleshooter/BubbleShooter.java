@@ -72,6 +72,7 @@ public class BubbleShooter extends Game {
 		assets.load(TextureID.BORDER, "MPborder.png");
 		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
 		assets.load(TextureID.CANNON, "cannon.png");
+		assets.load(TextureID.STONEBUBBLE, "libgdx-logo.png");
 		assets.finish();
 		
 		mms = new MainMenuScreen(this);

@@ -5,7 +5,7 @@ import java.util.List;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
-
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleType;
 /**
  * This is the abstract factory for our Boards.
  */
@@ -24,7 +24,13 @@ public abstract class BoardFactory {
 		if (bubble.equals("--")) return;
 		
 		int colorvalue = Integer.parseInt(bubble);
-		board.add(new Bubble(BubbleColors.values()[colorvalue].getColor()), i, j);
+		if(colorvalue < BubbleColors.values().length){
+			board.add(new Bubble(BubbleColors.values()[colorvalue].getColor()), i, j);
+		}
+		else{
+			board.add(BubbleType.values()[colorvalue-BubbleColors.values().length].getType(), i, j);
+		}
+
 	}
 	
 	protected void add(Board board, int idx) {
