@@ -24,7 +24,10 @@ public class TimerCondition extends EndingDecorator {
 	@Override
 	public void check(BSMode mode) {
 		Duration deltaTime = getDeltaTime();
-		if (gameLength.compareTo(deltaTime) < 0) this.lost();
+		if (gameLength.compareTo(deltaTime) < 0) {
+			this.lost();
+			return;
+		}
 		statsObs.drawTimer(gameLength.minus(deltaTime));
 		super.check(mode);
 	}
