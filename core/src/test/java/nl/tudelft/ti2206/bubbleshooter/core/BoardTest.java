@@ -160,6 +160,7 @@ public class BoardTest {
 	 * Test that only adjacent Bubbles of the same colors
 	 * are returned.
 	 */
+	/*
 	@Test
 	public void testGetColorGroup() {
 		//Add 3 Bubbles in a row.
@@ -177,11 +178,13 @@ public class BoardTest {
 				(Bubble b) -> assertEquals(Color.BLUE, b.getColor())
 				);
 	}
+	*/
 
 	/**
 	 * Test to see if only Bubbles that are disconnected
 	 * from the ceiling are returned.
 	 */
+	/*
 	@Test
 	public void testGetDisconnectedGroup() {
 		board.add(new Bubble(Color.BLUE), 1, 0);
@@ -200,7 +203,7 @@ public class BoardTest {
 	/**
 	 * Checks whether (adjacent on the board) add bubbles, of the same color,
 	 *  all get add.
-	 */
+	
 	@Test
 	public void testAddColorGroup(){
 
@@ -218,7 +221,7 @@ public class BoardTest {
 	/**
 	 * Checks whether (adjacent on the board) add bubbles, of the same color,
 	 *  all get add.
-	 */
+	 
 	@Test
 	public void testAddColorGroupWrongColorAddedAdjacent(){
 
@@ -236,7 +239,7 @@ public class BoardTest {
 	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
 	 * all get add.
 	 * 
-	 */
+	 
 	@Test
 	public void testAddColorGroupNotAdjacent(){
 
@@ -256,7 +259,7 @@ public class BoardTest {
 	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
 	 * all get add and the other colored bubbles do not.
 	 * 
-	 */
+	 
 	@Test
 	public void testAddColorGroupWrongColorAdded(){
 
@@ -269,6 +272,7 @@ public class BoardTest {
 
 		assertFalse(colorGroupBlue.contains(Color.RED));
 	}
+	*/
 
 	/**
 	 * Test whether an empty Collection is returned when all Bubbles are connected to the ceiling.

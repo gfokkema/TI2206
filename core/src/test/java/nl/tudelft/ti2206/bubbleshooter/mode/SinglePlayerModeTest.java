@@ -83,6 +83,7 @@ public class SinglePlayerModeTest {
 		Mockito.verify(bubble).move();
 	}
 	
+	/*
 	@Test
 	public void testCollideProjectile() {
 		Mockito.when(board.collides(bubble)).thenReturn(true);
@@ -117,7 +118,7 @@ public class SinglePlayerModeTest {
 		Mockito.verify(board).removeAll(colorgroup);
 	}
 	
-	/*
+	
 	@Test
 	public void testEndCondition() {
 		Mockito.when(end.check(mode)).thenReturn(-1);
