@@ -102,8 +102,6 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver,
 		Vector2 origin = drawable.getOrigin();
 		
 		game.batch.setColor(drawable.getColor());
-		game.batch.setBlendFunction(-1, GL30.GL_ACTIVE_TEXTURE);
-		game.batch.enableBlending();
 		game.batch.draw(new TextureRegion(game.assets.get(drawable.getTexture())),
 						offset.x + position.x, offset.y + position.y,
 						origin.x, origin.y,
