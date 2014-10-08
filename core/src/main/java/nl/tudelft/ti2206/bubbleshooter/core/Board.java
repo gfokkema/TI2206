@@ -118,26 +118,6 @@ public class Board extends BSDrawable implements Serializable {
 	}
 
 	/**
-	 * Get a {@link Collection} of all {@link Bubble} objects adjacent to the
-	 * given {@link Bubble} that have the same color.
-	 * 
-	 * @param id
-	 *            the grid id of the {@link Bubble}
-	 * @return {@link Collection} of {@link Bubble} objects adjacent to id and
-	 *         with the same color
-	 */
-	public Collection<Bubble> getColorGroup(int id) {
-		// Search for bubbles of the same color
-		HashMap<Integer, Bubble> sameColors = new HashMap<Integer, Bubble>();
-		depthFirst(
-				id,
-				(current, neighbor) -> bubbles.get(current).getColor().equals(bubbles
-						.get(neighbor).getColor()), sameColors);
-		sameColors.put(id, bubbles.get(id));
-		return sameColors.values();
-	}
-
-	/**
 	 * Traversal to find all of the nodes that should be removed. If nothing
 	 * should be removed, then nothing is returned.
 	 * 
@@ -176,7 +156,7 @@ public class Board extends BSDrawable implements Serializable {
 	 *            The solution set accumulator, which at the end contains all
 	 *            results.
 	 */
-	private void depthFirst(Integer currentIndex,
+	public void depthFirst(Integer currentIndex,
 			BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
 		for (Orientation o : Orientation.values()) {
 			int neighborIndex = o.fromIndex(currentIndex, grid.getWidth());

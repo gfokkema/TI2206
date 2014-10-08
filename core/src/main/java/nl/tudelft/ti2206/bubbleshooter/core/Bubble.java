@@ -56,6 +56,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	
 	private int color;
 	private Circle bounds;
+	private BubbleBehaviour behaviour;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
@@ -63,6 +64,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	public Bubble() {
 		this.color = Color.rgba8888(getRandomColor());
 		this.bounds = new Circle();
+		this.behaviour = new BubbleBehaviour(this);
 	}
 
 	/**
@@ -136,6 +138,10 @@ public class Bubble extends BSDrawable implements Serializable {
 		this.bounds = c;
 		setChanged();
 		notifyObservers();
+	}
+	
+	public BubbleBehaviour getBehaviour() {
+		return this.behaviour;
 	}
 
 	/**
