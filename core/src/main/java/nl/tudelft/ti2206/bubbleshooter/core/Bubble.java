@@ -3,8 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import java.io.Serializable;
 import java.util.Random;
 
-import org.junit.Test;
-
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
