@@ -27,11 +27,11 @@ public class EndingConditionTest {
 	@DataPoint
 	public static EndingCondition belowBasic = new BelowLineCondition(new BasicCondition());
 	@DataPoint
-	public static EndingCondition timerBasic = new TimerCondition(new BasicCondition(), Duration.ofSeconds(1));
+	public static EndingCondition timerBasic = new TimerCondition(new BasicCondition(), Duration.ofMillis(10));
 	@DataPoint
-	public static EndingCondition timerBelowBasic = new TimerCondition(new BelowLineCondition(new BasicCondition()), Duration.ofSeconds(1));
+	public static EndingCondition timerBelowBasic = new TimerCondition(new BelowLineCondition(new BasicCondition()), Duration.ofMillis(10));
 	@DataPoint
-	public static EndingCondition belowTimerBasic = new BelowLineCondition(new TimerCondition(new BasicCondition(), Duration.ofSeconds(1)));
+	public static EndingCondition belowTimerBasic = new BelowLineCondition(new TimerCondition(new BasicCondition(), Duration.ofMillis(10)));
 
 	@Before
 	public void setUp() {
