@@ -12,7 +12,6 @@ import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import org.junit.Before;
@@ -37,18 +36,9 @@ public class SinglePlayerModeTest {
 	@Before
 	public void setUp() {
 		Mockito.when(cannon.getProjectile()).thenReturn(cbubble);
-		//Mockito.when(end.check(mode)).thenReturn(-1);
-		
 		mode = new SinglePlayerMode(end, board, cannon);
 		mode.addStatsObserver(obs);
 	}
-	
-	/*
-	@Test
-	public void testUpdate() {
-		assertEquals(mode.update(.02f), 0);
-	}
-	*/
 	
 	@Test
 	public void testCannon() {
@@ -110,15 +100,6 @@ public class SinglePlayerModeTest {
 		Mockito.verify(board).add(bubble);
 		Mockito.verify(board).removeAll(colorgroup);
 	}
-	
-	/*
-	@Test
-	public void testEndCondition() {
-		Mockito.when(end.check(mode)).thenReturn(-1);
-		
-		assertEquals(-1, mode.update(.02f));
-	}
-	*/
 
 	@Test
 	public void testDrawables() {

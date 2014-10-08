@@ -9,10 +9,22 @@ public abstract class EndingDecorator extends EndingCondition {
 		this.end = end;
 	} 
 
+	/**
+	 * Called when the level was lost.
+	 * Calls will be forwarded, until we reach a
+	 * non-decorator EndingCondition.
+	 */
+	@Override
 	public void lost() {
 		end.lost();
 	}
 
+	/**
+	 * Called when the level was won.
+	 * Calls will be forwarded, until we reach a
+	 * non-decorator EndingCondition.
+	 */
+	@Override
 	public void won() {
 		end.won();
 	}
