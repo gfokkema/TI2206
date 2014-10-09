@@ -16,6 +16,7 @@ import nl.tudelft.ti2206.bubbleshooter.util.ScreenLogger;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -62,7 +63,7 @@ public class BubbleShooter extends Game {
 		font = new BitmapFont();
 		engine = new SoundEngine(assets);
 		Logger.getLogger().addLog(new ScreenLogger());
-		
+	
 		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
 		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
@@ -74,6 +75,10 @@ public class BubbleShooter extends Game {
 		assets.load(TextureID.CANNON, "cannon.png");
 		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
 		assets.finish();
+		
+		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
