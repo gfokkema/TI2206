@@ -102,7 +102,7 @@ public abstract class BSMode {
 				}
 				
 				//bom behaviour				
-				HashMap<Integer, Bubble> bomBubble = board.getInstanceOf(new BomBubble());
+				HashMap<Integer, Bubble> bomBubble = board.getColourGroup(new BomBubble());
 				for(Entry<Integer, Bubble> b: bomBubble.entrySet()) {
 					if(board.getGrid().adjacent(b.getKey(), new_idx)) {
 						board.removeAll(b.getValue().getBehaviour().getGroup(board, b.getKey()));
