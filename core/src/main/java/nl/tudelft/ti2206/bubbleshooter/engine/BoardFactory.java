@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.engine;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.MichaelBayBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.StoneBubble;
@@ -31,7 +32,8 @@ public abstract class BoardFactory {
 			case 5: board.add(new Bubble(), i, j);
 			case 6: board.add(new StoneBubble(), i ,j);
 			case 7: board.add(new WildcardBubble(), i ,j);
-			case 8: board.add(new MichaelBayBubble(), i, j);
+			case 8: board.add(new BomBubble(), i, j);
+			case 9: board.add(new MichaelBayBubble(), i, j);
 		}
 	}
 	

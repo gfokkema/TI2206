@@ -2,17 +2,22 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.core.StoneBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.WildcardBubble;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -84,7 +89,9 @@ public abstract class BSMode {
 			projectile.move();
 
 			if(new_idx != -1) {
-				Collection<Bubble> sameColors = board.getGroup(projectile, new_idx);
+				
+				//colour bubble behaviour
+				Collection<Bubble> sameColors = projectile.getBehaviour().getGroup(board, new_idx);
 				if (sameColors.size() >= 3) {
 					board.removeAll(sameColors);
 					Collection<Bubble> disconnected = board.getDisconnectedGroup();
@@ -93,6 +100,16 @@ public abstract class BSMode {
 					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
 					this.obs.drawScore(score);
 				}
+				
+				//bom behaviour				
+				HashMap<Integer, Bubble> bomBubble = board.getInstanceOf(new BomBubble());
+				for(Entry<Integer, Bubble> b: bomBubble.entrySet()) {
+					if(board.getGrid().adjacent(b.getKey(), new_idx)) {
+						board.removeAll(b.getValue().getBehaviour().getGroup(board, b.getKey()));
+					}
+				}
+				
+				
 			}
 		}
 		end.check(this);

@@ -1,0 +1,14 @@
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+00  00  00  00  00  00  00  00
+  --  --  --  --  --  06  06
+00  01  02  03  04  00  01  02
+  03  04  00  01  02  03  04
+--- END --- BUBBLESHOOTER OF DOOM ---
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+00  01  02  03  04  00  01  02
+  03  04  00  01  02  03  04
+00  01  02  03  04  00  01  02
+  03  04  00  01  02  03  04
+--- END --- BUBBLESHOOTER OF DOOM ---

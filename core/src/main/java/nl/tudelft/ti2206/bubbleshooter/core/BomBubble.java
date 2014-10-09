@@ -1,17 +1,15 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.graphics.Color;
 
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+public class BomBubble extends Bubble{
+	private static final long serialVersionUID = -684963823755680038L;
 
-public class StoneBubble extends Bubble{
-	private static final long serialVersionUID = 6207069265433663286L;
-
-	
-	public StoneBubble() {
-		super.color = Color.rgba8888(Color.GRAY);
-		super.behaviour = null;
+	public BomBubble() {
+		super.color = Color.rgba8888(Color.RED);
+		super.behaviour = new BomBehaviour(this);
 	}
 	
 	/**

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
@@ -177,25 +178,6 @@ public class Board extends BSDrawable implements Serializable {
 	}
 	
 	/**
-	 * Get a {@link Collection} of all {@link Bubble} objects adjacent to the
-	 * given {@link Bubble} that have the same color.
-	 * 
-	 * @param id
-	 *            the grid id of the {@link Bubble}
-	 * @return {@link Collection} of {@link Bubble} objects adjacent to id and
-	 *         with the same color
-	 */
-	public Collection<Bubble> getGroup(Bubble type, int id) {
-		// Search for bubbles of the same color
-		HashMap<Integer, Bubble> bubbleGroup = new HashMap<Integer, Bubble>();
-		depthFirst(
-				id,
-				(current, neighbour) -> type.getBehaviour().Group(this, current, neighbour), bubbleGroup);
-		bubbleGroup.put(id, bubbles.get(id));
-		return bubbleGroup.values();
-	}
-
-	/**
 	 * Remove all the {@link Bubble}s that are both in the given
 	 * {@link Collection} and on the grid.
 	 * 
@@ -225,6 +207,14 @@ public class Board extends BSDrawable implements Serializable {
 	
 	public HashMap<Integer, Bubble> getBubbles() {
 		return bubbles;
+	}
+	
+	public HashMap<Integer, Bubble> getInstanceOf(Bubble bubble) {
+		HashMap<Integer, Bubble> instance = new HashMap<Integer, Bubble>();
+		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
+			if(b.getValue().getColor().equals(bubble.getColor())) instance.put(b.getKey(), b.getValue());
+		}
+		return instance;
 	}
 	
 	public Grid getGrid() {

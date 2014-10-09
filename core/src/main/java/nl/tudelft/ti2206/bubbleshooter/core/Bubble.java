@@ -36,10 +36,10 @@ public class Bubble extends BSDrawable implements Serializable {
 			return color;
 		}
 	}
-		
-	private int color;
-	private Circle bounds;
-	private BubbleBehaviour behaviour;
+
+	protected int color;
+	protected Circle bounds;
+	protected BubbleBehaviour behaviour;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
