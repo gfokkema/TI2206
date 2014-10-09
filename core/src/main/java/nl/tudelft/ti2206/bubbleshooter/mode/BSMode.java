@@ -84,7 +84,7 @@ public abstract class BSMode {
 			projectile.move();
 
 			if(new_idx != -1) {
-				Collection<Bubble> sameColors = projectile.getBehaviour().getGroup(board, new_idx);
+				Collection<Bubble> sameColors = board.getGroup(projectile, new_idx);
 				if (sameColors.size() >= 3) {
 					board.removeAll(sameColors);
 					Collection<Bubble> disconnected = board.getDisconnectedGroup();

@@ -175,6 +175,25 @@ public class Board extends BSDrawable implements Serializable {
 			}
 		}
 	}
+	
+	/**
+	 * Get a {@link Collection} of all {@link Bubble} objects adjacent to the
+	 * given {@link Bubble} that have the same color.
+	 * 
+	 * @param id
+	 *            the grid id of the {@link Bubble}
+	 * @return {@link Collection} of {@link Bubble} objects adjacent to id and
+	 *         with the same color
+	 */
+	public Collection<Bubble> getGroup(Bubble type, int id) {
+		// Search for bubbles of the same color
+		HashMap<Integer, Bubble> bubbleGroup = new HashMap<Integer, Bubble>();
+		depthFirst(
+				id,
+				(current, neighbour) -> type.getBehaviour().Group(this, current, neighbour), bubbleGroup);
+		bubbleGroup.put(id, bubbles.get(id));
+		return bubbleGroup.values();
+	}
 
 	/**
 	 * Remove all the {@link Bubble}s that are both in the given
