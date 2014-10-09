@@ -36,23 +36,7 @@ public class Bubble extends BSDrawable implements Serializable {
 			return color;
 		}
 	}
-	
-	public enum BubbleType {
-		STONE(new StoneBubble()),
-		WILDCARD(new WildcardBubble()),
-		MICHAELBAY(new MichaelBayBubble());
 		
-		private Bubble bubble;
-		private BubbleType(Bubble type) {
-		 this.bubble = type;
-		}
-		
-		public Bubble getType() {
-			return bubble;
-		}
-	}
-
-	
 	private int color;
 	private Circle bounds;
 	private BubbleBehaviour behaviour;

@@ -4,8 +4,10 @@ import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.MichaelBayBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.StoneBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.WildcardBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleType;
 /**
  * This is the abstract factory for our Boards.
  */
@@ -23,14 +25,14 @@ public abstract class BoardFactory {
 	protected void add(Board board, String bubble, int i, int j) {
 		if (bubble.equals("--")) return;
 		
-		int colorvalue = Integer.parseInt(bubble);
-		if(colorvalue < BubbleColors.values().length){
-			board.add(new Bubble(BubbleColors.values()[colorvalue].getColor()), i, j);
+		int value = Integer.parseInt(bubble);
+		switch(value) {
+			case 0:	case 1:	case 2:	case 3:	case 4: board.add(new Bubble(BubbleColors.values()[value].getColor()), i, j);
+			case 5: board.add(new Bubble(), i, j);
+			case 6: board.add(new StoneBubble(), i ,j);
+			case 7: board.add(new WildcardBubble(), i ,j);
+			case 8: board.add(new MichaelBayBubble(), i, j);
 		}
-		else{
-			board.add(BubbleType.values()[colorvalue-BubbleColors.values().length].getType(), i, j);
-		}
-
 	}
 	
 	protected void add(Board board, int idx) {

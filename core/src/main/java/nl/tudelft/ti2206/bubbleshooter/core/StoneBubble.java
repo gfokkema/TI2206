@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 public class StoneBubble extends Bubble{
-	
+	private static final long serialVersionUID = 6207069265433663286L;
 	private int color;
 	
 	public StoneBubble() {
