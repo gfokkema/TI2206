@@ -30,7 +30,7 @@ public class TimerConditionTest {
 	 */
 	@Test
 	public void testStatsObserverDrawTimer() {
-		timerBasic.check(any());
+		timerBasic.check(null);
 		verify(statsObs).drawTimer(gt(Duration.ofMillis(0)));
 	}
 
@@ -46,7 +46,7 @@ public class TimerConditionTest {
 
 	@Test
 	public void testContinueCondition() {
-		timerBasic.check(any());
+		timerBasic.check(null);
 		verify(wrappedCondition, never()).won();
 		verify(wrappedCondition, never()).lost();
 	}

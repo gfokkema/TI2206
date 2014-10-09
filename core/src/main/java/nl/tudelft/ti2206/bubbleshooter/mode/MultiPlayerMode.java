@@ -16,6 +16,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
+import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -35,7 +36,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	private Cannon cannon2;
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
-	private int condition2;
+	private EndingCondition condition2;
+	private EndingObserver endObs;
 
 	/**
 	 * The Multiplayer mode constructor.
@@ -55,13 +57,12 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
-		
-		this.condition2 = 0;
 
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
 
+		writeCondition(end);
 		writeDrawable(board);
 		writeDrawable(cannon);
 		writeDrawable(cannon.getProjectile());
@@ -103,7 +104,16 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 */
 	@Override
 	public void update(float deltaTime) {
-		//return super.update(deltaTime) + condition2;
+		super.update(deltaTime);
+		if (board2 == null) return;
+		condition2.check(this.board2);
+		this.writeCondition(end);
+	}
+
+	@Override
+	public void addEndingObserver(EndingObserver obs) {
+		super.addEndingObserver(obs);
+		this.endObs = obs;
 	}
 
 	/**
@@ -135,19 +145,19 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	public synchronized void setProjectileOpp(Projectile pj) {
 		this.projectile2 = pj;
 	}
-	
-	public synchronized void setConditionOpp(int condition) {
-		this.condition2 = condition;
+
+	private void setConditionOpp(EndingCondition ec) {
+		this.condition2 = ec.opponent();
+		condition2.addEndingObserver(endObs);
 	}
 
 	/**
 	 * Writes the condition.
 	 * @param condition
 	 */
-	public void writeCondition(int condition) {
+	public void writeCondition(EndingCondition condition) {
 		try {
-			Gdx.app.log("condition", "" + condition);
-			out.writeInt(-1*condition);
+			out.writeObject(condition);
 			out.flush();
 			out.reset();
 		} catch (Exception e) {
@@ -172,7 +182,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	public void run() {
 		while (true) {
 			try {
-
 				Object o = in.readObject();
 				if (o instanceof Board) {
 					setBoardOpp((Board) o);
@@ -180,14 +189,14 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 					setCannonOpp((Cannon) o);
 				} else if (o instanceof Projectile) {
 					setProjectileOpp((Projectile) o);
+				} else if (o instanceof EndingCondition) {
+					setConditionOpp((EndingCondition) o);
 				}
-
-				setConditionOpp(in.readInt());
-				
 			} catch (EOFException e) {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(1);
 			}
 		}
 	}

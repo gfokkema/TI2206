@@ -28,7 +28,7 @@ public class BasicConditionTest {
 	@Test
 	public void testWinningCondition() {
 		when(board.isEmpty()).thenReturn(true);
-		basic.check(mode);
+		basic.check(this.board);
 		verify(obs).won();
 		verify(obs, never()).lost();
 	}
@@ -36,7 +36,7 @@ public class BasicConditionTest {
 	@Test
 	public void testContinueCondition() {
 		when(board.isEmpty()).thenReturn(false);
-		basic.check(mode);
+		basic.check(this.board);
 		verify(obs, never()).lost();
 		verify(obs, never()).won();
 	}

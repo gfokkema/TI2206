@@ -3,7 +3,10 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Board;
+
 public class TimerCondition extends EndingDecorator {
+	private static final long serialVersionUID = 5765501184371624635L;
 	private Duration gameLength;
 	private ZonedDateTime epoch;
 
@@ -22,14 +25,14 @@ public class TimerCondition extends EndingDecorator {
 	}
 
 	@Override
-	public void check(BSMode mode) {
+	public void check(Board board) {
 		Duration deltaTime = getDeltaTime();
 		if (gameLength.compareTo(deltaTime) < 0) {
 			this.lost();
 			return;
 		}
 		statsObs.drawTimer(gameLength.minus(deltaTime));
-		super.check(mode);
+		super.check(board);
 	}
 
 }

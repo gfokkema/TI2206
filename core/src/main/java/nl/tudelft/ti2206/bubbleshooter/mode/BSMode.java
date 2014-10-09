@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * This class serves as the abstraction of all other game-modes. 
  * It contains the basic game-logic applicable to all other game-modes.
- * Furthermore it deals with drawing the score onto the playing-field.
+ * It acts as an observable, calling a {@link StatsObserver} to update.
  * @author group-15
  *
  */
@@ -31,7 +31,7 @@ public abstract class BSMode {
 
 	private StatsObserver obs;
 
-	private EndingCondition end;
+	protected EndingCondition end;
 	private int score;
 
 	/**
@@ -46,13 +46,12 @@ public abstract class BSMode {
 		this.cannon = cannon;
 		cannon.addObserver(Logger.getLogger());
 		setProjectile(cannon.getProjectile());
-		
+
 		for (int i = 0; i < 40; i++) {
 			board.add(new Bubble(), i);
 		}
 		this.end = end;
 		this.score = 0;
-		
 	}
 	
 	/**
@@ -83,7 +82,7 @@ public abstract class BSMode {
 		}
 		
 		if (projectile == null || projectile == cannon.getProjectile()) {
-			end.check(this);
+			end.check(this.board);
 			return;
 		}
 
@@ -106,7 +105,7 @@ public abstract class BSMode {
 				}
 			}
 		}
-		end.check(this);
+		end.check(this.board);
 	}
 
 	/**
