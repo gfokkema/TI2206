@@ -37,7 +37,6 @@ public class Bubble extends BSDrawable implements Serializable {
 		}
 	}
 	
-	/*
 	public enum BubbleType {
 		STONE(new StoneBubble()),
 		WILDCARD(new WildcardBubble()),
@@ -52,7 +51,7 @@ public class Bubble extends BSDrawable implements Serializable {
 			return bubble;
 		}
 	}
-	*/
+
 	
 	private int color;
 	private Circle bounds;
