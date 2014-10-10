@@ -58,7 +58,7 @@ public class Board extends BSDrawable implements Serializable {
 		if (b.getBounds().y + 16 > 480)
 			return true;
 		if (b.getBounds().x - 16 < 32
-				|| b.getBounds().x + 16 > grid.getWidth() * 32 + 32) {
+				|| b.getBounds().x - 16 > grid.getWidth() * 32) {
 			Vector2 dir = b.getDirection();
 			dir.x = -dir.x;
 		}
