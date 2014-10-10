@@ -20,7 +20,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Board extends BSDrawable implements Serializable {
 	private static final long serialVersionUID = -4815917036827285256L;
-	private transient Grid grid;
+	private Grid grid;
 	private HashMap<Integer, Bubble> bubbles;
 
 	/**
