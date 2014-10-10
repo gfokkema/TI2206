@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
@@ -23,6 +24,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public abstract class BSMode {
+	protected Iterator<Board> boards;
 	protected Board board;
 	protected Cannon cannon;
 	protected Projectile projectile;
@@ -42,7 +44,9 @@ public abstract class BSMode {
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
 	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		this.board = factory.makeLevels().get(0);
+		this.boards = factory.makeLevels().iterator();
+		this.board = boards.next();
+		
 		board.addObserver(Logger.getLogger());
 		
 		this.cannon = cannon;
@@ -165,5 +169,14 @@ public abstract class BSMode {
 	public int getScore() {
 		return score;
 	}
-
+	
+	public boolean hasNext() {
+		return boards.hasNext();
+	}
+	
+	public void next() {
+		this.board.deleteObservers();
+		this.board = boards.next();
+		this.board.addObserver(Logger.getLogger());
+	}
 }

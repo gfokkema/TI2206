@@ -134,6 +134,11 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver,
 
 	@Override
 	public void won() {
-		game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
+		if (game_mode.hasNext()) game_mode.next();
+		else game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
+	}
+
+	@Override
+	public void wonBoard() {
 	}
 }
