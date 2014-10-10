@@ -22,7 +22,6 @@ import com.badlogic.gdx.math.Vector2;
  * The Board represents the playing field that keeps track of all bubbles in the game.
  */
 public class BoardTest {
-	/*
 	private Board board;
 
 	/**
@@ -35,7 +34,7 @@ public class BoardTest {
 	 *   17  18  19  20  21
 	 * 22  23  24  25  26  27
 	 *   28  29  30  31  32
-	 
+	 */
 	@Before
 	public void setUp() {
 		board = new Board(6, 15);
@@ -43,7 +42,7 @@ public class BoardTest {
 
 	/**
 	 * Test the default values of a {@link Board}.
-	 
+	 */
 	@Test
 	public void testCreate() {
 		assertEquals(320, board.getWidth());
@@ -59,7 +58,7 @@ public class BoardTest {
 
 	/**
 	 * Test adding a bubble to the {@link Board}, using a given {@link Board} index.
-	 
+	 */
 	@Test
 	public void testAddIndex() {
 		assertTrue(board.add(new Bubble(), 0));
@@ -69,7 +68,7 @@ public class BoardTest {
 
 	/**
 	 * Test adding a bubble to the {@link Board}, using only it's current position.
-	 
+	 */
 	@Test
 	public void testAdd() {
 		Circle c1 = new Circle(32 * 3 + 16, 480 - 32 * 0 - 16, 16);
@@ -88,7 +87,7 @@ public class BoardTest {
 
 	/**
 	 * Test whether all the correct drawables are returned by this {@link Board}.
-	 
+	 */
 	@Test
 	public void testGetDrawables() {
 		Collection<BSDrawable> drawables;
@@ -110,7 +109,7 @@ public class BoardTest {
 
 	/**
 	 * Test whether the collision method works, with the collision in possible circumstances.
-	 
+	 */
 	@Test
 	public void testCollision() {
 		for (int i = 0; i < 20; i++) {
@@ -133,7 +132,7 @@ public class BoardTest {
 
 	/**
 	 * Test collisions with the border of the board.
-	 
+	 */
 	@Test
 	public void testCollisionBorder() {
 		Circle c1 = new Circle(32 * 3, 480 - 32 * 0, 16);
@@ -157,11 +156,11 @@ public class BoardTest {
 		assertEquals(new Vector2(1, 0), bubble.getDirection());
 	}
 
+	/*
 	/**
 	 * Test that only adjacent Bubbles of the same colors
 	 * are returned.
 	 
-	/*
 	@Test
 	public void testGetColorGroup() {
 		//Add 3 Bubbles in a row.
@@ -179,13 +178,12 @@ public class BoardTest {
 				(Bubble b) -> assertEquals(Color.BLUE, b.getColor())
 				);
 	}
-	
+	*/
 
 	/**
 	 * Test to see if only Bubbles that are disconnected
 	 * from the ceiling are returned.
-	 
-	/*
+	 */
 	@Test
 	public void testGetDisconnectedGroup() {
 		board.add(new Bubble(Color.BLUE), 1, 0);
@@ -201,10 +199,11 @@ public class BoardTest {
 				);
 	}
 
+	/*
 	/**
 	 * Checks whether (adjacent on the board) add bubbles, of the same color,
 	 *  all get add.
-	
+	 
 	@Test
 	public void testAddColorGroup(){
 
@@ -217,7 +216,6 @@ public class BoardTest {
 				(Bubble b) -> assertEquals(Color.RED, b.getColor())
 				);
 	}	
-
 
 	/**
 	 * Checks whether (adjacent on the board) add bubbles, of the same color,
@@ -240,7 +238,7 @@ public class BoardTest {
 	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
 	 * all get add.
 	 * 
-	 
+	
 	@Test
 	public void testAddColorGroupNotAdjacent(){
 
@@ -260,7 +258,7 @@ public class BoardTest {
 	 * Checks whether (not adjacent on the board) add bubbles, of the same color, 
 	 * all get add and the other colored bubbles do not.
 	 * 
-	 
+	
 	@Test
 	public void testAddColorGroupWrongColorAdded(){
 
@@ -273,11 +271,11 @@ public class BoardTest {
 
 		assertFalse(colorGroupBlue.contains(Color.RED));
 	}
-	
+	*/
 
 	/**
 	 * Test whether an empty Collection is returned when all Bubbles are connected to the ceiling.
-	 
+	 */
 	@Test
 	public void testGetDisconnectedGroupEmpty() {
 		// Initialize four bubbles
@@ -287,5 +285,4 @@ public class BoardTest {
 		Collection<Bubble> empty = board.getDisconnectedGroup();
 		assertTrue(empty.isEmpty());
 	}
-	*/
 }
