@@ -14,6 +14,13 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
  */
 public abstract class BoardFactory {
 	public abstract List<Board> makeLevels();
+	
+	protected Bubble parse(String bubble) {
+		if (bubble.equals("--")) return null;
+		
+		int colorvalue = Integer.parseInt(bubble);
+		return new Bubble(BubbleColors.values()[colorvalue].getColor());
+	}
 		
 	/**
 	 * Add a bubble to a board with the specified index.
@@ -36,6 +43,11 @@ public abstract class BoardFactory {
 			case 9: board.add(new MichaelBayBubble(), i, j);
 		}
 	}
+
+//	protected void add(Board board, Bubble b, int i, int j) {
+//		board.add(b, i, j);
+//
+//	}
 	
 	protected void add(Board board, int idx) {
 		board.add(new Bubble(), idx);

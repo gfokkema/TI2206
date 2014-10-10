@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
@@ -19,11 +20,12 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * This class serves as the abstraction of all other game-modes. 
  * It contains the basic game-logic applicable to all other game-modes.
- * Furthermore it deals with drawing the score onto the playing-field.
+ * It acts as an observable, calling a {@link StatsObserver} to update.
  * @author group-15
  *
  */
 public abstract class BSMode {
+	protected Iterator<Board> boards;
 	protected Board board;
 	protected Cannon cannon;
 	protected Projectile projectile;
@@ -33,7 +35,7 @@ public abstract class BSMode {
 
 	private StatsObserver obs;
 
-	private EndingCondition end;
+	protected EndingCondition end;
 	private int score;
 
 	/**
@@ -43,16 +45,17 @@ public abstract class BSMode {
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
 	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		this.board = factory.makeLevels().get(0);
+		this.boards = factory.makeLevels().iterator();
+		this.board = boards.next();
+		
 		board.addObserver(Logger.getLogger());
 		
 		this.cannon = cannon;
 		cannon.addObserver(Logger.getLogger());
 		setProjectile(cannon.getProjectile());
-		
+
 		this.end = end;
 		this.score = 0;
-		
 	}
 
 	/**
@@ -73,7 +76,7 @@ public abstract class BSMode {
 		}
 		
 		if (projectile == null || projectile == cannon.getProjectile()) {
-			end.check(this);
+			end.check(this.board);
 			return;
 		}
 
@@ -98,7 +101,7 @@ public abstract class BSMode {
 				this.obs.drawScore(score);				
 			}
 		}
-		end.check(this);
+		end.check(this.board);
 	}
 
 	/**
@@ -169,5 +172,14 @@ public abstract class BSMode {
 	public int getScore() {
 		return score;
 	}
-
+	
+	public boolean hasNext() {
+		return boards.hasNext();
+	}
+	
+	public void next() {
+		this.board.deleteObservers();
+		this.board = boards.next();
+		this.board.addObserver(Logger.getLogger());
+	}
 }

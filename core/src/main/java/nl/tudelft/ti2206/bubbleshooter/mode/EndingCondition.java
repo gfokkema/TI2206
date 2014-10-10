@@ -1,5 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
+import java.io.Serializable;
+
+import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
@@ -10,14 +13,16 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
  * @author group-15
  *
  */
-public abstract class EndingCondition {
-	StatsObserver statsObs;
-	EndingObserver endingObs;
+public abstract class EndingCondition implements Serializable {
+	private static final long serialVersionUID = -6763514295341944686L;
+	transient StatsObserver statsObs;
+	transient EndingObserver endingObs;
 
 	/**
 	 * Check whether the game should end
+	 * @param board TODO
 	 */
-	public abstract void check(BSMode mode);
+	public abstract void check(Board board);
 
 	/**
 	 * Called when the level is lost.
@@ -39,5 +44,13 @@ public abstract class EndingCondition {
 
 	public void addEndingObserver(EndingObserver o) {
 		this.endingObs = o;
+	}
+
+	/**
+	 * Return the opponent side version of this EndingCondition.
+	 * @return the opponent's EndingCondition.
+	 */
+	public EndingCondition opponent() {
+		return new OpponentCondition(this);
 	}
 }

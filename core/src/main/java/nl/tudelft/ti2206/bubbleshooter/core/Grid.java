@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import java.io.Serializable;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -7,7 +9,8 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class Grid {
+public class Grid implements Serializable {
+	private static final long serialVersionUID = -3156876087711309439L;
 	private int width = 8, height = 20;
 	
 	/**
