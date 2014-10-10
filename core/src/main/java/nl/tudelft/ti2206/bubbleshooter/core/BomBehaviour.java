@@ -15,11 +15,9 @@ public class BomBehaviour extends BubbleBehaviour{
 
 	@Override
 	public Collection<Bubble> getGroup(Board board, int id) {
-		Gdx.app.log("hoi", "");
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();
 		group.put(id, board.getBubbles().get(id));
 		for(Entry<Integer, Bubble> b: board.getBubbles().entrySet()) {
-			Gdx.app.log("group", group.toString());
 			if(board.getGrid().adjacent(b.getKey(), id)) group.put(b.getKey(), b.getValue());
 		}
 		return group.values();
@@ -28,14 +26,10 @@ public class BomBehaviour extends BubbleBehaviour{
 	
 	@Override
 	public Collection<Bubble> remove(Board board, int id, int projectile) {
-		HashMap<Integer, Bubble> bomBubble = board.getColourGroup(bubble);
-		Collection<Bubble> remove = new ArrayList<Bubble>();
-		for(Entry<Integer, Bubble> b: bomBubble.entrySet()) {
-			if(board.getGrid().adjacent(b.getKey(), projectile)) {
-				remove.addAll(getGroup(board, b.getKey()));
+			if(board.getGrid().adjacent(id, projectile)) {
+				return getGroup(board,id);
 			}
+			return new ArrayList<Bubble>();
 		}
-		
-		return remove;
-	}
+
 }

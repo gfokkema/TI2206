@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -20,5 +21,13 @@ public class MichaelBayBehaviour extends BubbleBehaviour {
 		}
 		return group.values();
 		
+	}
+	
+	public Collection<Bubble> remove(Board board, int id, int projectile) {
+		//michael bay behaviour				
+		if(board.getGrid().adjacent(id, projectile)) {
+			return getGroup(board, id);
+		}
+		return new ArrayList<Bubble>();
 	}
 }

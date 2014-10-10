@@ -5,13 +5,9 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
-import nl.tudelft.ti2206.bubbleshooter.core.MichaelBayBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.core.StoneBubble;
-import nl.tudelft.ti2206.bubbleshooter.core.WildcardBubble;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
@@ -90,53 +86,12 @@ public abstract class BSMode {
 
 
 			if(new_idx != -1) {				
-				//colour bubble behaviour
-/*
-			if(new_idx != -1) {
-				// collection of disconnected group
-				Collection<Bubble> disconnected;
+
+				score += 3* board.removeAll(projectile.getBehaviour().remove(board,new_idx));
 				
-				//colour bubble behaviour
-				Collection<Bubble> sameColors = projectile.getBehaviour().getGroup(board, new_idx);
-				if (sameColors.size() >= 3) {
-					board.removeAll(sameColors);
-					disconnected = board.getDisconnectedGroup();
-					board.removeAll(disconnected);
-					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
+				for(Entry<Integer, Bubble> b: board.getPowerUps().entrySet()) {
+					score += 3 * board.removeAll(b.getValue().getBehaviour().remove(board, b.getKey(), new_idx));
 				}
-				
-				//bom behaviour				
-				HashMap<Integer, Bubble> bomBubble = board.getColourGroup(new BomBubble());
-				for(Entry<Integer, Bubble> b: bomBubble.entrySet()) {
-					if(board.getGrid().adjacent(b.getKey(), new_idx)) {
-						sameColors = b.getValue().getBehaviour().getGroup(board, b.getKey());
-						board.removeAll(sameColors);
-						disconnected = board.getDisconnectedGroup();
-						board.removeAll(disconnected);
-						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
-					}
-					
-				}
-				
-				//michael bay behaviour				
-				HashMap<Integer, Bubble> michaelBay = board.getColourGroup(new MichaelBayBubble());
-				for(Entry<Integer, Bubble> b: michaelBay.entrySet()) {
-					if(board.getGrid().adjacent(b.getKey(), new_idx)) {
-						sameColors = b.getValue().getBehaviour().getGroup(board, b.getKey());
-						board.removeAll(sameColors);
-						score += 3 * sameColors.size() - 9;
-					}
-				}
-				this.obs.drawScore(score);
-*/
-				
-					score += 3* board.removeAll(projectile.getBehaviour().remove(board,new_idx));
-//					for(Entry<Integer, Bubble> b: board.getPowerUps().entrySet()) {
-//						
-//						b.getValue().getBehaviour().getGroup(board, b.getKey());
-//						
-//						board.removeAll(b.getValue().getBehaviour().getGroup(board, b.getKey()));
-//					}
 								
 				Collection<Bubble> disconnected = board.getDisconnectedGroup();
 				board.removeAll(disconnected);
