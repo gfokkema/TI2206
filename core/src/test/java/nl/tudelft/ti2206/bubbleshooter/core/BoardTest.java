@@ -282,4 +282,19 @@ public class BoardTest {
 		Collection<Bubble> empty = board.getDisconnectedGroup();
 		assertTrue(empty.isEmpty());
 	}
+
+	@Test
+	public void testBubbleBelowLine() {
+		board.add(new Bubble(),0,1);
+		assertFalse(board.bubbleBelowLine(14));
+		//Test just before the id which are checked.
+		board.add(new Bubble(),4,13);
+		assertFalse(board.bubbleBelowLine(14));
+		//Test the last bubble that's checked.
+		board.add(new Bubble(),5,14);
+		assertTrue(board.bubbleBelowLine(14));
+		//Test the first bubble that's checked.
+		board.add(new Bubble(),0,14);
+		assertTrue(board.bubbleBelowLine(14));
+	}
 }
