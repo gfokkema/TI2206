@@ -11,7 +11,13 @@ import org.junit.runners.Suite.SuiteClasses;
 				CannonTest.class,
 				GridTest.class,
 				PointerTest.class,
-				ProjectileTest.class })
+				ProjectileTest.class,
+				MichaelBayBubbleTest.class,
+				BomBubbleTest.class,
+				StoneBubbleTest.class,
+				BomBehaviourTest.class,
+				MichaelBayBehaviourTest.class,
+				StoneBubbleBehaviourTest.class})
 public class CoreTests {
 
 }

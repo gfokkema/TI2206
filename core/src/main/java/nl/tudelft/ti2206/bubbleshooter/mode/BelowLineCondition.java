@@ -1,9 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
-import java.util.HashMap;
-
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 
 /**
  * The Single-Player {@link EndingCondition}.
@@ -22,20 +19,10 @@ public class BelowLineCondition extends EndingDecorator {
 	 */
 	@Override
 	public void check(Board board) {
-		HashMap<Integer, Bubble> bubbles = board.getBubbles();
-		
-		int width = board.getGrid().getWidth();
-		int height = board.getGrid().getHeight();
-		
-		int max = (int) ((2*width -1) * Math.floor(height/2));
-		if (Math.floor(height/2) == height/2)
-			width--;
-		else
-			max += width;
-
-		for(int i = max-width; i <= max; i++)
-			if(bubbles.containsKey(i)) this.lost();
-		
+		if(board.bubbleBelowLine()) {
+			this.lost();
+			return;
+		}
 		super.check(board);
 	}
 

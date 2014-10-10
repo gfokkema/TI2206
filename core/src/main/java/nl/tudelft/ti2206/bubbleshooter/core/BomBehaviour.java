@@ -14,15 +14,14 @@ public class BomBehaviour extends BubbleBehaviour{
 			if(board.getGrid().adjacent(b.getKey(), id)) group.put(b.getKey(), b.getValue());
 		}
 		return group.values();
-		
 	}
 	
 	@Override
 	public Collection<Bubble> remove(Board board, int id, int projectile) {
-			if(board.getGrid().adjacent(id, projectile)) {
-				return getGroup(board,id);
-			}
-			return new ArrayList<Bubble>();
+		if(board.getGrid().adjacent(id, projectile)) {
+			return getGroup(board,id);
 		}
+		return new ArrayList<Bubble>();
+	}
 
 }

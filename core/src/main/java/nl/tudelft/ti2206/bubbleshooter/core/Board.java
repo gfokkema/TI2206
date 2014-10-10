@@ -85,10 +85,10 @@ public class Board extends BSDrawable implements Serializable {
 
 		// Update the bounds of the circle
 		b.setBounds(new Circle(grid.getLoc(idx), 16));
-		
+
 		setChanged();
 		notifyObservers("Bubble has been added to index " + idx + ".");
-		
+
 		return true;
 	}
 
@@ -247,5 +247,19 @@ public class Board extends BSDrawable implements Serializable {
 
 	public boolean isEmpty() {
 		return bubbles.isEmpty();
+	}
+
+	public boolean bubbleBelowLine() {
+		return bubbleBelowLine(grid.getHeight() - 2);
+	}
+
+	protected boolean bubbleBelowLine(int lineRow) {
+		int start = grid.toIdx(0,lineRow);
+		int lastRowWidth = grid.getWidth() - (grid.getHeight() % 2 - 1);
+		int finish = grid.toIdx(lastRowWidth - 1, grid.getHeight() - 1);
+		for(int i = start; i <= finish; i++) {
+			if(bubbles.containsKey(i)) return true;
+		}
+		return false;
 	}
 }
