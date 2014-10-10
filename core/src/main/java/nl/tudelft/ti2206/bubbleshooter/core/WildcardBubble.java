@@ -8,8 +8,8 @@ public class WildcardBubble extends Bubble{
 	private static final long serialVersionUID = -2817453609032842103L;
 	
 	public WildcardBubble() {
-		super.color = Color.rgba8888(Color.WHITE);
-//		super.behaviour = new WildcardBehaviour(this);
+		super(Color.WHITE);
+		// super(Color.WHITE, new WildCardBehaviour(this);
 	}
 	
 	/**

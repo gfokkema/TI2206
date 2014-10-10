@@ -5,11 +5,10 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import com.badlogic.gdx.graphics.Color;
 
 public class MichaelBayBubble extends Bubble {
+	private static final long serialVersionUID = -7975696762542618100L;
 
-	
 	public MichaelBayBubble() {
-		super.color = Color.rgba8888(Color.MAGENTA);
-		super.behaviour = new MichaelBayBehaviour(this);
+		super(Color.MAGENTA, new MichaelBayBehaviour());
 	}
 	
 	/**

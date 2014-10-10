@@ -6,12 +6,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class MichaelBayBehaviour extends BubbleBehaviour {
-
-	public MichaelBayBehaviour(Bubble bubble) {
-		super(bubble);
-	}
-
-	
 	@Override
 	public Collection<Bubble> getGroup(Board board, int id) {
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();

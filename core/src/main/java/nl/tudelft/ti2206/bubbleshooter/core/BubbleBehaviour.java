@@ -4,13 +4,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class BubbleBehaviour {
-
-	protected Bubble bubble;
-	
-	public BubbleBehaviour(Bubble bubble) {
-		this.bubble = bubble;
-	}
-	
 	public boolean Group(Board board, Integer current, Integer neighbour) {
 		return board.getBubbles().get(current).getColor().equals(board.getBubbles().get(neighbour).getColor());
 	}

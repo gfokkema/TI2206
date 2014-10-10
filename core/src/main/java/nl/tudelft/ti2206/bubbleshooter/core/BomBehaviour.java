@@ -5,14 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import com.badlogic.gdx.Gdx;
-
 public class BomBehaviour extends BubbleBehaviour{
-
-	public BomBehaviour(Bubble bubble) {
-		super(bubble);
-	}
-
 	@Override
 	public Collection<Bubble> getGroup(Board board, int id) {
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();

@@ -1,12 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Observer;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
-import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
