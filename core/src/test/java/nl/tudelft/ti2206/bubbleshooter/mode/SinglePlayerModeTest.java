@@ -1,10 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyFloat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.never;
 
 import java.io.IOException;
 import java.util.ArrayList;
