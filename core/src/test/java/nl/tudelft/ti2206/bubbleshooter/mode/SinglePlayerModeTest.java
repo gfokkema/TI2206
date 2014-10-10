@@ -9,6 +9,7 @@ import static org.mockito.Mockito.never;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
@@ -29,6 +30,7 @@ public class SinglePlayerModeTest {
 	private SinglePlayerMode mode;
 	
 	@Mock ArrayList<Board> boards;
+	@Mock Iterator<Board> board_it;
 	@Mock Board board;
 	@Mock BoardFactory factory;
 	@Mock Cannon cannon;
@@ -40,10 +42,10 @@ public class SinglePlayerModeTest {
 	
 	@Before
 	public void setUp() throws IOException {
-		Mockito.when(boards.get(0)).thenReturn(board);
 		Mockito.when(cannon.getProjectile()).thenReturn(cbubble);
-		//Mockito.when(end.check(mode)).thenReturn(-1);
 		Mockito.when(factory.makeLevels()).thenReturn(boards);
+		Mockito.when(boards.iterator()).thenReturn(board_it);
+		Mockito.when(board_it.next()).thenReturn(board);
 		
 		mode = new SinglePlayerMode(end, factory, cannon);
 		mode.addStatsObserver(obs);
