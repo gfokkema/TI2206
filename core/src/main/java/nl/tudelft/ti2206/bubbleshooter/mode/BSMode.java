@@ -89,11 +89,11 @@ public abstract class BSMode {
 
 			if(new_idx != -1) {			
 				score += 3* board.removeAll(projectile.getBehaviour().remove(board,new_idx));
-				
+
 				for(Entry<Integer, Bubble> b: board.getPowerUps().entrySet()) {
 					score += 3 * board.removeAll(b.getValue().getBehaviour().remove(board, b.getKey(), new_idx));
 				}
-								
+
 				Collection<Bubble> disconnected = board.getDisconnectedGroup();
 				board.removeAll(disconnected);
 
