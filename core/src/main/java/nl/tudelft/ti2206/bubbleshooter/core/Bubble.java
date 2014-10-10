@@ -26,9 +26,17 @@ public class Bubble extends BSDrawable implements Serializable {
 		BLUE(Color.BLUE),
 		PURPLE(Color.PURPLE),
 		YELLOW(Color.YELLOW),
+		ORANGE(Color.ORANGE),
+		PINK(Color.PINK),
+		WHITE(Color.WHITE),
+		
 		GRAY(Color.GRAY),
 		MAGENTA(Color.MAGENTA),
-		CYAN(Color.CYAN);
+		CYAN(Color.CYAN),
+		MAROON(Color.MAROON),
+		NAVY(Color.NAVY),
+		OLIVE(Color.OLIVE),
+		CLEAR(Color.CLEAR);
 		
 		private Color color;
 		private BubbleColors(Color color) {
