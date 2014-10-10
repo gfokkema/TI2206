@@ -11,6 +11,13 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
  */
 public abstract class BoardFactory {
 	public abstract List<Board> makeLevels();
+	
+	protected Bubble parse(String bubble) {
+		if (bubble.equals("--")) return null;
+		
+		int colorvalue = Integer.parseInt(bubble);
+		return new Bubble(BubbleColors.values()[colorvalue].getColor());
+	}
 		
 	/**
 	 * Add a bubble to a board with the specified index.
@@ -20,11 +27,8 @@ public abstract class BoardFactory {
 	 * @param i			the x-coordinate in the Grid
 	 * @param j			the y-coordinate in the Grid
 	 */
-	protected void add(Board board, String bubble, int i, int j) {
-		if (bubble.equals("--")) return;
-		
-		int colorvalue = Integer.parseInt(bubble);
-		board.add(new Bubble(BubbleColors.values()[colorvalue].getColor()), i, j);
+	protected void add(Board board, Bubble b, int i, int j) {
+		board.add(b, i, j);
 	}
 	
 	protected void add(Board board, int idx) {

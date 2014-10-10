@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 
 import com.badlogic.gdx.Gdx;
 
@@ -66,7 +67,9 @@ public abstract class FileBoardFactory extends BoardFactory {
 			String[] bubbles = lines[y].split("  ");
 			
 			for (int x = 0; x < bubbles.length && x < board.getWidth() - (y - 1) % 2; x++) {
-				add(board, bubbles[x], x, y - 1);
+				Bubble b = parse(bubbles[x]);
+				if (b != null)
+					add(board, parse(bubbles[x]), x, y - 1);
 			}
 		}
 		return board;
