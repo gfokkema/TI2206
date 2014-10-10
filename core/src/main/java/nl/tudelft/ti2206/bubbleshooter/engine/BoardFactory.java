@@ -20,15 +20,14 @@ public abstract class BoardFactory {
 		
 		int value = Integer.parseInt(bubble);
 		switch(value) {
-			case 0:	case 1:	case 2:	case 3:	case 4: return new Bubble(BubbleColors.values()[value].getColor());
 			case 5: return new Bubble();
 			case 6: return new StoneBubble();
 			case 7: return new WildcardBubble();
 			case 8: return new BomBubble();
 			case 9: return new MichaelBayBubble();
+			default:	if (value < 5) return new Bubble(BubbleColors.values()[value].getColor());
+						else return null;
 		}
-		//unknown bubble
-		return null;
 	}
 		
 	/**
