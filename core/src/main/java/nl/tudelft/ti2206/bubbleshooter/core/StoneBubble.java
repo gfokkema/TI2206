@@ -10,7 +10,7 @@ public class StoneBubble extends Bubble{
 
 	
 	public StoneBubble() {
-		super.color = Color.rgba8888(Color.GRAY);
+		super.color = Color.rgba8888(BubbleColors.GRAY.getColor());
 		super.behaviour = null;
 	}
 	

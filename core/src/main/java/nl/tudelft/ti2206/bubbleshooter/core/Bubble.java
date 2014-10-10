@@ -25,7 +25,9 @@ public class Bubble extends BSDrawable implements Serializable {
 		GREEN(Color.GREEN),
 		BLUE(Color.BLUE),
 		PURPLE(Color.PURPLE),
-		YELLOW(Color.YELLOW);
+		YELLOW(Color.YELLOW),
+		GRAY(Color.GRAY),
+		CYAN(Color.CYAN);
 		
 		private Color color;
 		private BubbleColors(Color color) {
@@ -45,7 +47,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	 * Instantiate a new Bubble, with a Random color.
 	 */
 	public Bubble() {
-		this.color = Color.rgba8888(getRandomColor());
+		this.color = Color.rgba8888(getRandomColor(4));
 		this.bounds = new Circle();
 		this.behaviour = new BubbleBehaviour(this);
 	}
@@ -92,9 +94,9 @@ public class Bubble extends BSDrawable implements Serializable {
 	 * Pick a ColorValue at random.
 	 * @return a randomly chosen ColorValue.
 	 */
-	protected Color getRandomColor() {
+	protected Color getRandomColor(int length) {
 		BubbleColors[] colors = BubbleColors.values();
-		return colors[(new Random()).nextInt(colors.length)].getColor();
+		return colors[(new Random()).nextInt(length)].getColor();
 	}
 	
 	/**

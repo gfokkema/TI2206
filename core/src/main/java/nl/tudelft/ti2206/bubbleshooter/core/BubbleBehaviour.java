@@ -33,4 +33,16 @@ public class BubbleBehaviour {
 		bubbleGroup.put(id, board.getBubbles().get(id));
 		return bubbleGroup.values();
 	}
+	
+	public Collection<Bubble> remove(Board board, int id, int projectile) {
+		if(id == projectile) return remove(board,projectile);
+		else return null;
+	}
+	
+	public Collection<Bubble> remove(Board board, int projectile) {
+		Collection<Bubble> sameColors = getGroup(board, projectile);
+		if (sameColors.size() >= 3) {
+			return sameColors;
+		} else return null;
+	}
 }

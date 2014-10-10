@@ -9,9 +9,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -184,10 +187,12 @@ public class Board extends BSDrawable implements Serializable {
 	 * @param bs
 	 *            The collection specifying the elements that should be removed.
 	 */
-	public void removeAll(Collection<Bubble> bs) {
+	public int removeAll(Collection<Bubble> bs) {
+		if(bs == null || bs.isEmpty()) return 0;
 		bubbles.values().removeAll(bs);
 		setChanged();
 		notifyObservers(bs.size() + " bubbles have been removed.");
+		return bs.size();
 	}
 
 	@Override
@@ -215,6 +220,26 @@ public class Board extends BSDrawable implements Serializable {
 			if(b.getValue().getColor().equals(bubble.getColor())) instance.put(b.getKey(), b.getValue());
 		}
 		return instance;
+	}
+	
+	public HashMap<Integer, Bubble> getColourGroup(Color color) {
+		HashMap<Integer, Bubble> instance = new HashMap<Integer, Bubble>();
+		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
+			if(b.getValue().getColor().equals(color)) instance.put(b.getKey(), b.getValue());
+		}
+		return instance;
+	}
+			
+	public HashMap<Integer, Bubble> getPowerUps() {
+		HashMap<Integer, Bubble> powerUps = new HashMap<Integer, Bubble>();
+		for(Entry<Integer, Bubble> b : bubbles.entrySet()) {		
+			for(int i = 5; i<BubbleColors.values().length; i++) {
+				if(BubbleColors.values()[i].getColor().equals(b.getValue().getColor())) {
+					powerUps.put(b.getKey(), b.getValue());
+				}
+			}
+		}
+		return powerUps;
 	}
 	
 	public Grid getGrid() {

@@ -8,7 +8,7 @@ public class BomBubble extends Bubble{
 	private static final long serialVersionUID = -684963823755680038L;
 
 	public BomBubble() {
-		super.color = Color.rgba8888(Color.CYAN);
+		super.color = Color.rgba8888(BubbleColors.CYAN.getColor());
 		super.behaviour = new BomBehaviour(this);
 	}
 	

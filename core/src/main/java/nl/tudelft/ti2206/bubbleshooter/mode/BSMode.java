@@ -88,28 +88,23 @@ public abstract class BSMode {
 			setProjectile(cannon.getProjectile());
 			projectile.move();
 
-			if(new_idx != -1) {
-				
+			if(new_idx != -1) {				
 				//colour bubble behaviour
-				Collection<Bubble> sameColors = projectile.getBehaviour().getGroup(board, new_idx);
-				if (sameColors.size() >= 3) {
-					board.removeAll(sameColors);
-					Collection<Bubble> disconnected = board.getDisconnectedGroup();
-					board.removeAll(disconnected);
+				
+					score += 3* board.removeAll(projectile.getBehaviour().remove(board,new_idx));
+					Gdx.app.log("power ups in BSMode", board.getPowerUps().toString());
+//					for(Entry<Integer, Bubble> b: board.getPowerUps().entrySet()) {
+//						
+//						b.getValue().getBehaviour().getGroup(board, b.getKey());
+//						
+//						board.removeAll(b.getValue().getBehaviour().getGroup(board, b.getKey()));
+//					}
+								
+				Collection<Bubble> disconnected = board.getDisconnectedGroup();
+				board.removeAll(disconnected);
 
-					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
-					this.obs.drawScore(score);
-				}
-				
-				//bom behaviour				
-				HashMap<Integer, Bubble> bomBubble = board.getColourGroup(new BomBubble());
-				for(Entry<Integer, Bubble> b: bomBubble.entrySet()) {
-					if(board.getGrid().adjacent(b.getKey(), new_idx)) {
-						board.removeAll(b.getValue().getBehaviour().getGroup(board, b.getKey()));
-					}
-				}
-				
-				
+				score += 3 * disconnected.size();
+				this.obs.drawScore(score);				
 			}
 		}
 		end.check(this);
