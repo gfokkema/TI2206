@@ -13,7 +13,6 @@ import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;

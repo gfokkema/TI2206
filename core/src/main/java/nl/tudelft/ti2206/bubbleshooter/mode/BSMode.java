@@ -84,9 +84,7 @@ public abstract class BSMode {
 			setProjectile(cannon.getProjectile());
 			projectile.move();
 
-
-			if(new_idx != -1) {				
-
+			if(new_idx != -1) {			
 				score += 3* board.removeAll(projectile.getBehaviour().remove(board,new_idx));
 				
 				for(Entry<Integer, Bubble> b: board.getPowerUps().entrySet()) {
