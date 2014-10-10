@@ -18,8 +18,17 @@ public abstract class BoardFactory {
 	protected Bubble parse(String bubble) {
 		if (bubble.equals("--")) return null;
 		
-		int colorvalue = Integer.parseInt(bubble);
-		return new Bubble(BubbleColors.values()[colorvalue].getColor());
+		int value = Integer.parseInt(bubble);
+		switch(value) {
+			case 0:	case 1:	case 2:	case 3:	case 4: return new Bubble(BubbleColors.values()[value].getColor());
+			case 5: return new Bubble();
+			case 6: return new StoneBubble();
+			case 7: return new WildcardBubble();
+			case 8: return new BomBubble();
+			case 9: return new MichaelBayBubble();
+		}
+		//unknown bubble
+		return null;
 	}
 		
 	/**
@@ -30,24 +39,10 @@ public abstract class BoardFactory {
 	 * @param i			the x-coordinate in the Grid
 	 * @param j			the y-coordinate in the Grid
 	 */
-	protected void add(Board board, String bubble, int i, int j) {
-		if (bubble.equals("--")) return;
-		
-		int value = Integer.parseInt(bubble);
-		switch(value) {
-			case 0:	case 1:	case 2:	case 3:	case 4: board.add(new Bubble(BubbleColors.values()[value].getColor()), i, j);
-			case 5: board.add(new Bubble(), i, j);
-			case 6: board.add(new StoneBubble(), i ,j);
-			case 7: board.add(new WildcardBubble(), i ,j);
-			case 8: board.add(new BomBubble(), i, j);
-			case 9: board.add(new MichaelBayBubble(), i, j);
-		}
-	}
 
-//	protected void add(Board board, Bubble b, int i, int j) {
-//		board.add(b, i, j);
-//
-//	}
+	protected void add(Board board, Bubble b, int i, int j) {
+		board.add(b, i, j);
+	}
 	
 	protected void add(Board board, int idx) {
 		board.add(new Bubble(), idx);
