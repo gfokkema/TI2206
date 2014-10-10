@@ -8,6 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.core.MichaelBayBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.core.StoneBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.WildcardBubble;
@@ -17,7 +18,6 @@ import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -88,11 +88,49 @@ public abstract class BSMode {
 			setProjectile(cannon.getProjectile());
 			projectile.move();
 
+
 			if(new_idx != -1) {				
 				//colour bubble behaviour
+/*
+			if(new_idx != -1) {
+				// collection of disconnected group
+				Collection<Bubble> disconnected;
+				
+				//colour bubble behaviour
+				Collection<Bubble> sameColors = projectile.getBehaviour().getGroup(board, new_idx);
+				if (sameColors.size() >= 3) {
+					board.removeAll(sameColors);
+					disconnected = board.getDisconnectedGroup();
+					board.removeAll(disconnected);
+					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
+				}
+				
+				//bom behaviour				
+				HashMap<Integer, Bubble> bomBubble = board.getColourGroup(new BomBubble());
+				for(Entry<Integer, Bubble> b: bomBubble.entrySet()) {
+					if(board.getGrid().adjacent(b.getKey(), new_idx)) {
+						sameColors = b.getValue().getBehaviour().getGroup(board, b.getKey());
+						board.removeAll(sameColors);
+						disconnected = board.getDisconnectedGroup();
+						board.removeAll(disconnected);
+						score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
+					}
+					
+				}
+				
+				//michael bay behaviour				
+				HashMap<Integer, Bubble> michaelBay = board.getColourGroup(new MichaelBayBubble());
+				for(Entry<Integer, Bubble> b: michaelBay.entrySet()) {
+					if(board.getGrid().adjacent(b.getKey(), new_idx)) {
+						sameColors = b.getValue().getBehaviour().getGroup(board, b.getKey());
+						board.removeAll(sameColors);
+						score += 3 * sameColors.size() - 9;
+					}
+				}
+				this.obs.drawScore(score);
+*/
 				
 					score += 3* board.removeAll(projectile.getBehaviour().remove(board,new_idx));
-					Gdx.app.log("power ups in BSMode", board.getPowerUps().toString());
 //					for(Entry<Integer, Bubble> b: board.getPowerUps().entrySet()) {
 //						
 //						b.getValue().getBehaviour().getGroup(board, b.getKey());
