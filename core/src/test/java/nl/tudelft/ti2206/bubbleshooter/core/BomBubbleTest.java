@@ -23,7 +23,7 @@ public class BomBubbleTest {
 	 * Test if the MichaelBay Bubble is correctly instantiated
 	 */
 	@Test
-	public void testMichaelBayBubble() {
+	public void testBomBubble() {
 		assertEquals(Color.CYAN, BBubble.getColor());
 	}
 	
