@@ -5,8 +5,6 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +20,6 @@ public class BomBehaviourTest {
 	 */
 	@Mock Board board;
 	@Mock Grid grid;
-	@Mock Collection<Bubble> bubbles;
 	BomBehaviour BBehaviour;
 	
 	/**

@@ -2,11 +2,9 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +21,6 @@ public class MichaelBayBehaviourTest {
 	 */
 	@Mock Board board;
 	@Mock Grid grid;
-	@Mock Collection<Bubble> bubbles;
 	MichaelBayBehaviour MBBehaviour;
 	
 	/**

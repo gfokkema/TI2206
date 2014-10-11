@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({	BackgroundTest.class,
 				BoardTest.class,
 				BubbleTest.class,
+				BubbleBehaviourTest.class,
 				CannonTest.class,
 				GridTest.class,
 				PointerTest.class,
@@ -17,7 +18,8 @@ import org.junit.runners.Suite.SuiteClasses;
 				StoneBubbleTest.class,
 				BomBehaviourTest.class,
 				MichaelBayBehaviourTest.class,
-				StoneBubbleBehaviourTest.class})
+				StoneBubbleBehaviourTest.class,
+				WildcardBubbleTest.class})
 public class CoreTests {
 
 }
