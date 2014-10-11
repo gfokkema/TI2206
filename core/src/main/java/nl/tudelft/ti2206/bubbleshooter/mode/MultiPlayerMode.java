@@ -47,7 +47,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 * @param in the {@link ObjectInputStream}.
 	 * @param out the {@link ObjectOutputStream}.
 	 */
-	public MultiPlayerMode(EndingCondition end, BoardFactory factory, Cannon cannon, ObjectInputStream in, ObjectOutputStream out) {
+	protected MultiPlayerMode(EndingCondition end, BoardFactory factory, Cannon cannon, ObjectInputStream in, ObjectOutputStream out) {
 		super(end, factory, cannon);
 		
 		this.in = in;

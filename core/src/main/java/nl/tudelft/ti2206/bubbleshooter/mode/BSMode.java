@@ -34,7 +34,7 @@ public abstract class BSMode implements EndingObserver {
 	protected boolean cannonRight;
 
 	private StatsObserver statsObs;
-	private GameObserver gameObs;
+	protected GameObserver gameObs;
 
 	protected EndingCondition end;
 	private int score;
@@ -190,7 +190,6 @@ public abstract class BSMode implements EndingObserver {
 
 	@Override
 	public void won() {
-		if(hasNext()) next();
-		else gameObs.switchToWonScreen();
+		gameObs.switchToWonScreen();
 	}
 }

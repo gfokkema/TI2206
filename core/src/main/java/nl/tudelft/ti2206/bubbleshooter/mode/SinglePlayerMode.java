@@ -62,4 +62,10 @@ public class SinglePlayerMode extends BSMode {
 		odraw.put(offset, drawables);
 		return odraw;
 	}
+
+	@Override
+	public void won() {
+		if(hasNext()) next();
+		else gameObs.switchToWonScreen();
+	}
 }
