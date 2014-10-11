@@ -115,7 +115,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	 */
 	protected Color getRandomColor() {
 		BubbleColors[] colors = BubbleColors.values();
-		return colors[(new Random()).nextInt(4)].getColor();
+		return colors[(new Random()).nextInt(5)].getColor();
 	}
 	
 	/**
