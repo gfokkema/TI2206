@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class BubbleBehaviour {
-	public boolean Group(Board board, Integer current, Integer neighbour) {
+	private boolean testColor(Board board, Integer current, Integer neighbour) {
 		return board.getBubbles().get(current).getColor().equals(board.getBubbles().get(neighbour).getColor());
 	}
 	
@@ -22,7 +22,8 @@ public class BubbleBehaviour {
 		HashMap<Integer, Bubble> bubbleGroup = new HashMap<Integer, Bubble>();
 		board.depthFirst(
 				id,
-				(current, neighbour) -> this.Group(board, current, neighbour), bubbleGroup);
+				(current, neighbour) -> testColor(board, current, neighbour),
+				bubbleGroup);
 		bubbleGroup.put(id, board.getBubbles().get(id));
 		return bubbleGroup.values();
 	}

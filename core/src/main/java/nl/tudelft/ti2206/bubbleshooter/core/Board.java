@@ -212,13 +212,13 @@ public class Board extends BSDrawable implements Serializable {
 	public HashMap<Integer, Bubble> getBubbles() {
 		return bubbles;
 	}
+
+	public Collection<Bubble> getGroup(int idx) {
+		return bubbles.get(idx).getBehaviour().remove(this, idx);
+	}
 	
 	public HashMap<Integer, Bubble> getColourGroup(Bubble bubble) {
-		HashMap<Integer, Bubble> instance = new HashMap<Integer, Bubble>();
-		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
-			if(b.getValue().getColor().equals(bubble.getColor())) instance.put(b.getKey(), b.getValue());
-		}
-		return instance;
+		return getColourGroup(bubble.getColor());
 	}
 	
 	public HashMap<Integer, Bubble> getColourGroup(Color color) {
