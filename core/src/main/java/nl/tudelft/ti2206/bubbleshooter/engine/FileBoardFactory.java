@@ -92,6 +92,6 @@ public abstract class FileBoardFactory extends BoardFactory {
 			case 9: return new MichaelBayBubble();
 			default:	if (value < 5) return new Bubble(BubbleColors.values()[value].getColor());
 						else return null;
-		}
+		}	
 	}
 }
