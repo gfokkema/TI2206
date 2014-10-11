@@ -3,24 +3,17 @@ package nl.tudelft.ti2206.bubbleshooter.input;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Sound;
-
 import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
@@ -35,19 +28,14 @@ public class SinglePlayerProcessorTest {
 	@Mock Cannon cannon;
 	@Mock Projectile projectile;
 	@Mock Board board;
-	@Mock AssetManager loader;
-	@Mock Sound sound;
-	private Assets assets;
+
 	
 	/**
 	 * Initialize some common mocks and variables.
 	 */
 	@Before
 	public void setUp() {
-		assets = Assets.getAssets();
-		assets.setAssetManager(loader);
 		input = new SinglePlayerProcessor(mode);
-		Mockito.when(loader.get(anyString())).thenReturn(sound);
 		Mockito.when(mode.getCannon()).thenReturn(cannon);
 		Mockito.when(mode.getBoard()).thenReturn(board);
 	}

@@ -2,6 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.mockito.Matchers.anyString;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import org.junit.Before;
@@ -11,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -20,17 +24,22 @@ import com.badlogic.gdx.math.Vector2;
 @RunWith(MockitoJUnitRunner.class)
 public class CannonTest {
 	@Mock Texture tex;
-
+	@Mock AssetManager loader;
+	@Mock Sound sound;
+	
 	private Cannon cannon;
+	private Assets assets;
 
 	/**
 	 * Initialize our mock objects and the {@link Cannon}.
 	 */
 	@Before
 	public void setUp(){
+		assets = Assets.getAssets();
+		assets.setAssetManager(loader);
 		Mockito.when(tex.getWidth()).thenReturn(20);
 		Mockito.when(tex.getWidth()).thenReturn(100);
-
+		Mockito.when(loader.get(anyString())).thenReturn(sound);
 		this.cannon = new Cannon(0, 0);
 	}
 
