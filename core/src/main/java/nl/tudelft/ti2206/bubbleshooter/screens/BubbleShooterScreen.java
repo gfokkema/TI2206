@@ -7,7 +7,7 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
+import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  * @author group-15
  *
  */
-public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver, EndingObserver {
+public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver, GameObserver {
 	BubbleShooter game;
 	BSMode game_mode;
 	private Stage stage;
@@ -54,7 +54,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver,
 		this.game = game;
 		this.game_mode = game_mode;
 		game_mode.addStatsObserver(this);
-		game_mode.addEndingObserver(this);
+		game_mode.addGameObserver(this);
 	}
 
 	/**
@@ -128,17 +128,12 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver,
 	}
 
 	@Override
-	public void lost() {
+	public void switchToLostScreen() {
 		game.setScreen(new GameEndedScreen(game, "YOU LOST!", game_mode.getScore()));
 	}
 
 	@Override
-	public void won() {
-		if (game_mode.hasNext()) game_mode.next();
-		else game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
-	}
-
-	@Override
-	public void wonBoard() {
+	public void switchToWonScreen() {
+		game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
 	}
 }

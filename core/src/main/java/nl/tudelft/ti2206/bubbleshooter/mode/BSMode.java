@@ -11,6 +11,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
+import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
@@ -23,7 +24,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public abstract class BSMode {
+public abstract class BSMode implements EndingObserver {
 	protected Iterator<Board> boards;
 	protected Board board;
 	protected Cannon cannon;
@@ -32,7 +33,8 @@ public abstract class BSMode {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	private StatsObserver obs;
+	private StatsObserver statsObs;
+	private GameObserver gameObs;
 
 	protected EndingCondition end;
 	private int score;
@@ -54,6 +56,7 @@ public abstract class BSMode {
 		setProjectile(cannon.getProjectile());
 
 		this.end = end;
+		end.addEndingObserver(this);
 		this.score = 0;
 	}
 
@@ -94,7 +97,7 @@ public abstract class BSMode {
 					board.removeAll(disconnected);
 
 					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
-					this.obs.drawScore(score);
+					this.statsObs.drawScore(score);
 				}
 			}
 		}
@@ -105,13 +108,13 @@ public abstract class BSMode {
 	 * Add the {@link StatsObserver} to the {@link EndingCondition}.
 	 * @param o the statsobserver.
 	 */
-	public void addStatsObserver(StatsObserver o) {
-		this.obs = o;
-		end.addStatsObserver(o);
+	public void addStatsObserver(StatsObserver obs) {
+		this.statsObs = obs;
+		end.addStatsObserver(obs);
 	}
 
-	public void addEndingObserver(EndingObserver obs) {
-		end.addEndingObserver(obs);
+	public void addGameObserver(GameObserver obs) {
+		this.gameObs = obs;
 	}
 
 	/**
@@ -178,5 +181,16 @@ public abstract class BSMode {
 		this.board.deleteObservers();
 		this.board = boards.next();
 		this.board.addObserver(Logger.getLogger());
+	}
+
+	@Override
+	public void lost() {
+		gameObs.switchToLostScreen();
+	}
+
+	@Override
+	public void won() {
+		if(hasNext()) next();
+		else gameObs.switchToWonScreen();
 	}
 }

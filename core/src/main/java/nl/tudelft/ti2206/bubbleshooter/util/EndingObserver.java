@@ -8,11 +8,6 @@ package nl.tudelft.ti2206.bubbleshooter.util;
  */
 public interface EndingObserver {
 	/**
-	 * Gets called when a board is won.
-	 */
-	public void wonBoard();
-
-	/**
 	 * Gets called when the game was lost.
 	 */
 	public void lost();

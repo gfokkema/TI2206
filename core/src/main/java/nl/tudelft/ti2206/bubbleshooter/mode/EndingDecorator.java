@@ -40,18 +40,4 @@ public abstract class EndingDecorator extends EndingCondition {
 	public void addEndingObserver(EndingObserver o) {
 		end.addEndingObserver(o);
 	}
-
-	/**
-	 * Return the opponent side version of this EndingCondition.
-	 * We traverse all wrapped {@link EndingDecorator}s until we
-	 * reach the base {@link EndingCondition}, like for
-	 * example {@link BasicCondition}.
-	 * @return this instance.
-	 */
-	@Override
-	public EndingCondition opponent() {
-		end = end.opponent();
-		return this;
-	}
-
 }

@@ -45,12 +45,4 @@ public abstract class EndingCondition implements Serializable {
 	public void addEndingObserver(EndingObserver o) {
 		this.endingObs = o;
 	}
-
-	/**
-	 * Return the opponent side version of this EndingCondition.
-	 * @return the opponent's EndingCondition.
-	 */
-	public EndingCondition opponent() {
-		return new OpponentCondition(this);
-	}
 }
