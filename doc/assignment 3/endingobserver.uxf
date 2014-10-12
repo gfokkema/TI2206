@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>224</y>
+      <w>240</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>/EndingDecorator/
+--
++EndingDecorator(end: EndingCondition)
++check(b: Board)
++lost()
++won()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>112</y>
+      <w>240</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>/EndingCondition/
+--
+/+check(b: Board)/
+/+lost()/
+/+won()/
++addEndingObserver(o: EndingObserver)
++addStatsObserver(o: StatsObserver)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>920</x>
+      <y>192</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>224</y>
+      <w>248</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>/BSMode/
+--
++BSMode(end: EndingCondition,
+              factory: BoardFactory,
+              cannon: Cannon)
+/+getDrawables()/
++update(deltaTime: float)
++addGameObserver(obs: GameObserver)
++addStatsObserver(obs: StatsObserver)
++lost()
++won()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>112</y>
+      <w>248</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+EndingObserver
+--
++lost()
++won()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>168</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>120</y>
+      <w>176</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Is notified        Notifies
+m1=0..* 
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>256</y>
+      <w>176</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Registers with
+m1=0..*
+m2=0..*</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>16</x>
+      <y>256</y>
+      <w>272</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+GameObserver
+--
++switchToLostScreen()
++switchToWonScreen()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>264</y>
+      <w>144</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Is notified        Notifies
+m1=0..* 
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>312</y>
+      <w>24</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>16</x>
+      <y>416</y>
+      <w>272</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>BubbleShooterScreen
+--
++BubbleShooterScreen(game: BubbleShooter,
+                                      game_mode: BSMode)
++render()
++show()
++hide()
++switchToLostScreen()
++switchToWonScreen()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>464</y>
+      <w>144</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Registers with
+m1=0..*
+m2=0..*</panel_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>416</y>
+      <w>248</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>SinglePlayerMode
+--
++SinglePlayerMode(end: EndingCondition,
+                                factory: BoardFactory,
+                                cannon: Cannon)
++getDrawables()
++won()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>360</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>432</x>
+      <y>432</y>
+      <w>248</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>SinglePlayerMode
+--
++SinglePlayerMode(end: EndingCondition,
+                                factory: BoardFactory,
+                                cannon: Cannon)
++getDrawables()
++won()
+bg=white
+fg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
