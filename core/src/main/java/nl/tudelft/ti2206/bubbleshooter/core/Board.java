@@ -6,11 +6,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -55,7 +58,7 @@ public class Board extends BSDrawable implements Serializable {
 		if (b.getBounds().y + 16 > 480)
 			return true;
 		if (b.getBounds().x - 16 < 32
-				|| b.getBounds().x + 16 > grid.getWidth() * 32 + 32) {
+				|| b.getBounds().x - 16 > grid.getWidth() * 32) {
 			Vector2 dir = b.getDirection();
 			dir.x = -dir.x;
 		}
@@ -118,26 +121,6 @@ public class Board extends BSDrawable implements Serializable {
 	}
 
 	/**
-	 * Get a {@link Collection} of all {@link Bubble} objects adjacent to the
-	 * given {@link Bubble} that have the same color.
-	 * 
-	 * @param id
-	 *            the grid id of the {@link Bubble}
-	 * @return {@link Collection} of {@link Bubble} objects adjacent to id and
-	 *         with the same color
-	 */
-	public Collection<Bubble> getColorGroup(int id) {
-		// Search for bubbles of the same color
-		HashMap<Integer, Bubble> sameColors = new HashMap<Integer, Bubble>();
-		depthFirst(
-				id,
-				(current, neighbor) -> bubbles.get(current).getColor().equals(bubbles
-						.get(neighbor).getColor()), sameColors);
-		sameColors.put(id, bubbles.get(id));
-		return sameColors.values();
-	}
-
-	/**
 	 * Traversal to find all of the nodes that should be removed. If nothing
 	 * should be removed, then nothing is returned.
 	 * 
@@ -176,7 +159,7 @@ public class Board extends BSDrawable implements Serializable {
 	 *            The solution set accumulator, which at the end contains all
 	 *            results.
 	 */
-	private void depthFirst(Integer currentIndex,
+	public void depthFirst(Integer currentIndex,
 			BiPredicate<Integer, Integer> condition, Map<Integer, Bubble> remove) {
 		for (Orientation o : Orientation.values()) {
 			int neighborIndex = o.fromIndex(currentIndex, grid.getWidth());
@@ -195,7 +178,7 @@ public class Board extends BSDrawable implements Serializable {
 			}
 		}
 	}
-
+	
 	/**
 	 * Remove all the {@link Bubble}s that are both in the given
 	 * {@link Collection} and on the grid.
@@ -203,10 +186,12 @@ public class Board extends BSDrawable implements Serializable {
 	 * @param bs
 	 *            The collection specifying the elements that should be removed.
 	 */
-	public void removeAll(Collection<Bubble> bs) {
+	public int removeAll(Collection<Bubble> bs) {
+		if(bs == null || bs.isEmpty()) return 0;
 		bubbles.values().removeAll(bs);
 		setChanged();
 		notifyObservers(bs.size() + " bubbles have been removed.");
+		return bs.size();
 	}
 
 	@Override
@@ -226,6 +211,34 @@ public class Board extends BSDrawable implements Serializable {
 	
 	public HashMap<Integer, Bubble> getBubbles() {
 		return bubbles;
+	}
+
+	public Collection<Bubble> getGroup(int idx) {
+		return bubbles.get(idx).getBehaviour().remove(this, idx);
+	}
+	
+	public HashMap<Integer, Bubble> getColourGroup(Bubble bubble) {
+		return getColourGroup(bubble.getColor());
+	}
+	
+	public HashMap<Integer, Bubble> getColourGroup(Color color) {
+		HashMap<Integer, Bubble> instance = new HashMap<Integer, Bubble>();
+		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
+			if(b.getValue().getColor().equals(color)) instance.put(b.getKey(), b.getValue());
+		}
+		return instance;
+	}
+			
+	public HashMap<Integer, Bubble> getPowerUps() {
+		HashMap<Integer, Bubble> powerUps = new HashMap<Integer, Bubble>();
+		for(Entry<Integer, Bubble> b : bubbles.entrySet()) {		
+			for(int i = 5; i<BubbleColors.values().length; i++) {
+				if(BubbleColors.values()[i].getColor().equals(b.getValue().getColor())) {
+					powerUps.put(b.getKey(), b.getValue());
+				}
+			}
+		}
+		return powerUps;
 	}
 	
 	public Grid getGrid() {

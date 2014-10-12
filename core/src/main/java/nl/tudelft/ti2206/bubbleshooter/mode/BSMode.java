@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
@@ -89,16 +90,18 @@ public abstract class BSMode implements EndingObserver {
 			setProjectile(cannon.getProjectile());
 			projectile.move();
 
-			if(new_idx != -1) {
-				Collection<Bubble> sameColors = board.getColorGroup(new_idx);
-				if (sameColors.size() >= 3) {
-					board.removeAll(sameColors);
-					Collection<Bubble> disconnected = board.getDisconnectedGroup();
-					board.removeAll(disconnected);
+			if(new_idx != -1) {			
+				score += 3 * board.removeAll(board.getGroup(new_idx));
 
-					score += 3 * disconnected.size() + 3 * sameColors.size() - 3;
-					this.statsObs.drawScore(score);
+				for(Entry<Integer, Bubble> b: board.getPowerUps().entrySet()) {
+					score += 3 * board.removeAll(b.getValue().getBehaviour().remove(board, b.getKey(), new_idx));
 				}
+
+				Collection<Bubble> disconnected = board.getDisconnectedGroup();
+				board.removeAll(disconnected);
+
+				score += 3 * disconnected.size();
+				this.statsObs.drawScore(score);				
 			}
 		}
 		end.check(this.board);

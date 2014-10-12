@@ -33,6 +33,7 @@ public class Assets {
 		BACKGROUND,
 		BORDER,
 		BUBBLE,
+		STONEBUBBLE,
 		BUTTON,
 		CANNON
 	}

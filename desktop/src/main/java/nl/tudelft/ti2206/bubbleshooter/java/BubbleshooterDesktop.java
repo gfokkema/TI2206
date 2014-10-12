@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.java;
 
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -24,6 +25,9 @@ public class BubbleshooterDesktop {
 		// fullscreen
 		config.fullscreen = false;
 		config.title = "Bubble Shooter";
+		config.addIcon("logo/logo16.png", FileType.Internal);
+		config.addIcon("logo/logo32.png", FileType.Internal);
+		config.addIcon("logo/logo128.png", FileType.Internal);
 		// temporarily start directly to the main menu --> splash art should come first...
 		new LwjglApplication(new BubbleShooter(), config);
 	}

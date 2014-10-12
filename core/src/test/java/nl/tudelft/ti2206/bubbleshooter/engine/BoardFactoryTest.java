@@ -14,11 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.badlogic.gdx.graphics.Color;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 @RunWith(MockitoJUnitRunner.class)
 public class BoardFactoryTest {
 	private ZenBoardFactory factory;
@@ -51,6 +46,7 @@ public class BoardFactoryTest {
 		Mockito.verify(board, times(5)).add(anyObject(), anyInt());
 	}
 	
+	/*
 	@Test
 	public void testAddBubble() {
 		factory.add(board, bubble, 0, 0);
@@ -70,14 +66,5 @@ public class BoardFactoryTest {
 		
 		Mockito.verify(board, times(5)).add(anyObject(), anyInt(), anyInt());
 	}
-	
-	@Test
-	public void testParse() {
-		assertEquals(Color.RED, factory.parse("00").getColor());
-		assertEquals(Color.GREEN, factory.parse("01").getColor());
-		assertEquals(Color.BLUE, factory.parse("02").getColor());
-		assertEquals(Color.PURPLE, factory.parse("03").getColor());
-		assertEquals(Color.YELLOW, factory.parse("04").getColor());
-		assertNull(factory.parse("--"));
-	}
+	*/
 }

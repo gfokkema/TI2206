@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.badlogic.gdx.Input.Keys;
-
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -29,6 +28,7 @@ public class SinglePlayerProcessorTest {
 	@Mock Cannon cannon;
 	@Mock Projectile projectile;
 	@Mock Board board;
+
 	
 	/**
 	 * Initialize some common mocks and variables.

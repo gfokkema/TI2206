@@ -8,10 +8,18 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({	BackgroundTest.class,
 				BoardTest.class,
 				BubbleTest.class,
+				BubbleBehaviourTest.class,
 				CannonTest.class,
 				GridTest.class,
 				PointerTest.class,
-				ProjectileTest.class })
+				ProjectileTest.class,
+				MichaelBayBubbleTest.class,
+				BomBubbleTest.class,
+				StoneBubbleTest.class,
+				BomBehaviourTest.class,
+				MichaelBayBehaviourTest.class,
+				StoneBubbleBehaviourTest.class,
+				WildcardBubbleTest.class})
 public class CoreTests {
 
 }

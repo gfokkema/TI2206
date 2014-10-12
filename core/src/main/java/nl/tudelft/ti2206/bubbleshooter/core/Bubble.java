@@ -25,7 +25,18 @@ public class Bubble extends BSDrawable implements Serializable {
 		GREEN(Color.GREEN),
 		BLUE(Color.BLUE),
 		PURPLE(Color.PURPLE),
-		YELLOW(Color.YELLOW);
+		YELLOW(Color.YELLOW),
+		ORANGE(Color.ORANGE),
+		PINK(Color.PINK),
+		WHITE(Color.WHITE),
+		
+		GRAY(Color.GRAY),
+		MAGENTA(Color.MAGENTA),
+		CYAN(Color.CYAN),
+		MAROON(Color.MAROON),
+		NAVY(Color.NAVY),
+		OLIVE(Color.OLIVE),
+		CLEAR(Color.CLEAR);
 		
 		private Color color;
 		private BubbleColors(Color color) {
@@ -36,16 +47,16 @@ public class Bubble extends BSDrawable implements Serializable {
 			return color;
 		}
 	}
-	
-	private int color;
-	private Circle bounds;
+
+	protected int color;
+	protected Circle bounds;
+	protected BubbleBehaviour behaviour;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
 	 */
 	public Bubble() {
-		this.color = Color.rgba8888(getRandomColor());
-		this.bounds = new Circle();
+		this(new BubbleBehaviour());
 	}
 
 	/**
@@ -55,8 +66,21 @@ public class Bubble extends BSDrawable implements Serializable {
 	 * @param c - the Color of the Bubble.
 	 */
 	public Bubble(Color c) {
-		this.color = Color.rgba8888(c);
+		this(c, new BubbleBehaviour());
 	}
+	
+	public Bubble(BubbleBehaviour b) {
+		this.color = Color.rgba8888(getRandomColor());
+		this.behaviour = b;
+		this.bounds = new Circle();
+	}
+	
+	public Bubble(Color c, BubbleBehaviour b) {
+		this.color = Color.rgba8888(c);
+		this.behaviour = b;
+		this.bounds = new Circle();
+	}
+	
 
 	/**
 	 * Check if this Bubble collides with b.
@@ -91,7 +115,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	 */
 	protected Color getRandomColor() {
 		BubbleColors[] colors = BubbleColors.values();
-		return colors[(new Random()).nextInt(colors.length)].getColor();
+		return colors[(new Random()).nextInt(5)].getColor();
 	}
 	
 	/**
@@ -118,6 +142,10 @@ public class Bubble extends BSDrawable implements Serializable {
 		this.bounds = c;
 		setChanged();
 		notifyObservers();
+	}
+	
+	public BubbleBehaviour getBehaviour() {
+		return this.behaviour;
 	}
 
 	/**

@@ -1,13 +1,14 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;;
+import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 /**
  * This class holds the properties of the background to use for the game.
  */
 public class Background extends BSDrawable {
-	
+	private static final long serialVersionUID = 7891297852719385463L;
+
 	/**
 	 * Returns the Texture of the background.
 	 * @return the {@link #Texture} of the background.

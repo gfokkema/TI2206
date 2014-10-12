@@ -1,12 +1,11 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Observer;
 
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
-import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -91,6 +90,7 @@ public class Cannon extends BSDrawable implements Serializable {
 		fired.setDirection(new Vector2(pointer.direction));
 		
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
+		Assets.getAssets().get(SoundID.CANNON).play();
 		setChanged();
 		notifyObservers("Cannon has been shot!");
 		return fired;
