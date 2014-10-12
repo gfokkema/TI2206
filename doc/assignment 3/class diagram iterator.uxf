@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>24</y>
+      <w>168</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+EndingObserver
+--
++lost()
++won()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1224</x>
+      <y>408</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>concrete Iterator
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>984</x>
+      <y>400</y>
+      <w>256</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+creates</panel_attributes>
+    <additional_attributes>240;40;24;40</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>608</x>
+      <y>328</y>
+      <w>400</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>/nl.tudelft.ti2206.bubbleshooter.mode::BSMode/
+--
+#boards: Iterator&lt;Board&gt;
+#board: Board
+#cannon: Cannon
+#projectile: Projectile
+#cannonLeft: boolean
+#cannonRight: boolean
+-statsObs: StatsObserver
+#gameObs: GameObserver
+#end: EndingCondition
+-score: int
+--
++BSMode(EndingCondition end, BoardFactory factory, Cannon cannon): ctor
++update(float deltaTime): void
++addStatsObserver(StatsObserver obs): void
++addGameObserver(GameObserver obs): void
++getDrawables(): HashMap&lt;Vector2, Collection&lt;BSDrawable&gt;&gt;
++getCannon(): Cannon
++getBoard(): Board
++getProjectile(): Projectile
++setProjectile(Projectile projectile): void
++cannonLeft(boolean left): void
++cannonRight(boolean right): void
++getScore(): int
++hasNext(): boolean
++next(): void
++lost(): void
++won(): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>744</x>
+      <y>152</y>
+      <w>102</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+implements</panel_attributes>
+    <additional_attributes>56;24;48;176</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1248</x>
+      <y>264</y>
+      <w>102</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+implements</panel_attributes>
+    <additional_attributes>48;24;56;144</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1216</x>
+      <y>112</y>
+      <w>168</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Iterator
+--
+hasNext()
+next()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>368</y>
+      <w>272</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+GameObserver
+--
++switchToLostScreen()
++switchToWonScreen()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>56</x>
+      <y>568</y>
+      <w>272</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>BubbleShooterScreen
+--
++BubbleShooterScreen(game: BubbleShooter,
+                                      game_mode: BSMode)
++render()
++show()
++hide()
++switchToLostScreen()
++switchToWonScreen()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>168</x>
+      <y>424</y>
+      <w>24</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>664</x>
+      <y>776</y>
+      <w>248</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>SinglePlayerMode
+--
++SinglePlayerMode(end: EndingCondition,
+                                factory: BoardFactory,
+                                cannon: Cannon)
++getDrawables()
++won()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>400</y>
+      <w>288</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Is notified        Notifies
+</panel_attributes>
+    <additional_attributes>10.0;20.0;340.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>640</y>
+      <w>360</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Registers with
+</panel_attributes>
+    <additional_attributes>430.0;260.0;190.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
