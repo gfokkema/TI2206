@@ -9,14 +9,15 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 public class BubbleBehaviourTest {
-
+	
+	/*
 	Board board;
 	BubbleBehaviour BBehaviour;
 	BubbleBehaviour spy;
 	
 	/**
 	 * Setup intialization and stubbing.
-	 */
+	 *
 	@Before
 	public void setUp(){
 		board = mock(Board.class, RETURNS_MOCKS);
@@ -27,7 +28,7 @@ public class BubbleBehaviourTest {
 	
 	/**
 	 * Test remove.
-	 */
+	 *
 	@Test
 	public void testRemove() {
 		assertEquals(null, spy.remove(board, 2, 3));
@@ -35,11 +36,11 @@ public class BubbleBehaviourTest {
 	
 	/**
 	 * Test getGroup.
-	 */
+	 *
 	@Test
 	public void testGetGroup() {
 		spy.remove(board, 2,2);
 		Mockito.verify(spy).getGroup(board, 2);
 	}
-
+	*/
 }

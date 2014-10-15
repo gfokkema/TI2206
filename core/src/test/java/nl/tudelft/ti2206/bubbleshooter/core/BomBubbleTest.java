@@ -10,10 +10,11 @@ import com.badlogic.gdx.graphics.Color;
 
 public class BomBubbleTest {
 
+	/*
 	private BomBubble BBubble;
 	/**
 	 * A new bubble is initiated, to be used through the class.
-	 */
+	 *
 	@Before
 	public void setUp() {
 		this.BBubble = new BomBubble();
@@ -21,7 +22,7 @@ public class BomBubbleTest {
 	
 	/**
 	 * Test if the MichaelBay Bubble is correctly instantiated
-	 */
+	 *
 	@Test
 	public void testBomBubble() {
 		assertEquals(Color.CYAN, BBubble.getColor());
@@ -29,11 +30,12 @@ public class BomBubbleTest {
 	
 	/**
 	 * Test whether the defaults of a bubble are instantiated correctly.
-	 */
+	 *
 	@Test
 	public void testDefaults() {
 		assertEquals(32, BBubble.getWidth());
 		assertEquals(32, BBubble.getHeight());
 		assertEquals(TextureID.STONEBUBBLE, BBubble.getTexture());
 	}
+	*/
 }

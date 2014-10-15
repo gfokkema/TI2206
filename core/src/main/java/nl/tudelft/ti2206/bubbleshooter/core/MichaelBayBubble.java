@@ -6,7 +6,7 @@ public class MichaelBayBubble extends Bubble {
 	private static final long serialVersionUID = -7975696762542618100L;
 
 	public MichaelBayBubble() {
-		super(BubbleColors.MAGENTA.getColor(), new MichaelBayBehaviour());
+		super(BubbleType.MICHAELBAYBUBBLE, new MichaelBayBehaviour());
 	}
 	
 	/**

@@ -11,7 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
 				FileBoardFactoryTest.class,
 				MPBoardFactoryTest.class,
 				SoundEngineTest.class,
-				ZenBoardFactoryTest.class })
+				ZenBoardFactoryTest.class 
+				})
 public class EngineTests {
 
 }

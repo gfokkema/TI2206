@@ -1,12 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
-import java.util.Random;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -17,70 +15,34 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class Bubble extends BSDrawable implements Serializable {
+public abstract class Bubble extends BSDrawable implements Serializable {
 	private static final long serialVersionUID = -3647601554787437036L;
-	
-	public enum BubbleColors {
-		RED(Color.RED),
-		GREEN(Color.GREEN),
-		BLUE(Color.BLUE),
-		PURPLE(Color.PURPLE),
-		YELLOW(Color.YELLOW),
-		ORANGE(Color.ORANGE),
-		PINK(Color.PINK),
-		WHITE(Color.WHITE),
+
+	public enum BubbleType {
+		COLOURBUBBLE ("C"),
+		BOMBUBBLE ("B"),
+		STONEBUBBLE ("S"),
+		MICHAELBAYBUBBLE ("M");
 		
-		GRAY(Color.GRAY),
-		MAGENTA(Color.MAGENTA),
-		CYAN(Color.CYAN),
-		MAROON(Color.MAROON),
-		NAVY(Color.NAVY),
-		OLIVE(Color.OLIVE),
-		CLEAR(Color.CLEAR);
-		
-		private Color color;
-		private BubbleColors(Color color) {
-			this.color = color;
+		private String notation;
+		private BubbleType(String n) {
+			this.notation = n;
 		}
 		
-		public Color getColor() {
-			return color;
+		public String getNotation() {
+			return this.notation;
 		}
 	}
-
-	protected int color;
-	protected Circle bounds;
-	protected BubbleBehaviour behaviour;
 	
-	/**
-	 * Instantiate a new Bubble, with a Random color.
-	 */
-	public Bubble() {
-		this(new BubbleBehaviour());
-	}
-
-	/**
-	 * Instantiate a new Bubble, with the given color.
-	 * This function is for testing purposes, therefore
-	 * it's protected and can only be used in the same package.
-	 * @param c - the Color of the Bubble.
-	 */
-	public Bubble(Color c) {
-		this(c, new BubbleBehaviour());
-	}
+	Circle bounds;
+	BubbleBehaviour behaviour;
+	BubbleType type;
 	
-	public Bubble(BubbleBehaviour b) {
-		this.color = Color.rgba8888(getRandomColor());
+	public Bubble(BubbleType type, BubbleBehaviour b) {
+		this.type = type;
 		this.behaviour = b;
 		this.bounds = new Circle();
 	}
-	
-	public Bubble(Color c, BubbleBehaviour b) {
-		this.color = Color.rgba8888(c);
-		this.behaviour = b;
-		this.bounds = new Circle();
-	}
-	
 
 	/**
 	 * Check if this Bubble collides with b.
@@ -108,16 +70,7 @@ public class Bubble extends BSDrawable implements Serializable {
 	public void setPosition(Vector2 position) {
 		bounds.set(position, bounds.radius);
 	}
-		
-	/**
-	 * Pick a ColorValue at random.
-	 * @return a randomly chosen ColorValue.
-	 */
-	protected Color getRandomColor() {
-		BubbleColors[] colors = BubbleColors.values();
-		return colors[(new Random()).nextInt(5)].getColor();
-	}
-	
+			
 	/**
 	 * Get the bounding {@link Circle} of this {@link Bubble}.
 	 * @return	{@link Circle} that bounds this bubble
@@ -146,6 +99,10 @@ public class Bubble extends BSDrawable implements Serializable {
 	
 	public BubbleBehaviour getBehaviour() {
 		return this.behaviour;
+	}
+	
+	public BubbleType getType() {
+		return this.type;
 	}
 
 	/**
@@ -184,12 +141,4 @@ public class Bubble extends BSDrawable implements Serializable {
 		return 32;
 	}
 	
-	/**
-	 * Return the color of this {@link Bubble}.
-	 * @return color of this {@link Bubble}.
-	 */
-	@Override
-	public Color getColor() {
-		return new Color(color);
-	}
 }

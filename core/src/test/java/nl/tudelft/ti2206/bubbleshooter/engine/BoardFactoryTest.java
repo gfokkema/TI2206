@@ -14,8 +14,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class BoardFactoryTest {
+	/*
 	private ZenBoardFactory factory;
 	
 	@Mock Board board;

@@ -18,8 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
 				StoneBubbleTest.class,
 				BomBehaviourTest.class,
 				MichaelBayBehaviourTest.class,
-				StoneBubbleBehaviourTest.class,
-				WildcardBubbleTest.class})
+				StoneBubbleBehaviourTest.class})
 public class CoreTests {
 
 }

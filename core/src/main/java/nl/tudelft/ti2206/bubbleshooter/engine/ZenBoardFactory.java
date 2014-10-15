@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.ColourBubble;
 
 public class ZenBoardFactory extends BoardFactory {
 	@Override
@@ -13,7 +14,7 @@ public class ZenBoardFactory extends BoardFactory {
 		boards.add(b);
 		
 		for (int i = 0; i < 40; i++) {
-			add(b, i);
+			add(b, new ColourBubble(), i);
 		}
 		
 		return boards;

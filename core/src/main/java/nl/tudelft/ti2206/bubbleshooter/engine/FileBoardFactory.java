@@ -11,10 +11,10 @@ import java.util.List;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.ColourBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.ColourBubble.BubbleColors;
 import nl.tudelft.ti2206.bubbleshooter.core.MichaelBayBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.StoneBubble;
-import nl.tudelft.ti2206.bubbleshooter.core.WildcardBubble;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
 
 import com.badlogic.gdx.Gdx;
 
@@ -69,29 +69,29 @@ public abstract class FileBoardFactory extends BoardFactory {
 		Board board = new Board(dim[0], dim[1]);
 		for (int y = 1; y < lines.length; y++) {
 			lines[y] = lines[y].trim();
-			String[] bubbles = lines[y].split("  ");
+			String[] bubbles = lines[y].split("   ");
 			
 			for (int x = 0; x < bubbles.length && x < board.getWidth() - (y - 1) % 2; x++) {
-				Bubble b = parse(bubbles[x]);
-				if (b != null)
-					add(board, parse(bubbles[x]), x, y - 1);
+				Bubble b = parseType(bubbles[x]);
+				if (b != null) add(board, b, x, y - 1);
 			}
 		}
 		return board;
 	}
 	
-	protected Bubble parse(String bubble) {
-		if (bubble.equals("--")) return null;
+	protected Bubble parseType(String bubble) {
+		if (bubble.equals("---")) return null;
 		
-		int value = Integer.parseInt(bubble);
-		switch(value) {
-			case 5: return new Bubble();
-			case 6: return new StoneBubble();
-			case 7: return new WildcardBubble();
-			case 8: return new BomBubble();
-			case 9: return new MichaelBayBubble();
-			default:	if (value < 5) return new Bubble(BubbleColors.values()[value].getColor());
-						else return null;
+		String sub = bubble.substring(0, 1);
+		switch(sub) {
+			case "C":	return parseColourBubble(bubble.substring(1, 3));
+			//ad more cases
+			default:	return null;
 		}	
+	}
+	protected Bubble parseColourBubble(String substring) {
+		int version = Integer.parseInt(substring);
+		BubbleColors[] colours = BubbleColors.values();
+		return new ColourBubble(colours[version].getColor());
 	}
 }

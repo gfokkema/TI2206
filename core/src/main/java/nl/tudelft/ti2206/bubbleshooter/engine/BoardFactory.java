@@ -23,7 +23,8 @@ public abstract class BoardFactory {
 		board.add(b, i, j);
 	}
 	
-	protected void add(Board board, int idx) {
-		board.add(new Bubble(), idx);
+	protected void add(Board board, Bubble b, int idx) {
+		board.add(b, idx);
 	}
+	
 }

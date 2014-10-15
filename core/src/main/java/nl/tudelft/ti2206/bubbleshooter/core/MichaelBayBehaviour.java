@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public class MichaelBayBehaviour extends BubbleBehaviour {
+public class MichaelBayBehaviour implements BubbleBehaviour {
 	@Override
 	public Collection<Bubble> getGroup(Board board, int id) {
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();

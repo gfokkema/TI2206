@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
+import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleType;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
@@ -214,7 +214,7 @@ public class Board extends BSDrawable implements Serializable {
 	}
 
 	public Collection<Bubble> getGroup(int idx) {
-		return bubbles.get(idx).getBehaviour().remove(this, idx);
+		return bubbles.get(idx).getBehaviour().getGroup(this, idx);
 	}
 	
 	public HashMap<Integer, Bubble> getColourGroup(Bubble bubble) {
@@ -231,11 +231,9 @@ public class Board extends BSDrawable implements Serializable {
 			
 	public HashMap<Integer, Bubble> getPowerUps() {
 		HashMap<Integer, Bubble> powerUps = new HashMap<Integer, Bubble>();
-		for(Entry<Integer, Bubble> b : bubbles.entrySet()) {		
-			for(int i = 5; i<BubbleColors.values().length; i++) {
-				if(BubbleColors.values()[i].getColor().equals(b.getValue().getColor())) {
-					powerUps.put(b.getKey(), b.getValue());
-				}
+		for(Entry<Integer, Bubble> b : bubbles.entrySet()) {
+			if(b.getValue().getType() != BubbleType.COLOURBUBBLE) {
+				powerUps.put(b.getKey(), b.getValue());
 			}
 		}
 		return powerUps;

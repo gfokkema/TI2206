@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public class BomBehaviour extends BubbleBehaviour{
-	@Override
+public class BomBehaviour implements BubbleBehaviour{
+	
 	public Collection<Bubble> getGroup(Board board, int id) {
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();
 		group.put(id, board.getBubbles().get(id));
@@ -16,7 +16,6 @@ public class BomBehaviour extends BubbleBehaviour{
 		return group.values();
 	}
 	
-	@Override
 	public Collection<Bubble> remove(Board board, int id, int projectile) {
 		if(board.getGrid().adjacent(id, projectile)) {
 			return getGroup(board,id);

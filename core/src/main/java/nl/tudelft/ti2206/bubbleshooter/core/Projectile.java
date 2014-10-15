@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class Projectile extends Bubble {
+public class Projectile extends ColourBubble {
 	private static final long serialVersionUID = -4014441150246221939L;
 	Vector2 direction;
 	int velocity;
