@@ -31,11 +31,17 @@ public class HighScore implements Comparable<HighScore> {
 	public String getName() {
 		return name;
 	}
-	
+	/**
+	 * A method to set the score.
+	 * @param score
+	 */
 	public void setHighScore(int score){
 		this.highscore = score;
 	}
-	
+	/**
+	 * A method to set the name.
+	 * @param name
+	 */
 	public void setName(String name){
 		this.name = name;
 	}
