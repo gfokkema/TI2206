@@ -23,7 +23,14 @@ public class HighScore {
 	public String getName() {
 		return name;
 	}
-
+	
+	public void setName(String Name){
+		this.name = Name;
+	}
+	
+	public void setScore(int score){
+		this.highscore = score;
+	}
 
 
 }

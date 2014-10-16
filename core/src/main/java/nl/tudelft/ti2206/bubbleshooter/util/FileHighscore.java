@@ -29,14 +29,16 @@ public class FileHighscore {
 			HighScoreComparator comparator = new HighScoreComparator();
 			scores.sort(comparator);
 		}
+		
+		public void loadScoreFile() {
+			// TODO Auto-generated method stub
+			
+		}
 		private void updateScoreFile() {
 			// TODO Auto-generated method stub
 			
 		}
 
-		public void loadScoreFile() {
-			// TODO Auto-generated method stub
-			
-		}
+
 
 }
