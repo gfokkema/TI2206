@@ -15,6 +15,6 @@ public class BomBubble extends Bubble{
 	 */
 	@Override
 	public TextureID getTexture() {
-		return TextureID.STONEBUBBLE;
+		return TextureID.BOMBUBBLE;
 	}
 }

@@ -1,4 +1,6 @@
 --- BEGIN --- BUBBLESHOOTER OF DOOM ---
 8x15
 C00   C00   C00   C00   C00   C00   C00   C00
+   C01   C01   C01   C01   C01   C01   C01   
+---   ---   B00   ---   ---   S00   ---   ---
 --- END --- BUBBLESHOOTER OF DOOM ---

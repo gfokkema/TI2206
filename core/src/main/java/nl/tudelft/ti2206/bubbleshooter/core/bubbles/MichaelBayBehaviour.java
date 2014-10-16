@@ -20,7 +20,7 @@ public class MichaelBayBehaviour implements BubbleBehaviour {
 	
 	public int remove(Board board, int id, int projectile) {
 		if(board.getGrid().adjacent(id, projectile)) {
-			return board.removeAll(getGroup(board, id));
+			return 3 * board.removeAll(getGroup(board, id));
 		}
 		return 0;
 	}

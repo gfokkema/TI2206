@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble.BubbleColors;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.MichaelBayBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.StoneBubble;
 
 import com.badlogic.gdx.Gdx;
 
@@ -79,16 +82,15 @@ public abstract class FileBoardFactory extends BoardFactory {
 	protected Bubble parseType(String bubble) {
 		if (bubble.equals("---")) return null;
 		
-		String sub = bubble.substring(0, 1);
-		switch(sub) {
-			case "C":	return parseColourBubble(bubble.substring(1, 3));
-			//ad more cases
+		String type = bubble.substring(0, 1);
+		int version = Integer.parseInt(bubble.substring(1,3));
+		switch(type) {
+			case "C":	return new ColourBubble(BubbleColors.values()[version].getColor());
+			case "B":	return new BomBubble();
+			case "S":	return new StoneBubble();
+			case "M":	return new MichaelBayBubble();
 			default:	return null;
 		}	
 	}
-	protected Bubble parseColourBubble(String substring) {
-		int version = Integer.parseInt(substring);
-		BubbleColors[] colours = BubbleColors.values();
-		return new ColourBubble(colours[version].getColor());
-	}
+	
 }

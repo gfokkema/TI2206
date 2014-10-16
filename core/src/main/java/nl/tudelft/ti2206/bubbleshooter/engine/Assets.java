@@ -34,6 +34,8 @@ public class Assets {
 		BORDER,
 		BUBBLE,
 		STONEBUBBLE,
+		MICHAELBAYBUBBLE,
+		BOMBUBBLE,
 		BUTTON,
 		CANNON
 	}

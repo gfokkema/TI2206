@@ -74,6 +74,8 @@ public class BubbleShooter extends Game {
 		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
 		assets.load(TextureID.CANNON, "cannon.png");
 		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
+		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
+		assets.load(TextureID.MICHAELBAYBUBBLE, "MichaelBayBubble.png");
 		assets.finish();
 		
 		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);

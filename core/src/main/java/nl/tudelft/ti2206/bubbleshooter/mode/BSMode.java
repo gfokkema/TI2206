@@ -3,7 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
@@ -17,7 +16,6 @@ import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -94,8 +92,9 @@ public abstract class BSMode implements EndingObserver {
 
 			if(new_idx != -1) {			
 				//score += 3 * board.removeAll(board.getGroup(new_idx));
-				for(Entry<Integer, Bubble> b: board.getBubbles().entrySet()) {
-					score += b.getValue().getBehaviour().remove(board, b.getKey(), new_idx);
+				for(int i = 0; i < board.getGrid().getHeight() * board.getGrid().getWidth() -1; i++) {
+					if(board.getBubbles().get(i) != null) 
+						score += board.getBubbles().get(i).getBehaviour().remove(board, i, new_idx);
 				}
 
 				Collection<Bubble> disconnected = board.getDisconnectedGroup();

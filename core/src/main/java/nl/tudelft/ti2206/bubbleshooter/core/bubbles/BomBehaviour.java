@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -19,7 +18,7 @@ public class BomBehaviour implements BubbleBehaviour{
 	
 	public int remove(Board board, int id, int projectile) {
 		if(board.getGrid().adjacent(id, projectile)) {
-			return 3* board.removeAll(getGroup(board,id));
+			return 3 * board.removeAll(getGroup(board,id));
 		}
 		return 0;
 	}

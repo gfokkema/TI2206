@@ -15,7 +15,7 @@ public class MichaelBayBubble extends Bubble {
 	 */
 	@Override
 	public TextureID getTexture() {
-		return TextureID.STONEBUBBLE;
+		return TextureID.MICHAELBAYBUBBLE;
 	}
 
 }
