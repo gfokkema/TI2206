@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;

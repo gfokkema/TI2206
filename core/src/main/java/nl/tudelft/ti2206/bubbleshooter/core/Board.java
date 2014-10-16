@@ -9,9 +9,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble.BubbleColors;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble.BubbleColors;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;

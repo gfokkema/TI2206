@@ -5,7 +5,7 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 
 import org.junit.Before;
 import org.junit.Test;

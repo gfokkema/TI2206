@@ -9,14 +9,15 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
-import nl.tudelft.ti2206.bubbleshooter.core.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.MPBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
 

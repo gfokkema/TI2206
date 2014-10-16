@@ -3,7 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.engine;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 /**
  * This is the abstract factory for our Boards.
  */

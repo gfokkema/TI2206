@@ -7,8 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 import org.junit.Before;
 import org.junit.Test;

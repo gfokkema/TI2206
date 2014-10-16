@@ -2,10 +2,10 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
 
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
-import nl.tudelft.ti2206.bubbleshooter.engine.BSDrawable;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
