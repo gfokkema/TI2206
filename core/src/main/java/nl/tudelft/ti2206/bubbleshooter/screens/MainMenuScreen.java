@@ -43,21 +43,16 @@ public class MainMenuScreen extends AbstractScreen {
 		super(game);
 		
 		TextButtonStyle style = new TextButtonStyle(game.assets.get(SkinID.BUTTON),
-												game.assets.get(SkinID.BUTTON),
 													game.assets.get(SkinID.BUTTON),
-												game.font);
-	//	TextButtonStyle style = new TextButtonStyle();
-	//	style.font = game.font;
-		style.over = game.assets.get(SkinID.BUTTON);
+													game.assets.get(SkinID.BUTTON),
+													game.font);
+		game.assets.get(SkinID.BUTTON).setMinWidth(200);
+		game.assets.get(SkinID.BUTTON).setMinHeight(50);
 		
 		TextButton singleplay = new TextButton("Single player", style);
-		singleplay.setSize(1, 1);
 		TextButton multiplay = new TextButton("Multi player", style);
-		multiplay.setScale(0,5);
 		TextButton options = new TextButton("Options", style);
-		options.setSize(1, 1);
 		TextButton quit = new TextButton("Quit", style);
-		quit.setSize(1, 1);
 		
 		singleplay.addListener(new ClickListener() {
 			@Override
