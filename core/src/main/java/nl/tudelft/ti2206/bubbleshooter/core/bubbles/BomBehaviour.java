@@ -18,6 +18,7 @@ public class BomBehaviour implements BubbleBehaviour{
 	 * Gets the {@link Collection<{@link Bubble}>} of {@link Bubble}s to be removed.
 	 * @return the {@link Collection<{@link Bubble}>} of all adjacent bubbles.
 	 */
+	@Override
 	public Collection<Bubble> getGroup(Board board, int id) {
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();
 		group.put(id, board.getBubbles().get(id));
@@ -30,6 +31,7 @@ public class BomBehaviour implements BubbleBehaviour{
 	/**
 	 * Removes the {@link Bubble}s caught within the blast of the {@link BomBubble}.
 	 */
+	@Override
 	public int remove(Board board, int id, int projectile) {
 		if(board.getGrid().adjacent(id, projectile)) {
 			return 3 * board.removeAll(getGroup(board,id));

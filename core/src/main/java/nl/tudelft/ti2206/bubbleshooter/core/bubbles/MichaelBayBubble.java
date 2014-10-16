@@ -2,9 +2,18 @@ package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
+/**
+ * The {@link MichaelBayBubble} is a special {@link Bubble} that nukes the whole level.
+ * It contains its own {@link BubbleBehaviour} and {@link TextureID}.
+ * @author group-15
+ *
+ */
 public class MichaelBayBubble extends Bubble {
 	private static final long serialVersionUID = -7975696762542618100L;
 
+	/**
+	 * MichaelBayBubble constructor.
+	 */
 	public MichaelBayBubble() {
 		super(new MichaelBayBehaviour());
 	}

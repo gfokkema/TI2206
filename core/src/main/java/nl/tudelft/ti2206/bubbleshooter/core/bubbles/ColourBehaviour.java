@@ -16,6 +16,7 @@ public class ColourBehaviour implements BubbleBehaviour {
 	 * @return {@link Collection} of {@link Bubble} objects adjacent to id and
 	 *         with the same color
 	 */
+	@Override
 	public Collection<Bubble> getGroup(Board board, int id) {
 		// Search for bubbles of the same color
 		HashMap<Integer, Bubble> bubbleGroup = new HashMap<Integer, Bubble>();
@@ -31,6 +32,7 @@ public class ColourBehaviour implements BubbleBehaviour {
 	 * Calls the other {@link #remove(Board, int)}
 	 * Determines if the id is equal to the projectile.
 	 */
+	@Override
 	public int remove(Board board, int id, int projectile) {
 		if(id == projectile) return remove(board,projectile);
 		else return 0;
