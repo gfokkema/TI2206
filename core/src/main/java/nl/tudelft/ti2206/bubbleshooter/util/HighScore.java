@@ -31,6 +31,14 @@ public class HighScore implements Comparable<HighScore> {
 	public String getName() {
 		return name;
 	}
+	
+	public void setHighScore(int score){
+		this.highscore = score;
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
 	/**
 	 * A method to help to SortedSet to become sorted.
 	 */
