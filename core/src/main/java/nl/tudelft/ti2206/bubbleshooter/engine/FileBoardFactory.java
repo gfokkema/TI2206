@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.BomBubble;
-import nl.tudelft.ti2206.bubbleshooter.core.Bubble;
-import nl.tudelft.ti2206.bubbleshooter.core.ColourBubble;
-import nl.tudelft.ti2206.bubbleshooter.core.ColourBubble.BubbleColors;
-import nl.tudelft.ti2206.bubbleshooter.core.MichaelBayBubble;
-import nl.tudelft.ti2206.bubbleshooter.core.StoneBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble.BubbleColors;
 
 import com.badlogic.gdx.Gdx;
 

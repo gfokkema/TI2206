@@ -5,10 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({	BasicConditionTest.class,
-				EndingConditionTest.class,
-				SinglePlayerModeTest.class,
-				TimerConditionTest.class })
+@SuiteClasses({ SinglePlayerModeTest.class })
 public class ModeTests {
 
 }

@@ -5,20 +5,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({	BackgroundTest.class,
-				BoardTest.class,
-				BubbleTest.class,
-				BubbleBehaviourTest.class,
-				CannonTest.class,
-				GridTest.class,
-				PointerTest.class,
-				ProjectileTest.class,
-				MichaelBayBubbleTest.class,
-				BomBubbleTest.class,
-				StoneBubbleTest.class,
-				BomBehaviourTest.class,
-				MichaelBayBehaviourTest.class,
-				StoneBubbleBehaviourTest.class})
+@SuiteClasses({ BackgroundTest.class, BoardTest.class, CannonTest.class,
+		GridTest.class, PointerTest.class })
 public class CoreTests {
 
 }

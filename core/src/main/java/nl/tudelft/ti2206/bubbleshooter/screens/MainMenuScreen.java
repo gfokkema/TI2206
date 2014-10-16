@@ -5,11 +5,11 @@ import java.time.Duration;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.mode.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.TimerCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.TimerCondition;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

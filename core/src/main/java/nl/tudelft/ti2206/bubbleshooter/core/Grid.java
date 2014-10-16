@@ -2,6 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
 
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+
 import com.badlogic.gdx.math.Vector2;
 
 /**

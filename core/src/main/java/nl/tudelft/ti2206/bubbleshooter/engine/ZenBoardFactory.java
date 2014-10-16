@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.ColourBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
 
 public class ZenBoardFactory extends BoardFactory {
 	@Override
