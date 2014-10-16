@@ -17,6 +17,7 @@ import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -93,9 +94,8 @@ public abstract class BSMode implements EndingObserver {
 
 			if(new_idx != -1) {			
 				//score += 3 * board.removeAll(board.getGroup(new_idx));
-
 				for(Entry<Integer, Bubble> b: board.getBubbles().entrySet()) {
-					score += board.removeAll(b.getValue().getBehaviour().remove(board, b.getKey(), new_idx));
+					score += b.getValue().getBehaviour().remove(board, b.getKey(), new_idx);
 				}
 
 				Collection<Bubble> disconnected = board.getDisconnectedGroup();
