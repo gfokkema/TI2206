@@ -6,7 +6,7 @@ public class BomBubble extends Bubble{
 	private static final long serialVersionUID = -684963823755680038L;
 
 	public BomBubble() {
-		super(BubbleType.BOMBUBBLE, new BomBehaviour());
+		super(new BomBehaviour());
 	}
 	
 	/**

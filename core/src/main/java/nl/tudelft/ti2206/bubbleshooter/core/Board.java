@@ -10,7 +10,6 @@ import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble.BubbleType;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
@@ -229,17 +228,7 @@ public class Board extends BSDrawable implements Serializable {
 		}
 		return instance;
 	}
-			
-	public HashMap<Integer, Bubble> getPowerUps() {
-		HashMap<Integer, Bubble> powerUps = new HashMap<Integer, Bubble>();
-		for(Entry<Integer, Bubble> b : bubbles.entrySet()) {
-			if(b.getValue().getType() != BubbleType.COLOURBUBBLE) {
-				powerUps.put(b.getKey(), b.getValue());
-			}
-		}
-		return powerUps;
-	}
-	
+		
 	public Grid getGrid() {
 		return grid;
 	}

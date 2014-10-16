@@ -17,29 +17,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public abstract class Bubble extends BSDrawable implements Serializable {
 	private static final long serialVersionUID = -3647601554787437036L;
-
-	public enum BubbleType {
-		COLOURBUBBLE ("C"),
-		BOMBUBBLE ("B"),
-		STONEBUBBLE ("S"),
-		MICHAELBAYBUBBLE ("M");
-		
-		private String notation;
-		private BubbleType(String n) {
-			this.notation = n;
-		}
-		
-		public String getNotation() {
-			return this.notation;
-		}
-	}
 	
 	Circle bounds;
 	BubbleBehaviour behaviour;
-	BubbleType type;
-	
-	public Bubble(BubbleType type, BubbleBehaviour b) {
-		this.type = type;
+
+	public Bubble(BubbleBehaviour b) {
 		this.behaviour = b;
 		this.bounds = new Circle();
 	}
@@ -101,10 +83,6 @@ public abstract class Bubble extends BSDrawable implements Serializable {
 		return this.behaviour;
 	}
 	
-	public BubbleType getType() {
-		return this.type;
-	}
-
 	/**
 	 * Returns the texture of this {@link Bubble}.
 	 * @return {@link #Texture} of this {@link Bubble}.

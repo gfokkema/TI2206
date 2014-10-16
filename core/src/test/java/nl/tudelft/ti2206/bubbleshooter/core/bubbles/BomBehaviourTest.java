@@ -54,7 +54,7 @@ public class BomBehaviourTest {
 	public void testRemoveNotAdjacent() {
 		// stub again for the other route
 		Mockito.when(grid.adjacent(anyInt(), anyInt())).thenReturn(false);
-		assertEquals(new ArrayList<Bubble>(), BBehaviour.remove(board, 2, 3));
+		assertEquals(0, BBehaviour.remove(board, 2, 3));
 	}
 
 }

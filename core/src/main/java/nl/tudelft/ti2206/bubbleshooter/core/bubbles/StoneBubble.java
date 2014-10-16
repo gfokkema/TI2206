@@ -6,7 +6,7 @@ public class StoneBubble extends Bubble{
 	private static final long serialVersionUID = 6207069265433663286L;
 	
 	public StoneBubble() {
-		super(BubbleType.STONEBUBBLE, new StoneBehaviour());
+		super(new StoneBehaviour());
 	}
 	
 	/**

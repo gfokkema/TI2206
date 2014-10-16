@@ -27,16 +27,16 @@ public class ColourBehaviour implements BubbleBehaviour {
 		return bubbleGroup.values();
 	}
 	
-	public Collection<Bubble> remove(Board board, int id, int projectile) {
+	public int remove(Board board, int id, int projectile) {
 		if(id == projectile) return remove(board,projectile);
-		else return null;
+		else return 0;
 	}
 	
-	public Collection<Bubble> remove(Board board, int projectile) {
+	public int remove(Board board, int projectile) {
 		Collection<Bubble> sameColors = getGroup(board, projectile);
 		if (sameColors.size() >= 3) {
-			return sameColors;
-		} else return null;
+			return board.removeAll(sameColors);
+		} else return 0;
 	}
 	
 	private boolean testColor(Board board, Integer current, Integer neighbour) {

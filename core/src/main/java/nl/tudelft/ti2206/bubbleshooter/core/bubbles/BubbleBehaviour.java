@@ -5,7 +5,8 @@ import java.util.Collection;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 
 public interface BubbleBehaviour {	
+	
 	Collection<Bubble> getGroup(Board board, int id);
 	
-	Collection<Bubble> remove(Board board, int id, int projectile);
+	int remove(Board board, int id, int projectile);
 }

@@ -13,8 +13,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Projectile extends ColourBubble {
 	private static final long serialVersionUID = -4014441150246221939L;
-	Vector2 direction;
-	int velocity;
+	private Vector2 direction;
+	private int velocity;
 
 	/**
 	 * Create a {@link Projectile} with the specified {@link Circle} bounding
@@ -29,6 +29,9 @@ public class Projectile extends ColourBubble {
 	 *            the speed of this {@link Bubble}
 	 */
 	public Projectile(Circle bounds, Vector2 direction, int velocity) {
+		//only temporarily
+		super(5);
+		
 		this.setBounds(bounds);
 		this.direction = direction;
 		this.velocity = velocity;

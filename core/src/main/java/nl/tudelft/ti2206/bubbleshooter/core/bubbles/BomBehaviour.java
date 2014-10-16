@@ -17,10 +17,10 @@ public class BomBehaviour implements BubbleBehaviour{
 		return group.values();
 	}
 	
-	public Collection<Bubble> remove(Board board, int id, int projectile) {
+	public int remove(Board board, int id, int projectile) {
 		if(board.getGrid().adjacent(id, projectile)) {
-			return getGroup(board,id);
+			return 3* board.removeAll(getGroup(board,id));
 		}
-		return new ArrayList<Bubble>();
+		return 0;
 	}
 }

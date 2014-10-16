@@ -22,8 +22,7 @@ public class ColourBubble extends Bubble{
 		CYAN(Color.CYAN),
 		MAROON(Color.MAROON),
 		NAVY(Color.NAVY),
-		OLIVE(Color.OLIVE),
-		CLEAR(Color.CLEAR);
+		OLIVE(Color.OLIVE);
 		
 		private Color color;
 		private BubbleColors(Color color) {
@@ -38,8 +37,13 @@ public class ColourBubble extends Bubble{
 	protected Color colour;
 	
 	public ColourBubble() {
-		super(BubbleType.COLOURBUBBLE, new ColourBehaviour());
-		this.colour = getRandomColor();
+		super(new ColourBehaviour());
+		this.colour = getRandomColor(BubbleColors.values().length -1);
+	}
+	
+	public ColourBubble(int colourLimit) {
+		super(new ColourBehaviour());
+		this.colour = getRandomColor(colourLimit);
 	}
 		
 	/**
@@ -49,7 +53,7 @@ public class ColourBubble extends Bubble{
 	 * @param c - the Color of the Bubble.
 	 */
 	public ColourBubble(Color colour) {
-		super(BubbleType.COLOURBUBBLE, new ColourBehaviour());
+		super(new ColourBehaviour());
 		this.colour = colour;
 	}
 		
@@ -57,9 +61,9 @@ public class ColourBubble extends Bubble{
 	 * Pick a ColorValue at random.
 	 * @return a randomly chosen ColorValue.
 	 */
-	protected Color getRandomColor() {
+	protected Color getRandomColor(int colourLimit) {
 		BubbleColors[] colors = BubbleColors.values();
-		return colors[(new Random()).nextInt(5)].getColor();
+		return colors[(new Random()).nextInt(colourLimit)].getColor();
 	}
 	
 	/**

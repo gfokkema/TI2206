@@ -54,7 +54,7 @@ public class MichaelBayBehaviourTest {
 	public void testRemoveNotAdjacent() {
 		// stub again for the other route
 		Mockito.when(grid.adjacent(anyInt(), anyInt())).thenReturn(false);
-		assertEquals(new ArrayList<Bubble>(), MBBehaviour.remove(board, 2, 3));
+		assertEquals(0, MBBehaviour.remove(board, 2, 3));
 	}
 
 
