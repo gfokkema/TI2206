@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
@@ -41,8 +42,13 @@ public class MainMenuScreen extends AbstractScreen {
 	public MainMenuScreen(BubbleShooter game) {
 		super(game);
 		
+		//TextButtonStyle style = new TextButtonStyle(game.assets.get(SkinID.BUTTON),
+		//											game.assets.get(SkinID.BUTTON),
+		//											game.assets.get(SkinID.BUTTON),
+		//											game.font);
 		TextButtonStyle style = new TextButtonStyle();
 		style.font = game.font;
+		style.over = game.assets.get(SkinID.BUTTON);
 		
 		TextButton singleplay = new TextButton("Single player", style);
 		TextButton multiplay = new TextButton("Multi player", style);

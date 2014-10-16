@@ -6,11 +6,19 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 /**
  * This class manages all external assets that Bubbleshooter uses.
  */
 public class Assets {
+	/**
+	 * This enum contains all types of {@link Skin} assets.
+	 */
+	public enum SkinID {
+		BUTTON
+	}
 	/**
 	 * This enum contains all types of {@link Music} assets.
 	 */
@@ -34,7 +42,6 @@ public class Assets {
 		BORDER,
 		BUBBLE,
 		STONEBUBBLE,
-		BUTTON,
 		CANNON
 	}
 	
@@ -47,23 +54,28 @@ public class Assets {
 	EnumMap<MusicID, String> music;
 	EnumMap<SoundID, String> sounds;
 	EnumMap<TextureID, String> textures;
+	EnumMap<SkinID, String> skins;
+	Skin skin;
 	
 	/**
 	 * Initializes the {@link Assets} class that holds all external assets for Bubbleshooter.
 	 * @param loader	the {@link AssetManager} to use
 	 */
-	private Assets(AssetManager loader) {
+	private Assets(AssetManager loader, Skin skin) {
 		this.loader = loader;
+		this.skin = skin;
+		
 		music = new EnumMap<MusicID, String>(MusicID.class);
 		sounds = new EnumMap<SoundID, String>(SoundID.class);
 		textures = new EnumMap<TextureID, String>(TextureID.class);
+		skins = new EnumMap<SkinID, String>(SkinID.class);
 	}
 
 	/**
 	 * Initializes the {@link Assets} class that holds all external assets for Bubbleshooter.
 	 */
 	private Assets() {
-		this(new AssetManager());
+		this(new AssetManager(), new Skin());
 	}
 	
 	/**
@@ -95,6 +107,15 @@ public class Assets {
 	}
 	
 	/**
+	 * Retrieve the {@link Drawable} that is linked to {@link SkinID}.
+	 * @param id	{@link SkinID} representing the {@link Drawable} for the UI skin
+	 * @return		{@link Drawable} linked to {@link SkinID}
+	 */
+	public Drawable get(SkinID id) {
+		return skin.getDrawable(skins.get(id));
+	}
+	
+	/**
 	 * Retrieve the {@link Sound} that is linked to {@link SoundID}.
 	 * @param id	{@link SoundID} representing the {@link Sound} type
 	 * @return		{@link Sound} linked to {@link SoundID}
@@ -111,7 +132,7 @@ public class Assets {
 	public Texture get(TextureID id) {
 		return loader.get(textures.get(id));
 	}
-
+	
 	/**
 	 * Loads a file and links it to a {@link MusicID}.
 	 * @param id		{@link MusicID} to link this file with
@@ -120,6 +141,16 @@ public class Assets {
 	public void load(MusicID id, String handle) {
 		music.put(id, handle);
 		loader.load(handle, Music.class);
+	}
+	
+	/**
+	 * Loads a file and links it to a {@link SkinID}.
+	 * @param id		{@link SkinID} to link this file with
+	 * @param handle	handle for the {@link Drawable} file
+	 */
+	public void load(SkinID id, String handle) {
+		skins.put(id, handle);
+		loader.load(handle, Texture.class);
 	}
 	
 	/**
@@ -147,5 +178,8 @@ public class Assets {
 	 */
 	public void finish() {
 		loader.finishLoading();
+		skins.values().forEach((String handle) -> {
+			skin.add(handle, loader.get(handle), Texture.class);
+		});
 	}
 }
