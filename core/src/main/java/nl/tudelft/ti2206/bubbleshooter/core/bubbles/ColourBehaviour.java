@@ -27,11 +27,21 @@ public class ColourBehaviour implements BubbleBehaviour {
 		return bubbleGroup.values();
 	}
 	
+	/**
+	 * Calls the other {@link #remove(Board, int)}
+	 * Determines if the id is equal to the projectile.
+	 */
 	public int remove(Board board, int id, int projectile) {
 		if(id == projectile) return remove(board,projectile);
 		else return 0;
 	}
 	
+	/**
+	 * Removes the group gotten from {@link #getGroup(Board, int)}.
+	 * @param board the {@link Board} used.
+	 * @param projectile the {@link Projectile} on the {@link Grid}.
+	 * @return amount of {@link Bubble}s are removed.
+	 */
 	public int remove(Board board, int projectile) {
 		Collection<Bubble> sameColors = getGroup(board, projectile);
 		if (sameColors.size() >= 3) {
@@ -39,6 +49,13 @@ public class ColourBehaviour implements BubbleBehaviour {
 		} else return 0;
 	}
 	
+	/**
+	 * Tests colors of the neighbouring {@link Bubble}s.
+	 * @param board the {@link Board} used.
+	 * @param current the current {@link Bubble}.
+	 * @param neighbour the neighbouring {@link Bubble}.
+	 * @return true if the current is equal to the neighbour.
+	 */
 	private boolean testColor(Board board, Integer current, Integer neighbour) {
 		return board.getBubbles().get(current).getColor().equals(board.getBubbles().get(neighbour).getColor());
 	}

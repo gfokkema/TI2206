@@ -3,24 +3,30 @@ package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 import java.io.Serializable;
 
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * The bubble class creates bubbles used for the bubbles on the play-field.
- * Bubbles on the field have an orientation (six directions - because of the hexagonal board).
- * Furthermore bubbles possess a color and bounding circle (the latter can be compared to a "hit-box").
+ * The {@link Bubble} class is an abstraction of {@link Bubble}s used for the {@link Bubble}s on the play-field.
+ * {@link Bubble}s on the field have an orientation (six directions - because of the hexagonal board).
+ * Furthermore bubbles possess a position and bounding circle (the latter can be compared to a "hit-box").
  * @author group-15
  *
  */
 public abstract class Bubble extends BSDrawable implements Serializable {
 	private static final long serialVersionUID = -3647601554787437036L;
 	
+	/**
+	 * Initialization of behaviour and bounds.
+	 */
 	Circle bounds;
 	BubbleBehaviour behaviour;
 
+	/**
+	 * Bubbles contain a {@link BubbleBehaviour} and bounds.
+	 * @param b
+	 */
 	public Bubble(BubbleBehaviour b) {
 		this.behaviour = b;
 		this.bounds = new Circle();
@@ -81,15 +87,6 @@ public abstract class Bubble extends BSDrawable implements Serializable {
 	
 	public BubbleBehaviour getBehaviour() {
 		return this.behaviour;
-	}
-	
-	/**
-	 * Returns the texture of this {@link Bubble}.
-	 * @return {@link #Texture} of this {@link Bubble}.
-	 */
-	@Override
-	public TextureID getTexture() {
-		return TextureID.BUBBLE;
 	}
 	
 	/**

@@ -2,11 +2,27 @@ package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
 import java.util.Random;
 
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+
 import com.badlogic.gdx.graphics.Color;
 
+/**
+ * The 'regular' bubbles that only possess a color.
+ * They come in different flavors:
+ * - Red 
+ * - Blue
+ * - Green
+ * - Yellow
+ * - Pink
+ * @author group-15
+ *
+ */
 public class ColourBubble extends Bubble{
 	private static final long serialVersionUID = 746300724926407976L;
 
+	/**
+	 * Enum of all the different possible colors.
+	 */
 	public enum BubbleColors {
 		RED(Color.RED),
 		GREEN(Color.GREEN),
@@ -36,11 +52,18 @@ public class ColourBubble extends Bubble{
 	
 	protected Color colour;
 	
+	/**
+	 * ColourBubble constructor.
+	 */
 	public ColourBubble() {
 		super(new ColourBehaviour());
 		this.colour = getRandomColor(BubbleColors.values().length -1);
 	}
 	
+	/**
+	 * Secondary ColorBubble constructor.
+	 * @param colourLimit the amount of colors a bubble may be.
+	 */
 	public ColourBubble(int colourLimit) {
 		super(new ColourBehaviour());
 		this.colour = getRandomColor(colourLimit);
@@ -70,8 +93,18 @@ public class ColourBubble extends Bubble{
 	 * Return the color of this {@link Bubble}.
 	 * @return color of this {@link Bubble}.
 	 */
+	@Override
 	public Color getColor() {
 		return colour;
+	}
+	
+	/**
+	 * Returns the texture of this {@link Bubble}.
+	 * @return {@link #Texture} of this {@link Bubble}.
+	 */
+	@Override
+	public TextureID getTexture() {
+		return TextureID.BUBBLE;
 	}
 	
 }

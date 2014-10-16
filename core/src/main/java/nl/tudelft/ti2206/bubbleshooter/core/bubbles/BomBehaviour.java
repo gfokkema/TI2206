@@ -6,7 +6,18 @@ import java.util.Map.Entry;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 
-public class BomBehaviour implements BubbleBehaviour{	
+/**
+ * This class describes the {@link BubbleBehaviour} of the {@link BomBubble}.
+ * All adjacent {@link Bubble}s to the {@link BomBubble} will be removed when hit.
+ * @author group-15
+ *
+ */
+public class BomBehaviour implements BubbleBehaviour{
+	
+	/**
+	 * Gets the {@link Collection<{@link Bubble}>} of {@link Bubble}s to be removed.
+	 * @return the {@link Collection<{@link Bubble}>} of all adjacent bubbles.
+	 */
 	public Collection<Bubble> getGroup(Board board, int id) {
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();
 		group.put(id, board.getBubbles().get(id));
@@ -16,6 +27,9 @@ public class BomBehaviour implements BubbleBehaviour{
 		return group.values();
 	}
 	
+	/**
+	 * Removes the {@link Bubble}s caught within the blast of the {@link BomBubble}.
+	 */
 	public int remove(Board board, int id, int projectile) {
 		if(board.getGrid().adjacent(id, projectile)) {
 			return 3 * board.removeAll(getGroup(board,id));
