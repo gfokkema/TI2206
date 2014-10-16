@@ -1,13 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-
-/**
- * 
- * @author group-15
- *
- */
-public class HighScore {
+public class HighScore implements Comparable<HighScore> {
 	private int highscore;
 	private String name;
 	
@@ -24,6 +17,8 @@ public class HighScore {
 		return name;
 	}
 
-
-
+	@Override
+	public int compareTo(HighScore o) {
+		return Integer.compare(this.highscore, o.highscore);
+	}
 }
