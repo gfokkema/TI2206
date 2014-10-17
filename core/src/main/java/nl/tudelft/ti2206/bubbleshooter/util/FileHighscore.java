@@ -1,16 +1,12 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import com.badlogic.gdx.Gdx;
 
 /**
  * A class to read or write to the highscores file.
@@ -58,8 +54,12 @@ public class FileHighscore {
 		return filename;
 	}
 
-	public void setFileName(String filename) {
-		this.filename = filename;
+	public void setFileName(String filename) {		
+		StringBuilder sb = new StringBuilder();
+		sb.append(filename+".txt");
+		this.filename = sb.toString();
+		
+		
 	}
 
 	/**
