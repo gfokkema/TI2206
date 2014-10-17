@@ -1,10 +1,14 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
+
+import java.io.Serializable;
+
 /**
  * A class which creates a object for the HighScoresFile.
  * @author group-15
  *
  */
-public class HighScore implements Comparable<HighScore> {
+public class HighScore implements Comparable<HighScore>, Serializable {
+	private static final long serialVersionUID = 2603273380851092688L;
 	private int highscore;
 	private String name;
 	

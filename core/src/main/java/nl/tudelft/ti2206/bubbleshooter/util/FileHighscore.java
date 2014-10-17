@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.SortedSet;
@@ -37,10 +39,10 @@ public class FileHighscore {
 	public SortedSet<HighScore> loadScoreFile() {
 		ObjectInputStream inputStream = null;
 		try {
-			inputStream = new ObjectInputStream(Gdx.files.internal("HighScores.txt").read());
+			inputStream = new ObjectInputStream(new FileInputStream("HighScores.txt"));
 			scores = (SortedSet<HighScore>) inputStream.readObject();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 
 		} finally {
 			try {
@@ -48,7 +50,7 @@ public class FileHighscore {
 					inputStream.close();
 				}
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		return scores;
@@ -59,11 +61,11 @@ public class FileHighscore {
 	private void updateScoreFile() {
 		ObjectOutputStream outputStream = null;
 		try {
-			outputStream = new ObjectOutputStream(Gdx.files.internal("HighScores.txt").write(false));
+			outputStream = new ObjectOutputStream(new FileOutputStream("HighScores.txt"));
 			outputStream.writeObject(scores);
 
 		} catch (Exception e) {
-			System.out.println("erorroeorero");
+			e.printStackTrace();
 		} finally {
 			try {
 				if (outputStream != null) {
@@ -71,7 +73,7 @@ public class FileHighscore {
 					outputStream.close();
 				}
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
