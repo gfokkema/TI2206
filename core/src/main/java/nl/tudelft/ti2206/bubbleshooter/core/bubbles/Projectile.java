@@ -1,5 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -36,7 +39,16 @@ public class Projectile extends ColourBubble {
 		this.direction = direction;
 		this.velocity = velocity;
 	}
-
+	
+	public Projectile(ArrayList<Color> colour, Circle bounds, Vector2 direction, int velocity) {
+		//only temporarily
+		super(colour);
+		
+		this.setBounds(bounds);
+		this.direction = direction;
+		this.velocity = velocity;
+	}
+	
 	/**
 	 * Moves the {@link Projectile} along it's trajectory specified by
 	 * direction.

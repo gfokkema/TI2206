@@ -228,6 +228,15 @@ public class Board extends BSDrawable implements Serializable {
 		}
 		return instance;
 	}
+	
+	public ArrayList<Color> getColoursAvailable() {
+		ArrayList<Color> colours = new ArrayList<Color>();
+		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
+			//WHITE is a black color
+			if(!colours.contains(b.getValue().getColor()) && b.getValue().getColor() != Color.WHITE) colours.add(b.getValue().getColor());
+		}
+		return colours;
+	}
 		
 	public Grid getGrid() {
 		return grid;

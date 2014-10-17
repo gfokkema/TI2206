@@ -82,16 +82,15 @@ public abstract class BSMode implements EndingObserver {
 			end.check(this.board);
 			return;
 		}
+		
 
 		projectile.move();
 		//NOTE: collides has side-effects!
 		if (board.collides(projectile)) {
 			int new_idx = board.add(projectile);
 			setProjectile(cannon.getProjectile());
-			projectile.move();
 
-			if(new_idx != -1) {			
-				//score += 3 * board.removeAll(board.getGroup(new_idx));
+			if(new_idx != -1) {
 				for(int i = 0; i < board.getGrid().getHeight() * board.getGrid().getWidth() -1; i++) {
 					if(board.getBubbles().get(i) != null) 
 						score += board.getBubbles().get(i).getBehaviour().remove(board, i, new_idx);

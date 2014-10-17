@@ -1,9 +1,11 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 /**
@@ -68,6 +70,11 @@ public class ColourBubble extends Bubble{
 		super(new ColourBehaviour());
 		this.colour = getRandomColor(colourLimit);
 	}
+	
+	public ColourBubble(ArrayList<Color> colours) {
+		super(new ColourBehaviour());
+		this.colour = getRandomColor(colours);
+	}
 		
 	/**
 	 * Instantiate a new Bubble, with the given color.
@@ -87,6 +94,11 @@ public class ColourBubble extends Bubble{
 	protected Color getRandomColor(int colourLimit) {
 		BubbleColors[] colors = BubbleColors.values();
 		return colors[(new Random()).nextInt(colourLimit)].getColor();
+	}
+	
+	protected Color getRandomColor(ArrayList<Color> colours) {
+		Gdx.app.log("colours", colours.toString());
+		return colours.get(new Random().nextInt(colours.size()));
 	}
 	
 	/**
