@@ -1,9 +1,12 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -11,20 +14,27 @@ import com.badlogic.gdx.Gdx;
 
 /**
  * A class to read or write to the highscores file.
+ * 
  * @author group-15
  *
  */
 public class FileHighscore {
 	private SortedSet<HighScore> scores;
+	private String filename = "HighScores.txt";
 	
 	public FileHighscore() {
 		scores = new TreeSet<HighScore>();
 	}
+	
+
 
 	/**
 	 * A method to add a HighScore object
-	 * @param name  The name given by the player
-	 * @param score The score of the player
+	 * 
+	 * @param name
+	 *            The name given by the player
+	 * @param score
+	 *            The score of the player
 	 */
 	public void addScore(String name, int score) {
 		loadScoreFile();
@@ -32,14 +42,37 @@ public class FileHighscore {
 		updateScoreFile();
 	}
 
+	public void createNewFile() {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(getFileName(), "UTF-8");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		writer.close();
+	}
+
+	public String getFileName() {
+
+		return filename;
+	}
+
+	public void setFileName(String filename) {
+		this.filename = filename;
+	}
+
 	/**
-	 * A method to load the highscore file in, which closes the inputreader after the file is read.
+	 * A method to load the highscore file in, which closes the inputreader
+	 * after the file is read.
 	 */
 	@SuppressWarnings("unchecked")
 	public SortedSet<HighScore> loadScoreFile() {
 		ObjectInputStream inputStream = null;
 		try {
-			inputStream = new ObjectInputStream(new FileInputStream("HighScores.txt"));
+			inputStream = new ObjectInputStream(new FileInputStream(
+					getFileName()));
+
 			scores = (SortedSet<HighScore>) inputStream.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,13 +88,17 @@ public class FileHighscore {
 		}
 		return scores;
 	}
+
 	/**
-	 *  A method which writes back to the highscores file, and closes the outputreader after.
+	 * A method which writes back to the highscores file, and closes the
+	 * outputreader after.
 	 */
 	private void updateScoreFile() {
 		ObjectOutputStream outputStream = null;
 		try {
-			outputStream = new ObjectOutputStream(new FileOutputStream("HighScores.txt"));
+
+			outputStream = new ObjectOutputStream(new FileOutputStream(
+					getFileName()));
 			outputStream.writeObject(scores);
 
 		} catch (Exception e) {
@@ -70,6 +107,7 @@ public class FileHighscore {
 			try {
 				if (outputStream != null) {
 					outputStream.flush();
+					outputStream.reset();
 					outputStream.close();
 				}
 			} catch (Exception e) {
