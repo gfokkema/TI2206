@@ -7,6 +7,7 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
@@ -27,33 +28,20 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  * @author group-15
  *
  */
-public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver, GameObserver {
+public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 	BubbleShooter game;
 	BSMode game_mode;
-	private Stage stage;
-	private Table table;
-	private Label timerField;
-	private Label scoreField;
+	GameUI ui;
 
 	/**
 	 * Constructor of BubbleShooterScreen
 	 * Creates a cannon, board and game.
 	 * @param game	the parent {@link BubbleShooter} instance
 	 */
-	public BubbleShooterScreen(BubbleShooter game, BSMode game_mode) {
-		this.stage = new Stage(new ScreenViewport());
-		this.table = new Table();
-		table.setFillParent(true);
-		stage.addActor(table);
-		LabelStyle style = new LabelStyle(game.font, Color.WHITE);
-		timerField = new Label("Time left:", style);
-		scoreField = new Label("Score:", style);
-		table.add(timerField).expandX().expandY().top().left();
-		table.add(scoreField).expandX().expandY().top().right();
-
+	public BubbleShooterScreen(BubbleShooter game, BSMode game_mode, GameUI ui) {
 		this.game = game;
 		this.game_mode = game_mode;
-		game_mode.addStatsObserver(this);
+		this.ui = ui;
 		game_mode.addGameObserver(this);
 	}
 
@@ -72,8 +60,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver,
 			c.forEach((BSDrawable d) -> draw(o, d));
 		});
 		game.batch.end();
-		stage.act();
-		stage.draw();
+		ui.draw();
 	}
 	
 	/**
@@ -108,23 +95,6 @@ public class BubbleShooterScreen extends ScreenAdapter implements StatsObserver,
 						drawable.getWidth(), drawable.getHeight(),
 						1, 1,
 						drawable.getRotation());
-	}
-
-	/**
-	 * Draw the timer onto the playing-field.
-	 */
-	@Override
-	public void drawTimer(Duration duration) {
-		String timeString = "Time left: " + duration.toMinutes() + ":" + (duration.getSeconds()%60);
-		timerField.setText(timeString);
-	}
-
-	/**
-	 * Draw the score onto the playing-field.
-	 */
-	@Override
-	public void drawScore(int score) {
-		scoreField.setText("Score:" + score);
 	}
 
 	@Override

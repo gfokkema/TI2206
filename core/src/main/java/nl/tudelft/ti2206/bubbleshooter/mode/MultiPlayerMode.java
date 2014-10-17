@@ -18,8 +18,10 @@ import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.MPBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.ui.StatsBar;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
+import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -40,6 +42,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
 	private EndingCondition condition2;
+	private StatsObserver opponentStatsObs;
 	private OpponentAdapter opponentEndingObs;
 
 	/**
@@ -112,6 +115,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		super.update(deltaTime);
 		if (board2 == null) return;
 		condition2.check(this.board2);
+		this.opponentStatsObs.updateScore(111);
 		this.writeCondition(end);
 	}
 
@@ -209,5 +213,10 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof BSDrawable) writeDrawable((BSDrawable) o);
+	}
+
+	public void addOpponentStatsObserver(StatsObserver multi) {
+		opponentStatsObs = multi;
+		condition2.addStatsObserver(opponentStatsObs);
 	}
 }

@@ -31,7 +31,7 @@ public class TimerCondition extends EndingDecorator {
 			this.lost();
 			return;
 		}
-		statsObs.drawTimer(gameLength.minus(deltaTime));
+		statsObs.updateTimer(gameLength.minus(deltaTime));
 		super.check(board);
 	}
 

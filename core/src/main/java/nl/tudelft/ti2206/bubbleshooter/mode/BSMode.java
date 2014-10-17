@@ -102,7 +102,7 @@ public abstract class BSMode implements EndingObserver {
 				board.removeAll(disconnected);
 
 				score += 3 * disconnected.size();
-				this.statsObs.drawScore(score);				
+				this.statsObs.updateScore(score);
 			}
 		}
 		end.check(this.board);

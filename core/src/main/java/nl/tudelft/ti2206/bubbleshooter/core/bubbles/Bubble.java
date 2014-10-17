@@ -50,7 +50,7 @@ public class Bubble extends BSDrawable implements Serializable {
 
 	protected int color;
 	protected Circle bounds;
-	protected BubbleBehaviour behaviour;
+	protected transient BubbleBehaviour behaviour;
 	
 	/**
 	 * Instantiate a new Bubble, with a Random color.
