@@ -51,6 +51,7 @@ public class MainMenuScreen extends AbstractScreen {
 		
 		TextButton singleplay = new TextButton("Single player", style);
 		TextButton multiplay = new TextButton("Multi player", style);
+		TextButton highscore = new TextButton("Highscores", style);
 		TextButton options = new TextButton("Options", style);
 		TextButton quit = new TextButton("Quit", style);
 		
@@ -71,6 +72,13 @@ public class MainMenuScreen extends AbstractScreen {
 				game.setScreen(new MultiPlayerScreen(game));
 			}
 		});
+		highscore.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				game.engine.play(SoundID.BUTTON);
+				game.setScreen(new HighScoreScreen(game));
+			}
+		});
 		options.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -88,6 +96,7 @@ public class MainMenuScreen extends AbstractScreen {
 		
 		table.add(singleplay).expandX().center().row();
 		table.add(multiplay).expandX().center().row();
+		table.add(highscore).expandX().center().row();
 		table.add(options).expandX().center().row();
 		table.add(quit).expandX().center().row();
 	}

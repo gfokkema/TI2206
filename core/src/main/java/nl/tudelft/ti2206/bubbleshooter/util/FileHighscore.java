@@ -1,10 +1,11 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.SortedSet;
+import java.util.TreeSet;
+
+import com.badlogic.gdx.Gdx;
 
 /**
  * A class to read or write to the highscores file.
@@ -13,6 +14,10 @@ import java.util.SortedSet;
  */
 public class FileHighscore {
 	private SortedSet<HighScore> scores;
+	
+	public FileHighscore() {
+		scores = new TreeSet<HighScore>();
+	}
 
 	/**
 	 * A method to add a HighScore object
@@ -29,13 +34,11 @@ public class FileHighscore {
 	 * A method to load the highscore file in, which closes the inputreader after the file is read.
 	 */
 	@SuppressWarnings("unchecked")
-	public void loadScoreFile() {
+	public SortedSet<HighScore> loadScoreFile() {
 		ObjectInputStream inputStream = null;
 		try {
-			inputStream = new ObjectInputStream(new FileInputStream(
-					"HighScores.txt"));
+			inputStream = new ObjectInputStream(Gdx.files.internal("HighScores.txt").read());
 			scores = (SortedSet<HighScore>) inputStream.readObject();
-
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
@@ -48,7 +51,7 @@ public class FileHighscore {
 				System.out.println(e.getMessage());
 			}
 		}
-
+		return scores;
 	}
 	/**
 	 *  A method which writes back to the highscores file, and closes the outputreader after.
@@ -56,8 +59,7 @@ public class FileHighscore {
 	private void updateScoreFile() {
 		ObjectOutputStream outputStream = null;
 		try {
-			outputStream = new ObjectOutputStream(new FileOutputStream(
-					"HighScores.txt"));
+			outputStream = new ObjectOutputStream(Gdx.files.internal("HighScores.txt").write(false));
 			outputStream.writeObject(scores);
 
 		} catch (Exception e) {
