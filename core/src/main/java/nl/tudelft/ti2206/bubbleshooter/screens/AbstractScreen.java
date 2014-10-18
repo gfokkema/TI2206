@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
@@ -40,15 +42,15 @@ public class AbstractScreen extends ScreenAdapter {
 		this.game = game;
 		this.stage = new Stage(new ScreenViewport());
 		this.table = new Table();
-		this.buttonStyle = new TextButtonStyle(	game.assets.get(SkinID.BUTTON),
-												game.assets.get(SkinID.BUTTON),
-												game.assets.get(SkinID.BUTTON),
+		this.buttonStyle = new TextButtonStyle(	Assets.getAssets().get(SkinID.BUTTON),
+												Assets.getAssets().get(SkinID.BUTTON),
+												Assets.getAssets().get(SkinID.BUTTON),
 												game.font);
 		this.labelStyle = new LabelStyle(game.font, Color.WHITE);
 		this.textStyle = new TextFieldStyle(game.font, Color.WHITE, null, null, null);
 		table.debug();
 		
-		TextureRegion region = new TextureRegion(game.assets.get(TextureID.BACKGROUND));
+		TextureRegion region = new TextureRegion(Assets.getAssets().get(TextureID.BACKGROUND));
 		TextureRegionDrawable drawable = new TextureRegionDrawable(region);
 		table.background(drawable);
 		table.setFillParent(true);
@@ -61,7 +63,7 @@ public class AbstractScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(stage);
-		game.engine.play(MusicID.MENU);
+		SoundEngine.getSoundEngine().play(MusicID.MENU);
 	}
 	
 	/**
@@ -70,7 +72,7 @@ public class AbstractScreen extends ScreenAdapter {
 	 */
 	@Override
 	public void hide() {
-		game.engine.pause();
+		SoundEngine.getSoundEngine().pause();
 	}
 	
 	/**

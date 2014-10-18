@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -41,29 +42,29 @@ public class OptionsScreen extends AbstractScreen {
 		volup.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
-				game.engine.setBGMVolume(game.engine.getBGMVolume() + volumeStep);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().setBGMVolume(SoundEngine.getSoundEngine().getBGMVolume() + volumeStep);
 			}
 		});
 		voldown.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
-				game.engine.setBGMVolume(game.engine.getBGMVolume() - volumeStep);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().setBGMVolume(SoundEngine.getSoundEngine().getBGMVolume() - volumeStep);
 			}
 		});
 		sfxup.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
-				game.engine.setSFXVolume(game.engine.getSFXVolume() + volumeStep);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().setSFXVolume(SoundEngine.getSoundEngine().getSFXVolume() + volumeStep);
 			}
 		});
 		sfxdown.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
-				game.engine.setSFXVolume(game.engine.getSFXVolume() - volumeStep);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().setSFXVolume(SoundEngine.getSoundEngine().getSFXVolume() - volumeStep);
 			}
 		});
 		

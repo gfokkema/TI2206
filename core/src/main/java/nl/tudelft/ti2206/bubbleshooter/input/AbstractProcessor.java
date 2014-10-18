@@ -1,10 +1,13 @@
 package nl.tudelft.ti2206.bubbleshooter.input;
 
-import static nl.tudelft.ti2206.bubbleshooter.BubbleShooter.keyDownBindings;
-import static nl.tudelft.ti2206.bubbleshooter.BubbleShooter.keyUpBindings;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Input.Keys;
 
 /**
  * This class processes input from a game.
@@ -12,6 +15,21 @@ import com.badlogic.gdx.InputAdapter;
  * A singleplayerprocessor or hotseatedprocessor should be derived from this class.
  */
 public abstract class AbstractProcessor extends InputAdapter {
+	private static Map<Integer, Function<AbstractProcessor, Boolean>> keyDownBindings
+		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
+	private static Map<Integer, Function<AbstractProcessor, Boolean>> keyUpBindings
+		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
+
+	// Initialize the keybindings.
+	static {
+		keyDownBindings.put(Keys.LEFT, AbstractProcessor::cannonLeft);
+		keyDownBindings.put(Keys.RIGHT, AbstractProcessor::cannonRight);
+		keyDownBindings.put(Keys.SPACE, AbstractProcessor::cannonShoot);
+	
+		keyUpBindings.put(Keys.LEFT, AbstractProcessor::cannonStopLeft);
+		keyUpBindings.put(Keys.RIGHT, AbstractProcessor::cannonStopRight);
+	}
+	
 	protected BSMode mode;
 
 	/**

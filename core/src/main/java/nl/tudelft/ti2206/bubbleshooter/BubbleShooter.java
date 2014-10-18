@@ -1,23 +1,16 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.input.AbstractProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.ScreenLogger;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,26 +27,10 @@ public class BubbleShooter extends Game {
 	 * Initialize a spritebatch and bitmapfont for later use.
 	 * Assign the initial music being used
 	 */
-	public Assets assets;
 	public BitmapFont font;
 	public FileHighscore scores;
 	public MainMenuScreen mms;
-	public SoundEngine engine;
 	public SpriteBatch batch;
-	public static Map<Integer, Function<AbstractProcessor, Boolean>> keyDownBindings
-		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
-	public static Map<Integer, Function<AbstractProcessor, Boolean>> keyUpBindings
-		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
-
-	// Initialize the keybindings.
-	static {
-		keyDownBindings.put(Keys.LEFT, AbstractProcessor::cannonLeft);
-		keyDownBindings.put(Keys.RIGHT, AbstractProcessor::cannonRight);
-		keyDownBindings.put(Keys.SPACE, AbstractProcessor::cannonShoot);
-
-		keyUpBindings.put(Keys.LEFT, AbstractProcessor::cannonStopLeft);
-		keyUpBindings.put(Keys.RIGHT, AbstractProcessor::cannonStopRight);
-	}
 
 	/**
 	 * Create the spritebatch and bitmapfont.
@@ -61,12 +38,11 @@ public class BubbleShooter extends Game {
 	 */
 	@Override
 	public void create() {
-		assets = Assets.getAssets();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		engine = new SoundEngine(assets);
 		Logger.getLogger().addLog(new ScreenLogger());
 	
+		Assets assets = Assets.getAssets();
 		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
 		assets.load(SkinID.BUTTON, "brown_button.png");

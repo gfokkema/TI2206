@@ -25,18 +25,20 @@ public class SoundEngineTest {
 	@Mock Music music_game, music_menu;
 	@Mock Sound sound_bubble, sound_button;
 
-	private SoundEngine engine;
+	private SoundEngine engine = SoundEngine.getSoundEngine();
 
 	/**
 	 * Set up our mocks and our {@link SoundEngine}.
 	 */
 	@Before
 	public void setUp() {
+		engine.reset();
+		engine.setAsset(assets);
+		
 		Mockito.when(assets.get(MusicID.GAME)).thenReturn(music_game);
 		Mockito.when(assets.get(MusicID.MENU)).thenReturn(music_menu);
 		Mockito.when(assets.get(SoundID.BUBBLE)).thenReturn(sound_bubble);
 		Mockito.when(assets.get(SoundID.BUTTON)).thenReturn(sound_button);
-		engine = new SoundEngine(assets);
 	}
 
 	/**

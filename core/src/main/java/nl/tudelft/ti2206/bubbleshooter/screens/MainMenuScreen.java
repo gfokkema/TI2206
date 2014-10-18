@@ -5,6 +5,7 @@ import java.time.Duration;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
@@ -51,7 +52,7 @@ public class MainMenuScreen extends AbstractScreen {
 		singleplay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
 				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
@@ -64,28 +65,28 @@ public class MainMenuScreen extends AbstractScreen {
 		multiplay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				game.setScreen(new MultiPlayerScreen(game));
 			}
 		});
 		highscore.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				game.setScreen(new HighScoreScreen(game));
 			}
 		});
 		options.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				game.setScreen(new OptionsScreen(game));
 			}
 		});
 		quit.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				Gdx.app.exit();
 			}
 		});

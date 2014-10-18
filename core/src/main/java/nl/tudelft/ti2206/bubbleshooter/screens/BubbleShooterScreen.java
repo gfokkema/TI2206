@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
@@ -60,7 +62,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 	 */
 	@Override
 	public void show() {
-		 game.engine.play(MusicID.GAME);
+		SoundEngine.getSoundEngine().play(MusicID.GAME);
 	}
 	
 	/**
@@ -81,7 +83,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 		Vector2 origin = drawable.getOrigin();
 		
 		game.batch.setColor(drawable.getColor());
-		game.batch.draw(new TextureRegion(game.assets.get(drawable.getTexture())),
+		game.batch.draw(new TextureRegion(Assets.getAssets().get(drawable.getTexture())),
 						offset.x + position.x, offset.y + position.y,
 						origin.x, origin.y,
 						drawable.getWidth(), drawable.getHeight(),

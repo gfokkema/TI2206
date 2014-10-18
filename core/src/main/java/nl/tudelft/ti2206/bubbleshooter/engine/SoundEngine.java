@@ -12,6 +12,7 @@ import com.badlogic.gdx.audio.Music;
  *
  */
 public class SoundEngine {
+	private static SoundEngine engine = null;
 	Assets assets;
 	Music m;
 	
@@ -22,7 +23,33 @@ public class SoundEngine {
 	 * Construct a {@link SoundEngine} using the given {@link Assets} manager.
 	 * @param assets	{@link Assets} manager containing all sounds
 	 */
-	public SoundEngine(Assets assets) {
+	private SoundEngine(Assets assets) {
+		this.assets = assets;
+	}
+	
+	private SoundEngine() {
+		this(Assets.getAssets());
+	}
+	
+	public static SoundEngine getSoundEngine() {
+		if (engine == null) engine = new SoundEngine();
+		
+		return engine;
+	}
+	
+	/**
+	 * This method will reset the whole {@link SoundEngine}.
+	 */
+	public void reset() {
+		engine = new SoundEngine();
+	}
+	
+	/**
+	 * Set the assets we should use.
+	 * This can be used for changing themes between levels.
+	 * @param loader	the {@link Assets} to use
+	 */
+	public void setAsset(Assets assets) {
 		this.assets = assets;
 	}
 	
