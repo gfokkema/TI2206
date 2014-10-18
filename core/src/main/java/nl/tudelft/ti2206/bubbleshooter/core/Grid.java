@@ -8,8 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * The type of {@link Grid} a board uses.
- * @author group-15
- *
  */
 public class Grid implements Serializable {
 	private static final long serialVersionUID = -3156876087711309439L;
@@ -17,6 +15,8 @@ public class Grid implements Serializable {
 	
 	/**
 	 * Constructs the mathematical representation of a grid.
+	 * @param width		the width of the grid in bubbles
+	 * @param height	the height of the grid in bubbles
 	 */
 	public Grid(int width, int height) {
 		this.width = width;

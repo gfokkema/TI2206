@@ -82,7 +82,8 @@ public class Cannon extends BSDrawable implements Serializable {
 		
 	/**
 	 * Shoot the actual bubble: pew pew!
-	 * @return	{@link Projectile} that has been shot
+	 * @param board	{@link Board} that this projectile will be shot at
+	 * @return		{@link Projectile} that has been shot
 	 */
 	public Projectile shoot(Board board) {
 		Projectile fired = projectile;
@@ -130,8 +131,8 @@ public class Cannon extends BSDrawable implements Serializable {
 	}
 
 	/**
-	 * Returns the texture of this {@link Cannon}.
-	 * @return {@link #Texture} of this {@link Cannon}
+	 * Returns the {@link TextureID} of this {@link Cannon}.
+	 * @return {@link TextureID} of this {@link Cannon}
 	 */
 	@Override
 	public TextureID getTexture() {

@@ -56,6 +56,7 @@ public class JoinGameScreen extends AbstractScreen {
 	
 	/**
 	 * Implements the escape key on your keyboard for our UI which brings the user back to the main menu.
+	 * @param delta	the time that has passed
 	 */
 	@Override
 	public void render(float delta) {
@@ -64,7 +65,7 @@ public class JoinGameScreen extends AbstractScreen {
 	}
 	/**
 	 * Implements our client socket wih datastreams.
-	 * @param ip
+	 * @param ip	the ip address we will connect to
 	 */
 	public void connect(String ip) {
 		try {

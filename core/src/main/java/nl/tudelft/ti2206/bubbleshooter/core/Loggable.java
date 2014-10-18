@@ -7,8 +7,6 @@ import java.util.Observable;
  * Loggable class.
  * Anything that extends this class will be made {@link Observable}.
  * Which means it will be "loggable".
- * @author group-15
- *
  */
 public abstract class Loggable extends Observable {
 	private long lastlog;
@@ -22,8 +20,8 @@ public abstract class Loggable extends Observable {
 	}
 	
 	/**
-	 * Notifies the {@link #Observer}.
-	 * @param msg the message it will give to the {@link #Observer}.
+	 * Notifies the Observers of this object.
+	 * @param msg the message it will give to the Observer.
 	 */
 	public void notifyObservers(String msg) {
 		if (hasChanged() && new Date().getTime() > lastlog + 100) {

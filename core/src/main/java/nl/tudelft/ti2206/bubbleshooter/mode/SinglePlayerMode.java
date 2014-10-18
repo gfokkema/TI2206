@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
@@ -28,7 +27,7 @@ public class SinglePlayerMode extends BSMode {
 	/**
 	 * Constructor for the Single-Player mode.
 	 * @param end the used {@link EndingCondition}.
-	 * @param board the used {@link Board}.
+	 * @param factory the used {@link BoardFactory} for the game.
 	 * @param cannon the used {@link Cannon}.
 	 */
 	public SinglePlayerMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
@@ -38,8 +37,9 @@ public class SinglePlayerMode extends BSMode {
 	}
 	
 	/**
-	 * Secondary constructor.
+	 * Constructor for the Single-Player mode with some default values.
 	 * @param end the used {@link EndingCondition}.
+	 * @param factory the used {@link BoardFactory} for the game.
 	 */
 	public SinglePlayerMode(EndingCondition end, BoardFactory factory) {
 		this(end, factory, new Cannon(160,15));
@@ -47,7 +47,8 @@ public class SinglePlayerMode extends BSMode {
 	}
 
 	/**
-	 * Gets the drawables for the Single-Player mode.
+	 * Gets the drawables for the multiplayer-game.
+	 * @return a hash-map containing all the drawables.
 	 */
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {

@@ -182,9 +182,8 @@ public class Board extends BSDrawable implements Serializable {
 	/**
 	 * Remove all the {@link Bubble}s that are both in the given
 	 * {@link Collection} and on the grid.
-	 * 
-	 * @param bs
-	 *            The collection specifying the elements that should be removed.
+	 * @param bs	The collection specifying the elements that should be removed.
+	 * @return		the number of bubbles that have been removed
 	 */
 	public int removeAll(Collection<Bubble> bs) {
 		if(bs == null || bs.isEmpty()) return 0;

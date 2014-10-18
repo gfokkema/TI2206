@@ -9,8 +9,8 @@ public class Background extends BSDrawable {
 	private static final long serialVersionUID = 7891297852719385463L;
 
 	/**
-	 * Returns the Texture of the background.
-	 * @return the {@link #Texture} of the background.
+	 * Returns the {@link TextureID} of the background.
+	 * @return the {@link TextureID} of the background.
 	 */
 	@Override
 	public TextureID getTexture() {

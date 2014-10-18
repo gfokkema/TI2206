@@ -30,7 +30,9 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 	/**
 	 * Constructor of BubbleShooterScreen
 	 * Creates a cannon, board and game.
-	 * @param game	the parent {@link BubbleShooter} instance
+	 * @param game		the parent {@link BubbleShooter} instance
+	 * @param game_mode	the {@link BSMode} that will be used
+	 * @param ui		the {@link GameUI} that will be used
 	 */
 	public BubbleShooterScreen(BubbleShooter game, BSMode game_mode, GameUI ui) {
 		this.game = game;
@@ -41,6 +43,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 
 	/**
 	 * Render everything on the bubble shooter screen
+	 * @param delta	the time that has passed
 	 */
 	@Override
 	public void render (float delta) {
