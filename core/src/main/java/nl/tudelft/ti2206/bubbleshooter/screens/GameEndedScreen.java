@@ -1,12 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-
-import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 
 /**
  * The screen shown when the game has ended: lose/win.
@@ -23,11 +21,12 @@ public class GameEndedScreen extends AbstractScreen {
 	 */
 	public GameEndedScreen(BubbleShooter game, String message, int score) {
 		super(game);
-		LabelStyle labelstyle = new LabelStyle(game.font, Color.WHITE);
-		Label messageLabel = new Label(message, labelstyle);
-		Label scoreLabel = new Label("Your score: " + score, labelstyle);
-		Label info = new Label("Press ESC to return", labelstyle);
+		
+		Label messageLabel = new Label(message, labelStyle);
 		messageLabel.setScale(5);
+		Label scoreLabel = new Label("Your score: " + score, labelStyle);
+		Label info = new Label("Press ESC to return", labelStyle);
+		
 		table.add(messageLabel).expandX().center().row();
 		table.add(scoreLabel).expandX().center().row();
 		table.add(info).expandX().center().row();

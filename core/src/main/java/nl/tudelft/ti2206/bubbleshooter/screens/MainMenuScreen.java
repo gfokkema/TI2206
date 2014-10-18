@@ -4,7 +4,6 @@ import java.time.Duration;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
@@ -17,7 +16,6 @@ import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -44,18 +42,11 @@ public class MainMenuScreen extends AbstractScreen {
 	public MainMenuScreen(BubbleShooter game) {
 		super(game);
 		
-		TextButtonStyle style = new TextButtonStyle(game.assets.get(SkinID.BUTTON),
-													game.assets.get(SkinID.BUTTON),
-													game.assets.get(SkinID.BUTTON),
-													game.font);
-		game.assets.get(SkinID.BUTTON).setMinWidth(200);
-		game.assets.get(SkinID.BUTTON).setMinHeight(50);
-
-		TextButton singleplay = new TextButton("Single player", style);
-		TextButton multiplay = new TextButton("Multi player", style);
-		TextButton highscore = new TextButton("Highscores", style);
-		TextButton options = new TextButton("Options", style);
-		TextButton quit = new TextButton("Quit", style);
+		TextButton singleplay = new TextButton("Single player", buttonStyle);
+		TextButton multiplay = new TextButton("Multi player", buttonStyle);
+		TextButton highscore = new TextButton("Highscores", buttonStyle);
+		TextButton options = new TextButton("Options", buttonStyle);
+		TextButton quit = new TextButton("Quit", buttonStyle);
 
 		singleplay.addListener(new ClickListener() {
 			@Override

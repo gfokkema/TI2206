@@ -14,14 +14,10 @@ import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -40,22 +36,14 @@ public class JoinGameScreen extends AbstractScreen {
 	public JoinGameScreen(BubbleShooter game) {
 		super(game);
 		
-		LabelStyle labelstyle = new LabelStyle(game.font, Color.WHITE);
-		TextFieldStyle textstyle = new TextFieldStyle(game.font, Color.WHITE, null, null, null);
-		TextButtonStyle buttonstyle = new TextButtonStyle();
-		buttonstyle.font = game.font;
-		
-		Label label = new Label("Please enter the IP address of a server", labelstyle);
-		TextField text = new TextField("", textstyle);
-		TextButton connect = new TextButton("Connect", buttonstyle);
+		Label label = new Label("Please enter the IP address of a server", labelStyle);
+		TextField text = new TextField("", textStyle);
+		TextButton connect = new TextButton("Connect", buttonStyle);
 		
 		connect.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.engine.play(SoundID.BUTTON);
-				//game.setScreen(new BubbleShooterScreen(game));
-				
-				// FIXME: MAYBE MAKE THIS FAULT TOLERANT
 				connect(text.getText());
 			}
 		});
@@ -90,6 +78,7 @@ public class JoinGameScreen extends AbstractScreen {
 			System.out.println(e.getMessage());
 			Gdx.app.exit();
 		}
+		
 		EndingCondition basic = new BasicCondition();
 		EndingCondition belowLine = new BelowLineCondition(basic);
 		GameUIBuilder gub = new GameUIBuilder(game.font);

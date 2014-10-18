@@ -33,17 +33,13 @@ public class OptionsScreen extends AbstractScreen {
 	 */
 	public OptionsScreen(BubbleShooter game) {
 		super(game);
-		
-		LabelStyle labelstyle = new LabelStyle(game.font, Color.WHITE);
-		TextButtonStyle style = new TextButtonStyle();
-		style.font = game.font;
-		
-		Label vollabel = new Label("Change Volume", labelstyle);
-		TextButton volup = new TextButton("+", style);
-		TextButton voldown = new TextButton("-", style);
-		Label sfxlabel = new Label("Change SFX", labelstyle);
-		TextButton sfxup = new TextButton("+", style);
-		TextButton sfxdown = new TextButton("-", style);
+				
+		Label vollabel = new Label("Change Volume", labelStyle);
+		TextButton volup = new TextButton("+", buttonStyle);
+		TextButton voldown = new TextButton("-", buttonStyle);
+		Label sfxlabel = new Label("Change SFX", labelStyle);
+		TextButton sfxup = new TextButton("+", buttonStyle);
+		TextButton sfxdown = new TextButton("-", buttonStyle);
 		
 		volup.addListener(new ClickListener() {
 			@Override

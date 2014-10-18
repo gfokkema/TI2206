@@ -112,7 +112,10 @@ public class Assets {
 	 * @return		{@link Drawable} linked to {@link SkinID}
 	 */
 	public Drawable get(SkinID id) {
-		return skin.getDrawable(skins.get(id));
+		Drawable d = skin.getDrawable(skins.get(id));
+		d.setMinHeight(50);
+		d.setMinWidth(200);
+		return d;
 	}
 	
 	/**

@@ -2,14 +2,20 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -22,6 +28,9 @@ public class AbstractScreen extends ScreenAdapter {
 	protected BubbleShooter game;
 	protected Stage stage;
 	protected Table table;
+	protected TextButtonStyle buttonStyle;
+	protected LabelStyle labelStyle;
+	protected TextFieldStyle textStyle;
 	
 	/**
 	 * Sets up the buttons to be displayed.
@@ -31,6 +40,12 @@ public class AbstractScreen extends ScreenAdapter {
 		this.game = game;
 		this.stage = new Stage(new ScreenViewport());
 		this.table = new Table();
+		this.buttonStyle = new TextButtonStyle(	game.assets.get(SkinID.BUTTON),
+												game.assets.get(SkinID.BUTTON),
+												game.assets.get(SkinID.BUTTON),
+												game.font);
+		this.labelStyle = new LabelStyle(game.font, Color.WHITE);
+		this.textStyle = new TextFieldStyle(game.font, Color.WHITE, null, null, null);
 		table.debug();
 		
 		TextureRegion region = new TextureRegion(game.assets.get(TextureID.BACKGROUND));
@@ -85,5 +100,9 @@ public class AbstractScreen extends ScreenAdapter {
 	@Override
 	public void dispose() {
 		stage.dispose();
+	}
+	
+	public ButtonStyle getButtonStyle() {
+		return this.buttonStyle;
 	}
 }

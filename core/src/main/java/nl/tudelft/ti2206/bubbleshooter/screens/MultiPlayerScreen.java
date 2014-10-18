@@ -25,11 +25,8 @@ public class MultiPlayerScreen extends AbstractScreen {
 	public MultiPlayerScreen(BubbleShooter game) {
 		super(game);
 		
-		TextButtonStyle style = new TextButtonStyle();
-		style.font = game.font;
-		
-		TextButton host = new TextButton("Host a game", style);
-		TextButton join = new TextButton("Join a game", style);
+		TextButton host = new TextButton("Host a game", buttonStyle);
+		TextButton join = new TextButton("Join a game", buttonStyle);
 		
 		host.addListener(new ClickListener() {
 			@Override
