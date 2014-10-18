@@ -26,10 +26,6 @@ public class HighScoreScreen extends AbstractScreen {
 		Label label = new Label("These are the high scores for Arcade Mode.", labelStyle);
 		table.add(label).expandX().center().row();
 		
-		game.scores.addScore("Gerlof", 20);
-		game.scores.addScore("Adam", 100);
-		game.scores.addScore("Skip", 200);
-		
 		NavigableSet<HighScore> scores = game.scores.loadScoreFile().descendingSet();
 		Iterator<HighScore> it = scores.iterator();
 		while(it.hasNext()) {
