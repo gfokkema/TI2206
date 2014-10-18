@@ -67,7 +67,6 @@ public class ColourBubble extends Bubble{
 	}
 	
 	protected Color getRandomColor(ArrayList<Color> colours) {
-		Gdx.app.log("colours", colours.toString());
 		return colours.get(new Random().nextInt(colours.size()));
 	}
 	

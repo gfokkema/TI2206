@@ -6,6 +6,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +15,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-//@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class BoardFactoryTest {
-	/*
 	private ZenBoardFactory factory;
 	
 	@Mock Board board;
@@ -29,25 +29,27 @@ public class BoardFactoryTest {
 	
 	@Test
 	public void testAdd() {
-		factory.add(board, 0);
+		factory.add(board, new ColourBubble(), 0);
 		Mockito.verify(board).add(anyObject(), eq(0));
 		
-		factory.add(board, 0);
+		factory.add(board, new ColourBubble(), 0);
 		Mockito.verify(board, times(2)).add(anyObject(), eq(0));
 		
-		factory.add(board, 1);
+		factory.add(board, new ColourBubble(), 1);
 		Mockito.verify(board).add(anyObject(), eq(1));
 		
-		factory.add(board, 2);
+		factory.add(board, new ColourBubble(), 2);
 		Mockito.verify(board).add(anyObject(), eq(2));
 		
-		factory.add(board, 3);
+		factory.add(board, new ColourBubble(), 3);
 		Mockito.verify(board).add(anyObject(), eq(3));
 		
 		Mockito.verify(board, times(5)).add(anyObject(), anyInt());
 	}
 	
-	/*
+	/**
+	 * 
+	 */
 	@Test
 	public void testAddBubble() {
 		factory.add(board, bubble, 0, 0);
@@ -67,5 +69,4 @@ public class BoardFactoryTest {
 		
 		Mockito.verify(board, times(5)).add(anyObject(), anyInt(), anyInt());
 	}
-	*/
 }

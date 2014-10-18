@@ -3,6 +3,9 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Matchers.anyString;
+
+import java.util.ArrayList;
+
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
@@ -16,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -26,10 +30,12 @@ import com.badlogic.gdx.math.Vector2;
 public class CannonTest {
 	@Mock Texture tex;
 	@Mock AssetManager loader;
+	@Mock Board board;
 	@Mock Sound sound;
 	
 	private Cannon cannon;
 	private Assets assets;
+	private ArrayList<Color> available;
 
 	/**
 	 * Initialize our mock objects and the {@link Cannon}.
@@ -38,6 +44,9 @@ public class CannonTest {
 	public void setUp(){
 		assets = Assets.getAssets();
 		assets.setAssetManager(loader);
+		available = new ArrayList<Color>();
+		available.add(Color.BLUE);
+		Mockito.when(board.getColoursAvailable()).thenReturn(available);
 		Mockito.when(tex.getWidth()).thenReturn(20);
 		Mockito.when(tex.getWidth()).thenReturn(100);
 		Mockito.when(loader.get(anyString())).thenReturn(sound);
@@ -110,9 +119,9 @@ public class CannonTest {
 		ammo = cannon.projectile;
 		assertEquals(ammo, cannon.projectile);
 
-//		fired = cannon.shoot();
-//		assertEquals(fired, ammo);
-//		assertNotEquals(fired, cannon.projectile);
+		fired = cannon.shoot(board);
+		assertEquals(fired, ammo);
+		assertNotEquals(fired, cannon.projectile);
 	}
 
 	/**

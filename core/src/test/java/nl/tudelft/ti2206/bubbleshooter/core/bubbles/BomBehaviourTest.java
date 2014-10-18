@@ -3,13 +3,8 @@ package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
-
-import java.util.ArrayList;
-
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BomBehaviour;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 
 import org.junit.Before;
 import org.junit.Test;
