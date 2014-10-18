@@ -1,7 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.Iterator;
-import java.util.SortedSet;
+import java.util.NavigableSet;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
@@ -32,7 +32,7 @@ public class HighScoreScreen extends AbstractScreen {
 		filescores.addScore("Adam", 100);
 		filescores.addScore("Skip", 200);
 		
-		SortedSet<HighScore> scores = filescores.loadScoreFile();
+		NavigableSet<HighScore> scores = filescores.loadScoreFile().descendingSet();
 		Iterator<HighScore> it = scores.iterator();
 		while(it.hasNext()) {
 			HighScore score = it.next();

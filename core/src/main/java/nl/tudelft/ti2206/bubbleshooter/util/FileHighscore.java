@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.util.SortedSet;
+import java.util.NavigableSet;
 import java.util.TreeSet;
 
 /**
@@ -15,7 +15,7 @@ import java.util.TreeSet;
  *
  */
 public class FileHighscore {
-	private SortedSet<HighScore> scores;
+	private NavigableSet<HighScore> scores;
 	private String filename = "HighScores.txt";
 	
 	public FileHighscore() {
@@ -67,13 +67,13 @@ public class FileHighscore {
 	 * after the file is read.
 	 */
 	@SuppressWarnings("unchecked")
-	public SortedSet<HighScore> loadScoreFile() {
+	public NavigableSet<HighScore> loadScoreFile() {
 		ObjectInputStream inputStream = null;
 		try {
 			inputStream = new ObjectInputStream(new FileInputStream(
 					getFileName()));
 
-			scores = (SortedSet<HighScore>) inputStream.readObject();
+			scores = (NavigableSet<HighScore>) inputStream.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 
