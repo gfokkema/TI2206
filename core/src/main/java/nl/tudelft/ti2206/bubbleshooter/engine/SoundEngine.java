@@ -12,6 +12,7 @@ import com.badlogic.gdx.audio.Music;
  *
  */
 public class SoundEngine {
+	private static SoundEngine engine = null;
 	Assets assets;
 	Music m;
 	
@@ -22,12 +23,18 @@ public class SoundEngine {
 	 * Construct a {@link SoundEngine} using the given {@link Assets} manager.
 	 * @param assets	{@link Assets} manager containing all sounds
 	 */
-	public SoundEngine(Assets assets) {
+	private SoundEngine(Assets assets) {
 		this.assets = assets;
 	}
 	
-	public SoundEngine() {
+	private SoundEngine() {
 		this(Assets.getAssets());
+	}
+	
+	public static SoundEngine getSoundEngine() {
+		if (engine == null) engine = new SoundEngine();
+		
+		return engine;
 	}
 	
 	/**

@@ -20,7 +20,7 @@ public abstract class AbstractProcessor extends InputAdapter {
 	private static Map<Integer, Function<AbstractProcessor, Boolean>> keyUpBindings
 		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
 
-// Initialize the keybindings.
+	// Initialize the keybindings.
 	static {
 		keyDownBindings.put(Keys.LEFT, AbstractProcessor::cannonLeft);
 		keyDownBindings.put(Keys.RIGHT, AbstractProcessor::cannonRight);

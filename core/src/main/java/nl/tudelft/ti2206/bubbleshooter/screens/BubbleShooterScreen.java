@@ -5,6 +5,7 @@ import java.util.Collection;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
@@ -61,7 +62,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 	 */
 	@Override
 	public void show() {
-		 game.engine.play(MusicID.GAME);
+		SoundEngine.getSoundEngine().play(MusicID.GAME);
 	}
 	
 	/**

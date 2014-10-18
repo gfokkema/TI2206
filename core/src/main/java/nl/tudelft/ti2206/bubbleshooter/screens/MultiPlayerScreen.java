@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -30,14 +31,14 @@ public class MultiPlayerScreen extends AbstractScreen {
 		host.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				game.setScreen(new HostGameScreen(game));
 			}
 		});
 		join.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.engine.play(SoundID.BUTTON);
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				game.setScreen(new JoinGameScreen(game));
 			}
 		});
