@@ -1,6 +1,76 @@
 --- BEGIN --- BUBBLESHOOTER OF DOOM ---
 8x15
 C00   C00   C00   C00   C00   C00   C00   C00
-   C01   C01   C01   C01   C01   C01   C01   
----   ---   B00   ---   ---   S00   ---   ---
+   C01   C01   C01   C01   C01   C01   C01  
+C02   C02   C02   C02   C02   C02   C02   C02
+   C03   B00   C03   C03   C03   C03   C03
+ ---   ---   ---   ---   ---   ---  M00   S00
+--- END --- BUBBLESHOOTER OF DOOM ---
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+C00   C00   C00   S00   C00   C00   C00   C00
+   C01   C01   S00   S00   C01   C01   C01  
+C02   C02   S00   M00   S00   C02   C02   C02
+  C03   S00    C03   C03   S00   C03   C03
+C01   C03   C04   ---   C02   C01   C00   C00
+   C01   C04   C03   C02   C01   C01   C00  
+ ---   ---   ---   ---   ---   ---   ---   ---
+--- END --- BUBBLESHOOTER OF DOOM ---
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+C00   C00   C00   C00   ---   C01   C00   C00
+   S00   ---   ---   ---   C02   ---   C01  
+S00   S00   ---   ---   ---   C00   C02   C02
+   S00   S00   ---   C03   C04   C03   C03
+S00   S00   ---   C04   C02   C01   C00   C00
+   S00   ---   ---   C02   C01   C01   C00  
+---   ---   ---   ---   ---   ---   ---   ---
+--- END --- BUBBLESHOOTER OF DOOM ---
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+S00   S00   S00   M00   S00   S00   S00   S00
+   C01   C02   C02   C03   C04   C00   ---  
+C03   B00   B00   C02   C02   C01   C04   C04
+   C01   C00   C03   C03   C01   C03   C03
+C00   ---   C03   C02   C03   C04   C04   C01
+   C00   C00   C02   C02   C03   C03   C03  
+B00   ---   ---   S00   ---   ---   B00   B00  
+--- END --- BUBBLESHOOTER OF DOOM ---
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+---   C01   C01   ---   ---   C03   C03   ---
+   ---   S00   S00   C02   C02   C04   ---  
+C03   S00   S00   S00   C00   C00   C04   C04
+   ---   ---   C03   C03   C01   C03   C03
+C00   ---   C03   C02   C03   ---   C04   ---
+   C00   C00   C02   C02   S00   S00   S00  
+S00   ---   ---   C03   ---   ---   C03   C03
+   ---   ---   ---   ---   ---   ---   C03  
+--- END --- BUBBLESHOOTER OF DOOM ---
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+C01   ---   ---   ---   ---   ---   ---   ---
+   C01   C00   C03   C03   C01   C03   C03
+C00   ---   C03   C02   C03   C04   C04   C01
+   C00   C00   C02   C02   C03   C03   C03
+C00   ---   C03   C02   C03   C04   C04   C01
+   C01   C02   B00   C03   C04   B00   ---  
+C03   B00   C02   C02   C02   C01   C04   C04
+   C01    C00   C04   C04   C01   C03   C03
+C00   ---   C03   C02   C03   C04   C04   C01
+   C00   C00   C02   C02   C03   C03   C03  
+C01   ---   ---   C02   ---   ---   C00   C03  
+--- END --- BUBBLESHOOTER OF DOOM ---
+--- BEGIN --- BUBBLESHOOTER OF DOOM ---
+8x15
+C01   C01   ---   ---   ---   C03   C03   C00
+   C03   C02   ---   ---   C02   C04   ---  
+---   C03   C02   ---   C00   C00   ---   C00
+   ---   C03   C03   C03   C01   ---   ---
+---   ---   C00   C02   C03   ---   ---   C00
+   ---   ---   C00   C02   ---   ---   ---  
+---   ---   ---   C00   ---   ---   ---   C00
+   ---   ---   ---   ---   ---   ---   ---  
+---   ---   ---   ---   ---   ---   ---   C00
+   ---   ---   ---   ---   ---   ---   ---  
 --- END --- BUBBLESHOOTER OF DOOM ---
