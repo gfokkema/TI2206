@@ -9,7 +9,6 @@ import com.badlogic.gdx.audio.Music;
  * This class acts as a {@link SoundEngine} for the whole game.
  * When something in the game wants to play a sound,
  * or change settings regarding the sound, this class will be used.
- *
  */
 public class SoundEngine {
 	private static SoundEngine engine = null;
@@ -27,10 +26,17 @@ public class SoundEngine {
 		this.assets = assets;
 	}
 	
+	/**
+	 * Construct a {@link SoundEngine} using the default {@link Assets} manager.
+	 */
 	private SoundEngine() {
 		this(Assets.getAssets());
 	}
 	
+	/**
+	 * Creates and returns the unique instance of the {@link SoundEngine}.
+	 * @return	unique instance of {@link SoundEngine}
+	 */
 	public static SoundEngine getSoundEngine() {
 		if (engine == null) engine = new SoundEngine();
 		
@@ -47,7 +53,7 @@ public class SoundEngine {
 	/**
 	 * Set the assets we should use.
 	 * This can be used for changing themes between levels.
-	 * @param loader	the {@link Assets} to use
+	 * @param assets	the {@link Assets} to use
 	 */
 	public void setAsset(Assets assets) {
 		this.assets = assets;

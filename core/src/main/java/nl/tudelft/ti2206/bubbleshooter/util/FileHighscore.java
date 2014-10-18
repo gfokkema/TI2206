@@ -11,9 +11,7 @@ import java.util.TreeSet;
 
 /**
  * A class to read or write to the highscores file.
- * 
  * @author group-15
- *
  */
 public class FileHighscore {
 	private NavigableSet<HighScore> scores;
@@ -37,29 +35,35 @@ public class FileHighscore {
 		updateScoreFile();
 	}
 
+	/**
+	 * Checks whether the highscore file already exists, and if not, creates it.
+	 */
 	public void checkHighScoreFile(){
 		File f = new File(getFileName());
 		if(f.exists() && !f.isDirectory())  {} 
 		else{
-			createNewFile();
+			PrintWriter writer = null;
+			try {
+				writer = new PrintWriter(getFileName(), "UTF-8");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			writer.close();
 		}
-		
-		
-	}
-	public void createNewFile() {
-		PrintWriter writer = null;
-		try {
-			writer = new PrintWriter(getFileName(), "UTF-8");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		writer.close();
 	}
 
+	/**
+	 * This method returns the filename of the used high score file.
+	 * @return	String with the filename
+	 */
 	public String getFileName() {
 		return filename;
 	}
 
+	/**
+	 * This method sets the filename of the used high score file.
+	 * @param filename	String with the filename
+	 */
 	public void setFileName(String filename) {
 		this.filename = filename + ".txt";
 	}
@@ -67,6 +71,7 @@ public class FileHighscore {
 	/**
 	 * A method to load the highscore file in, which closes the inputreader
 	 * after the file is read.
+	 * @return	{@link NavigableSet} of {@link HighScore} objects
 	 */
 	@SuppressWarnings("unchecked")
 	public NavigableSet<HighScore> loadScoreFile() {
@@ -114,6 +119,8 @@ public class FileHighscore {
 	
 	/**
 	 * This method evaluates whether a score should be added to the highscores.
+	 * @param score	the score that has to be checked against the list
+	 * @return		boolean indicating whether this is a highscore
 	 */
 	public boolean isHighScore(int score) {
 		return scores.size() < 20 || score > scores.first().getHighScore();

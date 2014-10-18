@@ -47,6 +47,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	/**
 	 * The Multiplayer mode constructor.
 	 * @param end the {@link EndingCondition}.
+	 * @param factory the used {@link BoardFactory} for the game.
+	 * @param cannon the used {@link Cannon} for the game.
 	 * @param in the {@link ObjectInputStream}.
 	 * @param out the {@link ObjectOutputStream}.
 	 */
@@ -73,7 +75,13 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		board.addObserver(this);
 		cannon.addObserver(this);
 	}
-	
+
+	/**
+	 * The Multiplayer mode constructor with some default values.
+	 * @param end the {@link EndingCondition}.
+	 * @param in the {@link ObjectInputStream}.
+	 * @param out the {@link ObjectOutputStream}.
+	 */
 	public MultiPlayerMode(EndingCondition end, ObjectInputStream in, ObjectOutputStream out) {
 		this(end, new MPBoardFactory(), new Cannon(160,15), in, out);
 	}
@@ -108,6 +116,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 
 	/**
 	 * Updates every frame the cannon,board and projectile.
+	 * @param deltaTime	the time that has elapsed
 	 */
 	@Override
 	public void update(float deltaTime) {
@@ -118,6 +127,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		this.writeCondition(end);
 	}
 
+	
 	@Override
 	public void addGameObserver(GameObserver obs) {
 		super.addGameObserver(obs);
@@ -126,7 +136,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 
 	/**
 	 * Setter for opponent's board.
-	 * @param board
+	 * @param board	the {@link Board} of the opponent
 	 */
 	public synchronized void setBoardOpp(Board board) {
 		this.board2 = board;
@@ -134,7 +144,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 
 	/**
 	 * Setter for oppponent's cannon.
-	 * @param cn
+	 * @param cn	the {@link Cannon} of the opponent
 	 */
 	public synchronized void setCannonOpp(Cannon cn) {
 		this.cannon2 = cn;
@@ -148,7 +158,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 
 	/**
 	 * Setter for opponent projectile.
-	 * @param pj
+	 * @param pj	the {@link Projectile} of the opponent 
 	 */
 	public synchronized void setProjectileOpp(Projectile pj) {
 		this.projectile2 = pj;
@@ -160,8 +170,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	}
 
 	/**
-	 * Writes the condition.
-	 * @param condition
+	 * Writes the {@link EndingCondition} over the network.
+	 * @param condition	the {@link EndingCondition} of the player
 	 */
 	public void writeCondition(EndingCondition condition) {
 		try {
@@ -173,6 +183,10 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		}
 	}
 	
+	/**
+	 * Writes a {@link BSDrawable} over the network.
+	 * @param d	the {@link BSDrawable} of the player
+	 */
 	public void writeDrawable(BSDrawable d) {
 		try {
 			out.writeObject(d);
@@ -184,7 +198,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	}
 
 	/**
-	 * Runnable that copes with read input by sockets.
+	 * Runnable that copes with input read from sockets.
 	 */
 	@Override
 	public void run() {

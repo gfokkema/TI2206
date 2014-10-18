@@ -9,7 +9,7 @@ package nl.tudelft.ti2206.bubbleshooter.util;
 public class ScreenLogger implements LogStrategy {
 	
 	/**
-	 * Simply use a Java {@link #System} println.
+	 * Simply use a Java System println.
 	 */
 	@Override
 	public void write(String msg) {

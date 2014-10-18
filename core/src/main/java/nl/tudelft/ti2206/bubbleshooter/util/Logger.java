@@ -34,8 +34,8 @@ public class Logger implements Observer {
 	}
 	
 	/**
-	 * Add the {@link #LogStrategy} to the list.
-	 * @param strat the {@link #LogStrategy}
+	 * Add the {@link LogStrategy} to the list.
+	 * @param strat	the {@link LogStrategy}
 	 */
 	public void addLog(LogStrategy strat) {
 		logstrats.add(strat);

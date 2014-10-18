@@ -22,8 +22,6 @@ import com.badlogic.gdx.math.Vector2;
  * This class serves as the abstraction of all other game-modes. 
  * It contains the basic game-logic applicable to all other game-modes.
  * It acts as an observable, calling a {@link StatsObserver} to update.
- * @author group-15
- *
  */
 public abstract class BSMode implements EndingObserver {
 	protected Iterator<Board> boards;
@@ -43,7 +41,7 @@ public abstract class BSMode implements EndingObserver {
 	/**
 	 * BSMode constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
 	 * @param end the {@link EndingCondition} of the game.
-	 * @param board the used {@link Board} for the game.
+	 * @param factory the used {@link BoardFactory} for the game.
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
 	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
@@ -65,8 +63,7 @@ public abstract class BSMode implements EndingObserver {
 	 * The update method deals with the actual game-logic.
 	 * Inside this method, the actual calls to rotating the cannon,
 	 * moving the projectile, removing bubbles and updating the score is being taken care of.
-	 * @param deltaTime
-	 * @return boolean check if the game should end.
+	 * @param deltaTime	the time that has elapsed
 	 */
 	public void update(float deltaTime) {
 		if (cannonLeft) {
@@ -108,7 +105,7 @@ public abstract class BSMode implements EndingObserver {
 
 	/**
 	 * Add the {@link StatsObserver} to the {@link EndingCondition}.
-	 * @param o the statsobserver.
+	 * @param obs the statsobserver.
 	 */
 	public void addStatsObserver(StatsObserver obs) {
 		this.statsObs = obs;
@@ -120,7 +117,8 @@ public abstract class BSMode implements EndingObserver {
 	}
 
 	/**
-	 * Abstraction of getting the drawables.
+	 * Abstract method for getting all drawables.
+	 * @return {@link HashMap} containing all {@link BSDrawable} objects and their offset
 	 */
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();
 
@@ -175,10 +173,17 @@ public abstract class BSMode implements EndingObserver {
 		return score;
 	}
 	
+	/**
+	 * Checks whether this is the last {@link Board}.
+	 * @return	boolean indicating whether this is the last {@link Board}
+	 */
 	public boolean hasNext() {
 		return boards.hasNext();
 	}
 	
+	/**
+	 * Switches {@link BSMode} to the next {@link Board}.
+	 */
 	public void next() {
 		this.board.deleteObservers();
 		this.board = boards.next();

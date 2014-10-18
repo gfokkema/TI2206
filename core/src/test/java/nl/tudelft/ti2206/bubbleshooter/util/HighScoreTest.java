@@ -19,27 +19,4 @@ public class HighScoreTest {
 		assertFalse(highscore.getHighScore() != 400);
 		assertFalse(highscore.getHighScore() == 399);
 	}
-
-	@Test
-	public void setHighScoreTest() {
-		highscore.setHighScore(250);
-		assertTrue(highscore.getHighScore() == 250);
-		assertFalse(highscore.getHighScore() == 251);
-
-		highscore.setHighScore(450);
-		assertTrue(highscore.getHighScore() == 450);
-		assertFalse(highscore.getHighScore() == 201);
-	}
-
-	@Test
-	public void setNameTest() {
-		highscore.setName("Shaggy");
-		assertTrue(highscore.getName().equals("Shaggy"));
-		assertFalse(highscore.getName().equals("tom_jones"));
-
-		highscore.setName("tom_jones");
-		assertFalse(highscore.getName().equals("Shaggy"));
-		assertTrue(highscore.getName().equals("tom_jones"));
-	}
-
 }
