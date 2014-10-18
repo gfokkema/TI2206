@@ -3,7 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.engine;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 
 import java.io.BufferedReader;
