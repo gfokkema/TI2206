@@ -42,30 +42,6 @@ public class Board extends BSDrawable implements Serializable {
 	}
 
 	/**
-	 * Checks the {@link Bubble} that gets shot for collisions with all the
-	 * other bubbles.
-	 * 
-	 * @param b
-	 *            {@link Bubble} that has been shot
-	 * @return true if there's a collision, false otherwise
-	 */
-	public boolean collides(Projectile b) {
-		for (Bubble v : bubbles.values()) {
-			if (v.collides(b))
-				return true;
-		}
-
-		if (b.getBounds().y + 16 > 480)
-			return true;
-		if (b.getBounds().x - 16 < 32
-				|| b.getBounds().x - 16 > grid.getWidth() * 32) {
-			Vector2 dir = b.getDirection();
-			dir.x = -dir.x;
-		}
-		return false;
-	}
-
-	/**
 	 * Add a {@link Bubble} to the {@link Board} on a specific {@link Board}
 	 * index.
 	 * 
@@ -108,6 +84,11 @@ public class Board extends BSDrawable implements Serializable {
 		return add(b, grid.toIdx(i, j));
 	}
 
+	/**
+	 * Adds a projectile to the board and sets the behaviour chain for removal in motion.
+	 * @param p	the {@link Projectile} that has to be added to the board
+	 * @return	the number of points the user has scored by placing this {@link Projectile}
+	 */
 	public int add(Projectile p) {
 		int new_idx = grid.getIndex(p.getMidPoint());
 		if (!add(p, new_idx)) return -1;
@@ -124,37 +105,42 @@ public class Board extends BSDrawable implements Serializable {
 		return score + disconnected.size();
 	}
 
-	public Collection<BSDrawable> getDrawables() {
-		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
-		drawables.add(this);
-		drawables.addAll(bubbles.values());
-		return drawables;
+	public boolean bubbleBelowLine() {
+		return bubbleBelowLine(grid.getHeight() - 2);
 	}
 
-
-	/**
-	 * Traversal to find all of the nodes that should be removed. If nothing
-	 * should be removed, then nothing is returned.
-	 * 
-	 * @return {@link Collection} that's either empty or filled with nodes that
-	 *         will be removed
-	 */
-	public Collection<Bubble> getDisconnectedGroup() {
-		// The same Map will be used for each depth-first search.
-		HashMap<Integer, Bubble> connectedToCeiling = new HashMap<Integer, Bubble>();
-		for (int ceilingIndex = 0; ceilingIndex < grid.getWidth(); ceilingIndex++) {
-			if (!bubbles.containsKey(ceilingIndex)) {
-				// There's no bubble here
-				continue;
-			}
-			connectedToCeiling.put(ceilingIndex, bubbles.get(ceilingIndex));
-			depthFirst(ceilingIndex, (current, neighbor) -> true,
-					connectedToCeiling);
+	protected boolean bubbleBelowLine(int lineRow) {
+		int start = grid.toIdx(0,lineRow);
+		int lastRowWidth = grid.getWidth() - (grid.getHeight() % 2 - 1);
+		int finish = grid.toIdx(lastRowWidth - 1, grid.getHeight() - 1);
+		for(int i = start; i <= finish; i++) {
+			if(bubbles.containsKey(i)) return true;
 		}
-		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
-		// Remove all of the bubbles that are not connected to the ceiling.
-		result.removeAll(connectedToCeiling.values());
-		return result;
+		return false;
+	}
+	
+	/**
+	 * Checks the {@link Bubble} that gets shot for collisions with all the
+	 * other bubbles.
+	 * 
+	 * @param b
+	 *            {@link Bubble} that has been shot
+	 * @return true if there's a collision, false otherwise
+	 */
+	public boolean collides(Projectile b) {
+		for (Bubble v : bubbles.values()) {
+			if (v.collides(b))
+				return true;
+		}
+
+		if (b.getBounds().y + 16 > 480)
+			return true;
+		if (b.getBounds().x - 16 < 32
+				|| b.getBounds().x - 16 > grid.getWidth() * 32) {
+			Vector2 dir = b.getDirection();
+			dir.x = -dir.x;
+		}
+		return false;
 	}
 
 	/**
@@ -191,6 +177,63 @@ public class Board extends BSDrawable implements Serializable {
 		}
 	}
 	
+	public HashMap<Integer, Bubble> getBubbles() {
+		return bubbles;
+	}
+	
+	public ArrayList<Color> getColoursAvailable() {
+		ArrayList<Color> colours = new ArrayList<Color>();
+		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
+			//WHITE is a black color
+			if(!colours.contains(b.getValue().getColor()) && b.getValue().getColor() != Color.WHITE) colours.add(b.getValue().getColor());
+		}
+		return colours;
+	}
+	
+	/**
+	 * Traversal to find all of the nodes that should be removed. If nothing
+	 * should be removed, then nothing is returned.
+	 * 
+	 * @return {@link Collection} that's either empty or filled with nodes that
+	 *         will be removed
+	 */
+	public Collection<Bubble> getDisconnectedGroup() {
+		// The same Map will be used for each depth-first search.
+		HashMap<Integer, Bubble> connectedToCeiling = new HashMap<Integer, Bubble>();
+		for (int ceilingIndex = 0; ceilingIndex < grid.getWidth(); ceilingIndex++) {
+			if (!bubbles.containsKey(ceilingIndex)) {
+				// There's no bubble here
+				continue;
+			}
+			connectedToCeiling.put(ceilingIndex, bubbles.get(ceilingIndex));
+			depthFirst(ceilingIndex, (current, neighbor) -> true,
+					connectedToCeiling);
+		}
+		List<Bubble> result = new ArrayList<Bubble>(bubbles.values());
+		// Remove all of the bubbles that are not connected to the ceiling.
+		result.removeAll(connectedToCeiling.values());
+		return result;
+	}
+	
+	public Collection<BSDrawable> getDrawables() {
+		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
+		drawables.add(this);
+		drawables.addAll(bubbles.values());
+		return drawables;
+	}
+	
+	public Grid getGrid() {
+		return grid;
+	}
+	
+	public Collection<Bubble> getGroup(int idx) {
+		return bubbles.get(idx).getBehaviour().getGroup(this, idx);
+	}
+
+	public boolean isEmpty() {
+		return bubbles.isEmpty();
+	}
+	
 	/**
 	 * Remove all the {@link Bubble}s that are both in the given
 	 * {@link Collection} and on the grid.
@@ -204,7 +247,7 @@ public class Board extends BSDrawable implements Serializable {
 		notifyObservers(bs.size() + " bubbles have been removed.");
 		return bs.size();
 	}
-
+	
 	@Override
 	public TextureID getTexture() {
 		return TextureID.BORDER;
@@ -218,56 +261,5 @@ public class Board extends BSDrawable implements Serializable {
 	@Override
 	public int getHeight() {
 		return 480;
-	}
-	
-	public HashMap<Integer, Bubble> getBubbles() {
-		return bubbles;
-	}
-
-	public Collection<Bubble> getGroup(int idx) {
-		return bubbles.get(idx).getBehaviour().getGroup(this, idx);
-	}
-	
-	public HashMap<Integer, Bubble> getColourGroup(Bubble bubble) {
-		return getColourGroup(bubble.getColor());
-	}
-	
-	public HashMap<Integer, Bubble> getColourGroup(Color color) {
-		HashMap<Integer, Bubble> instance = new HashMap<Integer, Bubble>();
-		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
-			if(b.getValue().getColor().equals(color)) instance.put(b.getKey(), b.getValue());
-		}
-		return instance;
-	}
-	
-	public ArrayList<Color> getColoursAvailable() {
-		ArrayList<Color> colours = new ArrayList<Color>();
-		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
-			//WHITE is a black color
-			if(!colours.contains(b.getValue().getColor()) && b.getValue().getColor() != Color.WHITE) colours.add(b.getValue().getColor());
-		}
-		return colours;
-	}
-		
-	public Grid getGrid() {
-		return grid;
-	}
-
-	public boolean isEmpty() {
-		return bubbles.isEmpty();
-	}
-
-	public boolean bubbleBelowLine() {
-		return bubbleBelowLine(grid.getHeight() - 2);
-	}
-
-	protected boolean bubbleBelowLine(int lineRow) {
-		int start = grid.toIdx(0,lineRow);
-		int lastRowWidth = grid.getWidth() - (grid.getHeight() % 2 - 1);
-		int finish = grid.toIdx(lastRowWidth - 1, grid.getHeight() - 1);
-		for(int i = start; i <= finish; i++) {
-			if(bubbles.containsKey(i)) return true;
-		}
-		return false;
 	}
 }
