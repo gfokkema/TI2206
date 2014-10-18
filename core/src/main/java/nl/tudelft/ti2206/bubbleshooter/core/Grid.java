@@ -90,11 +90,8 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * @param p	the {@link Projectile} that has to be added to the board
 	 * @return	the number of points the user has scored by placing this {@link Projectile}
 	 */
-	public int add(Projectile p) {
-		int new_idx = getIndex(p.getMidPoint());
-		if (!add(p, new_idx)) return -1;
-		
-		return 0;
+	public boolean add(Projectile p) {
+		return add(p, getIndex(p.getMidPoint()));
 	}
 	
 	/**

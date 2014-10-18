@@ -71,11 +71,10 @@ public abstract class BSMode implements EndingObserver {
 		if (projectile == null || projectile == cannon.getProjectile()) return;
 		
 		projectile.move();
-		if (board.collides(projectile)) {
-			score += board.getGrid().add(projectile);
-			statsObs.updateScore(score);
-			
+		// TODO: fix the add method
+		if (board.collides(projectile) && board.getGrid().add(projectile)) {
 			setProjectile(cannon.getProjectile());
+			// TODO: call behaviour
 		}
 	}
 
