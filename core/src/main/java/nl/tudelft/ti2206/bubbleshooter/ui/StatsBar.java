@@ -9,6 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 public class StatsBar implements StatsObserver {
 	protected Label timerField;
 	protected Label scoreField;
+	protected static String format = "Time left: %02d:%02d";
 
 	protected StatsBar(Label timer, Label score) {
 		this.timerField = timer;
@@ -17,7 +18,7 @@ public class StatsBar implements StatsObserver {
 
 	@Override
 	public void updateTimer(Duration duration) {
-		String timeString = "Time left: " + duration.toMinutes() + ":" + (duration.getSeconds()%60);
+		String timeString = String.format(format, duration.toMinutes(), duration.getSeconds()%60);
 		timerField.setText(timeString);
 	}
 
