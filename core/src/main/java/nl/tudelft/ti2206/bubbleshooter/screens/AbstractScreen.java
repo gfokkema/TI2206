@@ -91,7 +91,6 @@ public class AbstractScreen extends ScreenAdapter {
 		
 	    stage.act(delta);
 	    stage.draw();
-	    Table.drawDebug(stage);
 	}
 	
 	/**
