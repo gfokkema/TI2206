@@ -27,6 +27,6 @@ public class StoneBehaviour implements BubbleBehaviour {
 	 */
 	@Override
 	public int remove(Board board, int id, int projectile) {
-		return 3;
+		return 0;
 	}
 }

@@ -68,11 +68,9 @@ public abstract class BSMode implements EndingObserver {
 	public void update(float deltaTime) {
 		if (cannonLeft) {
 			cannon.left(deltaTime);
-			//Logger.print("Cannon rotation left", "" + cannon.getRotation());
 		}
 		if (cannonRight) {
 			cannon.right(deltaTime);
-			//Logger.print("Cannon rotation right", "" + cannon.getRotation());
 		}
 		
 		if (projectile == null || projectile == cannon.getProjectile()) {

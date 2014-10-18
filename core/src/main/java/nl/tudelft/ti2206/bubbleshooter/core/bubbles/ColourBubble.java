@@ -5,7 +5,6 @@ import java.util.Random;
 
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 /**
