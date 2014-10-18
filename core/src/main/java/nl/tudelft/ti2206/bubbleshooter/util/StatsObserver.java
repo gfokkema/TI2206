@@ -13,11 +13,11 @@ public interface StatsObserver {
 	 * Draws the timer in timed game modes.
 	 * @param duration - The time that's left.
 	 */
-	public void drawTimer(Duration duration);
+	public void updateTimer(Duration duration);
 	
 	/**
 	 * Draws the score in all score-based game modes.
 	 * @param score - the score.
 	 */
-	public void drawScore(int score);
+	public void updateScore(int score);
 }

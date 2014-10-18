@@ -33,7 +33,7 @@ public class TimerConditionTest {
 	@Test
 	public void testStatsObserverDrawTimer() {
 		timerBasic.check(null);
-		verify(statsObs).drawTimer(gt(Duration.ofMillis(0)));
+		verify(statsObs).updateTimer(gt(Duration.ofMillis(0)));
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class TimerConditionTest {
 	public void testStatsObserverDrawTimerAboveZero() {
 		timerBasic.setDuration(Duration.ofMillis(-1));
 		timerBasic.check(null);
-		verify(statsObs, never()).drawTimer(any());
+		verify(statsObs, never()).updateTimer(any());
 	}
 
 	@Test

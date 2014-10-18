@@ -39,7 +39,7 @@ public abstract class BSMode implements EndingObserver {
 	protected GameObserver gameObs;
 
 	protected EndingCondition end;
-	private int score;
+	private int score= 0;
 
 	/**
 	 * BSMode constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
@@ -102,7 +102,7 @@ public abstract class BSMode implements EndingObserver {
 				board.removeAll(disconnected);
 
 				score += 3 * disconnected.size();
-				this.statsObs.drawScore(score);				
+				this.statsObs.updateScore(score);
 			}
 		}
 		end.check(this.board);
