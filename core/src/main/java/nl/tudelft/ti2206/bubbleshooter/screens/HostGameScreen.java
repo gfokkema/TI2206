@@ -10,13 +10,12 @@ import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
 import nl.tudelft.ti2206.bubbleshooter.util.getIP;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 /**
  * The screen shown when hosting a multi-player game.
@@ -43,11 +42,9 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			intip = getIP.getLocalIP();
 		} catch (Exception e) {}
 		
-		LabelStyle style = new LabelStyle(game.font, Color.WHITE);
-		
-		Label extiplabel = new Label("External IP: " + extip, style);
-		Label intiplabel = new Label("Internal IP: " + intip, style);
-		Label label = new Label("Please wait for a player to connect", style);
+		Label extiplabel = new Label("External IP: " + extip, labelStyle);
+		Label intiplabel = new Label("Internal IP: " + intip, labelStyle);
+		Label label = new Label("Please wait for a player to connect", labelStyle);
 		
 		table.add(extiplabel).expandX().center().row();
 		table.add(intiplabel).expandX().center().row();
@@ -64,6 +61,7 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 		super.render(delta);
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
 	}
+
 	/**
 	 * Implements our server socket with datastreams.
 	 */
@@ -85,7 +83,10 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 		Gdx.app.postRunnable(() -> {
 			EndingCondition basic = new BasicCondition();
 			EndingCondition belowLine = new BelowLineCondition(basic);
-			game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(belowLine, br, bw)));
+			GameUIBuilder gub = new GameUIBuilder(game.font);
+			MultiPlayerMode multi = new MultiPlayerMode(belowLine, br, bw);
+			gub.addMultiPlayerStatsBars(multi);
+			game.setScreen(new BubbleShooterScreen(game, multi, gub.build()));
 		});
 	}
 }
