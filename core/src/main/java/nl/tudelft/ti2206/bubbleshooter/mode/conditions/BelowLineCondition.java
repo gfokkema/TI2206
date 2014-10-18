@@ -19,7 +19,7 @@ public class BelowLineCondition extends EndingDecorator {
 	 */
 	@Override
 	public void check(Board board) {
-		if(board.bubbleBelowLine()) {
+		if(board.getGrid().bubbleBelowLine()) {
 			this.lost();
 			return;
 		}

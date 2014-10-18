@@ -45,12 +45,9 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * Add a {@link Bubble} to the {@link Board} on a specific {@link Board}
 	 * index.
 	 * 
-	 * @param b
-	 *            {@link Bubble} that has to be added
-	 * @param idx
-	 *            {@link Board} index
-	 * @return true if the {@link Board} has been added successfully, false
-	 *         otherwise
+	 * @param b		{@link Bubble} that has to be added
+	 * @param idx	{@link Board} index
+	 * @return		true if the {@link Board} has been added successfully, false otherwise
 	 */
 	public boolean add(Bubble b, Integer idx) {
 		GridCell cell = cells.get(idx);
@@ -71,15 +68,10 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 
 	/**
 	 * Add a {@link Bubble} to the {@link Board} on a specific hex index.
-	 * 
-	 * @param b
-	 *            {@link Bubble} that has to be added
-	 * @param i
-	 *            hexagonal x-coordinate
-	 * @param j
-	 *            hexagonal y-coordinate
-	 * @return true if the {@link Board} has been added successfully, false
-	 *         otherwise
+	 * @param b	{@link Bubble} that has to be added
+	 * @param i	hexagonal x-coordinate
+	 * @param j	hexagonal y-coordinate
+	 * @return	true if the {@link Board} has been added successfully, false otherwise
 	 */
 	public boolean add(Bubble b, int i, int j) {
 		return add(b, toIdx(i, j));
@@ -92,6 +84,20 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 */
 	public boolean add(Projectile p) {
 		return add(p, getIndex(p.getMidPoint()));
+	}
+	
+	public boolean bubbleBelowLine() {
+		return bubbleBelowLine(getGridHeight() - 2);
+	}
+
+	protected boolean bubbleBelowLine(int lineRow) {
+		int start = toIdx(0,lineRow);
+		int lastRowWidth = getGridWidth() - (getGridHeight() % 2 - 1);
+		int finish = toIdx(lastRowWidth - 1, getGridHeight() - 1);
+		for(int i = start; i <= finish; i++) {
+			if(cells.get(i).isOccupied()) return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -114,7 +120,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		HashSet<Color> colours = new HashSet<Color>();
 		for(GridCell c: cells.values()) {
 			if (c.isOccupied()) {
-				//WHITE is a black color
+				// WHITE is a black color
 				Color color = c.getBubble().getColor();
 				if(color != Color.WHITE) colours.add(color);
 			}
@@ -144,6 +150,13 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 */
 	public int getGridHeight() {
 		return height;
+	}
+	
+	public boolean isEmpty() {
+		for (GridCell c : cells.values()) {
+			if (c.isOccupied()) return false;
+		};
+		return true;
 	}
 	
 	/**

@@ -15,7 +15,7 @@ public class BasicCondition extends EndingCondition {
 	 */
 	@Override
 	public void check(Board board) {
-		if (board.isEmpty()) this.won();
+		if (board.getGrid().isEmpty()) this.won();
 	}
 
 	@Override

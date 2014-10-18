@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 public class ColourBehaviour implements BubbleBehaviour {
 	
@@ -20,11 +22,12 @@ public class ColourBehaviour implements BubbleBehaviour {
 	public Collection<Bubble> getGroup(Board board, int id) {
 		// Search for bubbles of the same color
 		HashMap<Integer, Bubble> bubbleGroup = new HashMap<Integer, Bubble>();
-		board.depthFirst(
-				id,
-				(current, neighbour) -> testColor(board, current, neighbour),
-				bubbleGroup);
-		bubbleGroup.put(id, board.getBubbles().get(id));
+		// FIXME:
+		//board.depthFirst(
+		//		id,
+		//		(current, neighbour) -> testColor(board, current, neighbour),
+		//		bubbleGroup);
+		bubbleGroup.put(id, board.getGrid().cells.get(id).getBubble());
 		return bubbleGroup.values();
 	}
 	
@@ -59,6 +62,8 @@ public class ColourBehaviour implements BubbleBehaviour {
 	 * @return true if the current is equal to the neighbour.
 	 */
 	private boolean testColor(Board board, Integer current, Integer neighbour) {
-		return board.getBubbles().get(current).getColor().equals(board.getBubbles().get(neighbour).getColor());
+		// FIXME:
+		HashMap<Integer, GridCell> c = board.getGrid().cells;
+		return c.get(current).getBubble().getColor().equals(c.get(neighbour).getBubble().getColor());
 	}
 }
