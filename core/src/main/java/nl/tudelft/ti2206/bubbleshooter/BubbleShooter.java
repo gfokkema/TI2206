@@ -34,7 +34,6 @@ public class BubbleShooter extends Game {
 	 * Initialize a spritebatch and bitmapfont for later use.
 	 * Assign the initial music being used
 	 */
-	public Assets assets;
 	public BitmapFont font;
 	public FileHighscore scores;
 	public MainMenuScreen mms;
@@ -61,12 +60,11 @@ public class BubbleShooter extends Game {
 	 */
 	@Override
 	public void create() {
-		assets = Assets.getAssets();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		engine = new SoundEngine(assets);
 		Logger.getLogger().addLog(new ScreenLogger());
 	
+		Assets assets = Assets.getAssets();
 		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
 		assets.load(SkinID.BUTTON, "brown_button.png");
@@ -84,6 +82,7 @@ public class BubbleShooter extends Game {
 		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
+		engine = new SoundEngine();
 		scores = new FileHighscore();
 		
 		mms = new MainMenuScreen(this);
