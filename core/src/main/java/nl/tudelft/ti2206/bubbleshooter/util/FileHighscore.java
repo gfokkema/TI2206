@@ -106,6 +106,6 @@ public class FileHighscore {
 	 * This method evaluates whether a score should be added to the highscores.
 	 */
 	public boolean isHighScore(int score) {
-		return score > scores.first().getHighScore() || scores.size() < 20;
+		return scores.size() < 20 || score > scores.first().getHighScore();
 	}
 }
