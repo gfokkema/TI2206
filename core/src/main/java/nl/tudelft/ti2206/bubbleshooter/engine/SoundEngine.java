@@ -12,10 +12,23 @@ import com.badlogic.gdx.audio.Music;
  *
  */
 public class SoundEngine {
+	Assets assets;
 	Music m;
 	
 	private float bgmvolume = 0.5f;
 	private float sfxvolume = 0.5f;
+	
+	/**
+	 * Construct a {@link SoundEngine} using the given {@link Assets} manager.
+	 * @param assets	{@link Assets} manager containing all sounds
+	 */
+	public SoundEngine(Assets assets) {
+		this.assets = assets;
+	}
+	
+	public SoundEngine() {
+		this(Assets.getAssets());
+	}
 	
 	/**
 	 * Return the current background music volume.
@@ -59,8 +72,8 @@ public class SoundEngine {
 	 * @param id	{@link MusicID} that refers to music in {@link Assets}
 	 */
 	public void play(MusicID id) {
-		if (m != null && !m.equals(Assets.getAssets().get(id))) m.stop();
-		m = Assets.getAssets().get(id);
+		if (m != null && !m.equals(assets.get(id))) m.stop();
+		m = assets.get(id);
 		m.setLooping(true);
 		m.setVolume(bgmvolume);
 		m.play();
@@ -71,7 +84,7 @@ public class SoundEngine {
 	 * @param id	{@link SoundID} that refers to a sound effect in {@link Assets}
 	 */
 	public void play(SoundID id) {
-		Assets.getAssets().get(id).play(sfxvolume);
+		assets.get(id).play(sfxvolume);
 	}
 	
 	/**

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class FileHighscoreTest {
-
+	/*
 	@Test
 	public void testFileHighscore() {
 		fail("Not yet implemented");
@@ -39,6 +39,5 @@ public class FileHighscoreTest {
 	@Test
 	public void testIsHighScore() {
 		fail("Not yet implemented");
-	}
-
+	}*/
 }
