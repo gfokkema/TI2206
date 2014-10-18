@@ -55,11 +55,13 @@ public class BubbleShooter extends Game {
 		assets.load(TextureID.CANNON, "cannon.png");
 		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
 		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
-		assets.load(TextureID.MICHAELBAYBUBBLE, "MichaelBayBubble.png");
+		assets.load(TextureID.MICHAELBAYBUBBLE, "Nuke.png");
 		assets.finish();
 		
 		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.MICHAELBAYBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		scores = new FileHighscore();
