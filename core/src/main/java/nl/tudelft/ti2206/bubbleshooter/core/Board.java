@@ -121,6 +121,23 @@ public class Board extends BSDrawable implements Serializable {
 	}
 
 	/**
+	 * 
+	 */
+	public int removeGroup(int idx) {
+		int score = 0;
+		for(int i = 0; i < getGrid().getHeight() * getGrid().getWidth() -1; i++) {
+			if(bubbles.get(i) != null) 
+				score += bubbles.get(i).getBehaviour().remove(this, i, idx);
+		}
+	
+		Collection<Bubble> disconnected = this.getDisconnectedGroup();
+		this.removeAll(disconnected);
+		
+		return score + disconnected.size();
+	}
+
+
+	/**
 	 * Traversal to find all of the nodes that should be removed. If nothing
 	 * should be removed, then nothing is returned.
 	 * 

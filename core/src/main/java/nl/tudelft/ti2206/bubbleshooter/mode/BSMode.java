@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
@@ -78,7 +79,6 @@ public abstract class BSMode implements EndingObserver {
 			return;
 		}
 		
-
 		projectile.move();
 		//NOTE: collides has side-effects!
 		if (board.collides(projectile)) {
@@ -86,15 +86,7 @@ public abstract class BSMode implements EndingObserver {
 			setProjectile(cannon.getProjectile());
 
 			if(new_idx != -1) {
-				for(int i = 0; i < board.getGrid().getHeight() * board.getGrid().getWidth() -1; i++) {
-					if(board.getBubbles().get(i) != null) 
-						score += board.getBubbles().get(i).getBehaviour().remove(board, i, new_idx);
-				}
-
-				Collection<Bubble> disconnected = board.getDisconnectedGroup();
-				board.removeAll(disconnected);
-
-				score += 3 * disconnected.size();
+				score += board.removeGroup(new_idx);
 				this.statsObs.updateScore(score);
 			}
 		}
