@@ -114,6 +114,5 @@ public abstract class Bubble extends BSDrawable implements Serializable {
 	@Override
 	public int getHeight() {
 		return 32;
-	}
-	
+	}	
 }

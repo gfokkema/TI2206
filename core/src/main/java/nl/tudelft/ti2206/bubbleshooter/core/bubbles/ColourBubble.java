@@ -21,36 +21,6 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class ColourBubble extends Bubble{
 	private static final long serialVersionUID = 746300724926407976L;
-
-	/**
-	 * Enum of all the different possible colors.
-	 */
-	public enum BubbleColors {
-		RED(Color.RED),
-		GREEN(Color.GREEN),
-		BLUE(Color.BLUE),
-		PURPLE(Color.PURPLE),
-		YELLOW(Color.YELLOW),
-		ORANGE(Color.ORANGE),
-		PINK(Color.PINK),
-		WHITE(Color.WHITE),
-		
-		GRAY(Color.GRAY),
-		MAGENTA(Color.MAGENTA),
-		CYAN(Color.CYAN),
-		MAROON(Color.MAROON),
-		NAVY(Color.NAVY),
-		OLIVE(Color.OLIVE);
-		
-		private Color color;
-		private BubbleColors(Color color) {
-			this.color = color;
-		}
-		
-		public Color getColor() {
-			return color;
-		}
-	}
 	
 	protected Color colour;
 	
