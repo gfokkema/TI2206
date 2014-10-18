@@ -76,7 +76,7 @@ public class Board extends BSDrawable implements Serializable {
 	 * @return true if the {@link Board} has been added successfully, false
 	 *         otherwise
 	 */
-	public boolean add(Bubble b, int idx) {
+	public boolean add(Bubble b, Integer idx) {
 		if (bubbles.containsKey(idx))
 			return false;
 
@@ -108,9 +108,20 @@ public class Board extends BSDrawable implements Serializable {
 		return add(b, grid.toIdx(i, j));
 	}
 
-	public int add(Bubble b) {
-		int new_idx = grid.getIndex(b.getMidPoint());
-		return add(b, new_idx) ? new_idx : -1;
+	public int add(Projectile p) {
+		int new_idx = grid.getIndex(p.getMidPoint());
+		if (!add(p, new_idx)) return -1;
+		
+		int score = 0;
+		for(int i = 0; i < getGrid().getHeight() * getGrid().getWidth() -1; i++) {
+			if(bubbles.get(i) != null)
+				score += bubbles.get(i).getBehaviour().remove(this, i, new_idx);
+		}
+	
+		Collection<Bubble> disconnected = this.getDisconnectedGroup();
+		this.removeAll(disconnected);
+		
+		return score + disconnected.size();
 	}
 
 	public Collection<BSDrawable> getDrawables() {
@@ -118,22 +129,6 @@ public class Board extends BSDrawable implements Serializable {
 		drawables.add(this);
 		drawables.addAll(bubbles.values());
 		return drawables;
-	}
-
-	/**
-	 * 
-	 */
-	public int removeGroup(int idx) {
-		int score = 0;
-		for(int i = 0; i < getGrid().getHeight() * getGrid().getWidth() -1; i++) {
-			if(bubbles.get(i) != null) 
-				score += bubbles.get(i).getBehaviour().remove(this, i, idx);
-		}
-	
-		Collection<Bubble> disconnected = this.getDisconnectedGroup();
-		this.removeAll(disconnected);
-		
-		return score + disconnected.size();
 	}
 
 

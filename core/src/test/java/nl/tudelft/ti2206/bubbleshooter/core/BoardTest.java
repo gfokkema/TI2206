@@ -76,15 +76,15 @@ public class BoardTest {
 		Circle c1 = new Circle(32 * 3 + 16, 480 - 32 * 0 - 16, 16);
 		Circle c2 = new Circle(32 * 3 + 32, 480 - 32 * 1 - 16, 16);
 		Circle c3 = new Circle(32 * 3 + 16, 480 - 32 * 2 - 16, 16);
-		Bubble b = new ColourBubble();
-
-		b.setBounds(c1);
-		assertEquals(2, board.add(b));
-		b.setBounds(c2);
-		assertEquals(8, board.add(b));
-		b.setBounds(c3);
-		assertEquals(13, board.add(b));
-		assertEquals(-1, board.add(b));
+		
+		Projectile p = new Projectile(c1, new Vector2(), 0);
+		p.setBounds(c1);
+		assertEquals(0, board.add(p));
+		p.setBounds(c2);
+		assertEquals(0, board.add(p));
+		assertEquals(-1, board.add(p));
+		p.setBounds(c3);
+		assertEquals(3, board.add(p));
 	}
 
 	/**

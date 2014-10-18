@@ -4,11 +4,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
@@ -82,13 +80,10 @@ public abstract class BSMode implements EndingObserver {
 		projectile.move();
 		//NOTE: collides has side-effects!
 		if (board.collides(projectile)) {
-			int new_idx = board.add(projectile);
+			score += board.add(projectile);
+			statsObs.updateScore(score);
+			
 			setProjectile(cannon.getProjectile());
-
-			if(new_idx != -1) {
-				score += board.removeGroup(new_idx);
-				this.statsObs.updateScore(score);
-			}
 		}
 		end.check(this.board);
 	}
