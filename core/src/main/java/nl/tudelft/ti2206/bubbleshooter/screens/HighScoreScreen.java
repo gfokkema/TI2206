@@ -1,31 +1,17 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.Iterator;
 import java.util.SortedSet;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.util.HighScore;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * The screen shown when joining a multi-player game.
@@ -33,9 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  *
  */
 public class HighScoreScreen extends AbstractScreen {
-	private ObjectInputStream br = null;
-	private ObjectOutputStream bw = null;
-	
 	/**
 	 * Sets up the buttons to be displayed.
 	 * @param game the current game session
@@ -68,26 +51,5 @@ public class HighScoreScreen extends AbstractScreen {
 	public void render(float delta) {
 		super.render(delta);
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
-	}
-	/**
-	 * Implements our client socket wih datastreams.
-	 * @param ip
-	 */
-	public void connect(String ip) {
-		try {
-			Socket socket = new Socket(ip, 8008);
-
-			bw = new ObjectOutputStream(socket.getOutputStream());
-			bw.flush();
-			br = new ObjectInputStream(socket.getInputStream());
-			
-			System.out.println("CLIENT CONNECTED!");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			Gdx.app.exit();
-		}
-		EndingCondition basic = new BasicCondition();
-		EndingCondition belowLine = new BelowLineCondition(basic);
-		game.setScreen(new BubbleShooterScreen(game, new MultiPlayerMode(belowLine, br, bw)));
 	}
 }
