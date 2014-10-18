@@ -46,16 +46,15 @@ public abstract class BSMode implements EndingObserver {
 	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
 		this.boards = factory.makeLevels().iterator();
 		this.board = boards.next();
-		
-		board.addObserver(Logger.getLogger());
-		
 		this.cannon = cannon;
-		cannon.addObserver(Logger.getLogger());
-		setProjectile(cannon.getProjectile());
-
 		this.end = end;
-		end.addEndingObserver(this);
 		this.score = 0;
+		
+		setProjectile(cannon.getProjectile());
+		
+		this.board.addObserver(Logger.getLogger());
+		this.cannon.addObserver(Logger.getLogger());
+		this.end.addEndingObserver(this);
 	}
 
 	/**
@@ -65,27 +64,19 @@ public abstract class BSMode implements EndingObserver {
 	 * @param deltaTime	the time that has elapsed
 	 */
 	public void update(float deltaTime) {
-		if (cannonLeft) {
-			cannon.left(deltaTime);
-		}
-		if (cannonRight) {
-			cannon.right(deltaTime);
-		}
+		end.check(this.board);
 		
-		if (projectile == null || projectile == cannon.getProjectile()) {
-			end.check(this.board);
-			return;
-		}
+		if (cannonLeft) cannon.left(deltaTime);
+		if (cannonRight) cannon.right(deltaTime);
+		if (projectile == null || projectile == cannon.getProjectile()) return;
 		
 		projectile.move();
-		//NOTE: collides has side-effects!
 		if (board.collides(projectile)) {
 			score += board.add(projectile);
 			statsObs.updateScore(score);
 			
 			setProjectile(cannon.getProjectile());
 		}
-		end.check(this.board);
 	}
 
 	/**

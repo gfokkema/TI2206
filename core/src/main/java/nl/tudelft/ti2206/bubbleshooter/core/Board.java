@@ -37,8 +37,7 @@ public class Board extends BSDrawable implements Serializable {
 	 */
 	public Board(int width, int height) {
 		this.grid = new Grid(width, height);
-		this.bubbles = new HashMap<Integer, Bubble>(grid.getWidth()
-				* grid.getHeight());
+		this.bubbles = new HashMap<Integer, Bubble>(grid.getWidth() * grid.getHeight());
 	}
 
 	/**
