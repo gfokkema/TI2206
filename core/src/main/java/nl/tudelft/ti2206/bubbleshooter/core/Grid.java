@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 
@@ -40,7 +41,7 @@ public class Grid implements Serializable {
 	}
 	
 	/**
-	 * Checks whether two {@link Bubble} objects are adjacent to each other
+	 * Checks whether two {@link Bubble} objects are adjacent to each other.
 	 * @param a		{@link Bubble} object a
 	 * @param b		{@link Bubble} object b
 	 * @return		true if a and b are adjacent, false otherwise
@@ -56,6 +57,21 @@ public class Grid implements Serializable {
 		return	xy_a.y == xy_b.y && b - a == 1 ||
 				xy_b.y - xy_a.y == 1 && b - a > 0 &&
 					((b - a) == width || (b - a) == width - 1);
+	}
+	
+	/**
+	 * Returns all adjacent fields for a specified index.
+	 * @param idx	the index of the starting bubble
+	 */
+	public ArrayList<Integer> getAdjacent(int idx) {
+		ArrayList<Integer> adjacent = new ArrayList<>();
+		for (Orientation o : Orientation.values()) {
+			int new_idx = o.fromIndex(idx, this.getWidth());
+			if (this.adjacent(idx, new_idx)) {
+				adjacent.add(new_idx);
+			}
+		}
+		return adjacent;
 	}
 
 	/**
