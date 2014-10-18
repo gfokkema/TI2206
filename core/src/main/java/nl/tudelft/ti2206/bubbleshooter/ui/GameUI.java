@@ -14,6 +14,5 @@ public class GameUI {
 	public void draw() {
 		stage.act();
 		stage.draw();
-		Table.drawDebug(stage);
 	}
 }

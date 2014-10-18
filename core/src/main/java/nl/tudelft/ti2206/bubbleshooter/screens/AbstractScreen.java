@@ -31,7 +31,6 @@ public class AbstractScreen extends ScreenAdapter {
 		this.game = game;
 		this.stage = new Stage(new ScreenViewport());
 		this.table = new Table();
-		table.debug();
 		
 		TextureRegion region = new TextureRegion(game.assets.get(TextureID.BACKGROUND));
 		TextureRegionDrawable drawable = new TextureRegionDrawable(region);
@@ -76,7 +75,6 @@ public class AbstractScreen extends ScreenAdapter {
 		
 	    stage.act(delta);
 	    stage.draw();
-	    Table.drawDebug(stage);
 	}
 	
 	/**
