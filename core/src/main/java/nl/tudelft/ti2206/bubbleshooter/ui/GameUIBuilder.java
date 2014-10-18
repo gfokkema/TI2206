@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
@@ -34,6 +35,7 @@ public class GameUIBuilder {
 
 	public StatsBar addStatsBar(boolean left) {
 		VerticalGroup stats = new VerticalGroup();
+		stats.align(Align.left);
 		Label score = getLabel();
 		Label timer = getLabel();
 		stats.addActor(timer);

@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.time.Duration;
 import java.util.Collection;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
@@ -9,19 +8,12 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
-import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /**
  * The bubble shooter screen is the screen where the actual game is being played.
