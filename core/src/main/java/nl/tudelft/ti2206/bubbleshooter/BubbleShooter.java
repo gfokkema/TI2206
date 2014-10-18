@@ -5,7 +5,6 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;

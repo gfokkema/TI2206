@@ -38,6 +38,22 @@ public class SoundEngine {
 	}
 	
 	/**
+	 * This method will reset the whole {@link SoundEngine}.
+	 */
+	public void reset() {
+		engine = new SoundEngine();
+	}
+	
+	/**
+	 * Set the assets we should use.
+	 * This can be used for changing themes between levels.
+	 * @param loader	the {@link Assets} to use
+	 */
+	public void setAsset(Assets assets) {
+		this.assets = assets;
+	}
+	
+	/**
 	 * Return the current background music volume.
 	 * @return	current BGM volume (0 - 1)
 	 */
