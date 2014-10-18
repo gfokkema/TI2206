@@ -2,6 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 
@@ -13,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Grid implements Serializable {
 	private static final long serialVersionUID = -3156876087711309439L;
 	private int width = 8, height = 20;
+	private ArrayList<GridCell> gridCells;
 	
 	/**
 	 * Constructs the mathematical representation of a grid.
@@ -22,8 +25,17 @@ public class Grid implements Serializable {
 	public Grid(int width, int height) {
 		this.width = width;
 		this.height = height;
+		gridCells = new ArrayList<GridCell>(width*height);
 	}
-	
+
+	public Collection<Bubble> getDisconnected() {
+		Collection<Bubble> disconnected = new HashSet<Bubble>();
+		for (int i = 0; i < width; i++) {
+			gridCells.get(i).depthFirst(disconnected);
+		}
+		return disconnected;
+	}
+
 	/**
 	 * Returns the width of the {@link Board}.
 	 * @return	width in bubbles
