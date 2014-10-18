@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -36,6 +37,15 @@ public class FileHighscore {
 		updateScoreFile();
 	}
 
+	public void checkHighScoreFile(){
+		File f = new File(getFileName());
+		if(f.exists() && !f.isDirectory())  {} 
+		else{
+			createNewFile();
+		}
+		
+		
+	}
 	public void createNewFile() {
 		PrintWriter writer = null;
 		try {
