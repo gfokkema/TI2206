@@ -39,20 +39,6 @@ public class BubbleShooter extends Game {
 	public MainMenuScreen mms;
 	public SoundEngine engine;
 	public SpriteBatch batch;
-	public static Map<Integer, Function<AbstractProcessor, Boolean>> keyDownBindings
-		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
-	public static Map<Integer, Function<AbstractProcessor, Boolean>> keyUpBindings
-		= new HashMap<Integer, Function<AbstractProcessor, Boolean>>();
-
-	// Initialize the keybindings.
-	static {
-		keyDownBindings.put(Keys.LEFT, AbstractProcessor::cannonLeft);
-		keyDownBindings.put(Keys.RIGHT, AbstractProcessor::cannonRight);
-		keyDownBindings.put(Keys.SPACE, AbstractProcessor::cannonShoot);
-
-		keyUpBindings.put(Keys.LEFT, AbstractProcessor::cannonStopLeft);
-		keyUpBindings.put(Keys.RIGHT, AbstractProcessor::cannonStopRight);
-	}
 
 	/**
 	 * Create the spritebatch and bitmapfont.
