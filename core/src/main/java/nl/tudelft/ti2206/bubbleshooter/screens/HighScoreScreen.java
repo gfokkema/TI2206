@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.NavigableSet;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.util.HighScore;
 
 import com.badlogic.gdx.Gdx;
@@ -27,12 +26,11 @@ public class HighScoreScreen extends AbstractScreen {
 		Label label = new Label("These are the high scores for Arcade Mode.", labelStyle);
 		table.add(label).expandX().center().row();
 		
-		FileHighscore filescores = new FileHighscore();
-		filescores.addScore("Gerlof", 20);
-		filescores.addScore("Adam", 100);
-		filescores.addScore("Skip", 200);
+		game.scores.addScore("Gerlof", 20);
+		game.scores.addScore("Adam", 100);
+		game.scores.addScore("Skip", 200);
 		
-		NavigableSet<HighScore> scores = filescores.loadScoreFile().descendingSet();
+		NavigableSet<HighScore> scores = game.scores.loadScoreFile().descendingSet();
 		Iterator<HighScore> it = scores.iterator();
 		while(it.hasNext()) {
 			HighScore score = it.next();

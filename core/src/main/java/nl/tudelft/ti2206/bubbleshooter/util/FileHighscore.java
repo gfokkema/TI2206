@@ -20,9 +20,8 @@ public class FileHighscore {
 	
 	public FileHighscore() {
 		scores = new TreeSet<HighScore>();
+		loadScoreFile();
 	}
-	
-
 
 	/**
 	 * A method to add a HighScore object
@@ -33,7 +32,6 @@ public class FileHighscore {
 	 *            The score of the player
 	 */
 	public void addScore(String name, int score) {
-		loadScoreFile();
 		scores.add(new HighScore(name, score));
 		updateScoreFile();
 	}
@@ -43,23 +41,17 @@ public class FileHighscore {
 		try {
 			writer = new PrintWriter(getFileName(), "UTF-8");
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 		writer.close();
 	}
 
 	public String getFileName() {
-
 		return filename;
 	}
 
-	public void setFileName(String filename) {		
-		StringBuilder sb = new StringBuilder();
-		sb.append(filename+".txt");
-		this.filename = sb.toString();
-		
-		
+	public void setFileName(String filename) {
+		this.filename = filename + ".txt";
 	}
 
 	/**
@@ -70,13 +62,10 @@ public class FileHighscore {
 	public NavigableSet<HighScore> loadScoreFile() {
 		ObjectInputStream inputStream = null;
 		try {
-			inputStream = new ObjectInputStream(new FileInputStream(
-					getFileName()));
-
+			inputStream = new ObjectInputStream(new FileInputStream(getFileName()));
 			scores = (NavigableSet<HighScore>) inputStream.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		} finally {
 			try {
 				if (inputStream != null) {
@@ -96,11 +85,8 @@ public class FileHighscore {
 	private void updateScoreFile() {
 		ObjectOutputStream outputStream = null;
 		try {
-
-			outputStream = new ObjectOutputStream(new FileOutputStream(
-					getFileName()));
+			outputStream = new ObjectOutputStream(new FileOutputStream(getFileName()));
 			outputStream.writeObject(scores);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -114,6 +100,12 @@ public class FileHighscore {
 				e.printStackTrace();
 			}
 		}
-
+	}
+	
+	/**
+	 * This method evaluates whether a score should be added to the highscores.
+	 */
+	public boolean isHighScore(int score) {
+		return score > scores.first().getHighScore() || scores.size() < 20;
 	}
 }

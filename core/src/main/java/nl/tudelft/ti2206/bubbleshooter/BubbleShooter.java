@@ -12,6 +12,7 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.input.AbstractProcessor;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
+import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
 import nl.tudelft.ti2206.bubbleshooter.util.ScreenLogger;
 
@@ -35,6 +36,7 @@ public class BubbleShooter extends Game {
 	 */
 	public Assets assets;
 	public BitmapFont font;
+	public FileHighscore scores;
 	public MainMenuScreen mms;
 	public SoundEngine engine;
 	public SpriteBatch batch;
@@ -81,6 +83,8 @@ public class BubbleShooter extends Game {
 		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		scores = new FileHighscore();
 		
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
