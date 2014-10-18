@@ -21,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
  * The {@link Board} class represents the playing field which contains all the
  * {@link Bubble} objects.
  */
-public class Board extends BSDrawable implements Serializable {
+public class Board extends BSDrawable implements Serializable, Collidable {
 	private static final long serialVersionUID = -4815917036827285256L;
 	private Grid grid;
 	private HashMap<Integer, Bubble> bubbles;
@@ -54,10 +54,11 @@ public class Board extends BSDrawable implements Serializable {
 	public boolean add(Bubble b, Integer idx) {
 		if (bubbles.containsKey(idx))
 			return false;
-
+		
 		// Add the Bubble to the list
 		bubbles.put(idx, b);
-
+		grid.cells.get(idx).setBubble(b);
+		
 		// Update the bounds of the circle
 		b.setBounds(new Circle(grid.getLoc(idx), 16));
 
@@ -114,30 +115,6 @@ public class Board extends BSDrawable implements Serializable {
 		int finish = grid.toIdx(lastRowWidth - 1, grid.getHeight() - 1);
 		for(int i = start; i <= finish; i++) {
 			if(bubbles.containsKey(i)) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Checks the {@link Bubble} that gets shot for collisions with all the
-	 * other bubbles.
-	 * 
-	 * @param b
-	 *            {@link Bubble} that has been shot
-	 * @return true if there's a collision, false otherwise
-	 */
-	public boolean collides(Projectile b) {
-		for (Bubble v : bubbles.values()) {
-			if (v.collides(b))
-				return true;
-		}
-
-		if (b.getBounds().y + 16 > 480)
-			return true;
-		if (b.getBounds().x - 16 < 32
-				|| b.getBounds().x - 16 > grid.getWidth() * 32) {
-			Vector2 dir = b.getDirection();
-			dir.x = -dir.x;
 		}
 		return false;
 	}
@@ -260,5 +237,18 @@ public class Board extends BSDrawable implements Serializable {
 	@Override
 	public int getHeight() {
 		return 480;
+	}
+
+	@Override
+	public boolean collides(Projectile p) {
+		if (grid.collides(p)) return true;
+		
+		if (p.getBounds().y + 16 > 480) return true;
+		if (p.getBounds().x - 16 < 32
+				|| p.getBounds().x - 16 > grid.getWidth() * 32) {
+			Vector2 dir = p.getDirection();
+			dir.x = -dir.x;
+		}
+		return false;
 	}
 }

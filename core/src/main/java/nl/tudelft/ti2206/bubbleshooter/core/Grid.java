@@ -3,19 +3,22 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * The type of {@link Grid} a board uses.
  */
-public class Grid implements Serializable {
+public class Grid implements Serializable, Collidable {
 	private static final long serialVersionUID = -3156876087711309439L;
 	private int width = 8, height = 20;
-	private ArrayList<GridCell> gridCells;
+	public HashMap<Integer, GridCell> cells;
 	
 	/**
 	 * Constructs the mathematical representation of a grid.
@@ -25,13 +28,38 @@ public class Grid implements Serializable {
 	public Grid(int width, int height) {
 		this.width = width;
 		this.height = height;
-		gridCells = new ArrayList<GridCell>(width*height);
+		
+		cells = new HashMap<>(width * height - height / 2);
+		for (int i = 0; i < width * height - height / 2; i++) {
+			GridCell c = new GridCell(new Circle(getLoc(i), 16));
+			cells.put(i, c);
+			for (Integer neighbor_idx : getAdjacent(i)) {
+				GridCell neighbor = cells.get(neighbor_idx);
+				if (neighbor != null) c.connect(neighbor);
+			}
+		}
+	}
+	
+	/**
+	 * Checks the {@link Bubble} that gets shot for collisions with all the
+	 * other bubbles.
+	 * 
+	 * @param b
+	 *            {@link Bubble} that has been shot
+	 * @return true if there's a collision, false otherwise
+	 */
+	public boolean collides(Projectile p) {
+		for (GridCell c : cells.values()) {
+			if (c.getBubble() != null && c.collides(p))
+				return true;
+		}
+		return false;
 	}
 
 	public Collection<Bubble> getDisconnected() {
 		Collection<Bubble> disconnected = new HashSet<Bubble>();
 		for (int i = 0; i < width; i++) {
-			gridCells.get(i).depthFirst(disconnected);
+			cells.get(i).depthFirst(disconnected);
 		}
 		return disconnected;
 	}
@@ -60,9 +88,9 @@ public class Grid implements Serializable {
 	 */
 	public boolean adjacent(int a, int b) {
 		if (a > b) { int temp = a; a = b; b = temp; }
-		if (b < 0)	return false;
 		if (a < 0)	return false;
-		
+		if (b >= this.height * this.width - this.height / 2) return false;
+
 		Vector2 xy_a = toXY(a);
 		Vector2 xy_b = toXY(b);
 		
