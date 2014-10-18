@@ -6,15 +6,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.BiPredicate;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -40,79 +37,14 @@ public class Board extends BSDrawable implements Serializable, Collidable {
 		this.bubbles = new HashMap<Integer, Bubble>(grid.getWidth() * grid.getHeight());
 	}
 
-	/**
-	 * Add a {@link Bubble} to the {@link Board} on a specific {@link Board}
-	 * index.
-	 * 
-	 * @param b
-	 *            {@link Bubble} that has to be added
-	 * @param idx
-	 *            {@link Board} index
-	 * @return true if the {@link Board} has been added successfully, false
-	 *         otherwise
-	 */
-	public boolean add(Bubble b, Integer idx) {
-		if (bubbles.containsKey(idx))
-			return false;
-		
-		// Add the Bubble to the list
-		bubbles.put(idx, b);
-		grid.cells.get(idx).setBubble(b);
-		
-		// Update the bounds of the circle
-		b.setBounds(new Circle(grid.getLoc(idx), 16));
-
-		setChanged();
-		notifyObservers("Bubble has been added to index " + idx + ".");
-
-		return true;
-	}
-
-	/**
-	 * Add a {@link Bubble} to the {@link Board} on a specific hex index.
-	 * 
-	 * @param b
-	 *            {@link Bubble} that has to be added
-	 * @param i
-	 *            hexagonal x-coordinate
-	 * @param j
-	 *            hexagonal y-coordinate
-	 * @return true if the {@link Board} has been added successfully, false
-	 *         otherwise
-	 */
-	public boolean add(Bubble b, int i, int j) {
-		return add(b, grid.toIdx(i, j));
-	}
-
-	/**
-	 * Adds a projectile to the board and sets the behaviour chain for removal in motion.
-	 * @param p	the {@link Projectile} that has to be added to the board
-	 * @return	the number of points the user has scored by placing this {@link Projectile}
-	 */
-	public int add(Projectile p) {
-		int new_idx = grid.getIndex(p.getMidPoint());
-		if (!add(p, new_idx)) return -1;
-		
-		int score = 0;
-		for(int i = 0; i < getGrid().getHeight() * getGrid().getWidth() -1; i++) {
-			if(bubbles.get(i) != null)
-				score += bubbles.get(i).getBehaviour().remove(this, i, new_idx);
-		}
-	
-		Collection<Bubble> disconnected = this.getDisconnectedGroup();
-		this.removeAll(disconnected);
-		
-		return score + disconnected.size();
-	}
-
 	public boolean bubbleBelowLine() {
-		return bubbleBelowLine(grid.getHeight() - 2);
+		return bubbleBelowLine(grid.getGridHeight() - 2);
 	}
 
 	protected boolean bubbleBelowLine(int lineRow) {
 		int start = grid.toIdx(0,lineRow);
-		int lastRowWidth = grid.getWidth() - (grid.getHeight() % 2 - 1);
-		int finish = grid.toIdx(lastRowWidth - 1, grid.getHeight() - 1);
+		int lastRowWidth = grid.getGridWidth() - (grid.getGridHeight() % 2 - 1);
+		int finish = grid.toIdx(lastRowWidth - 1, grid.getGridHeight() - 1);
 		for(int i = start; i <= finish; i++) {
 			if(bubbles.containsKey(i)) return true;
 		}
@@ -157,15 +89,6 @@ public class Board extends BSDrawable implements Serializable, Collidable {
 		return bubbles;
 	}
 	
-	public ArrayList<Color> getColoursAvailable() {
-		ArrayList<Color> colours = new ArrayList<Color>();
-		for(Entry<Integer, Bubble> b: bubbles.entrySet()) {
-			//WHITE is a black color
-			if(!colours.contains(b.getValue().getColor()) && b.getValue().getColor() != Color.WHITE) colours.add(b.getValue().getColor());
-		}
-		return colours;
-	}
-	
 	/**
 	 * Traversal to find all of the nodes that should be removed. If nothing
 	 * should be removed, then nothing is returned.
@@ -194,7 +117,9 @@ public class Board extends BSDrawable implements Serializable, Collidable {
 	public Collection<BSDrawable> getDrawables() {
 		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
 		drawables.add(this);
-		drawables.addAll(bubbles.values());
+		grid.cells.values().forEach((GridCell c) -> {
+			if (c.isOccupied()) drawables.add(c.getBubble());
+		});
 		return drawables;
 	}
 	
@@ -207,7 +132,10 @@ public class Board extends BSDrawable implements Serializable, Collidable {
 	}
 
 	public boolean isEmpty() {
-		return bubbles.isEmpty();
+		for (GridCell c : grid.cells.values()) {
+			if (c.isOccupied()) return false;
+		};
+		return true;
 	}
 	
 	/**

@@ -8,14 +8,16 @@ import java.util.HashSet;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
  * The type of {@link Grid} a board uses.
  */
-public class Grid implements Serializable, Collidable {
+public class Grid extends BSDrawable implements Serializable, Collidable {
 	private static final long serialVersionUID = -3156876087711309439L;
 	private int width = 8, height = 20;
 	public HashMap<Integer, GridCell> cells;
@@ -34,10 +36,65 @@ public class Grid implements Serializable, Collidable {
 			GridCell c = new GridCell(new Circle(getLoc(i), 16));
 			cells.put(i, c);
 			for (Integer neighbor_idx : getAdjacent(i)) {
-				GridCell neighbor = cells.get(neighbor_idx);
-				if (neighbor != null) c.connect(neighbor);
+				c.connect(cells.get(neighbor_idx));
 			}
 		}
+	}
+	
+	/**
+	 * Add a {@link Bubble} to the {@link Board} on a specific {@link Board}
+	 * index.
+	 * 
+	 * @param b
+	 *            {@link Bubble} that has to be added
+	 * @param idx
+	 *            {@link Board} index
+	 * @return true if the {@link Board} has been added successfully, false
+	 *         otherwise
+	 */
+	public boolean add(Bubble b, Integer idx) {
+		GridCell cell = cells.get(idx);
+		if (cell.isOccupied()) return false;
+		
+		// Add the Bubble to the list
+		cell.setBubble(b);
+		
+		// Update the bounds of the circle
+		// TODO: replace this
+		b.setBounds(new Circle(getLoc(idx), 16));
+
+		setChanged();
+		notifyObservers("Bubble has been added to index " + idx + ".");
+
+		return true;
+	}
+
+	/**
+	 * Add a {@link Bubble} to the {@link Board} on a specific hex index.
+	 * 
+	 * @param b
+	 *            {@link Bubble} that has to be added
+	 * @param i
+	 *            hexagonal x-coordinate
+	 * @param j
+	 *            hexagonal y-coordinate
+	 * @return true if the {@link Board} has been added successfully, false
+	 *         otherwise
+	 */
+	public boolean add(Bubble b, int i, int j) {
+		return add(b, toIdx(i, j));
+	}
+
+	/**
+	 * Adds a projectile to the board and sets the behaviour chain for removal in motion.
+	 * @param p	the {@link Projectile} that has to be added to the board
+	 * @return	the number of points the user has scored by placing this {@link Projectile}
+	 */
+	public int add(Projectile p) {
+		int new_idx = getIndex(p.getMidPoint());
+		if (!add(p, new_idx)) return -1;
+		
+		return 0;
 	}
 	
 	/**
@@ -50,10 +107,22 @@ public class Grid implements Serializable, Collidable {
 	 */
 	public boolean collides(Projectile p) {
 		for (GridCell c : cells.values()) {
-			if (c.getBubble() != null && c.collides(p))
+			if (c.isOccupied() && c.collides(p))
 				return true;
 		}
 		return false;
+	}
+	
+	public ArrayList<Color> getColoursAvailable() {
+		HashSet<Color> colours = new HashSet<Color>();
+		for(GridCell c: cells.values()) {
+			if (c.isOccupied()) {
+				//WHITE is a black color
+				Color color = c.getBubble().getColor();
+				if(color != Color.WHITE) colours.add(color);
+			}
+		}
+		return new ArrayList<Color>(colours);
 	}
 
 	public Collection<Bubble> getDisconnected() {
@@ -68,7 +137,7 @@ public class Grid implements Serializable, Collidable {
 	 * Returns the width of the {@link Board}.
 	 * @return	width in bubbles
 	 */
-	public int getWidth() {
+	public int getGridWidth() {
 		return width;
 	}
 	
@@ -76,7 +145,7 @@ public class Grid implements Serializable, Collidable {
 	 * Returns the height of the {@link Board}.
 	 * @return	height in bubbles
 	 */
-	public int getHeight() {
+	public int getGridHeight() {
 		return height;
 	}
 	
@@ -181,4 +250,20 @@ public class Grid implements Serializable, Collidable {
 		
 		return toIdx(x_id, y_id);
 	}
+
+	@Override
+	public TextureID getTexture() {
+		return TextureID.BORDER;
+	}
+
+	@Override
+	public int getWidth() {
+		return 320;
+	}
+
+	@Override
+	public int getHeight() {
+		return 480;
+	}
+
 }

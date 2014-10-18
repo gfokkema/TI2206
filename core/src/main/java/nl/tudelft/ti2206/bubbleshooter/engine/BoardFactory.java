@@ -19,7 +19,7 @@ public abstract class BoardFactory {
 	 * @param j			the y-coordinate in the Grid
 	 */
 	protected void add(Board board, Bubble b, int i, int j) {
-		board.add(b, i, j);
+		board.getGrid().add(b, i, j);
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public abstract class BoardFactory {
 	 * @param idx		the idx in the Grid
 	 */
 	protected void add(Board board, Bubble b, int idx) {
-		board.add(b, idx);
+		board.getGrid().add(b, idx);
 	}
 	
 }
