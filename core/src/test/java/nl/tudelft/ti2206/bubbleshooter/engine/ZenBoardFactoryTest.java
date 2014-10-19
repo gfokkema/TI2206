@@ -5,13 +5,13 @@ import static org.junit.Assert.assertEquals;
 import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ZenBoardFactoryTest {
 	private ZenBoardFactory factory;
 	private Iterator<Board> boards;
@@ -26,12 +26,16 @@ public class ZenBoardFactoryTest {
 	
 	@Test
 	public void testBoardDim() {
-		assertEquals(8, board.getGrid().getWidth());
-		assertEquals(15, board.getGrid().getHeight());
+		assertEquals(8, board.getGrid().getGridWidth());
+		assertEquals(15, board.getGrid().getGridHeight());
 	}
 
 	@Test
 	public void testBoardSize() {
-		assertEquals(40, board.getBubbles().size());
+		int i = 0;
+		for (GridCell c : board.getGrid().cells.values()) {
+			if (c.isOccupied()) i++;
+		}
+		assertEquals(40, i);
 	}
 }
