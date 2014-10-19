@@ -37,9 +37,18 @@ public class GridCell implements Collidable {
 		this.bubble = b;
 	}
 
-	public int removeBubble() {
+	public void removeBubble() {
 		this.bubble = null;
-		return 1;
+	}
+
+	public int remove() {
+		if (!isOccupied()) return 0;
+		return bubble.getBehaviour().remove(this);
+	}
+
+	public int chain() {
+		if (!isOccupied()) return 0;
+		return bubble.getBehaviour().chain(this);
 	}
 
 	public boolean isOccupied() {
