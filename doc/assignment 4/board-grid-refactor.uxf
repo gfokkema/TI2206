@@ -5,15 +5,16 @@
     <id>UMLClass</id>
     <coordinates>
       <x>595</x>
-      <y>140</y>
+      <y>133</y>
       <w>189</w>
-      <h>105</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>/BSDrawable/
 --
 /+getTexture(): TextureID/
 /+getWidth(): int/
 /+getHeight(): int/
+
 +getPosition(): Vector2
 +getOritin(): Vector2
 +getColor(): Color
@@ -26,7 +27,7 @@
       <x>896</x>
       <y>315</y>
       <w>224</w>
-      <h>147</h>
+      <h>161</h>
     </coordinates>
     <panel_attributes>Grid
 --
@@ -34,12 +35,13 @@
 +add(b: Bubble, idx: int): GridCell
 +add(p: Projectile): GridCell
 +adjacent(a: int, b: int): boolean
-+collides(p: Projectile): boolean
+
 +getColoursAvailable(): ArrayList&lt;Color&gt;
 +getDrawables(): Collection&lt;BSDrawable&gt;
 +getFilledGridCells(): Collection&lt;GridCell&gt;
 +getGridWidth(): int
 +getGridHeight(): int
+
 +removeDisconnected(): int</panel_attributes>
     <additional_attributes/>
   </element>
@@ -75,12 +77,11 @@
       <x>581</x>
       <y>315</y>
       <w>217</w>
-      <h>203</h>
+      <h>189</h>
     </coordinates>
     <panel_attributes>GridCell
 --
 +GridCell(bounds: Circle)
-+collides(p: Projectile): boolean
 +connect(c: GridCell)
 +depthFirst(acc: Collection&lt;GridCell&gt;,
                     cond: Predicate&lt;Bubble&gt;,
@@ -88,8 +89,8 @@
 +getBubble(): Bubble
 +getNeighbors(): Set&lt;GridCell&gt;
 +forEachNeighbor(consumer: Consumer)
-+setBubble(b: Bubble)
 +isOccupied(): boolean
++setBubble(b: Bubble)
 +removeBubble()
 
 +chain(): int
@@ -276,29 +277,29 @@ m2=1</panel_attributes>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Collidable
 --
-+collides(p: Projectile)</panel_attributes>
++collides(p: Projectile): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>672</x>
-      <y>511</y>
+      <y>497</y>
       <w>203</w>
-      <h>105</h>
+      <h>119</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>270.0;130.0;270.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>270.0;150.0;270.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>854</x>
-      <y>455</y>
+      <y>469</y>
       <w>175</w>
-      <h>161</h>
+      <h>147</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;210.0;10.0;150.0;230.0;150.0;230.0;10.0</additional_attributes>
+    <additional_attributes>10.0;190.0;10.0;130.0;230.0;130.0;230.0;10.0</additional_attributes>
   </element>
 </diagram>
