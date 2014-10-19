@@ -40,7 +40,7 @@ public class FileHighscore {
 	 */
 	public void checkHighScoreFile(){
 		File f = new File(getFileName());
-		if(f.exists() && !f.isDirectory())  {} 
+		if(f.exists() && !f.isDirectory())  {System.out.println(f.getPath());} 
 		else{
 			PrintWriter writer = null;
 			try {
