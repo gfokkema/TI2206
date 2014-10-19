@@ -34,12 +34,7 @@ public class Board extends BSDrawable implements Serializable, Collidable {
 	}
 	
 	public Collection<BSDrawable> getDrawables() {
-		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
-		drawables.add(this);
-		grid.cells.values().forEach((GridCell c) -> {
-			if (c.isOccupied()) drawables.add(c.getBubble());
-		});
-		return drawables;
+		return grid.getDrawables();
 	}
 	
 	public Grid getGrid() {

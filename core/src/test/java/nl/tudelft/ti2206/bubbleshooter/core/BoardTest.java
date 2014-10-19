@@ -24,12 +24,12 @@ import com.badlogic.gdx.math.Vector2;
  * The Board represents the playing field that keeps track of all ColourBubbles in the game.
  */
 public class BoardTest {
-	private Board board;
+	private Grid grid;
 
 	/**
-	 * This method sets up a 6x15 board for use in all test cases.
+	 * This method sets up a 6x15 grid for use in all test cases.
 	 * 
-	 * This is what a 6x15 board looks like (for reference):
+	 * This is what a 6x15 grid looks like (for reference):
 	 *  0   1   2   3   4   5
 	 *    6   7   8   9  10
 	 * 11  12  13  14  15  16
@@ -39,7 +39,7 @@ public class BoardTest {
 	 */
 	@Before
 	public void setUp() {
-		board = new Board(6, 15);
+		grid = new Grid(6, 15);
 	}
 
 	/**
@@ -47,14 +47,14 @@ public class BoardTest {
 	 */
 	@Test
 	public void testCreate() {
-		assertEquals(320, board.getWidth());
-		assertEquals(480, board.getHeight());
-		assertEquals(TextureID.BORDER, board.getTexture());
-		assertTrue(board.isEmpty());
-		assertEquals(new Vector2(0, 0), board.getPosition());
-		assertEquals(new Vector2(0, 0), board.getOrigin());
-		assertEquals(Color.WHITE, board.getColor());
-		assertEquals(0, board.getRotation(), .001);
+		assertEquals(320, grid.getWidth());
+		assertEquals(480, grid.getHeight());
+		assertEquals(TextureID.BORDER, grid.getTexture());
+		assertTrue(grid.isEmpty());
+		assertEquals(new Vector2(0, 0), grid.getPosition());
+		assertEquals(new Vector2(0, 0), grid.getOrigin());
+		assertEquals(Color.WHITE, grid.getColor());
+		assertEquals(0, grid.getRotation(), .001);
 
 	}
 
@@ -63,9 +63,9 @@ public class BoardTest {
 	 */
 	@Test
 	public void testAddIndex() {
-		assertTrue(board.add(new ColourBubble(), 0));
-		assertFalse(board.add(new ColourBubble(), 0));
-		assertFalse(board.isEmpty());
+		assertTrue(grid.add(new ColourBubble(), 0));
+		assertFalse(grid.add(new ColourBubble(), 0));
+		assertFalse(grid.isEmpty());
 	}
 
 	/**
@@ -79,12 +79,12 @@ public class BoardTest {
 		
 		Projectile p = new Projectile(c1, new Vector2(), 0);
 		p.setBounds(c1);
-		assertEquals(0, board.add(p));
+		assertEquals(0, grid.add(p));
 		p.setBounds(c2);
-		assertEquals(0, board.add(p));
-		assertEquals(-1, board.add(p));
+		assertEquals(0, grid.add(p));
+		assertEquals(-1, grid.add(p));
 		p.setBounds(c3);
-		assertEquals(3, board.add(p));
+		assertEquals(3, grid.add(p));
 	}
 
 	/**
@@ -94,17 +94,17 @@ public class BoardTest {
 	public void testGetDrawables() {
 		Collection<BSDrawable> drawables;
 
-		drawables = board.getDrawables();
-		assertTrue(drawables.contains(board));
+		drawables = grid.getDrawables();
+		assertTrue(drawables.contains(grid));
 		assertEquals(1, drawables.size());
 
 		ArrayList<Bubble> testbubbles = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			testbubbles.add(new ColourBubble());
-			board.add(testbubbles.get(i), i);
+			grid.add(testbubbles.get(i), i);
 		}
 
-		drawables = board.getDrawables();
+		drawables = grid.getDrawables();
 		assertEquals(11, drawables.size());
 		for (Bubble b : testbubbles) assertTrue(drawables.contains(b));
 	}
@@ -115,7 +115,7 @@ public class BoardTest {
 	@Test
 	public void testCollision() {
 		for (int i = 0; i < 20; i++) {
-			board.add(new ColourBubble(), i);
+			grid.add(new ColourBubble(), i);
 		}
 		Circle c1 = new Circle(32 * 3, 480 - 32 * 1, 16);
 		Circle c2 = new Circle(32 * 3, 480 - 32 * 3, 16);
@@ -123,17 +123,17 @@ public class BoardTest {
 		Projectile bubble = new Projectile(c1, new Vector2(0, 0), 0);
 
 		bubble.setBounds(c1);
-		assertTrue(board.collides(bubble));
+		assertTrue(grid.collides(bubble));
 
 		bubble.setBounds(c2);
-		assertTrue(board.collides(bubble));
+		assertTrue(grid.collides(bubble));
 
 		bubble.setBounds(c3);
-		assertFalse(board.collides(bubble));
+		assertFalse(grid.collides(bubble));
 	}
 
 	/**
-	 * Test collisions with the border of the board.
+	 * Test collisions with the border of the grid.
 	 */
 	@Test
 	public void testCollisionBorder() {
@@ -144,17 +144,17 @@ public class BoardTest {
 
 		// ColourBubble should hit the top border
 		bubble.setBounds(c1);
-		assertTrue(board.collides(bubble));
+		assertTrue(grid.collides(bubble));
 
 		// ColourBubble should hit the rightmost border
 		bubble.setDirection(new Vector2(1, 0));
 		bubble.setBounds(c2);
-		assertFalse(board.collides(bubble));
+		assertFalse(grid.collides(bubble));
 		assertEquals(new Vector2(-1, 0), bubble.getDirection());
 
 		bubble.setDirection(new Vector2(-1, 0));
 		bubble.setBounds(c3);
-		assertFalse(board.collides(bubble));
+		assertFalse(grid.collides(bubble));
 		assertEquals(new Vector2(1, 0), bubble.getDirection());
 	}
 
@@ -165,15 +165,15 @@ public class BoardTest {
 	@Test
 	public void testgetGroup() {
 		//Add 3 ColourBubbles in a row.
-		board.add(new ColourBubble(Color.BLUE), 0);
-		board.add(new ColourBubble(Color.BLUE), 1);
-		board.add(new ColourBubble(Color.BLUE), 2);
+		grid.add(new ColourBubble(Color.BLUE), 0);
+		grid.add(new ColourBubble(Color.BLUE), 1);
+		grid.add(new ColourBubble(Color.BLUE), 2);
 		//Add one ColourBubble of a different color.
-		board.add(new ColourBubble(Color.RED), 3);
+		grid.add(new ColourBubble(Color.RED), 3);
 		//Add one ColourBubble of the same color, but not adjacent.
-		board.add(new ColourBubble(Color.BLUE), 1, 2);
+		grid.add(new ColourBubble(Color.BLUE), 1, 2);
 
-		Collection<Bubble> colorGroup = board.getGroup(0);
+		Collection<Bubble> colorGroup = grid.getGroup(0);
 		assertEquals(3, colorGroup.size());
 		colorGroup.forEach(
 				(Bubble b) -> assertEquals(Color.BLUE, b.getColor())
@@ -186,13 +186,13 @@ public class BoardTest {
 	 */
 	@Test
 	public void testGetDisconnectedGroup() {
-		board.add(new ColourBubble(Color.BLUE), 1, 0);
-		board.add(new ColourBubble(Color.BLUE), 2, 0);
-		board.add(new ColourBubble(Color.BLUE), 3, 0);
-		board.add(new ColourBubble(Color.RED), 4, 2);
-		board.add(new ColourBubble(Color.RED), 5, 2);
+		grid.add(new ColourBubble(Color.BLUE), 1, 0);
+		grid.add(new ColourBubble(Color.BLUE), 2, 0);
+		grid.add(new ColourBubble(Color.BLUE), 3, 0);
+		grid.add(new ColourBubble(Color.RED), 4, 2);
+		grid.add(new ColourBubble(Color.RED), 5, 2);
 
-		Collection<Bubble> disconnectedGroup = board.getDisconnectedGroup();
+		Collection<Bubble> disconnectedGroup = grid.getDisconnectedGroup();
 		assertEquals(2, disconnectedGroup.size());
 		disconnectedGroup.forEach(
 				(Bubble b) -> assertEquals(Color.RED, b.getColor())
@@ -200,52 +200,52 @@ public class BoardTest {
 	}
 
 	/**
-	 * Checks whether (adjacent on the board) add ColourBubbles, of the same color,
+	 * Checks whether (adjacent on the grid) add ColourBubbles, of the same color,
 	 *  all get add.
 	 */
 	@Test
 	public void testAddColorGroup(){
 
 		for (int i = 0; i < 4; i++) {
-			board.add(new ColourBubble(Color.RED), i);
+			grid.add(new ColourBubble(Color.RED), i);
 		}
 
-		Collection<Bubble> colorGroupRed = board.getGroup(0);
+		Collection<Bubble> colorGroupRed = grid.getGroup(0);
 		colorGroupRed.forEach(
 				(Bubble b) -> assertEquals(Color.RED, b.getColor())
 				);
 	}	
 
 	/**
-	 * Checks whether (adjacent on the board) add ColourBubbles, of the same color,
+	 * Checks whether (adjacent on the grid) add ColourBubbles, of the same color,
 	 *  all get add.
 	 */
 	@Test
 	public void testAddColorGroupWrongColorAddedAdjacent(){
 
 		for (int i = 0; i < 4; i++) {
-			board.add(new ColourBubble(Color.RED), i);
+			grid.add(new ColourBubble(Color.RED), i);
 		}
 
-		Collection<Bubble> colorGroupRed = board.getGroup(0);
+		Collection<Bubble> colorGroupRed = grid.getGroup(0);
 		assertFalse(colorGroupRed.contains(Color.BLUE));
 
 	}	
 
 
 	/**
-	 * Checks whether (not adjacent on the board) add ColourBubbles, of the same color, 
+	 * Checks whether (not adjacent on the grid) add ColourBubbles, of the same color, 
 	 * all get add.
 	 */
 	@Test
 	public void testAddColorGroupNotAdjacent(){
 
-		board.add(new ColourBubble(Color.BLUE),4);
-		board.add(new ColourBubble(Color.BLUE),5);
-		board.add(new ColourBubble(Color.RED),7);	
-		board.add(new ColourBubble(Color.BLUE), 10);
+		grid.add(new ColourBubble(Color.BLUE),4);
+		grid.add(new ColourBubble(Color.BLUE),5);
+		grid.add(new ColourBubble(Color.RED),7);	
+		grid.add(new ColourBubble(Color.BLUE), 10);
 
-		Collection<Bubble> colorGroupBlue = board.getGroup(5);
+		Collection<Bubble> colorGroupBlue = grid.getGroup(5);
 		colorGroupBlue.forEach(
 				(Bubble c) -> assertEquals(Color.BLUE, c.getColor())
 				);
@@ -253,18 +253,18 @@ public class BoardTest {
 	}
 
 	/**
-	 * Checks whether (not adjacent on the board) add ColourBubbles, of the same color, 
+	 * Checks whether (not adjacent on the grid) add ColourBubbles, of the same color, 
 	 * all get add and the other colored ColourBubbles do not.
 	 */
 	@Test
 	public void testAddColorGroupWrongColorAdded(){
 
-		board.add(new ColourBubble(Color.BLUE),4);
-		board.add(new ColourBubble(Color.BLUE),5);
-		board.add(new ColourBubble(Color.RED),7);	
-		board.add(new ColourBubble(Color.BLUE), 10);
+		grid.add(new ColourBubble(Color.BLUE),4);
+		grid.add(new ColourBubble(Color.BLUE),5);
+		grid.add(new ColourBubble(Color.RED),7);	
+		grid.add(new ColourBubble(Color.BLUE), 10);
 
-		Collection<Bubble> colorGroupBlue = board.getGroup(5);
+		Collection<Bubble> colorGroupBlue = grid.getGroup(5);
 
 		assertFalse(colorGroupBlue.contains(Color.RED));
 	}
@@ -277,27 +277,27 @@ public class BoardTest {
 	public void testGetDisconnectedGroupEmpty() {
 		// Initialize four ColourBubbles
 		for (int i = 0; i < 4; i++) {
-			board.add(new ColourBubble(), i);
+			grid.add(new ColourBubble(), i);
 		}
-		Collection<Bubble> empty = board.getDisconnectedGroup();
+		Collection<Bubble> empty = grid.getDisconnectedGroup();
 		assertTrue(empty.isEmpty());
 	}
 
 	/**
-	 * Test whether the board detects it when a ColourBubble is below the losing line.
+	 * Test whether the grid detects it when a ColourBubble is below the losing line.
 	 */
 	@Test
 	public void testBubbleBelowLine() {
-		board.add(new ColourBubble(),0,1);
-		assertFalse(board.bubbleBelowLine(14));
+		grid.add(new ColourBubble(),0,1);
+		assertFalse(grid.bubbleBelowLine(14));
 		//Test just before the id which are checked.
-		board.add(new ColourBubble(),4,13);
-		assertFalse(board.bubbleBelowLine(14));
+		grid.add(new ColourBubble(),4,13);
+		assertFalse(grid.bubbleBelowLine(14));
 		//Test the last ColourBubble that's checked.
-		board.add(new ColourBubble(),5,14);
-		assertTrue(board.bubbleBelowLine(14));
+		grid.add(new ColourBubble(),5,14);
+		assertTrue(grid.bubbleBelowLine(14));
 		//Test the first ColourBubble that's checked.
-		board.add(new ColourBubble(),0,14);
-		assertTrue(board.bubbleBelowLine(14));
+		grid.add(new ColourBubble(),0,14);
+		assertTrue(grid.bubbleBelowLine(14));
 	}
 }

@@ -128,12 +128,15 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return new ArrayList<Color>(colours);
 	}
 
-	public Collection<Bubble> getDisconnected() {
-		Collection<Bubble> disconnected = new HashSet<Bubble>();
+	public int removeDisconnected() {
+		Collection<GridCell> connected = new HashSet<GridCell>();
 		for (int i = 0; i < width; i++) {
-			cells.get(i).depthFirst(disconnected);
+			cells.get(i).depthFirst(connected);
 		}
-		return disconnected;
+		Collection<GridCell> disconnected = new HashSet<GridCell>(cells.values());
+		disconnected.removeAll(connected);
+		disconnected.forEach((GridCell gc) -> gc.removeBubble());
+		return disconnected.size();
 	}
 
 	/**
@@ -159,6 +162,15 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return true;
 	}
 	
+	public Collection<BSDrawable> getDrawables() {
+		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
+		drawables.add(this);
+		cells.values().forEach((GridCell c) -> {
+			if (c.isOccupied()) drawables.add(c.getBubble());
+		});
+		return drawables;
+	}
+
 	/**
 	 * Checks whether two {@link Bubble} objects are adjacent to each other.
 	 * @param a		{@link Bubble} object a
