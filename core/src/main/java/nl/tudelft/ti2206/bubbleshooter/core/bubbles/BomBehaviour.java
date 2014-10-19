@@ -9,6 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
  *
  */
 public class BomBehaviour implements BubbleBehaviour{
+	int score = 0;
 	
 	/**
 	 * Gets the {@link Collection<{@link Bubble}>} of {@link Bubble}s to be removed.
@@ -25,8 +26,8 @@ public class BomBehaviour implements BubbleBehaviour{
 	@Override
 	public int remove(GridCell cell) {
 		cell.removeBubble();
-		cell.forEachNeighbor((GridCell gc) -> gc.chain());
-		return 0;
+		cell.forEachNeighbor((GridCell gc) -> score += gc.chain());
+		return score;
 	}
 
 	@Override

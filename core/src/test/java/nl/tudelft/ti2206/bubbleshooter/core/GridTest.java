@@ -379,6 +379,27 @@ public class GridTest {
 	}
 	
 	/**
+	 * Test to see if only ColourBubbles that are disconnected
+	 * from the ceiling are returned.
+	 */
+	@Test
+	public void testRemoveDisconnected() {
+		grid.add(new ColourBubble(Color.BLUE), 1, 0);
+		grid.add(new ColourBubble(Color.BLUE), 2, 0);
+		grid.add(new ColourBubble(Color.BLUE), 3, 0);
+		grid.add(new ColourBubble(Color.RED), 4, 2);
+		grid.add(new ColourBubble(Color.RED), 5, 2);
+
+		int disconnected_size = grid.removeDisconnected();
+		Collection<GridCell> filled = grid.getFilledGridCells();
+		assertEquals(3, filled.size());
+		assertEquals(2, disconnected_size);
+		filled.forEach(
+				(GridCell gc) -> assertEquals(Color.BLUE, gc.getBubble().getColor())
+		);
+	}
+
+	/**
 	 * Test whether an empty Collection is returned when all ColourBubbles are connected to the ceiling.
 	 */
 	@Test
@@ -387,7 +408,8 @@ public class GridTest {
 		for (int i = 0; i < 4; i++) {
 			grid.add(new ColourBubble(), i);
 		}
-		grid.removeDisconnected();
+		int disconnected_size = grid.removeDisconnected();
 		assertEquals(4, grid.size());
+		assertEquals(2, disconnected_size);
 	}
 }

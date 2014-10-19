@@ -6,6 +6,7 @@ import java.util.HashSet;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 public class ColourBehaviour implements BubbleBehaviour {
+	int size = 0;
 
 	/**
 	 * Get a {@link Collection} of all {@link Bubble} objects adjacent to the
@@ -30,9 +31,15 @@ public class ColourBehaviour implements BubbleBehaviour {
 		sameColors.add(cell);
 		Bubble base = cell.getBubble();
 		cell.forEachNeighbor(g -> g.depthFirst(sameColors, (Bubble b) -> compareColors(base, b), true));
-		int size = sameColors.size();
-		if (size >= 3)	sameColors.forEach((GridCell g) -> g.removeBubble());
-		else			size = 0;
+		size = sameColors.size();
+		if (size >= 3) {
+			sameColors.forEach((GridCell g) -> {
+				g.removeBubble();
+				size++;
+			});
+		} else {
+			size = 0;
+		}
 		return size;
 	}
 

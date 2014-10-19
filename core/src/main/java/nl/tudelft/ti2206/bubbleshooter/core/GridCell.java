@@ -153,7 +153,11 @@ public class GridCell implements Collidable {
 	/**
 	 * Trigger the neighboring bubbles (used upon collision).
 	 */
-	public void triggerNeighbors() {
-		forEachNeighbor(g -> g.trigger());
+	public int triggerNeighbors() {
+		int score = 0;
+		for (GridCell g : neighbors) {
+			score += g.trigger();
+		}
+		return score;
 	}
 }
