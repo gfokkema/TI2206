@@ -44,96 +44,6 @@ public class BoardTest {
 	}
 
 	/**
-	 * Test the default values of a {@link Board}.
-	 */
-	@Test
-	public void testCreate() {
-		assertEquals(320, grid.getWidth());
-		assertEquals(480, grid.getHeight());
-		assertEquals(TextureID.BORDER, grid.getTexture());
-		assertTrue(grid.isEmpty());
-		assertEquals(new Vector2(0, 0), grid.getPosition());
-		assertEquals(new Vector2(0, 0), grid.getOrigin());
-		assertEquals(Color.WHITE, grid.getColor());
-		assertEquals(0, grid.getRotation(), .001);
-
-	}
-
-	/**
-	 * Test adding a ColourBubble to the {@link Board}, using a given {@link Board} index.
-	 */
-	@Test
-	public void testAddIndex() {
-		assertTrue(grid.add(new ColourBubble(), 0));
-		assertFalse(grid.add(new ColourBubble(), 0));
-		assertFalse(grid.isEmpty());
-	}
-
-	/**
-	 * Test adding a ColourBubble to the {@link Board}, using only it's current position.
-	 */
-	@Test
-	public void testAdd() {
-		Circle c1 = new Circle(32 * 3 + 16, 480 - 32 * 0 - 16, 16);
-		Circle c2 = new Circle(32 * 3 + 32, 480 - 32 * 1 - 16, 16);
-		Circle c3 = new Circle(32 * 3 + 16, 480 - 32 * 2 - 16, 16);
-		
-		Projectile p = new Projectile(c1, new Vector2(), 0);
-		p.setBounds(c1);
-		assertEquals(0, grid.add(p));
-		p.setBounds(c2);
-		assertEquals(0, grid.add(p));
-		assertEquals(-1, grid.add(p));
-		p.setBounds(c3);
-		assertEquals(3, grid.add(p));
-	}
-
-	/**
-	 * Test whether all the correct drawables are returned by this {@link Board}.
-	 */
-	@Test
-	public void testGetDrawables() {
-		Collection<BSDrawable> drawables;
-
-		drawables = grid.getDrawables();
-		assertTrue(drawables.contains(grid));
-		assertEquals(1, drawables.size());
-
-		ArrayList<Bubble> testbubbles = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			testbubbles.add(new ColourBubble());
-			grid.add(testbubbles.get(i), i);
-		}
-
-		drawables = grid.getDrawables();
-		assertEquals(11, drawables.size());
-		for (Bubble b : testbubbles) assertTrue(drawables.contains(b));
-	}
-
-	/**
-	 * Test whether the collision method works, with the collision in possible circumstances.
-	 */
-	@Test
-	public void testCollision() {
-		for (int i = 0; i < 20; i++) {
-			grid.add(new ColourBubble(), i);
-		}
-		Circle c1 = new Circle(32 * 3, 480 - 32 * 1, 16);
-		Circle c2 = new Circle(32 * 3, 480 - 32 * 3, 16);
-		Circle c3 = new Circle(32 * 3, 480 - 32 * 5, 16);
-		Projectile bubble = new Projectile(c1, new Vector2(0, 0), 0);
-
-		bubble.setBounds(c1);
-		assertTrue(grid.collides(bubble));
-
-		bubble.setBounds(c2);
-		assertTrue(grid.collides(bubble));
-
-		bubble.setBounds(c3);
-		assertFalse(grid.collides(bubble));
-	}
-
-	/**
 	 * Test collisions with the border of the grid.
 	 */
 	@Test
@@ -282,23 +192,5 @@ public class BoardTest {
 		Collection<Bubble> colorGroupBlue = grid.getGroup(5);
 
 		assertFalse(colorGroupBlue.contains(Color.RED));
-	}
-
-	/**
-	 * Test whether the grid detects it when a ColourBubble is below the losing line.
-	 */
-	@Test
-	public void testBubbleBelowLine() {
-		grid.add(new ColourBubble(),0,1);
-		assertFalse(grid.bubbleBelowLine(14));
-		//Test just before the id which are checked.
-		grid.add(new ColourBubble(),4,13);
-		assertFalse(grid.bubbleBelowLine(14));
-		//Test the last ColourBubble that's checked.
-		grid.add(new ColourBubble(),5,14);
-		assertTrue(grid.bubbleBelowLine(14));
-		//Test the first ColourBubble that's checked.
-		grid.add(new ColourBubble(),0,14);
-		assertTrue(grid.bubbleBelowLine(14));
 	}
 }

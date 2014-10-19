@@ -85,12 +85,12 @@ public class Cannon extends BSDrawable implements Serializable {
 	 * @param board	{@link Board} that this projectile will be shot at
 	 * @return		{@link Projectile} that has been shot
 	 */
-	public Projectile shoot(Board board) {
+	public Projectile shoot(Grid grid) {
 		Projectile fired = projectile;
 		fired.setVelocity(velocity);
 		fired.setDirection(new Vector2(pointer.direction));
 		
-		projectile = new Projectile(board.getGrid().getColoursAvailable(), new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
+		projectile = new Projectile(grid.getColoursAvailable(), new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
 		Assets.getAssets().get(SoundID.CANNON).play();
 		setChanged();
 		notifyObservers("Cannon has been shot!");

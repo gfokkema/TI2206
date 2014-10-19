@@ -84,14 +84,13 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * @return	the number of points the user has scored by placing this {@link Projectile}
 	 */
 	public boolean add(Projectile p) {
+		// FIXME: REMOVE
 		int i = getIndex(p.getMidPoint());
-		add(p, getIndex(p.getMidPoint()));
 		cells.get(i).forEachNeighbor((GridCell c) -> {
-			if (c.getBubble() != null) System.out.print(c.getBubble().getColor());
-			System.out.println("debug");
 			c.removeBubble();
 		});
-		return true;
+		// FIXME: REMOVE
+		return add(p, getIndex(p.getMidPoint()));
 	}
 	
 	public boolean bubbleBelowLine() {

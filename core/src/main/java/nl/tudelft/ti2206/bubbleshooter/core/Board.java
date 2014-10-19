@@ -60,7 +60,7 @@ public class Board extends BSDrawable implements Serializable, Collidable {
 		
 		if (p.getBounds().y + 16 > 480) return true;
 		if (p.getBounds().x - 16 < 32
-				|| p.getBounds().x - 16 > grid.getWidth() * 32) {
+				|| p.getBounds().x - 16 > grid.getGridWidth() * 32) {
 			Vector2 dir = p.getDirection();
 			dir.x = -dir.x;
 		}

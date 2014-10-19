@@ -6,12 +6,19 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
+
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 public class GridTest {
@@ -33,6 +40,114 @@ public class GridTest {
 		grid = new Grid(6, 15);
 	}
 
+	/**
+	 * Test the default values of a {@link Board}.
+	 */
+	@Test
+	public void testCreate() {
+		assertEquals(320, grid.getWidth());
+		assertEquals(480, grid.getHeight());
+		assertEquals(TextureID.BORDER, grid.getTexture());
+		assertTrue(grid.isEmpty());
+		assertEquals(new Vector2(0, 0), grid.getPosition());
+		assertEquals(new Vector2(0, 0), grid.getOrigin());
+		assertEquals(Color.WHITE, grid.getColor());
+		assertEquals(0, grid.getRotation(), .001);
+
+	}
+
+	/**
+	 * Test adding a ColourBubble to the {@link Grid}, using a given {@link Grid} index.
+	 */
+	@Test
+	public void testAddIndex() {
+		assertTrue(grid.add(new ColourBubble(), 0));
+		assertFalse(grid.add(new ColourBubble(), 0));
+		assertFalse(grid.isEmpty());
+	}
+
+	/**
+	 * Test adding a Projectile to the {@link Grid}, using only it's current position.
+	 */
+	@Test
+	public void testAdd() {
+		Circle c1 = new Circle(32 * 3 + 16, 480 - 32 * 0 - 16, 16);
+		Circle c2 = new Circle(32 * 3 + 32, 480 - 32 * 1 - 16, 16);
+		Circle c3 = new Circle(32 * 3 + 16, 480 - 32 * 2 - 16, 16);
+		
+		Projectile p = new Projectile(c1, new Vector2(), 0);
+		p.setBounds(c1);
+		assertTrue(grid.add(p));
+		p.setBounds(c2);
+		assertTrue(grid.add(p));
+		assertFalse(grid.add(p));
+		p.setBounds(c3);
+		assertTrue(grid.add(p));
+	}
+
+	/**
+	 * Test whether all the correct drawables are returned by this {@link Grid}.
+	 */
+	@Test
+	public void testGetDrawables() {
+		Collection<BSDrawable> drawables;
+
+		drawables = grid.getDrawables();
+		assertTrue(drawables.contains(grid));
+		assertEquals(1, drawables.size());
+
+		ArrayList<Bubble> testbubbles = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			testbubbles.add(new ColourBubble());
+			grid.add(testbubbles.get(i), i);
+		}
+
+		drawables = grid.getDrawables();
+		assertEquals(11, drawables.size());
+		for (Bubble b : testbubbles) assertTrue(drawables.contains(b));
+	}
+
+	/**
+	 * Test whether the collision method works, with the collision in possible circumstances.
+	 */
+	@Test
+	public void testCollision() {
+		for (int i = 0; i < 20; i++) {
+			grid.add(new ColourBubble(), i);
+		}
+		Circle c1 = new Circle(32 * 3, 480 - 32 * 1, 16);
+		Circle c2 = new Circle(32 * 3, 480 - 32 * 3, 16);
+		Circle c3 = new Circle(32 * 3, 480 - 32 * 5, 16);
+		Projectile bubble = new Projectile(c1, new Vector2(0, 0), 0);
+
+		bubble.setBounds(c1);
+		assertTrue(grid.collides(bubble));
+
+		bubble.setBounds(c2);
+		assertTrue(grid.collides(bubble));
+
+		bubble.setBounds(c3);
+		assertFalse(grid.collides(bubble));
+	}
+	
+	/**
+	 * Test whether the grid detects it when a ColourBubble is below the losing line.
+	 */
+	@Test
+	public void testBubbleBelowLine() {
+		grid.add(new ColourBubble(),0,1);
+		assertFalse(grid.bubbleBelowLine(14));
+		//Test just before the id which are checked.
+		grid.add(new ColourBubble(),4,13);
+		assertFalse(grid.bubbleBelowLine(14));
+		//Test the last ColourBubble that's checked.
+		grid.add(new ColourBubble(),5,14);
+		assertTrue(grid.bubbleBelowLine(14));
+		//Test the first ColourBubble that's checked.
+		grid.add(new ColourBubble(),0,14);
+		assertTrue(grid.bubbleBelowLine(14));
+	}
+	
 	/**
 	 * Test retrieving indices for the first row (even row).
 	 */
