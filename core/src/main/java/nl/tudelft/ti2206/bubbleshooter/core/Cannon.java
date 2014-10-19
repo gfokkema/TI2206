@@ -1,12 +1,14 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -85,12 +87,12 @@ public class Cannon extends BSDrawable implements Serializable {
 	 * @param board	{@link Board} that this projectile will be shot at
 	 * @return		{@link Projectile} that has been shot
 	 */
-	public Projectile shoot(Grid grid) {
+	public Projectile shoot(ArrayList<Color> colors) {
 		Projectile fired = projectile;
 		fired.setVelocity(velocity);
 		fired.setDirection(new Vector2(pointer.direction));
 		
-		projectile = new Projectile(grid.getColoursAvailable(), new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
+		projectile = new Projectile(colors, new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
 		Assets.getAssets().get(SoundID.CANNON).play();
 		setChanged();
 		notifyObservers("Cannon has been shot!");

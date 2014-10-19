@@ -119,7 +119,7 @@ public class CannonTest {
 		ammo = cannon.projectile;
 		assertEquals(ammo, cannon.projectile);
 
-		fired = cannon.shoot(grid);
+		fired = cannon.shoot(grid.getColoursAvailable());
 		assertEquals(fired, ammo);
 		assertNotEquals(fired, cannon.projectile);
 	}
