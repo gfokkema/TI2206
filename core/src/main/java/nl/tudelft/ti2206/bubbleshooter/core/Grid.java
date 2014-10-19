@@ -86,8 +86,6 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		int i = getIndex(p.getMidPoint());
 		add(p, getIndex(p.getMidPoint()));
 		cells.get(i).forEachNeighbor((GridCell c) -> {
-			if (c.getBubble() != null) System.out.print(c.getBubble().getColor());
-			System.out.println("debug");
 			c.removeBubble();
 		});
 		return true;
