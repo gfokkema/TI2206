@@ -157,13 +157,17 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	}
 
 	/**
-	 * This method returns 
-	 * @return
+	 * This method returns the number of bubbles in the grid.
+	 * @return	the number of bubbles
 	 */
 	public int size() {
 		return getFilledGridCells().size();
 	}
 
+	/**
+	 * This method returns a Collection of {@link GridCells}s that have a {@link Bubble}.
+	 * @return	collection of {@link GridCell}s
+	 */
 	public Collection<GridCell> getFilledGridCells() {
 		return cells.values().stream()
 							 .filter(gc -> gc.isOccupied())
@@ -186,10 +190,18 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return height;
 	}
 	
+	/**
+	 * This method checks whether the board is empty.
+	 * @return	true if empty, false otherwise
+	 */
 	public boolean isEmpty() {
 		return getFilledGridCells().size() == 0;
 	}
 	
+	/**
+	 * This method returns all {@link BSDrawable}s that this {@link Grid} contains.
+	 * @return	collection of {@link BSDrawable}
+	 */
 	public Collection<BSDrawable> getDrawables() {
 		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
 		drawables.add(this);
