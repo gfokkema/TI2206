@@ -5,8 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ BackgroundTest.class, 
+@SuiteClasses({ BackgroundTest.class,
 				CannonTest.class,
+				GridCellTest.class,
 				GridTest.class,
 				PointerTest.class })
 public class CoreTests {

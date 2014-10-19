@@ -388,6 +388,7 @@ public class GridTest {
 	/**
 	 * Test adjacent out of bound cells, positive
 	 */
+	@Test
 	public void testAdjacentOutOfBounds_3() {
 		assertFalse(grid.adjacent(77, 83));
 		assertFalse(grid.adjacent(83, 84));

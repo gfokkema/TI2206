@@ -53,7 +53,15 @@ public class GridCell extends BSDrawable implements Collidable {
 	public Bubble getBubble() {
 		return this.bubble;
 	}
-
+	
+	/**
+	 * This method returns the neighboring {@link GridCell}s of this {@link GridCell}.
+	 * @return		the neighboring {@link GridCell}s
+	 */
+	public Set<GridCell> getNeighbors() {
+		return neighbors;
+	}
+ 
 	/**
 	 * This method sets the {@link Bubble} contained in this {@link GridCell}.
 	 * @param b		the {@link Bubble} that should be contained

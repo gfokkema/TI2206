@@ -9,7 +9,7 @@ import java.net.URL;
 
 import org.junit.Test;
 
-public class getIPTest {
+public class GetIPTest {
 
 	@Test
 	public void getExternIPTest() throws Exception {
