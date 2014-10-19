@@ -36,6 +36,7 @@ public class GridCell implements Collidable {
 
 	public void setBubble(Bubble b) {
 		this.bubble = b;
+		b.setBounds(bounds);
 	}
 
 	public void removeBubble() {

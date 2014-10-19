@@ -8,6 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
@@ -72,10 +73,10 @@ public abstract class BSMode implements EndingObserver {
 		if (projectile == null || projectile == cannon.getProjectile()) return;
 		
 		projectile.move();
-		// TODO: fix the add method
-		if (grid.collides(projectile) && grid.add(projectile)) {
+		GridCell g;
+		if (grid.collides(projectile) && (g = grid.add(projectile)) != null) {
 			setProjectile(cannon.getProjectile());
-			// TODO: call behaviour
+			g.getBubble().getBehaviour().remove(g);
 		}
 	}
 

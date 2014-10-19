@@ -50,21 +50,15 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * @param idx	{@link Board} index
 	 * @return		true if the {@link Board} has been added successfully, false otherwise
 	 */
-	public boolean add(Bubble b, Integer idx) {
+	public GridCell add(Bubble b, Integer idx) {
 		GridCell cell = cells.get(idx);
-		if (cell.isOccupied()) return false;
+		if (cell.isOccupied()) return null;
 		
-		// Add the Bubble to the list
 		cell.setBubble(b);
 		
-		// Update the bounds of the circle
-		// TODO: replace this
-		b.setBounds(new Circle(getLoc(idx), 16));
-
 		setChanged();
 		notifyObservers("Bubble has been added to index " + idx + ".");
-
-		return true;
+		return cell;
 	}
 
 	/**
@@ -74,7 +68,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * @param j	hexagonal y-coordinate
 	 * @return	true if the {@link Board} has been added successfully, false otherwise
 	 */
-	public boolean add(Bubble b, int i, int j) {
+	public GridCell add(Bubble b, int i, int j) {
 		return add(b, toIdx(i, j));
 	}
 
@@ -83,13 +77,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * @param p	the {@link Projectile} that has to be added to the board
 	 * @return	the number of points the user has scored by placing this {@link Projectile}
 	 */
-	public boolean add(Projectile p) {
-		// FIXME: REMOVE
-		int i = getIndex(p.getMidPoint());
-		cells.get(i).forEachNeighbor((GridCell c) -> {
-			c.removeBubble();
-		});
-		// FIXME: REMOVE
+	public GridCell add(Projectile p) {
 		return add(p, getIndex(p.getMidPoint()));
 	}
 	
