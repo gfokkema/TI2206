@@ -5,16 +5,13 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
-
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * The {@link Board} class represents the playing field which contains all the
  * {@link Bubble} objects.
  */
-public class Board extends BSDrawable implements Serializable, Collidable {
+public class Board extends BSDrawable implements Serializable {
 	private static final long serialVersionUID = -4815917036827285256L;
 	private Grid grid;
 	private HashMap<Integer, Bubble> bubbles;
@@ -52,19 +49,6 @@ public class Board extends BSDrawable implements Serializable, Collidable {
 		setChanged();
 		notifyObservers(bs.size() + " bubbles have been removed.");
 		return bs.size();
-	}
-
-	@Override
-	public boolean collides(Projectile p) {
-		if (grid.collides(p)) return true;
-		
-		if (p.getBounds().y + 16 > 480) return true;
-		if (p.getBounds().x - 16 < 32
-				|| p.getBounds().x - 16 > grid.getGridWidth() * 32) {
-			Vector2 dir = p.getDirection();
-			dir.x = -dir.x;
-		}
-		return false;
 	}
 	
 	@Override

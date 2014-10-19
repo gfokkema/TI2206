@@ -108,6 +108,13 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 			if (c.isOccupied() && c.collides(p))
 				return true;
 		}
+		
+		if (p.getBounds().y + 16 > 480) return true;
+		if (p.getBounds().x - 16 < 32
+				|| p.getBounds().x - 16 > getGridWidth() * 32) {
+			Vector2 dir = p.getDirection();
+			dir.x = -dir.x;
+		}
 		return false;
 	}
 	
