@@ -304,4 +304,8 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return 480;
 	}
 
+	
+	//TODO: Add this somewhere
+	//setChanged();
+	//notifyObservers(bs.size() + " bubbles have been removed.");
 }

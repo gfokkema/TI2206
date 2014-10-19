@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 
 /**

@@ -3,7 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 
 import org.junit.Before;
@@ -19,7 +18,6 @@ public class BomBehaviourTest {
 	/**
 	 * Setup mocks
 	 */
-	@Mock Board board;
 	@Mock Grid grid;
 	BomBehaviour BBehaviour;
 	
@@ -29,7 +27,6 @@ public class BomBehaviourTest {
 	@Before
 	public void setUp(){
 		BBehaviour = new BomBehaviour();
-		Mockito.when(board.getGrid()).thenReturn(grid);
 	}
 	
 	/**
@@ -41,7 +38,6 @@ public class BomBehaviourTest {
 		Mockito.when(grid.adjacent(anyInt(), anyInt())).thenReturn(true);
 		
 		BBehaviour.remove(null);
-		Mockito.verify(board,atLeastOnce()).getGrid();
 		Mockito.verify(grid, atLeastOnce()).adjacent(anyInt(), anyInt());
 	}
 	
