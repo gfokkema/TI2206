@@ -67,7 +67,7 @@ public class GridCell implements Collidable {
 		if (!condition.test(bubble))	return;
 
 		acc.add(this);
-		forEachNeighbor(g -> g.depthFirst(acc));
+		forEachNeighbor(g -> g.depthFirst(acc, condition));
 	}
 
 	public void forEachNeighbor(Consumer<? super GridCell> consumer) {
