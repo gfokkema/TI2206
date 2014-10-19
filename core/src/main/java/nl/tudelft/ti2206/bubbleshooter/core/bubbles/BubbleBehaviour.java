@@ -10,16 +10,21 @@ import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 public interface BubbleBehaviour {	
 	
 	/**
-	 * Get the group of {@link Bubble}s which are needed to be removed.
-	 * @param cell TODO
-	 * @return {@link Collection<{@link Bubble}>}
+	 * Chaining behaviour of a {@link Bubble}. Determines whether it
+	 * responds to a chainreaction effect.
+	 * @param cell The GridCell which contains the bubble.
+	 * @return the amount of bubbles removed because of the chain effect
+	 * after this call.
 	 */
 	int chain(GridCell cell);
 	
 	/**
-	 * Removes the group of {@link Bubble}s gotten from {@link #chain(GridCell)}.
-	 * @param cell TODO
-	 * @return amount of {@link Bubble}s removed.
+	 * Removal behaviour of a bubble. If there's a call to {@link GridCell}'s
+	 * chain() method, it means that it can potentially trigger a chainreaction.
+	 * Whether or not that's the case, is determined by the chain method of the
+`	 * next {@link Bubble}'s {@link BubbleBehaviour}.
+	 * @param cell The GridCell which contains the bubble.
+	 * @return the amount of bubbles removed.
 	 */
 	int remove(GridCell cell);
 }
