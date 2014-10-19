@@ -9,7 +9,6 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.badlogic.gdx.graphics.Color;
