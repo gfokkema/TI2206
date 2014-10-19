@@ -186,7 +186,7 @@ public class BoardTest {
 	 * from the ceiling are returned.
 	 */
 	@Test
-	public void testGetDisconnectedGroup() {
+	public void testRemoveDisconnected() {
 		grid.add(new ColourBubble(Color.BLUE), 1, 0);
 		grid.add(new ColourBubble(Color.BLUE), 2, 0);
 		grid.add(new ColourBubble(Color.BLUE), 3, 0);
@@ -194,13 +194,24 @@ public class BoardTest {
 		grid.add(new ColourBubble(Color.RED), 5, 2);
 
 		grid.removeDisconnected();
-		Collection<GridCell> filled = grid.cells.values().stream()
-														 .filter(gc -> gc.isOccupied())
-														 .collect(Collectors.toList());
+		Collection<GridCell> filled = grid.getFilledGridCells();
 		assertEquals(3, filled.size());
 		filled.forEach(
 				(GridCell gc) -> assertEquals(Color.BLUE, gc.getBubble().getColor())
 		);
+	}
+
+	/**
+	 * Test whether an empty Collection is returned when all ColourBubbles are connected to the ceiling.
+	 */
+	@Test
+	public void testRemoveDisconnectedEmpty() {
+		// Initialize four ColourBubbles
+		for (int i = 0; i < 4; i++) {
+			grid.add(new ColourBubble(), i);
+		}
+		grid.removeDisconnected();
+		assertEquals(4, grid.size());
 	}
 
 	/**
@@ -271,20 +282,6 @@ public class BoardTest {
 		Collection<Bubble> colorGroupBlue = grid.getGroup(5);
 
 		assertFalse(colorGroupBlue.contains(Color.RED));
-	}
-
-
-	/**
-	 * Test whether an empty Collection is returned when all ColourBubbles are connected to the ceiling.
-	 */
-	@Test
-	public void testGetDisconnectedGroupEmpty() {
-		// Initialize four ColourBubbles
-		for (int i = 0; i < 4; i++) {
-			grid.add(new ColourBubble(), i);
-		}
-		Collection<Bubble> empty = grid.getDisconnectedGroup();
-		assertTrue(empty.isEmpty());
 	}
 
 	/**

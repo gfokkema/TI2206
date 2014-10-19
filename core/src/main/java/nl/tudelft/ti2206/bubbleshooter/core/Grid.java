@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
@@ -144,6 +145,16 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		disconnected.removeAll(connected);
 		disconnected.forEach((GridCell gc) -> gc.removeBubble());
 		return disconnected.size();
+	}
+
+	public int size() {
+		return getFilledGridCells().size();
+	}
+
+	public Collection<GridCell> getFilledGridCells() {
+		return cells.values().stream()
+							 .filter(gc -> gc.isOccupied())
+							 .collect(Collectors.toList());
 	}
 
 	/**
