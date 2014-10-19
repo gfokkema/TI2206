@@ -142,7 +142,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		for (int i = 0; i < width; i++) {
 			cells.get(i).depthFirst(connected);
 		}
-		Collection<GridCell> disconnected = new HashSet<GridCell>(cells.values());
+		Collection<GridCell> disconnected = new HashSet<GridCell>(getFilledGridCells());
 		disconnected.removeAll(connected);
 		disconnected.forEach((GridCell gc) -> gc.removeBubble());
 		return disconnected.size();

@@ -77,7 +77,7 @@ public abstract class BSMode implements EndingObserver {
 			setProjectile(cannon.getProjectile());
 			score += g.remove();
 			score += g.triggerNeighbors();
-			score += grid.removeDisconnected(); //FIXME
+			score += grid.removeDisconnected();
 			statsObs.updateScore(score);
 		}
 	}

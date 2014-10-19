@@ -410,6 +410,6 @@ public class GridTest {
 		}
 		int disconnected_size = grid.removeDisconnected();
 		assertEquals(4, grid.size());
-		assertEquals(2, disconnected_size);
+		assertEquals(0, disconnected_size);
 	}
 }
