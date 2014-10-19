@@ -13,7 +13,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ //BubbleTests.class,
+@SuiteClasses({ BubbleTests.class,
 				ConditionTests.class,
 				CoreTests.class,
 				EngineTests.class,
