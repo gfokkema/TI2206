@@ -44,32 +44,6 @@ public class BoardTest {
 	}
 
 	/**
-	 * Test collisions with the border of the grid.
-	 *
-	@Test
-	public void testCollisionBorder() {
-		Circle c1 = new Circle(32 * 3, 480 - 32 * 0, 16);
-		Circle c2 = new Circle(32 * 7, 480 - 32 * 5, 16);
-		Circle c3 = new Circle(32 * 0, 480 - 32 * 5, 16);
-		Projectile bubble = new Projectile(c1, new Vector2(0, 0), 0);
-
-		// ColourBubble should hit the top border
-		bubble.setBounds(c1);
-		assertTrue(grid.collides(bubble));
-
-		// ColourBubble should hit the rightmost border
-		bubble.setDirection(new Vector2(1, 0));
-		bubble.setBounds(c2);
-		assertFalse(grid.collides(bubble));
-		assertEquals(new Vector2(-1, 0), bubble.getDirection());
-
-		bubble.setDirection(new Vector2(-1, 0));
-		bubble.setBounds(c3);
-		assertFalse(grid.collides(bubble));
-		assertEquals(new Vector2(1, 0), bubble.getDirection());
-	}
-
-	/**
 	 * Test that only adjacent ColourBubbles of the same colors
 	 * are returned.
 	 *

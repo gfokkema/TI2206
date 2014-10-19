@@ -133,20 +133,50 @@ public class GridTest {
 	}
 	
 	/**
+	 * Test collisions with the border of the grid.
+	 */
+	@Test
+	public void testCollisionBorder() {
+		Circle c1 = new Circle(32 * 3, 480 - 32 * 0, 16);
+		Circle c2 = new Circle(32 * 7, 480 - 32 * 5, 16);
+		Circle c3 = new Circle(32 * 0, 480 - 32 * 5, 16);
+		Projectile bubble = new Projectile(c1, new Vector2(0, 0), 0);
+
+		// ColourBubble should hit the top border
+		bubble.setBounds(c1);
+		assertTrue(grid.collides(bubble));
+
+		// ColourBubble should hit the rightmost border
+		bubble.setDirection(new Vector2(1, 0));
+		bubble.setBounds(c2);
+		assertFalse(grid.collides(bubble));
+		assertEquals(new Vector2(-1, 0), bubble.getDirection());
+
+		bubble.setDirection(new Vector2(-1, 0));
+		bubble.setBounds(c3);
+		assertFalse(grid.collides(bubble));
+		assertEquals(new Vector2(1, 0), bubble.getDirection());
+	}
+	
+	/**
 	 * Test whether the grid detects it when a ColourBubble is below the losing line.
 	 */
 	@Test
 	public void testBubbleBelowLine() {
 		grid.add(new ColourBubble(),0,1);
+		assertFalse(grid.bubbleBelowLine());
 		assertFalse(grid.bubbleBelowLine(14));
 		//Test just before the id which are checked.
 		grid.add(new ColourBubble(),4,13);
+		assertTrue(grid.bubbleBelowLine());
 		assertFalse(grid.bubbleBelowLine(14));
 		//Test the last ColourBubble that's checked.
 		grid.add(new ColourBubble(),5,14);
+		assertTrue(grid.bubbleBelowLine());
 		assertTrue(grid.bubbleBelowLine(14));
 		//Test the first ColourBubble that's checked.
 		grid.add(new ColourBubble(),0,14);
+		assertTrue(grid.bubbleBelowLine());
 		assertTrue(grid.bubbleBelowLine(14));
 	}
 	
@@ -411,5 +441,25 @@ public class GridTest {
 		int disconnected_size = grid.removeDisconnected();
 		assertEquals(4, grid.size());
 		assertEquals(0, disconnected_size);
+	}
+	
+	/**
+	 * Test whether the correct list of colors available is returned.
+	 */
+	@Test
+	public void testColoursAvailable() {
+		assertEquals(new ArrayList<Color>(), grid.getColoursAvailable());
+		
+		Color[] colors1 = {Color.BLUE};
+		grid.add(new ColourBubble(Color.BLUE), 0);
+		assertEquals(new ArrayList<Color>(Arrays.asList(colors1)), grid.getColoursAvailable());
+		
+		Color[] colors2 = {Color.BLUE, Color.RED};
+		grid.add(new ColourBubble(Color.RED), 1);
+		assertEquals(new ArrayList<Color>(Arrays.asList(colors2)), grid.getColoursAvailable());
+		
+		Color[] colors3 = {Color.BLUE, Color.RED, Color.GREEN};
+		grid.add(new ColourBubble(Color.GREEN), 2);
+		assertEquals(new ArrayList<Color>(Arrays.asList(colors3)), grid.getColoursAvailable());
 	}
 }
