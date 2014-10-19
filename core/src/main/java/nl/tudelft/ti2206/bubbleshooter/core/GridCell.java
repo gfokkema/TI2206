@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.math.Circle;
 
@@ -17,7 +18,8 @@ import com.badlogic.gdx.math.Circle;
  * and it can contain a {@link Bubble}.
  * The {@link GridCell} also knows who it's neighbors are.
  */
-public class GridCell implements Collidable {
+public class GridCell extends BSDrawable implements Collidable {
+	private static final long serialVersionUID = 4801310405424982822L;
 	private Set<GridCell> neighbors;
 	private Bubble bubble;
 	private Circle bounds;
@@ -159,5 +161,23 @@ public class GridCell implements Collidable {
 			score += g.trigger();
 		}
 		return score;
+	}
+
+	@Override
+	public TextureID getTexture() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

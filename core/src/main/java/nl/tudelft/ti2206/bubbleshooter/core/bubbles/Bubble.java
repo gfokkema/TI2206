@@ -21,7 +21,7 @@ public abstract class Bubble extends BSDrawable implements Serializable {
 	 * Initialization of behaviour and bounds.
 	 */
 	Circle bounds;
-	BubbleBehaviour behaviour;
+	transient BubbleBehaviour behaviour;
 
 	/**
 	 * Bubbles contain a {@link BubbleBehaviour} and bounds.

@@ -187,7 +187,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * @return	true if empty, false otherwise
 	 */
 	public boolean isEmpty() {
-		return getFilledGridCells().size() == 0;
+		return size() == 0;
 	}
 	
 	/**
