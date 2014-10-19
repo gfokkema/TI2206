@@ -47,7 +47,7 @@ public class GridCell implements Collidable {
 	}
 
 	public void depthFirst(Collection<GridCell> acc) {
-		if (acc.contains(bubble)) 	return;
+		if (acc.contains(this)) 	return;
 		if (!isOccupied())			return;
 
 		acc.add(this);

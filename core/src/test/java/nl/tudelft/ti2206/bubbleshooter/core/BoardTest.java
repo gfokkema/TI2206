@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
@@ -177,7 +178,7 @@ public class BoardTest {
 		assertEquals(3, colorGroup.size());
 		colorGroup.forEach(
 				(Bubble b) -> assertEquals(Color.BLUE, b.getColor())
-				);
+		);
 	}
 
 	/**
@@ -193,8 +194,11 @@ public class BoardTest {
 		grid.add(new ColourBubble(Color.RED), 5, 2);
 
 		grid.removeDisconnected();
-		assertEquals(2, grid.cells.size());
-		grid.cells.values().forEach(
+		Collection<GridCell> filled = grid.cells.values().stream()
+														 .filter(gc -> gc.isOccupied())
+														 .collect(Collectors.toList());
+		assertEquals(3, filled.size());
+		filled.forEach(
 				(GridCell gc) -> assertEquals(Color.BLUE, gc.getBubble().getColor())
 		);
 	}
