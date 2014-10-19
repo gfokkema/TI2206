@@ -7,7 +7,6 @@ import static org.mockito.Mockito.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -18,6 +17,7 @@ public class FileBoardFactoryTest {
 	private ArcadeBoardFactory factory;
 	private ArcadeBoardFactory spy;
 	private BufferedReader br;
+	
 	
 	/**
 	 * Setup.
@@ -30,9 +30,17 @@ public class FileBoardFactoryTest {
 		br = mock(BufferedReader.class);
 	}
 	
+	/**
+	 * Test parsing a file.
+	 * @throws IOException
+	 */
 	@Test
-	public void testParseFileString() {
-		// TODO use an actual demo file.
+	public void testParseFile() throws IOException {
+		String testInput = "--- BEGIN --- .* ---\n5x5\nC00\n--- END --- .* ---";
+		spy.parseFile(testInput);
+		
+		// called the parseFile with a bufferedreader
+		Mockito.verify(spy).parseFile(any(BufferedReader.class));
 	}
 	
 	/**
@@ -44,18 +52,6 @@ public class FileBoardFactoryTest {
 	public void testParseBufferedReaderFileException() throws IOException {
 		Mockito.when(br.readLine()).thenReturn("something");
 		factory.parseFile(br);
-	}
-	
-	
-	/**
-	 * Test ParseFile.
-	 * Tests parsing the file.
-	 * @throws IOException 
-	 */
-	@Test
-	public void testParseFileBufferedReader() throws IOException {
-		Mockito.when(br.readLine()).thenReturn(null);
-		assertNotNull(factory.parseFile(br));
 	}
 	
 	@Test

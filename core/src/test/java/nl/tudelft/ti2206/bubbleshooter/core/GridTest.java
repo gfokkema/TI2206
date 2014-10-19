@@ -23,6 +23,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * This class tests all behaviour of the {@link Grid}, which is a container for {@link GridCell}s.
+ */
 public class GridTest {
 	private Grid grid;
 
