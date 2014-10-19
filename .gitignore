@@ -15,6 +15,7 @@
 .settings/
 target/
 bin
+core/test.txt
 
 # unwanted TeX crap
 *.aux

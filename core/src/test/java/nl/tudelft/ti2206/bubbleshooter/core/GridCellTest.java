@@ -23,6 +23,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * This class will test all the functionality of the {@link GridCell} class.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class GridCellTest {
 	@Mock BubbleBehaviour behaviour;
@@ -31,6 +34,9 @@ public class GridCellTest {
 	private Circle c;
 	private GridCell cell;
 	
+	/**
+	 * Initialize some commonly used variables.
+	 */
 	@Before
 	public void setUp() {
 		c = new Circle(new Vector2(0, 0), 20);
@@ -42,12 +48,18 @@ public class GridCellTest {
 		Mockito.when(behaviour.trigger(any())).thenReturn(3);
 	}
 	
+	/**
+	 * Test creation of a {@link GridCell}.
+	 */
 	@Test
 	public void testCreate() {
 		assertEquals(new Vector2(0, 0), cell.getOrigin());
 		assertEquals(new HashSet<GridCell>(), cell.getNeighbors());
 	}
 	
+	/**
+	 * Test connecting one {@link GridCell} to another {@link GridCell}.
+	 */
 	@Test
 	public void testConnect() {
 		HashSet<GridCell> expected = new HashSet<>();
@@ -64,6 +76,9 @@ public class GridCellTest {
 		assertEquals(expectedNeighbor, neighbor.getNeighbors());
 	}
 	
+	/**
+	 * Test setting a {@link Bubble} in this {@link GridCell}.
+	 */
 	@Test
 	public void testSetBubble() {
 		Bubble b = new ColourBubble();
@@ -76,6 +91,9 @@ public class GridCellTest {
 		assertEquals(b, cell.getBubble());
 	}
 
+	/**
+	 * Test removing a {@link Bubble} from this {@link GridCell}.
+	 */
 	@Test
 	public void testRemoveBubble() {
 		Bubble b = new ColourBubble();
@@ -86,6 +104,9 @@ public class GridCellTest {
 		assertNull(cell.getBubble());
 	}
 	
+	/**
+	 * Test initiating removal behaviour of {@link Bubble}s starting from this {@link GridCell}.
+	 */
 	@Test
 	public void testRemove() {
 		assertEquals(0, cell.remove());
@@ -99,6 +120,9 @@ public class GridCellTest {
 		Mockito.verify(behaviour).remove(cell);
 	}
 	
+	/**
+	 * Test initiating chaining behaviour of {@link Bubble}s starting from this {@link GridCell}.
+	 */
 	@Test
 	public void testChain() {
 		assertEquals(0, cell.chain());
@@ -112,6 +136,9 @@ public class GridCellTest {
 		Mockito.verify(behaviour).chain(cell);
 	}
 	
+	/**
+	 * Test initiating trigger behaviour of {@link Bubble}s starting from this {@link GridCell}.
+	 */
 	@Test
 	public void testTrigger() {
 		assertEquals(0, cell.trigger());

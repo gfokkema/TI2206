@@ -101,6 +101,15 @@ public class Assets {
 	}
 	
 	/**
+	 * Set the skin we should use.
+	 * This can be used for changing menu themes.
+	 * @param loader	the {@link Skin} to use
+	 */
+	public void setSkin(Skin skin) {
+		this.skin = skin;
+	}
+	
+	/**
 	 * Retrieve the {@link Music} that is linked to {@link MusicID}.
 	 * @param id	{@link MusicID} representing the {@link Music} type
 	 * @return		{@link Music} linked to {@link MusicID}
