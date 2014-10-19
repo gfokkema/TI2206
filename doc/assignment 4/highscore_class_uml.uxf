@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>440</y>
+      <w>320</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>:FileHighscore
+--
+-scores: NavigableSet&lt;HighScore&gt;
+-filename : String
+--
++FileHighscore(): constructor
++addScore(String name, int score): void
++checkHighScoreFile(): void
++getFileName(): String
++setFileName(String filename): void
++loadScoreFile(): NavigableSet&lt;HighScore&gt;
+-updateScoreFile(): void
++isHighScore(int score): boolean
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1070</x>
+      <y>490</y>
+      <w>330</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>HighScore
+--
+-serialVersionUID = 2603273380851092688L: long
+-highscore: int
+-name: String
+--
++HighScore(String name, int highscore): ctor
++getHighScore(): int
++getName(): String
++compareTo(HighScore o): int
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1090</x>
+      <y>290</y>
+      <w>220</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Comparable
+
+--
++compareTo(other:Object):int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1170</x>
+      <y>330</y>
+      <w>50</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30;30;30;160;30;30;30;160</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>600</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>GameEndedScreen
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>260</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>HighScoreScreen
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>260</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>MainMenuScreen
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>660</x>
+      <y>280</y>
+      <w>90</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-
+reads&gt;</panel_attributes>
+    <additional_attributes>50;160;50;30;50;160;50;30</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>380</y>
+      <w>240</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>BubbleShooter
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>340</x>
+      <y>580</y>
+      <w>250</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+adds HighScore&gt;
+</panel_attributes>
+    <additional_attributes>230;50;30;50;230;50;30;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>410</x>
+      <y>240</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+set&gt;
+</panel_attributes>
+    <additional_attributes>160;50;30;50;160;50;30;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>220</x>
+      <y>280</y>
+      <w>420</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>lt=-
+set&gt;
+</panel_attributes>
+    <additional_attributes>400;30;400;120;30;120;30;320</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>210</x>
+      <y>620</y>
+      <w>1050</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+set&gt;
+</panel_attributes>
+    <additional_attributes>1030;50;1030;120;30;120;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>860</x>
+      <y>400</y>
+      <w>198</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-
+has&lt;</panel_attributes>
+    <additional_attributes>160;30;160;140;30;140</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>140</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>abstractScreen
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>590</x>
+      <y>170</y>
+      <w>130</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;110;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>300</x>
+      <y>170</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220;30;30;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>120</x>
+      <y>130</y>
+      <w>330</w>
+      <h>490</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>310;30;30;30;30;470</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>720</x>
+      <y>280</y>
+      <w>112</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-
+iterates&gt;</panel_attributes>
+    <additional_attributes>60;160;60;30</additional_attributes>
+  </element>
+</diagram>
