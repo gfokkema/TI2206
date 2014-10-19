@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>595</x>
+      <y>140</y>
+      <w>189</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>/BSDrawable/
+--
+/+getTexture(): TextureID/
+/+getWidth(): int/
+/+getHeight(): int/
++getPosition(): Vector2
++getOritin(): Vector2
++getColor(): Color
++getRotation(): float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>896</x>
+      <y>315</y>
+      <w>224</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Grid
+--
++Grid(width: int, height: int)
++add(b: Bubble, idx: int): GridCell
++add(p: Projectile): GridCell
++adjacent(a: int, b: int): boolean
++collides(p: Projectile): boolean
++getColoursAvailable(): ArrayList&lt;Color&gt;
++getDrawables(): Collection&lt;BSDrawable&gt;
++getFilledGridCells(): Collection&lt;GridCell&gt;
++getGridWidth(): int
++getGridHeight(): int
++removeDisconnected(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>294</x>
+      <y>336</y>
+      <w>189</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>Bubble
+--
++Bubble(b: BubbleBehaviour)
++getBehaviour(): BubbleBehaviour
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>679</x>
+      <y>238</y>
+      <w>21</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>581</x>
+      <y>315</y>
+      <w>217</w>
+      <h>203</h>
+    </coordinates>
+    <panel_attributes>GridCell
+--
++GridCell(bounds: Circle)
++collides(p: Projectile): boolean
++connect(c: GridCell)
++depthFirst(acc: Collection&lt;GridCell&gt;,
+                    cond: Predicate&lt;Bubble&gt;,
+                    boolean: ignoreUnoccupied);
++getBubble(): Bubble
++getNeighbors(): Set&lt;GridCell&gt;
++forEachNeighbor(consumer: Consumer)
++setBubble(b: Bubble)
++isOccupied(): boolean
++removeBubble()
+
++chain(): int
++remove(): int
++triger(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>791</x>
+      <y>378</y>
+      <w>119</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1..*</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>679</x>
+      <y>238</y>
+      <w>350</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;480.0;60.0;480.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>385</x>
+      <y>238</y>
+      <w>315</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>430.0;10.0;430.0;60.0;10.0;60.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>476</x>
+      <y>371</y>
+      <w>119</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-
+contains
+m1=0..1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>224</x>
+      <y>371</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>42</x>
+      <y>336</y>
+      <w>189</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>BubbleBehaviour
+--
++Bubble(b: BubbleBehaviour)
+
++chain(cell: GridCell): int
++remove(cell: GridCell): int
++trigger(cell: GridCell): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>504</y>
+      <w>105</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>StoneBubble</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>217</x>
+      <y>588</y>
+      <w>105</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>Projectile</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>504</y>
+      <w>105</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>MichaelBayBubble</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>217</x>
+      <y>504</y>
+      <w>105</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>ColourBubble</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>266</x>
+      <y>406</y>
+      <w>140</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>385</x>
+      <y>406</y>
+      <w>21</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>385</x>
+      <y>406</y>
+      <w>140</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;180.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>259</x>
+      <y>518</y>
+      <w>21</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>791</x>
+      <y>602</y>
+      <w>126</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Collidable
+--
++collides(p: Projectile)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>511</y>
+      <w>203</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>270.0;130.0;270.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>854</x>
+      <y>455</y>
+      <w>175</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;150.0;230.0;150.0;230.0;10.0</additional_attributes>
+  </element>
+</diagram>
