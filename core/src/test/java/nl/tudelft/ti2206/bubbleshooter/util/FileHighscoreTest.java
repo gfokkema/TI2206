@@ -72,7 +72,6 @@ public class FileHighscoreTest {
 	public void testLoadScoreFile() {
 		File f = new File(fhs.getFileName());
 		f.delete();
-		System.out.println("ok");
 		fhs.loadScoreFile();
 		fhs.checkHighScoreFile();
 		fhs.addScore("jan_liet", 60);

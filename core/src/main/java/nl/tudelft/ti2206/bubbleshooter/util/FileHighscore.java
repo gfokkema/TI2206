@@ -40,8 +40,7 @@ public class FileHighscore {
 	 */
 	public void checkHighScoreFile(){
 		File f = new File(getFileName());
-		if(f.exists() && !f.isDirectory())  {System.out.println(f.getPath());} 
-		else{
+		if(!f.exists() || f.isDirectory()) {
 			PrintWriter writer = null;
 			try {
 				writer = new PrintWriter(getFileName(), "UTF-8");
@@ -80,7 +79,6 @@ public class FileHighscore {
 			inputStream = new ObjectInputStream(new FileInputStream(getFileName()));
 			scores = (NavigableSet<HighScore>) inputStream.readObject();
 		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			try {
 				if (inputStream != null) {
