@@ -193,9 +193,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	public Collection<BSDrawable> getDrawables() {
 		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
 		drawables.add(this);
-		cells.values().forEach((GridCell c) -> {
-			if (c.isOccupied()) drawables.add(c.getBubble());
-		});
+		getFilledGridCells().forEach(c -> drawables.add(c.getBubble()));
 		return drawables;
 	}
 
