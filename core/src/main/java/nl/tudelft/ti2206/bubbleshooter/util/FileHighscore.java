@@ -17,6 +17,9 @@ public class FileHighscore {
 	private NavigableSet<HighScore> scores;
 	private String filename = "HighScores.txt";
 	
+	/**
+	 * Constructor for creating a new FileHighscore instance
+	 */
 	public FileHighscore() {
 		scores = new TreeSet<HighScore>();
 		loadScoreFile();
@@ -36,7 +39,7 @@ public class FileHighscore {
 	}
 
 	/**
-	 * Checks whether the highscore file already exists, and if not, creates it.
+	 * Checks whether the highscore file already exists, and if not, creates it
 	 */
 	public void checkHighScoreFile(){
 		File f = new File(getFileName());
@@ -52,7 +55,7 @@ public class FileHighscore {
 	}
 
 	/**
-	 * This method returns the filename of the used high score file.
+	 * This method returns the filename of the used high score file
 	 * @return	String with the filename
 	 */
 	public String getFileName() {
@@ -60,7 +63,7 @@ public class FileHighscore {
 	}
 
 	/**
-	 * This method sets the filename of the used high score file.
+	 * This method sets the filename of the used high score file
 	 * @param filename	String with the filename
 	 */
 	public void setFileName(String filename) {
@@ -69,7 +72,7 @@ public class FileHighscore {
 
 	/**
 	 * A method to load the highscore file in, which closes the inputreader
-	 * after the file is read.
+	 * after the file is read
 	 * @return	{@link NavigableSet} of {@link HighScore} objects
 	 */
 	@SuppressWarnings("unchecked")
@@ -93,7 +96,7 @@ public class FileHighscore {
 
 	/**
 	 * A method which writes back to the highscores file, and closes the
-	 * outputreader after.
+	 * outputreader after
 	 */
 	private void updateScoreFile() {
 		ObjectOutputStream outputStream = null;
@@ -116,7 +119,7 @@ public class FileHighscore {
 	}
 	
 	/**
-	 * This method evaluates whether a score should be added to the highscores.
+	 * This method evaluates whether a score should be added to the highscores
 	 * @param score	the score that has to be checked against the list
 	 * @return		boolean indicating whether this is a highscore
 	 */
