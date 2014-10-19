@@ -3,7 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 import java.util.Collection;
 import java.util.HashSet;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 public class ColourBehaviour implements BubbleBehaviour {

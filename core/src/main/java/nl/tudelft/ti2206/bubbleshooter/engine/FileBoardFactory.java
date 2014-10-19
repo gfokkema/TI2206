@@ -8,7 +8,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;

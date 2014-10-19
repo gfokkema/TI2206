@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;

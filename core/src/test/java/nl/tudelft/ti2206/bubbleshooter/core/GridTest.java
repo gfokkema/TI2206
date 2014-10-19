@@ -2,6 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -61,8 +63,8 @@ public class GridTest {
 	 */
 	@Test
 	public void testAddIndex() {
-		assertTrue(grid.add(new ColourBubble(), 0));
-		assertFalse(grid.add(new ColourBubble(), 0));
+		assertNotNull(grid.add(new ColourBubble(), 0));
+		assertNull(grid.add(new ColourBubble(), 0));
 		assertFalse(grid.isEmpty());
 	}
 
@@ -77,12 +79,12 @@ public class GridTest {
 		
 		Projectile p = new Projectile(c1, new Vector2(), 0);
 		p.setBounds(c1);
-		assertTrue(grid.add(p));
+		assertNotNull(grid.add(p));
 		p.setBounds(c2);
-		assertTrue(grid.add(p));
-		assertFalse(grid.add(p));
+		assertNotNull(grid.add(p));
+		assertNull(grid.add(p));
 		p.setBounds(c3);
-		assertTrue(grid.add(p));
+		assertNotNull(grid.add(p));
 	}
 
 	/**
@@ -374,5 +376,18 @@ public class GridTest {
 		grid = new Grid(20, 4);
 		assertEquals(20, grid.getGridWidth());
 		assertEquals(4, grid.getGridHeight());
+	}
+	
+	/**
+	 * Test whether an empty Collection is returned when all ColourBubbles are connected to the ceiling.
+	 */
+	@Test
+	public void testRemoveDisconnectedEmpty() {
+		// Initialize four ColourBubbles
+		for (int i = 0; i < 4; i++) {
+			grid.add(new ColourBubble(), i);
+		}
+		grid.removeDisconnected();
+		assertEquals(4, grid.size());
 	}
 }

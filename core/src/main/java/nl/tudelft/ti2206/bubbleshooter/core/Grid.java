@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BubbleColors;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
@@ -98,10 +99,8 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	/**
 	 * Checks the {@link Bubble} that gets shot for collisions with all the
 	 * other bubbles.
-	 * 
-	 * @param b
-	 *            {@link Bubble} that has been shot
-	 * @return true if there's a collision, false otherwise
+	 * @param b	{@link Bubble} that has been shot
+	 * @return	true if there's a collision, false otherwise
 	 */
 	public boolean collides(Projectile p) {
 		for (GridCell c : cells.values()) {
@@ -118,18 +117,26 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return false;
 	}
 	
+	/**
+	 * This method returns the list of {@link BubbleColors} that are still in the playing field.
+	 * @return	a list of {@link BubbleColors}
+	 */
 	public ArrayList<Color> getColoursAvailable() {
 		HashSet<Color> colours = new HashSet<Color>();
-		for(GridCell c: cells.values()) {
-			if (c.isOccupied()) {
-				// WHITE is a black color
-				Color color = c.getBubble().getColor();
-				if(color != Color.WHITE) colours.add(color);
-			}
+		for(GridCell c: getFilledGridCells()) {
+			Color color = c.getBubble().getColor();
+			// If the color of a bubble is WHITE, then it is a special bubble
+			if(color != Color.WHITE) colours.add(color);
 		}
 		return new ArrayList<Color>(colours);
 	}
 
+
+	/**
+	 * This method starts the {@link Bubble} removal of {@link Bubble}s that arent'
+	 * connected to the ceiling anymore.
+	 * @return		the score associated with the removal
+	 */
 	public int removeDisconnected() {
 		Collection<GridCell> connected = new ArrayList<GridCell>();
 		for (int i = 0; i < width; i++) {
@@ -141,10 +148,18 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return disconnected.size();
 	}
 
+	/**
+	 * This method returns the number of bubbles in the grid.
+	 * @return	the number of bubbles
+	 */
 	public int size() {
 		return getFilledGridCells().size();
 	}
 
+	/**
+	 * This method returns a Collection of {@link GridCells}s that have a {@link Bubble}.
+	 * @return	collection of {@link GridCell}s
+	 */
 	public Collection<GridCell> getFilledGridCells() {
 		return cells.values().stream()
 							 .filter(gc -> gc.isOccupied())
@@ -167,19 +182,22 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return height;
 	}
 	
+	/**
+	 * This method checks whether the board is empty.
+	 * @return	true if empty, false otherwise
+	 */
 	public boolean isEmpty() {
-		for (GridCell c : cells.values()) {
-			if (c.isOccupied()) return false;
-		};
-		return true;
+		return getFilledGridCells().size() == 0;
 	}
 	
+	/**
+	 * This method returns all {@link BSDrawable}s that this {@link Grid} contains.
+	 * @return	collection of {@link BSDrawable}
+	 */
 	public Collection<BSDrawable> getDrawables() {
 		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
 		drawables.add(this);
-		cells.values().forEach((GridCell c) -> {
-			if (c.isOccupied()) drawables.add(c.getBubble());
-		});
+		getFilledGridCells().forEach(c -> drawables.add(c.getBubble()));
 		return drawables;
 	}
 
@@ -300,4 +318,8 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return 480;
 	}
 
+	
+	//TODO: Add this somewhere
+	//setChanged();
+	//notifyObservers(bs.size() + " bubbles have been removed.");
 }

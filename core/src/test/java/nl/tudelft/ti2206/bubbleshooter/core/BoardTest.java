@@ -37,7 +37,7 @@ public class BoardTest {
 	 *   17  18  19  20  21
 	 * 22  23  24  25  26  27
 	 *   28  29  30  31  32
-	 */
+	 *
 	@Before
 	public void setUp() {
 		grid = new Grid(6, 15);
@@ -45,7 +45,7 @@ public class BoardTest {
 
 	/**
 	 * Test collisions with the border of the grid.
-	 */
+	 *
 	@Test
 	public void testCollisionBorder() {
 		Circle c1 = new Circle(32 * 3, 480 - 32 * 0, 16);
@@ -72,7 +72,7 @@ public class BoardTest {
 	/**
 	 * Test that only adjacent ColourBubbles of the same colors
 	 * are returned.
-	 */
+	 *
 	@Test
 	public void testgetGroup() {
 		//Add 3 ColourBubbles in a row.
@@ -94,7 +94,7 @@ public class BoardTest {
 	/**
 	 * Test to see if only ColourBubbles that are disconnected
 	 * from the ceiling are returned.
-	 */
+	 *
 	@Test
 	public void testRemoveDisconnected() {
 		grid.add(new ColourBubble(Color.BLUE), 1, 0);
@@ -112,22 +112,9 @@ public class BoardTest {
 	}
 
 	/**
-	 * Test whether an empty Collection is returned when all ColourBubbles are connected to the ceiling.
-	 */
-	@Test
-	public void testRemoveDisconnectedEmpty() {
-		// Initialize four ColourBubbles
-		for (int i = 0; i < 4; i++) {
-			grid.add(new ColourBubble(), i);
-		}
-		grid.removeDisconnected();
-		assertEquals(4, grid.size());
-	}
-
-	/**
 	 * Checks whether (adjacent on the grid) add ColourBubbles, of the same color,
 	 *  all get add.
-	 */
+	 *
 	@Test
 	public void testAddColorGroup(){
 
@@ -144,7 +131,7 @@ public class BoardTest {
 	/**
 	 * Checks whether (adjacent on the grid) add ColourBubbles, of the same color,
 	 *  all get add.
-	 */
+	 *
 	@Test
 	public void testAddColorGroupWrongColorAddedAdjacent(){
 
@@ -161,7 +148,7 @@ public class BoardTest {
 	/**
 	 * Checks whether (not adjacent on the grid) add ColourBubbles, of the same color, 
 	 * all get add.
-	 */
+	 *
 	@Test
 	public void testAddColorGroupNotAdjacent(){
 
@@ -180,7 +167,7 @@ public class BoardTest {
 	/**
 	 * Checks whether (not adjacent on the grid) add ColourBubbles, of the same color, 
 	 * all get add and the other colored ColourBubbles do not.
-	 */
+	 *
 	@Test
 	public void testAddColorGroupWrongColorAdded(){
 
@@ -192,5 +179,5 @@ public class BoardTest {
 		Collection<Bubble> colorGroupBlue = grid.getGroup(5);
 
 		assertFalse(colorGroupBlue.contains(Color.RED));
-	}
+	}*/
 }
