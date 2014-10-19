@@ -38,6 +38,10 @@ public class HighScore implements Comparable<HighScore>, Serializable {
 		return name;
 	}
 	
+	/**
+	 * Override method compareTo of the implemented comparable interface
+	 * @return the rank value after it compares it with {@Highscore o} 
+	 */
 	@Override
 	public int compareTo(HighScore o) {
 		return Integer.compare(this.highscore, o.highscore);
