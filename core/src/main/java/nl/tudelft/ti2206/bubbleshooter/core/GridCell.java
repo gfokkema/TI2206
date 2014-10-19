@@ -85,7 +85,11 @@ public class GridCell extends BSDrawable implements Collidable {
 	 */
 	public int remove() {
 		if (!isOccupied()) return 0;
-		return bubble.getBehaviour().remove(this);
+		
+		int score = bubble.getBehaviour().remove(this);
+		setChanged();
+		notifyObservers("You have scored " + score + " points!");
+		return score;
 	}
 
 	/**

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.stream.Collectors;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
@@ -19,7 +21,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * The type of {@link Grid} a board uses.
  */
-public class Grid extends BSDrawable implements Serializable, Collidable {
+public class Grid extends BSDrawable implements Serializable, Collidable, Observer {
 	private static final long serialVersionUID = -3156876087711309439L;
 	private int width = 8, height = 20;
 	public HashMap<Integer, GridCell> cells;
@@ -36,6 +38,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		cells = new HashMap<>(width * height - height / 2);
 		for (int i = 0; i < width * height - height / 2; i++) {
 			GridCell c = new GridCell(new Circle(getLoc(i), 16));
+			c.addObserver(this);
 			cells.put(i, c);
 			for (Integer neighbor_idx : getAdjacent(i)) {
 				c.connect(cells.get(neighbor_idx));
@@ -318,8 +321,9 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return 480;
 	}
 
-	
-	//TODO: Add this somewhere
-	//setChanged();
-	//notifyObservers(bs.size() + " bubbles have been removed.");
+	@Override
+	public void update(Observable o, Object arg) {
+		setChanged();
+		notifyObservers(arg);
+	}
 }
