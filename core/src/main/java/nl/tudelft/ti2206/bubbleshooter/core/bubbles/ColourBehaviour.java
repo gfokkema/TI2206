@@ -27,7 +27,9 @@ public class ColourBehaviour implements BubbleBehaviour {
 	@Override
 	public int remove(GridCell cell) {
 		Collection<GridCell> sameColors = new HashSet<GridCell>();
-		cell.depthFirst(sameColors, (Bubble b) -> compareColors(cell.getBubble(), b));
+		sameColors.add(cell);
+		Bubble base = cell.getBubble();
+		cell.forEachNeighbor(g -> g.depthFirst(sameColors, (Bubble b) -> compareColors(base, b)));
 		int size = sameColors.size();
 		if (size >= 3) {
 			sameColors.forEach((GridCell g) -> g.removeBubble());

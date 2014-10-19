@@ -76,6 +76,7 @@ public abstract class BSMode implements EndingObserver {
 		if (grid.collides(projectile) && (g = grid.add(projectile)) != null) {
 			setProjectile(cannon.getProjectile());
 			g.remove();
+			grid.removeDisconnected();
 		}
 	}
 
