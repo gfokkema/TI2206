@@ -75,6 +75,10 @@ public abstract class BSMode implements EndingObserver {
 		GridCell g;
 		if (grid.collides(projectile) && (g = grid.add(projectile)) != null) {
 			setProjectile(cannon.getProjectile());
+			// FIXME:	we manually move the projectile in order to
+			//			trigger the network sync...
+			projectile.move();
+			
 			score += g.remove();
 			score += g.triggerNeighbors();
 			score += grid.removeDisconnected();
