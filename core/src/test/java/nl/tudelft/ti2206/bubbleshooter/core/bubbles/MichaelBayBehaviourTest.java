@@ -45,7 +45,7 @@ public class MichaelBayBehaviourTest {
 		// stub specifically for adjacency
 		Mockito.when(grid.adjacent(anyInt(), anyInt())).thenReturn(true);
 		
-		MBBehaviour.remove(board, 2, 3);
+		MBBehaviour.remove(null);
 		Mockito.verify(board,atLeastOnce()).getGrid();
 		Mockito.verify(grid, atLeastOnce()).adjacent(anyInt(), anyInt());
 	}
@@ -54,7 +54,7 @@ public class MichaelBayBehaviourTest {
 	public void testRemoveNotAdjacent() {
 		// stub again for the other route
 		Mockito.when(grid.adjacent(anyInt(), anyInt())).thenReturn(false);
-		assertEquals(0, MBBehaviour.remove(board, 2, 3));
+		assertEquals(0, MBBehaviour.remove(null));
 	}
 
 

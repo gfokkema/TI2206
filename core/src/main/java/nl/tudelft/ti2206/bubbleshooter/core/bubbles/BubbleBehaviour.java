@@ -1,8 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
-import java.util.Collection;
-
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 /**
  * Interface of the behaviour of a {@link Bubble}
@@ -13,18 +11,15 @@ public interface BubbleBehaviour {
 	
 	/**
 	 * Get the group of {@link Bubble}s which are needed to be removed.
-	 * @param board the {@link Board} used.
-	 * @param id the id of the {@link Bubble} on the {@link Grid}.
+	 * @param cell TODO
 	 * @return {@link Collection<{@link Bubble}>}
 	 */
-	Collection<Bubble> getGroup(Board board, int id);
+	int chain(GridCell cell);
 	
 	/**
-	 * Removes the group of {@link Bubble}s gotten from {@link #getGroup(Board, int)}.
-	 * @param board the {@link Board} used.
-	 * @param id the id of the {@link Bubble} on the {@link Grid}.
-	 * @param projectile the fired {@link Projectile} position on the {@link Grid}
+	 * Removes the group of {@link Bubble}s gotten from {@link #chain(GridCell)}.
+	 * @param cell TODO
 	 * @return amount of {@link Bubble}s removed.
 	 */
-	int remove(Board board, int id, int projectile);
+	int remove(GridCell cell);
 }

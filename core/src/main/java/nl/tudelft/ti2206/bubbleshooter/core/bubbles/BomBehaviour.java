@@ -1,9 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
-import java.util.Collection;
 import java.util.HashMap;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 /**
  * This class describes the {@link BubbleBehaviour} of the {@link BomBubble}.
@@ -18,24 +17,16 @@ public class BomBehaviour implements BubbleBehaviour{
 	 * @return the {@link Collection<{@link Bubble}>} of all adjacent bubbles.
 	 */
 	@Override
-	public Collection<Bubble> getGroup(Board board, int id) {
-		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();
-		// FIXME: make this work again
-		//group.put(id, board.getBubbles().get(id));
-		//for(Entry<Integer, Bubble> b: board.getBubbles().entrySet()) {
-		//	if(board.getGrid().adjacent(b.getKey(), id)) group.put(b.getKey(), b.getValue());
-		//}
-		return group.values();
+	public int chain(GridCell cell) {
+		return remove(cell);
 	}
 	
 	/**
 	 * Removes the {@link Bubble}s caught within the blast of the {@link BomBubble}.
 	 */
 	@Override
-	public int remove(Board board, int id, int projectile) {
-		if(board.getGrid().adjacent(id, projectile)) {
-			return 3 * board.removeAll(getGroup(board,id));
-		}
+	public int remove(GridCell cell) {
+		cell.forEachNeighbor((GridCell gc) -> gc.removeBubble());
 		return 0;
 	}
 }

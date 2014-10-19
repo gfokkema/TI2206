@@ -192,11 +192,11 @@ public class BoardTest {
 		grid.add(new ColourBubble(Color.RED), 4, 2);
 		grid.add(new ColourBubble(Color.RED), 5, 2);
 
-		Collection<Bubble> disconnectedGroup = grid.getDisconnectedGroup();
-		assertEquals(2, disconnectedGroup.size());
-		disconnectedGroup.forEach(
-				(Bubble b) -> assertEquals(Color.RED, b.getColor())
-				);
+		grid.removeDisconnected();
+		assertEquals(2, grid.cells.size());
+		grid.cells.values().forEach(
+				(GridCell gc) -> assertEquals(Color.BLUE, gc.getBubble().getColor())
+		);
 	}
 
 	/**

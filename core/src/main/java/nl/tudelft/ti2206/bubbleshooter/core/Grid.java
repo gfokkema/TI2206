@@ -129,7 +129,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	}
 
 	public int removeDisconnected() {
-		Collection<GridCell> connected = new HashSet<GridCell>();
+		Collection<GridCell> connected = new ArrayList<GridCell>();
 		for (int i = 0; i < width; i++) {
 			cells.get(i).depthFirst(connected);
 		}

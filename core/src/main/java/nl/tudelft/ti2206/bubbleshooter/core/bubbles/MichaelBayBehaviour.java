@@ -1,9 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
-import java.util.Collection;
 import java.util.HashMap;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 /**
  * This class describes the {@link BubbleBehaviour} of the {@link MichaelBayBubble}.
@@ -19,7 +18,7 @@ public class MichaelBayBehaviour implements BubbleBehaviour {
 	 * @return the {@link Collection<{@link Bubble}>} of all bubbles.
 	 */
 	@Override
-	public Collection<Bubble> getGroup(Board board, int id) {
+	public int chain(GridCell cell) {
 		HashMap<Integer, Bubble> group = new HashMap<Integer, Bubble>();
 		// FIXME:
 		//group.put(id, board.getBubbles().get(id));
@@ -34,9 +33,9 @@ public class MichaelBayBehaviour implements BubbleBehaviour {
 	 * Removes all the {@link Bubble}s.
 	 */
 	@Override
-	public int remove(Board board, int id, int projectile) {
+	public int remove(GridCell cell) {
 		if(board.getGrid().adjacent(id, projectile)) {
-			return 3 * board.removeAll(getGroup(board, id));
+			return 3 * board.removeAll(chain(null));
 		}
 		return 0;
 	}

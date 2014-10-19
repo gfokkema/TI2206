@@ -1,8 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
-import java.util.Collection;
-
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 /**
  * This class describes the {@link BubbleBehaviour} of the {@link StoneBubble}.
@@ -18,7 +16,7 @@ public class StoneBehaviour implements BubbleBehaviour {
 	 * @return null no bubbles should be removed.
 	 */
 	@Override
-	public Collection<Bubble> getGroup(Board board, int id) {
+	public int chain(GridCell cell) {
 		return null;
 	}
 
@@ -26,7 +24,7 @@ public class StoneBehaviour implements BubbleBehaviour {
 	 * Removes nothing.
 	 */
 	@Override
-	public int remove(Board board, int id, int projectile) {
+	public int remove(GridCell cell) {
 		return 0;
 	}
 }

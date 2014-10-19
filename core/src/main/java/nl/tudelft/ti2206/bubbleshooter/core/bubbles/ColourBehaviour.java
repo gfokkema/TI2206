@@ -13,13 +13,11 @@ public class ColourBehaviour implements BubbleBehaviour {
 	 * Get a {@link Collection} of all {@link Bubble} objects adjacent to the
 	 * given {@link Bubble} that have the same color.
 	 * 
-	 * @param id
-	 *            the grid id of the {@link Bubble}
 	 * @return {@link Collection} of {@link Bubble} objects adjacent to id and
 	 *         with the same color
 	 */
 	@Override
-	public Collection<Bubble> getGroup(Board board, int id) {
+	public int chain(GridCell cell) {
 		// Search for bubbles of the same color
 		HashMap<Integer, Bubble> bubbleGroup = new HashMap<Integer, Bubble>();
 		// FIXME:
@@ -36,19 +34,19 @@ public class ColourBehaviour implements BubbleBehaviour {
 	 * Determines if the id is equal to the projectile.
 	 */
 	@Override
-	public int remove(Board board, int id, int projectile) {
+	public int remove(GridCell cell) {
 		if(id == projectile) return remove(board,projectile);
 		else return 0;
 	}
 	
 	/**
-	 * Removes the group gotten from {@link #getGroup(Board, int)}.
+	 * Removes the group gotten from {@link #chain(GridCell)}.
 	 * @param board the {@link Board} used.
 	 * @param projectile the {@link Projectile} on the {@link Grid}.
 	 * @return amount of {@link Bubble}s are removed.
 	 */
 	public int remove(Board board, int projectile) {
-		Collection<Bubble> sameColors = getGroup(board, projectile);
+		Collection<Bubble> sameColors = chain(null);
 		if (sameColors.size() >= 3) {
 			return board.removeAll(sameColors);
 		} else return 0;

@@ -51,9 +51,8 @@ public class GridCell implements Collidable {
 		if (acc.contains(bubble)) 	return;
 		if (!isOccupied())			return;
 
-		ArrayList<GridCell> result = new ArrayList<GridCell>();
-		result.add(this);
-		this.neighbors.forEach(g -> g.depthFirst(acc));
+		acc.add(this);
+		forEachNeighbor(g -> g.depthFirst(acc));
 	}
 
 	public void forEachNeighbor(Consumer<? super GridCell> consumer) {
