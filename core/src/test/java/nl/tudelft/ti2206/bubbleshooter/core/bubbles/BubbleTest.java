@@ -18,34 +18,37 @@ import com.badlogic.gdx.math.Vector2;
  * In this class we will test the functionality of our Bubble class.
  */
 public class BubbleTest {
-	/*
+	
 	private Bubble bubble;
 
 	/**
 	 * A new bubble is initiated, to be used through the class.
 	 *
+	 */
 	@Before
 	public void setUp() {
-		this.bubble = new Bubble();
+		this.bubble = new ColourBubble();
 	}
 	/**
 	 * Checked whether the bubbles are initiated with the given color.
 	 *
+	 */
 	@Test
 	public void testBubble() {
-		bubble = new Bubble(Color.RED);
+		bubble = new ColourBubble(Color.RED);
 		assertEquals(Color.RED, bubble.getColor());
 
-		bubble = new Bubble(Color.BLUE);
+		bubble = new ColourBubble(Color.BLUE);
 		assertEquals(Color.BLUE, bubble.getColor());
 
-		bubble = new Bubble(Color.ORANGE);
+		bubble = new ColourBubble(Color.ORANGE);
 		assertEquals(Color.ORANGE, bubble.getColor());
 	}
 
 	/**
 	 * Test whether the defaults of a bubble are instantiated correctly.
 	 *
+	 */
 	@Test
 	public void testDefaults() {
 		assertEquals(32, bubble.getWidth());
@@ -56,6 +59,7 @@ public class BubbleTest {
 	/**
 	 * Checked whether the circles are initiated with the given boundaries.
 	 *
+	 */
 	@Test
 	public void testBounds() {
 		Circle c = new Circle(0, 0, 10);
@@ -66,6 +70,7 @@ public class BubbleTest {
 	/**
 	 * Checked whether the given vector is correctly initiated with given boundaries.
 	 *
+	 */
 	@Test
 	public void testPosition() {
 		Vector2 pos = new Vector2(10, 10), pos2 = new Vector2(20, 50);
@@ -82,12 +87,13 @@ public class BubbleTest {
 	/**
 	 * Checked whether with the given bounds, overlaps gives the right output.
 	 *
+	 */
 	@Test
 	public void testCollide() {
 		Circle c1 = new Circle(0, 0, 5);
 		Circle c2 = new Circle(0, 5, 5);
 		Circle c3 = new Circle(0, 10, 5);
-		Bubble b = new Bubble();
+		Bubble b = new ColourBubble();
 		b.setBounds(c1);
 
 		bubble.setBounds(c1);
@@ -105,6 +111,7 @@ public class BubbleTest {
 	/**
 	 * Checks if the new the position, from given index with given orientation is.
 	 *
+	 */
 	@Test
 	public void testFromIndex() {
 		Orientation ori;
@@ -123,6 +130,7 @@ public class BubbleTest {
 	/**
 	 * Checks whether the opposite orientation is correct
 	 *
+	 */
 	@Test
 	public void testOrientation() {
 		Orientation ori;
@@ -133,5 +141,5 @@ public class BubbleTest {
 		ori = Orientation.NORTH_EAST;
 		assertEquals(Orientation.SOUTH_WEST, ori.getOpposite());
 	}
-	*/
+	
 }
