@@ -17,14 +17,15 @@ public class StoneBehaviour implements BubbleBehaviour {
 	 */
 	@Override
 	public int chain(GridCell cell) {
-		return null;
+		return remove(cell);
 	}
 
 	/**
-	 * Removes nothing.
+	 * Removes itself.
 	 */
 	@Override
 	public int remove(GridCell cell) {
-		return 0;
+		cell.removeBubble();
+		return 1;
 	}
 }
