@@ -11,11 +11,11 @@ import com.badlogic.gdx.graphics.Color;
 
 public class MichaelBayBubbleTest {
 	
-	/*
 	private MichaelBayBubble MBBubble;
 	/**
 	 * A new bubble is initiated, to be used through the class.
 	 *
+	 */
 	@Before
 	public void setUp() {
 		this.MBBubble = new MichaelBayBubble();
@@ -24,19 +24,21 @@ public class MichaelBayBubbleTest {
 	/**
 	 * Test if the MichaelBay Bubble is correctly instantiated
 	 *
+	 */
 	@Test
 	public void testMichaelBayBubble() {
-		assertEquals(Color.MAGENTA, MBBubble.getColor());
+		assertEquals(Color.WHITE, MBBubble.getColor());
 	}
 	
 	/**
 	 * Test whether the defaults of a bubble are instantiated correctly.
 	 *
+	 */
 	@Test
 	public void testDefaults() {
 		assertEquals(32, MBBubble.getWidth());
 		assertEquals(32, MBBubble.getHeight());
-		assertEquals(TextureID.STONEBUBBLE, MBBubble.getTexture());
+		assertEquals(TextureID.MICHAELBAYBUBBLE, MBBubble.getTexture());
 	}
-	*/
+	
 }
