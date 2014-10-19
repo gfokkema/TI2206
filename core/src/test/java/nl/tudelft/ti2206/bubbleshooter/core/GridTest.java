@@ -377,4 +377,17 @@ public class GridTest {
 		assertEquals(20, grid.getGridWidth());
 		assertEquals(4, grid.getGridHeight());
 	}
+	
+	/**
+	 * Test whether an empty Collection is returned when all ColourBubbles are connected to the ceiling.
+	 */
+	@Test
+	public void testRemoveDisconnectedEmpty() {
+		// Initialize four ColourBubbles
+		for (int i = 0; i < 4; i++) {
+			grid.add(new ColourBubble(), i);
+		}
+		grid.removeDisconnected();
+		assertEquals(4, grid.size());
+	}
 }
