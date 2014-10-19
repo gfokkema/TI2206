@@ -1,6 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,7 +47,7 @@ public class GridCell implements Collidable {
 	}
 
 	public void depthFirst(Collection<GridCell> acc) {
-		if (acc.contains(bubble)) 	return;
+		if (acc.contains(this)) 	return;
 		if (!isOccupied())			return;
 
 		acc.add(this);
