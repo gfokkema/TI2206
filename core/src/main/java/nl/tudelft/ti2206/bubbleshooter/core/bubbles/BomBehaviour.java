@@ -1,7 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
-import java.util.HashMap;
-
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 /**

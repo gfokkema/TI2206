@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -163,6 +168,20 @@ public class GridTest {
 		// Value outside of bounds
 		grid.toXY(83);
 	}
+	
+	/**
+	 * Test adjacency for cells in the same row
+	 */
+	@Test
+	public void testGetAdjacent() {
+		Integer[] expected1 = {1, 6};
+		assertEquals(Arrays.asList(expected1), grid.getAdjacent(0));
+		
+		Integer[] expected2 = {3, 4, 8, 10, 14, 15};
+		ArrayList<Integer> actual = grid.getAdjacent(9);
+		Collections.sort(actual);
+		assertEquals(Arrays.asList(expected2), actual);
+	}
 
 	/**
 	 * Test adjacency for cells in the same row
@@ -173,6 +192,7 @@ public class GridTest {
 		assertFalse(grid.adjacent(5, 6));
 		assertTrue(grid.adjacent(6, 7));
 		assertTrue(grid.adjacent(8, 7));
+		assertTrue(grid.adjacent(9, 10));
 	}
 
 	/**
@@ -221,17 +241,9 @@ public class GridTest {
 	/**
 	 * Test adjacent out of bound cells, positive
 	 */
-	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAdjacentOutOfBounds_3() {
-		grid.adjacent(77, 83);
-	}
-
-	/**
-	 * Test adjacent out of bound cells, positive
-	 */
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testAdjacentOutOfBounds_4() {
-		grid.adjacent(83, 84);
+		assertFalse(grid.adjacent(77, 83));
+		assertFalse(grid.adjacent(83, 84));
 	}
 
 	/**
@@ -241,11 +253,11 @@ public class GridTest {
 	 */
 	@Test
 	public void testGetWidthHeight() {
-		assertEquals(6, grid.getWidth());
-		assertEquals(15, grid.getHeight());
+		assertEquals(6, grid.getGridWidth());
+		assertEquals(15, grid.getGridHeight());
 
 		grid = new Grid(20, 4);
-		assertEquals(20, grid.getWidth());
-		assertEquals(4, grid.getHeight());
+		assertEquals(20, grid.getGridWidth());
+		assertEquals(4, grid.getGridHeight());
 	}
 }
