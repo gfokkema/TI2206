@@ -5,9 +5,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ BackgroundTest.class, //BoardTest.class,
-		CannonTest.class,
-		GridTest.class, PointerTest.class })
+@SuiteClasses({ BackgroundTest.class, 
+				CannonTest.class,
+				GridTest.class,
+				PointerTest.class })
 public class CoreTests {
 
 }
