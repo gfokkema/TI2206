@@ -20,15 +20,20 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class ColourBubble extends Bubble{
 	private static final long serialVersionUID = 746300724926407976L;
+	protected Color color;
+	protected int colour;
 	
-	protected Color colour;
+	
 	
 	/**
 	 * ColourBubble constructor.
 	 */
+	@SuppressWarnings("static-access")
 	public ColourBubble() {
 		super(new ColourBehaviour());
-		this.colour = getRandomColor(BubbleColors.values().length -1);
+		
+		this.color = getRandomColor(BubbleColors.values().length -1);
+		colour = color.rgba8888(color);
 	}
 	
 	/**
@@ -37,12 +42,14 @@ public class ColourBubble extends Bubble{
 	 */
 	public ColourBubble(int colourLimit) {
 		super(new ColourBehaviour());
-		this.colour = getRandomColor(colourLimit);
+		this.color = getRandomColor(colourLimit);
+		colour = color.rgba8888(color);
 	}
 	
 	public ColourBubble(ArrayList<Color> colours) {
 		super(new ColourBehaviour());
-		this.colour = getRandomColor(colours);
+		this.color = getRandomColor(colours);
+		colour = color.rgba8888(color);
 	}
 		
 	/**
@@ -53,7 +60,7 @@ public class ColourBubble extends Bubble{
 	 */
 	public ColourBubble(Color colour) {
 		super(new ColourBehaviour());
-		this.colour = colour;
+		this.colour = colour.rgb888(colour);
 	}
 		
 	/**
@@ -75,7 +82,7 @@ public class ColourBubble extends Bubble{
 	 */
 	@Override
 	public Color getColor() {
-		return colour;
+		return color;
 	}
 	
 	/**
