@@ -136,6 +136,10 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 		return new ArrayList<Color>(colours);
 	}
 
+	public int removeGroup(int index) {
+		return cells.get(index).remove();
+	}
+
 	public int removeDisconnected() {
 		Collection<GridCell> connected = new ArrayList<GridCell>();
 		for (int i = 0; i < width; i++) {

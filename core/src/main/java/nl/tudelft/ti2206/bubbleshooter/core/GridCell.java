@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
@@ -56,8 +57,13 @@ public class GridCell implements Collidable {
 	}
 
 	public void depthFirst(Collection<GridCell> acc) {
-		if (acc.contains(this)) 	return;
-		if (!isOccupied())			return;
+		depthFirst(acc, bubble -> true);
+	}
+
+	public void depthFirst(Collection<GridCell> acc, Predicate<Bubble> condition) {
+		if (acc.contains(this)) 		return;
+		if (!isOccupied())				return;
+		if (!condition.test(bubble))	return;
 
 		acc.add(this);
 		forEachNeighbor(g -> g.depthFirst(acc));

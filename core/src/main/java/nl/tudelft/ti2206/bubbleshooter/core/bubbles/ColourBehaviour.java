@@ -1,10 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.HashSet;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 public class ColourBehaviour implements BubbleBehaviour {
@@ -18,15 +17,8 @@ public class ColourBehaviour implements BubbleBehaviour {
 	 */
 	@Override
 	public int chain(GridCell cell) {
-		// Search for bubbles of the same color
-		HashMap<Integer, Bubble> bubbleGroup = new HashMap<Integer, Bubble>();
-		// FIXME:
-		//board.depthFirst(
-		//		id,
-		//		(current, neighbour) -> testColor(board, current, neighbour),
-		//		bubbleGroup);
-		bubbleGroup.put(id, board.getGrid().cells.get(id).getBubble());
-		return bubbleGroup.values();
+		cell.removeBubble();
+		return 1;
 	}
 	
 	/**
@@ -35,33 +27,17 @@ public class ColourBehaviour implements BubbleBehaviour {
 	 */
 	@Override
 	public int remove(GridCell cell) {
-		if(id == projectile) return remove(board,projectile);
-		else return 0;
+		Collection<GridCell> sameColors = new HashSet<GridCell>();
+		cell.depthFirst(sameColors, (Bubble b) -> compareColors(cell.getBubble(), b));
+		int size = sameColors.size();
+		if (size >= 3) {
+			sameColors.forEach((GridCell g) -> g.removeBubble());
+			return size;
+		}
+		return 0;
 	}
-	
-	/**
-	 * Removes the group gotten from {@link #chain(GridCell)}.
-	 * @param board the {@link Board} used.
-	 * @param projectile the {@link Projectile} on the {@link Grid}.
-	 * @return amount of {@link Bubble}s are removed.
-	 */
-	public int remove(Board board, int projectile) {
-		Collection<Bubble> sameColors = chain(null);
-		if (sameColors.size() >= 3) {
-			return board.removeAll(sameColors);
-		} else return 0;
-	}
-	
-	/**
-	 * Tests colors of the neighbouring {@link Bubble}s.
-	 * @param board the {@link Board} used.
-	 * @param current the current {@link Bubble}.
-	 * @param neighbour the neighbouring {@link Bubble}.
-	 * @return true if the current is equal to the neighbour.
-	 */
-	private boolean testColor(Board board, Integer current, Integer neighbour) {
-		// FIXME:
-		HashMap<Integer, GridCell> c = board.getGrid().cells;
-		return c.get(current).getBubble().getColor().equals(c.get(neighbour).getBubble().getColor());
+
+	public boolean compareColors(Bubble a, Bubble b) {
+		return a.getColor().equals(b.getColor());
 	}
 }
