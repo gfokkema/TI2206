@@ -177,19 +177,16 @@ public class GridCell extends BSDrawable implements Collidable {
 
 	@Override
 	public TextureID getTexture() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

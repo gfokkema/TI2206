@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.engine;
 
 import static org.junit.Assert.assertEquals;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
@@ -16,6 +17,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 /**
  * Tests the {@link Assets} class, which manages all external assets used by Bubbleshooter.
@@ -23,7 +26,9 @@ import com.badlogic.gdx.graphics.Texture;
 @RunWith(MockitoJUnitRunner.class)
 public class AssetsTest {
 	@Mock AssetManager loader;
+	@Mock Drawable drawable;
 	@Mock Music music;
+	@Mock Skin skin;
 	@Mock Sound sound;
 	@Mock Texture texture;
 
@@ -36,9 +41,26 @@ public class AssetsTest {
 	public void setUp() {
 		assets = Assets.getAssets();
 		assets.setAssetManager(loader);
+		assets.setSkin(skin);
+		Mockito.when(loader.get("test.drw")).thenReturn(texture);
 		Mockito.when(loader.get("test.ogg")).thenReturn(music);
 		Mockito.when(loader.get("test.wav")).thenReturn(sound);
 		Mockito.when(loader.get("test.png")).thenReturn(texture);
+		Mockito.when(skin.getDrawable("test.drw")).thenReturn(drawable);
+	}
+	
+	/**
+	 * Test loading and retrieving a {@link Drawable}.
+	 */
+	@Test
+	public void testLoadDrawable() {
+		assets.load(SkinID.BUTTON, "test.drw");
+		Mockito.verify(loader).load("test.drw", Texture.class);
+		
+		assets.finish();
+		Mockito.verify(skin).add("test.drw", texture, Texture.class);
+		
+		assertEquals(drawable, assets.get(SkinID.BUTTON));
 	}
 
 	/**
