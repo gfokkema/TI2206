@@ -1,8 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,12 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class BelowLineConditionTest {
 	@Mock EndingCondition wrappedCondition;
-	@Mock Board board;
+	@Mock Grid grid;
 	BelowLineCondition below;
 
 	@Before
@@ -25,16 +24,16 @@ public class BelowLineConditionTest {
 
 	@Test
 	public void testLosingCondition() {
-		when(board.bubbleBelowLine()).thenReturn(true);
-		below.check(board);
+		when(grid.bubbleBelowLine()).thenReturn(true);
+		below.check(grid);
 		verify(wrappedCondition).lost();
 		verify(wrappedCondition, never()).won();
 	}
 
 	@Test
 	public void testContinueCondition() {
-		when(board.bubbleBelowLine()).thenReturn(false);
-		below.check(board);
+		when(grid.bubbleBelowLine()).thenReturn(false);
+		below.check(grid);
 		verify(wrappedCondition, never()).lost();
 		verify(wrappedCondition, never()).won();
 	}

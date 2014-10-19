@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
@@ -27,13 +27,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class SinglePlayerModeTest {
 	private SinglePlayerMode mode;
 	
-	@Mock ArrayList<Board> boards;
-	@Mock Iterator<Board> board_it;
-	@Mock Board board;
 	@Mock BoardFactory factory;
 	@Mock Cannon cannon;
 	@Mock Collection<Bubble> colorgroup;
 	@Mock EndingCondition end;
+	@Mock ArrayList<Grid> grids;
+	@Mock Iterator<Grid> grid_it;
+	@Mock Grid grid;
 	@Mock Projectile bubble;
 	@Mock Projectile cbubble;
 	@Mock StatsObserver obs;
@@ -41,9 +41,9 @@ public class SinglePlayerModeTest {
 	@Before
 	public void setUp() throws IOException {
 		Mockito.when(cannon.getProjectile()).thenReturn(cbubble);
-		Mockito.when(factory.makeLevels()).thenReturn(boards);
-		Mockito.when(boards.iterator()).thenReturn(board_it);
-		Mockito.when(board_it.next()).thenReturn(board);
+		Mockito.when(factory.makeLevels()).thenReturn(grids);
+		Mockito.when(grids.iterator()).thenReturn(grid_it);
+		Mockito.when(grid_it.next()).thenReturn(grid);
 		
 		mode = new SinglePlayerMode(end, factory, cannon);
 		mode.addStatsObserver(obs);

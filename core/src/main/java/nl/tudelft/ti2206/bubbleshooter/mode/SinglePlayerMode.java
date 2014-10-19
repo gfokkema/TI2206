@@ -57,7 +57,7 @@ public class SinglePlayerMode extends BSMode {
 		drawablesbg.add(bg);
 		odraw.put(new Vector2(0, 0), drawablesbg);
 		
-		Collection<BSDrawable> drawables = board.getDrawables();
+		Collection<BSDrawable> drawables = grid.getDrawables();
 		drawables.add(cannon);
 		drawables.add(cannon.getProjectile());
 		if (projectile != null) drawables.add(projectile);

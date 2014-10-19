@@ -13,6 +13,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.MPBoardFactory;
@@ -36,8 +37,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	private ObjectOutputStream out;
 
 	private Background bg;
-	private Board board2;
 	private Cannon cannon2;
+	private Grid grid2;
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
 	private EndingCondition condition2;
@@ -65,14 +66,14 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
 
-		this.board = factory.makeLevels().get(0);
+		this.grid = factory.makeLevels().get(0);
 
 		writeCondition(end);
-		writeDrawable(board);
+		writeDrawable(grid);
 		writeDrawable(cannon);
 		writeDrawable(cannon.getProjectile());
 		
-		board.addObserver(this);
+		grid.addObserver(this);
 		cannon.addObserver(this);
 	}
 
@@ -96,16 +97,16 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		ArrayList<BSDrawable> drawables1 = new ArrayList<>();
 		drawables1.add(bg);
 
-		drawables1.addAll(board.getDrawables());
+		drawables1.addAll(grid.getDrawables());
 		drawables1.add(cannon);
 		drawables1.add(cannon.getProjectile());
 		cannon.getProjectile().addObserver(this);
 		if (projectile != cannon.getProjectile()) drawables1.add(projectile);
 		odraw.put(offset1, drawables1);
 
-		if (board2 == null || cannon2 == null || projectile2 == null) return odraw;
+		if (grid2 == null || cannon2 == null || projectile2 == null) return odraw;
 		
-		Collection<BSDrawable> drawables2 = board2.getDrawables();
+		Collection<BSDrawable> drawables2 = grid2.getDrawables();
 		drawables2.add(cannon2);
 		drawables2.add(cannon2.getProjectile());
 		if (projectile2 != cannon2.getProjectile()) drawables2.add(projectile2);
@@ -121,8 +122,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		if (board2 == null) return;
-		condition2.check(this.board2);
+		if (grid2 == null) return;
+		condition2.check(this.grid2);
 		this.opponentStatsObs.updateScore(111);
 		this.writeCondition(end);
 	}
@@ -135,19 +136,19 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	}
 
 	/**
-	 * Setter for opponent's board.
-	 * @param board	the {@link Board} of the opponent
-	 */
-	public synchronized void setBoardOpp(Board board) {
-		this.board2 = board;
-	}
-
-	/**
 	 * Setter for oppponent's cannon.
 	 * @param cn	the {@link Cannon} of the opponent
 	 */
 	public synchronized void setCannonOpp(Cannon cn) {
 		this.cannon2 = cn;
+	}
+	
+	/**
+	 * Setter for opponent's board.
+	 * @param board	the {@link Board} of the opponent
+	 */
+	public synchronized void setGridOpp(Grid grid) {
+		this.grid2 = grid;
 	}
 	
 	@Override
@@ -205,8 +206,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		while (true) {
 			try {
 				Object o = in.readObject();
-				if (o instanceof Board) {
-					setBoardOpp((Board) o);
+				if (o instanceof Grid) {
+					setGridOpp((Grid) o);
 				} else if (o instanceof Cannon) {
 					setCannonOpp((Cannon) o);
 				} else if (o instanceof Projectile) {

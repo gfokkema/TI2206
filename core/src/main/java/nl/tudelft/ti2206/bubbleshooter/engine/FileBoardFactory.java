@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BomBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BubbleColors;
@@ -25,7 +26,7 @@ public abstract class FileBoardFactory extends BoardFactory {
 	 * @return		list of Boards
 	 * @throws IOException	when the file could not be read
 	 */
-	public List<Board> parseFile(String res) throws IOException {
+	public List<Grid> parseFile(String res) throws IOException {
 		InputStream in = Gdx.files.internal(res).read();
 		InputStreamReader is = new InputStreamReader(in);
 		BufferedReader br = new BufferedReader(is);
@@ -39,8 +40,8 @@ public abstract class FileBoardFactory extends BoardFactory {
 	 * @return		list of Boards
 	 * @throws IOException	when the stream could not be read or is invalid
 	 */
-	public List<Board> parseFile(BufferedReader br) throws IOException {
-		ArrayList<Board> boards = new ArrayList<>();
+	public List<Grid> parseFile(BufferedReader br) throws IOException {
+		ArrayList<Grid> grids = new ArrayList<>();
 		
 		String line;
 		while ((line = br.readLine()) != null) {
@@ -49,10 +50,10 @@ public abstract class FileBoardFactory extends BoardFactory {
 			StringWriter bw = new StringWriter();
 			while ((line = br.readLine()) != null && !line.matches("--- END --- .* ---"))
 				bw.write(line + "\n");
-			boards.add(parseLevel(bw.toString()));
+			grids.add(parseLevel(bw.toString()));
 		}
 		
-		return boards;
+		return grids;
 	}
 	
 	/**
@@ -61,22 +62,22 @@ public abstract class FileBoardFactory extends BoardFactory {
 	 * @return		list of Boards
 	 * @throws IOException	when the stream could not be read or is invalid
 	 */
-	public Board parseLevel(String s) throws IOException {
+	public Grid parseLevel(String s) throws IOException {
 		String[] lines = s.split("\\r?\\n");
 		String[] dimensions = lines[0].split("x");
 		int[] dim = { Integer.parseInt(dimensions[0]), Integer.parseInt(dimensions[1]) };
 		
-		Board board = new Board(dim[0], dim[1]);
+		Grid grid = new Grid(dim[0], dim[1]);
 		for (int y = 1; y < lines.length; y++) {
 			lines[y] = lines[y].trim();
 			String[] bubbles = lines[y].split("   ");
 			
-			for (int x = 0; x < bubbles.length && x < board.getWidth() - (y - 1) % 2; x++) {
+			for (int x = 0; x < bubbles.length && x < grid.getGridWidth() - (y - 1) % 2; x++) {
 				Bubble b = parseType(bubbles[x]);
-				if (b != null) add(board, b, x, y - 1);
+				if (b != null) add(grid, b, x, y - 1);
 			}
 		}
-		return board;
+		return grid;
 	}
 	
 	protected Bubble parseType(String bubble) {

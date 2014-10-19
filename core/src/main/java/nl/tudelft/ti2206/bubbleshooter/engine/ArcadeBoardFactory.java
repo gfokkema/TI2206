@@ -3,17 +3,17 @@ package nl.tudelft.ti2206.bubbleshooter.engine;
 import java.io.IOException;
 import java.util.List;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 
 public class ArcadeBoardFactory extends FileBoardFactory {
 	@Override
-	public List<Board> makeLevels() {
-		List<Board> boards = null; 
+	public List<Grid> makeLevels() {
+		List<Grid> grids = null; 
 		try {
-			boards = parseFile("levels/arcadeboard.txt");
+			grids = parseFile("levels/arcadeboard.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return boards;
+		return grids;
 	}
 }

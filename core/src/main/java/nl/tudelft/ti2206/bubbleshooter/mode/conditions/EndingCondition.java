@@ -2,7 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
 
 import java.io.Serializable;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
@@ -22,7 +22,7 @@ public abstract class EndingCondition implements Serializable {
 	 * Check whether the game should end
 	 * @param board TODO
 	 */
-	public abstract void check(Board board);
+	public abstract void check(Grid grid);
 
 	/**
 	 * Called when the level is lost.

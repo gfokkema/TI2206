@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 
 public abstract class EndingDecorator extends EndingCondition {
@@ -32,8 +32,8 @@ public abstract class EndingDecorator extends EndingCondition {
 	}
 
 	@Override
-	public void check(Board board) {
-		end.check(board);
+	public void check(Grid grid) {
+		end.check(grid);
 	}
 
 	@Override

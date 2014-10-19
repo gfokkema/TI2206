@@ -1,6 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 
 /**
  * Basic ending condition which ends the game once the {@link Board} is empty.
@@ -14,8 +15,8 @@ public class BasicCondition extends EndingCondition {
 	 * Check if the {@link Board} is empty.
 	 */
 	@Override
-	public void check(Board board) {
-		if (board.getGrid().isEmpty()) this.won();
+	public void check(Grid grid) {
+		if (grid.isEmpty()) this.won();
 	}
 
 	@Override

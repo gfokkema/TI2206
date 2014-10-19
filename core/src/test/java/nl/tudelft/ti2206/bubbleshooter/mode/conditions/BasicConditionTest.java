@@ -1,9 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 
 import org.junit.Before;
@@ -12,13 +13,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class BasicConditionTest {
 	@Mock EndingObserver obs;
-	@Mock Board board;
 	@Mock BSMode mode;
+	@Mock Grid grid;
 	public EndingCondition basic;
 
 	@Before
@@ -29,16 +28,16 @@ public class BasicConditionTest {
 
 	@Test
 	public void testWinningCondition() {
-		when(board.isEmpty()).thenReturn(true);
-		basic.check(this.board);
+		when(grid.isEmpty()).thenReturn(true);
+		basic.check(grid);
 		verify(obs).won();
 		verify(obs, never()).lost();
 	}
 
 	@Test
 	public void testContinueCondition() {
-		when(board.isEmpty()).thenReturn(false);
-		basic.check(this.board);
+		when(grid.isEmpty()).thenReturn(false);
+		basic.check(grid);
 		verify(obs, never()).lost();
 		verify(obs, never()).won();
 	}

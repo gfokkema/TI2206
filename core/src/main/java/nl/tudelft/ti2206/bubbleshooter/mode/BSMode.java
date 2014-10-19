@@ -7,6 +7,7 @@ import java.util.Iterator;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
@@ -23,8 +24,8 @@ import com.badlogic.gdx.math.Vector2;
  * It acts as an observable, calling a {@link StatsObserver} to update.
  */
 public abstract class BSMode implements EndingObserver {
-	protected Iterator<Board> boards;
-	protected Board board;
+	protected Iterator<Grid> grids;
+	protected Grid grid;
 	protected Cannon cannon;
 	protected Projectile projectile;
 	// FUGLY, doesn't belong here...
@@ -44,15 +45,15 @@ public abstract class BSMode implements EndingObserver {
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
 	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		this.boards = factory.makeLevels().iterator();
-		this.board = boards.next();
+		this.grids = factory.makeLevels().iterator();
+		this.grid = grids.next();
 		this.cannon = cannon;
 		this.end = end;
 		this.score = 0;
 		
 		setProjectile(cannon.getProjectile());
 		
-		this.board.addObserver(Logger.getLogger());
+		this.grid.addObserver(Logger.getLogger());
 		this.cannon.addObserver(Logger.getLogger());
 		this.end.addEndingObserver(this);
 	}
@@ -64,7 +65,7 @@ public abstract class BSMode implements EndingObserver {
 	 * @param deltaTime	the time that has elapsed
 	 */
 	public void update(float deltaTime) {
-		end.check(this.board);
+		end.check(this.grid);
 		
 		if (cannonLeft) cannon.left(deltaTime);
 		if (cannonRight) cannon.right(deltaTime);
@@ -72,7 +73,7 @@ public abstract class BSMode implements EndingObserver {
 		
 		projectile.move();
 		// TODO: fix the add method
-		if (board.collides(projectile) && board.getGrid().add(projectile)) {
+		if (grid.collides(projectile) && grid.add(projectile)) {
 			setProjectile(cannon.getProjectile());
 			// TODO: call behaviour
 		}
@@ -109,8 +110,8 @@ public abstract class BSMode implements EndingObserver {
 	 * Returns the {@link Board}.
 	 * @return the {@link Board}.
 	 */
-	public Board getBoard() {
-		return board;
+	public Grid getGrid() {
+		return grid;
 	}
 
 	/**
@@ -153,16 +154,16 @@ public abstract class BSMode implements EndingObserver {
 	 * @return	boolean indicating whether this is the last {@link Board}
 	 */
 	public boolean hasNext() {
-		return boards.hasNext();
+		return grids.hasNext();
 	}
 	
 	/**
 	 * Switches {@link BSMode} to the next {@link Board}.
 	 */
 	public void next() {
-		this.board.deleteObservers();
-		this.board = boards.next();
-		this.board.addObserver(Logger.getLogger());
+		this.grid.deleteObservers();
+		this.grid = grids.next();
+		this.grid.addObserver(Logger.getLogger());
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 
 /**
  * The Single-Player {@link EndingCondition}.
@@ -18,12 +18,12 @@ public class BelowLineCondition extends EndingDecorator {
 	 * The actual {@link EndingCondition} for the Single-Player mode.
 	 */
 	@Override
-	public void check(Board board) {
-		if(board.getGrid().bubbleBelowLine()) {
+	public void check(Grid grid) {
+		if(grid.bubbleBelowLine()) {
 			this.lost();
 			return;
 		}
-		super.check(board);
+		super.check(grid);
 	}
 
 }
