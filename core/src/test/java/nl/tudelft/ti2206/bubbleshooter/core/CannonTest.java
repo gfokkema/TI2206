@@ -30,7 +30,7 @@ import com.badlogic.gdx.math.Vector2;
 public class CannonTest {
 	@Mock Texture tex;
 	@Mock AssetManager loader;
-	@Mock Board board;
+	@Mock Grid grid;
 	@Mock Sound sound;
 	
 	private Cannon cannon;
@@ -46,7 +46,7 @@ public class CannonTest {
 		assets.setAssetManager(loader);
 		available = new ArrayList<Color>();
 		available.add(Color.BLUE);
-		Mockito.when(board.getColoursAvailable()).thenReturn(available);
+		Mockito.when(grid.getColoursAvailable()).thenReturn(available);
 		Mockito.when(tex.getWidth()).thenReturn(20);
 		Mockito.when(tex.getWidth()).thenReturn(100);
 		Mockito.when(loader.get(anyString())).thenReturn(sound);
@@ -119,7 +119,7 @@ public class CannonTest {
 		ammo = cannon.projectile;
 		assertEquals(ammo, cannon.projectile);
 
-		fired = cannon.shoot(board);
+		fired = cannon.shoot(grid);
 		assertEquals(fired, ammo);
 		assertNotEquals(fired, cannon.projectile);
 	}
