@@ -76,7 +76,7 @@ public abstract class BSMode implements EndingObserver {
 		GridCell g;
 		if (grid.collides(projectile) && (g = grid.add(projectile)) != null) {
 			setProjectile(cannon.getProjectile());
-			g.getBubble().getBehaviour().remove(g);
+			g.remove();
 		}
 	}
 
