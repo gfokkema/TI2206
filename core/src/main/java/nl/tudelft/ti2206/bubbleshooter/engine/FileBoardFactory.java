@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.badlogic.gdx.Gdx;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BomBubble;
@@ -19,6 +19,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.MichaelBayBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.StoneBubble;
 
 public abstract class FileBoardFactory extends BoardFactory {	
+	
 	/**
 	 * Create a Board list from a file
 	 * @param res	internal path to the file
@@ -26,22 +27,21 @@ public abstract class FileBoardFactory extends BoardFactory {
 	 * @throws IOException	when the file could not be read
 	 */
 	public List<Board> parseFile(String res) throws IOException {
-		InputStream in = new ByteArrayInputStream(res.getBytes(StandardCharsets.UTF_8));
-		InputStreamReader is = new InputStreamReader(in);
-		BufferedReader br = new BufferedReader(is);
-		
-		return parseFile(br);
+		InputStream in = Gdx.files.internal(res).read();
+		return parseFile(in);
 	}
 	
 	/**
-	 * Create a Board list from a {@link BufferedReader}
-	 * @param br	{@link BufferedReader} containing 1 or more Boards
+	 * Create a Board list from a {@link InputStream}
+	 * @param in	{@link InputStream} containing 1 or more Boards
 	 * @return		list of Boards
 	 * @throws IOException	when the stream could not be read or is invalid
 	 */
-	public List<Board> parseFile(BufferedReader br) throws IOException {
+	public List<Board> parseFile(InputStream in) throws IOException {
 		ArrayList<Board> boards = new ArrayList<>();
-		
+		InputStreamReader is = new InputStreamReader(in);
+		BufferedReader br = new BufferedReader(is);
+
 		String line;
 		while ((line = br.readLine()) != null) {
 			if (!line.matches("--- BEGIN --- .* ---")) throw new IOException();

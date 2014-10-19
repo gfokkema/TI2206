@@ -5,8 +5,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -16,7 +19,8 @@ import com.badlogic.gdx.graphics.Color;
 public class FileBoardFactoryTest {
 	private ArcadeBoardFactory factory;
 	private ArcadeBoardFactory spy;
-	private BufferedReader br;
+	private String testInput;
+	private InputStream in;
 	
 	
 	/**
@@ -27,7 +31,8 @@ public class FileBoardFactoryTest {
 	public void setUp() throws IOException {
 		factory = new ArcadeBoardFactory();
 		spy = spy(factory);
-		br = mock(BufferedReader.class);
+		testInput = "--- BEGIN --- .* ---\n5x5\nC00\n--- END --- .* ---";
+		in = new ByteArrayInputStream(testInput.getBytes(StandardCharsets.UTF_8));
 	}
 	
 	/**
@@ -35,12 +40,11 @@ public class FileBoardFactoryTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void testParseFile() throws IOException {
-		String testInput = "--- BEGIN --- .* ---\n5x5\nC00\n--- END --- .* ---";
-		spy.parseFile(testInput);
+	public void testParseFileInputStream() throws IOException {
+		spy.parseFile(in);
 		
 		// called the parseFile with a bufferedreader
-		Mockito.verify(spy).parseFile(any(BufferedReader.class));
+		Mockito.verify(spy).parseFile(any(InputStream.class));
 	}
 	
 	/**
@@ -50,8 +54,9 @@ public class FileBoardFactoryTest {
 	 */
 	@Test(expected = IOException.class)
 	public void testParseBufferedReaderFileException() throws IOException {
-		Mockito.when(br.readLine()).thenReturn("something");
-		factory.parseFile(br);
+		testInput = "throwAnIOException";
+		in = new ByteArrayInputStream(testInput.getBytes(StandardCharsets.UTF_8));
+		factory.parseFile(in);
 	}
 	
 	@Test
