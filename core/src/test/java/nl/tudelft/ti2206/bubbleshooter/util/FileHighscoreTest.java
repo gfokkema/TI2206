@@ -1,25 +1,22 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.NavigableSet;
-import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class FileHighscoreTest {
-
 	FileHighscore fhs = new FileHighscore();
 	HighScore score = new HighScore("jan_piet", 80);
 	NavigableSet<HighScore> scores;
 
 	@Before
 	public void initialize() {
-
 		fhs.setFileName("test");
-
 	}
 
 	@Test
@@ -48,7 +45,7 @@ public class FileHighscoreTest {
 		f.delete();
 		assertFalse(f.exists());
 
-		fhs.createNewFile();
+		fhs.addScore(null, 0);
 		assertTrue(f.exists());
 	}
 
@@ -76,7 +73,7 @@ public class FileHighscoreTest {
 		File f = new File(fhs.getFileName());
 		f.delete();
 		System.out.println("ok");
-		fhs.createNewFile();
+		fhs.loadScoreFile();
 		fhs.checkHighScoreFile();
 		fhs.addScore("jan_liet", 60);
 
