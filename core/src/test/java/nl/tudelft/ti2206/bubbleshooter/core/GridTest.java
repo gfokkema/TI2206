@@ -318,6 +318,60 @@ public class GridTest {
 		// Value outside of bounds
 		grid.toXY(83);
 	}
+
+	/**
+	 * This tests the infamous IndexOutOfBoundsException, which crashes the game (or used to).
+	 */
+	@Test
+	public void testAlmostOutOfBoundsLeft() {
+		grid.add(new ColourBubble(), 0);
+		Vector2 position = grid.cells.get(0).getBubble().getMidPoint();
+		position.y -= 32;
+		position.x -= 1;
+		Projectile justBelow = new Projectile(new Circle(position, 16), new Vector2(1, 0), 0);
+		assertFalse(grid.collides(justBelow));
+		grid.add(justBelow);
+		assertEquals(new Vector2(-1,0),justBelow.getDirection());
+
+		// Move the projectile up, so that it collides
+		position.y += 1;
+		// Move it to the right, so that it's not out of bounds anymore.
+		position.x += 1;
+		justBelow.setPosition(position);
+
+		// The bubble above now collides with the projectile.
+		assertTrue(grid.collides(justBelow));
+
+		// Add the bubble, without throwing an exception.
+		grid.add(justBelow);
+		assertEquals(justBelow, grid.cells.get(6).getBubble());
+	}
+
+	/**
+	 * This tests the infamous IndexOutOfBoundsException, which crashes the game (or used to).
+	 */
+	@Test
+	public void testAlmostOutOfBoundsRight() {
+		grid.add(new ColourBubble(), 5);
+		Vector2 position = grid.cells.get(5).getBubble().getMidPoint();
+		position.y -= 32;
+		Projectile justBelow = new Projectile(new Circle(position, 16), new Vector2(1, 0), 0);
+		assertFalse(grid.collides(justBelow));
+		assertEquals(new Vector2(-1,0),justBelow.getDirection());
+
+		// Move the projectile up, so that it collides
+		position.y += 1;
+		// Move it to the left, so that it's not out of bounds anymore.
+		position.x -= 1;
+		justBelow.setPosition(position);
+
+		// The bubble above now collides with the projectile.
+		assertTrue(grid.collides(justBelow));
+
+		// Add the bubble, without throwing an exception.
+		grid.add(justBelow);
+		assertEquals(justBelow, grid.cells.get(10).getBubble());
+	}
 	
 	/**
 	 * Test adjacency for cells in the same row
