@@ -43,14 +43,19 @@ public class GridCell implements Collidable {
 		this.bubble = null;
 	}
 
+	public int chain() {
+		if (!isOccupied()) return 0;
+		return bubble.getBehaviour().chain(this);
+	}
+
 	public int remove() {
 		if (!isOccupied()) return 0;
 		return bubble.getBehaviour().remove(this);
 	}
 
-	public int chain() {
+	public int trigger() {
 		if (!isOccupied()) return 0;
-		return bubble.getBehaviour().chain(this);
+		return bubble.getBehaviour().trigger(this);
 	}
 
 	public boolean isOccupied() {
@@ -58,19 +63,28 @@ public class GridCell implements Collidable {
 	}
 
 	public void depthFirst(Collection<GridCell> acc) {
-		depthFirst(acc, bubble -> true);
+		depthFirst(acc, true);
 	}
 
-	public void depthFirst(Collection<GridCell> acc, Predicate<Bubble> condition) {
+	public void depthFirst(Collection<GridCell> acc, boolean ignoreUnoccupied) {
+		depthFirst(acc, bubble -> true, ignoreUnoccupied);
+	}
+
+	public void depthFirst(Collection<GridCell> acc, Predicate<Bubble> condition, boolean ignoreUnoccupied) {
 		if (acc.contains(this)) 		return;
-		if (!isOccupied())				return;
+		if (ignoreUnoccupied && !isOccupied())
+			return;
 		if (!condition.test(bubble))	return;
 
 		acc.add(this);
-		forEachNeighbor(g -> g.depthFirst(acc, condition));
+		forEachNeighbor(g -> g.depthFirst(acc, condition, ignoreUnoccupied));
 	}
 
 	public void forEachNeighbor(Consumer<? super GridCell> consumer) {
 		neighbors.forEach(consumer);
+	}
+
+	public void triggerNeighbors() {
+		forEachNeighbor(g -> g.trigger());
 	}
 }

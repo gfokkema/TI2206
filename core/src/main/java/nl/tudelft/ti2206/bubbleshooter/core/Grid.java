@@ -53,9 +53,9 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	public GridCell add(Bubble b, Integer idx) {
 		GridCell cell = cells.get(idx);
 		if (cell.isOccupied()) return null;
-		
+
 		cell.setBubble(b);
-		
+
 		setChanged();
 		notifyObservers("Bubble has been added to index " + idx + ".");
 		return cell;
@@ -128,10 +128,6 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 			}
 		}
 		return new ArrayList<Color>(colours);
-	}
-
-	public int removeGroup(int index) {
-		return cells.get(index).remove();
 	}
 
 	public int removeDisconnected() {

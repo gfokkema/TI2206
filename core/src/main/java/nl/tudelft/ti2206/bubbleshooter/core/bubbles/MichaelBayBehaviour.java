@@ -1,5 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 /**
@@ -17,7 +21,7 @@ public class MichaelBayBehaviour implements BubbleBehaviour {
 	 */
 	@Override
 	public int chain(GridCell cell) {
-		return remove(cell);
+		return trigger(cell);
 	}
 	
 	/**
@@ -25,6 +29,16 @@ public class MichaelBayBehaviour implements BubbleBehaviour {
 	 */
 	@Override
 	public int remove(GridCell cell) {
-		return 0;
+		Collection<GridCell> allCells = new HashSet<GridCell>();
+		cell.depthFirst(allCells, false);
+		Collection<GridCell> allOccupied = allCells.stream().filter(g -> g.isOccupied())
+						 									.collect(Collectors.toList());
+		allOccupied.forEach(g -> g.removeBubble());
+		return allOccupied.size();
+	}
+
+	@Override
+	public int trigger(GridCell cell) {
+		return remove(cell);
 	}
 }

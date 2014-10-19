@@ -16,7 +16,7 @@ public class BomBehaviour implements BubbleBehaviour{
 	 */
 	@Override
 	public int chain(GridCell cell) {
-		return remove(cell);
+		return trigger(cell);
 	}
 	
 	/**
@@ -27,5 +27,10 @@ public class BomBehaviour implements BubbleBehaviour{
 		cell.removeBubble();
 		cell.forEachNeighbor((GridCell gc) -> gc.chain());
 		return 0;
+	}
+
+	@Override
+	public int trigger(GridCell cell) {
+		return remove(cell);
 	}
 }

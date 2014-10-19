@@ -27,4 +27,6 @@ public interface BubbleBehaviour {
 	 * @return the amount of bubbles removed.
 	 */
 	int remove(GridCell cell);
+
+	int trigger(GridCell cell);
 }

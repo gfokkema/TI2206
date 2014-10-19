@@ -7,7 +7,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Board;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 public class ColourBehaviour implements BubbleBehaviour {
-	
+
 	/**
 	 * Get a {@link Collection} of all {@link Bubble} objects adjacent to the
 	 * given {@link Bubble} that have the same color.
@@ -30,16 +30,19 @@ public class ColourBehaviour implements BubbleBehaviour {
 		Collection<GridCell> sameColors = new HashSet<GridCell>();
 		sameColors.add(cell);
 		Bubble base = cell.getBubble();
-		cell.forEachNeighbor(g -> g.depthFirst(sameColors, (Bubble b) -> compareColors(base, b)));
+		cell.forEachNeighbor(g -> g.depthFirst(sameColors, (Bubble b) -> compareColors(base, b), true));
 		int size = sameColors.size();
-		if (size >= 3) {
-			sameColors.forEach((GridCell g) -> g.removeBubble());
-			return size;
-		}
-		return 0;
+		if (size >= 3)	sameColors.forEach((GridCell g) -> g.removeBubble());
+		else			size = 0;
+		return size;
 	}
 
 	public boolean compareColors(Bubble a, Bubble b) {
 		return a.getColor().equals(b.getColor());
+	}
+
+	@Override
+	public int trigger(GridCell cell) {
+		return 0;
 	}
 }

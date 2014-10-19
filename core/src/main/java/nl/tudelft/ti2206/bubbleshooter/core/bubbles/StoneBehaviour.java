@@ -12,20 +12,24 @@ import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 public class StoneBehaviour implements BubbleBehaviour {
 	
 	/**
-	 * Gets the {@link Collection<{@link Bubble}>} of {@link Bubble}s to be removed.
-	 * @return null no bubbles should be removed.
+	 * Remove the {@link StoneBubble} when it's part of a chain reaction.
 	 */
 	@Override
 	public int chain(GridCell cell) {
-		return remove(cell);
+		cell.removeBubble();
+		return 1;
 	}
 
 	/**
-	 * Removes itself.
+	 * Don't remove.
 	 */
 	@Override
 	public int remove(GridCell cell) {
-		cell.removeBubble();
-		return 1;
+		return 0;
+	}
+
+	@Override
+	public int trigger(GridCell cell) {
+		return 0;
 	}
 }
