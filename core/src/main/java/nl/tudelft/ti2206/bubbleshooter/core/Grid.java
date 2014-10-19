@@ -83,7 +83,14 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	 * @return	the number of points the user has scored by placing this {@link Projectile}
 	 */
 	public boolean add(Projectile p) {
-		return add(p, getIndex(p.getMidPoint()));
+		int i = getIndex(p.getMidPoint());
+		add(p, getIndex(p.getMidPoint()));
+		cells.get(i).forEachNeighbor((GridCell c) -> {
+			if (c.getBubble() != null) System.out.print(c.getBubble().getColor());
+			System.out.println("debug");
+			c.removeBubble();
+		});
+		return true;
 	}
 	
 	public boolean bubbleBelowLine() {
@@ -197,7 +204,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable {
 	public ArrayList<Integer> getAdjacent(int idx) {
 		ArrayList<Integer> adjacent = new ArrayList<>();
 		for (Orientation o : Orientation.values()) {
-			int new_idx = o.fromIndex(idx, this.getWidth());
+			int new_idx = o.fromIndex(idx, getGridWidth());
 			if (this.adjacent(idx, new_idx)) {
 				adjacent.add(new_idx);
 			}

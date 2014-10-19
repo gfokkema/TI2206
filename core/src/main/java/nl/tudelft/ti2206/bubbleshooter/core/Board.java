@@ -1,7 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
