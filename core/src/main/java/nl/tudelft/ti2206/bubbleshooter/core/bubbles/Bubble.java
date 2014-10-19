@@ -31,15 +31,6 @@ public abstract class Bubble extends BSDrawable implements Serializable {
 		this.behaviour = b;
 		this.bounds = new Circle();
 	}
-
-	/**
-	 * Check if this Bubble collides with b.
-	 * @param b - the bubble that gets shot.
-	 * @return true if the Bubbles collided.
-	 */
-	public boolean collides(Bubble b) {
-		return bounds.overlaps(b.bounds);
-	}
 	
 	/**
 	 * Sets the bounding {@link Circle} of the bubble.

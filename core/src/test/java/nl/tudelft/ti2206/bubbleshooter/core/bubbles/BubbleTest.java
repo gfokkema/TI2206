@@ -1,10 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import nl.tudelft.ti2206.bubbleshooter.core.Orientation;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import org.junit.Before;
@@ -87,7 +84,7 @@ public class BubbleTest {
 	/**
 	 * Checked whether with the given bounds, overlaps gives the right output.
 	 *
-	 */
+	 *
 	@Test
 	public void testCollide() {
 		Circle c1 = new Circle(0, 0, 5);
