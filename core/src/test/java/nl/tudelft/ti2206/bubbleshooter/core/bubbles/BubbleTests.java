@@ -6,10 +6,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ BomBehaviourTest.class, BomBubbleTest.class,
-		BubbleTest.class, ColourBubbleTest.class,
+		BubbleTest.class, ColourBubbleTest.class, ColourBehaviourTest.class,
 		MichaelBayBehaviourTest.class, MichaelBayBubbleTest.class,
 		ProjectileTest.class, StoneBubbleBehaviourTest.class,
-		StoneBubbleTest.class })
+		StoneBubbleTest.class, })
 public class BubbleTests {
 
 }

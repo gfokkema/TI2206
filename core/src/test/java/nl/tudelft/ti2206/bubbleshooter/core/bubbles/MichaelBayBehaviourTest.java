@@ -1,19 +1,14 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
-
-import nl.tudelft.ti2206.bubbleshooter.core.Grid;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.MichaelBayBehaviour;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -22,9 +17,11 @@ public class MichaelBayBehaviourTest {
 
 	/**
 	 * Setup mocks
+	 *
 	 */
-	@Mock Grid grid;
-	MichaelBayBehaviour MBBehaviour;
+	private MichaelBayBehaviour MBBehaviour;
+	private MichaelBayBehaviour spy;
+	private GridCell gc;
 	
 	/**
 	 * Setup intialization and stubbing.
@@ -32,10 +29,24 @@ public class MichaelBayBehaviourTest {
 	@Before
 	public void setUp() {
 		MBBehaviour = new MichaelBayBehaviour();
+		spy = spy(MBBehaviour);
+		gc = mock(GridCell.class);
 	}
 	
 	@Test
-	public void test() {
-		
+	public void testChain() {
+		spy.chain(gc);
+		Mockito.verify(spy).trigger(gc);
+	}
+	
+	@Test
+	public void testTrigger() {
+		spy.trigger(gc);
+		Mockito.verify(spy).remove(gc);
+	}
+	
+	@Test
+	public void testRemove() {
+		assertEquals(0, spy.remove(gc));
 	}
 }
