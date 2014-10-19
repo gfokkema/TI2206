@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Board;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,13 +18,13 @@ public class MPBoardFactoryTest {
 
 	private MPBoardFactory factory;
 	private MPBoardFactory spy;
-	private List<Board> ls;
+	private List<Grid> ls;
 	
 	@Before
 	public void setUp() throws IOException {
 		factory = new MPBoardFactory();
 		spy = spy(factory);
-		ls = new ArrayList<Board>();
+		ls = new ArrayList<Grid>();
 	}
 	
 	/**
