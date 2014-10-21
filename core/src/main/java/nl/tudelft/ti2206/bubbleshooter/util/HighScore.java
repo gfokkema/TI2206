@@ -7,7 +7,7 @@ package nl.tudelft.ti2206.bubbleshooter.util;
  *
  */
 public class HighScore extends Score {
-	private static final long serialVersionUID = 2603273380851092688L;
+	private static final long serialVersionUID = -6790883413069087153L;
 	private String name;
 	
 	/**

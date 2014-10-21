@@ -1,11 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
@@ -39,22 +37,6 @@ public class FileHighscore {
 	}
 
 	/**
-	 * Checks whether the highscore file already exists, and if not, creates it
-	 */
-	public void checkHighScoreFile(){
-		File f = new File(getFileName());
-		if(!f.exists() || f.isDirectory()) {
-			PrintWriter writer = null;
-			try {
-				writer = new PrintWriter(getFileName(), "UTF-8");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			writer.close();
-		}
-	}
-
-	/**
 	 * This method returns the filename of the used high score file
 	 * @return	String with the filename
 	 */
@@ -82,6 +64,7 @@ public class FileHighscore {
 			inputStream = new ObjectInputStream(new FileInputStream(getFileName()));
 			scores = (NavigableSet<HighScore>) inputStream.readObject();
 		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (inputStream != null) {
