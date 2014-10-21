@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.util.HighScore;
 import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
@@ -47,6 +48,7 @@ public class GameEndedScreen extends AbstractScreen {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+					game.scores.addScore(new HighScore(score, nameField.getText()));
 					game.setScreen(new HighScoreScreen(game));
 				}
 			});
