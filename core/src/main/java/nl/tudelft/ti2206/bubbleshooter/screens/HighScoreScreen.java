@@ -30,7 +30,7 @@ public class HighScoreScreen extends AbstractScreen {
 		Iterator<HighScore> it = scores.iterator();
 		while(it.hasNext()) {
 			HighScore score = it.next();
-			Label l = new Label(score.getName() + ":   " + score.getHighScore(), labelStyle);
+			Label l = new Label(score.getName() + ":   " + score.getScore() + ":   " + score.getLevel(), labelStyle);
 			table.add(l).expandX().center().row();
 		}
 	}

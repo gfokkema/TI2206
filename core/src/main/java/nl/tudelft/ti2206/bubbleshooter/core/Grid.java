@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Grid extends BSDrawable implements Serializable, Collidable, Observer {
 	private static final long serialVersionUID = -3156876087711309439L;
 	private int width = 8, height = 20;
+	private String name;
 	public HashMap<Integer, GridCell> cells;
 	
 	/**
@@ -31,9 +32,10 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	 * @param width		the width of the grid in bubbles
 	 * @param height	the height of the grid in bubbles
 	 */
-	public Grid(int width, int height) {
+	public Grid(String name, int width, int height) {
 		this.width = width;
 		this.height = height;
+		this.name = name;
 		
 		cells = new HashMap<>(width * height - height / 2);
 		for (int i = 0; i < width * height - height / 2; i++) {
@@ -182,6 +184,14 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	 */
 	public int getGridHeight() {
 		return height;
+	}
+	
+	/**
+	 * Returns the name of this {@link Board}.
+	 * @return	the name
+	 */
+	public String getName() {
+		return name;
 	}
 	
 	/**

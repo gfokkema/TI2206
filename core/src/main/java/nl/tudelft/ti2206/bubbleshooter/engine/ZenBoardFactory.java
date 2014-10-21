@@ -9,7 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
 public class ZenBoardFactory extends BoardFactory {
 	@Override
 	public List<Grid> makeLevels() {
-		Grid g = new Grid(8, 15);
+		Grid g = new Grid("Zen", 8, 15);
 		List<Grid> grids = new ArrayList<>();
 		grids.add(g);
 		

@@ -33,8 +33,8 @@ public class FileHighscore {
 	 * @param score
 	 *            The score of the player
 	 */
-	public void addScore(String name, int score) {
-		scores.add(new HighScore(name, score));
+	public void addScore(HighScore score) {
+		scores.add(score);
 		updateScoreFile();
 	}
 
@@ -123,7 +123,7 @@ public class FileHighscore {
 	 * @param score	the score that has to be checked against the list
 	 * @return		boolean indicating whether this is a highscore
 	 */
-	public boolean isHighScore(int score) {
-		return scores.size() < 20 || score > scores.first().getHighScore();
+	public boolean isHighScore(Score score) {
+		return scores.size() < 20 || score.getScore() > scores.first().getScore();
 	}
 }

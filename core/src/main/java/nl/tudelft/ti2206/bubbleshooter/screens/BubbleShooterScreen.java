@@ -5,11 +5,12 @@ import java.util.Collection;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
-import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -96,11 +97,13 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 
 	@Override
 	public void switchToLostScreen() {
-		game.setScreen(new GameEndedScreen(game, "YOU LOST!", game_mode.getScore()));
+		Score score = new Score(game_mode.getScore(), game_mode.getGrid().getName());
+		game.setScreen(new GameEndedScreen(game, "YOU LOST!", score));
 	}
 
 	@Override
 	public void switchToWonScreen() {
-		game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
+		Score score = new Score(game_mode.getScore(), game_mode.getGrid().getName());
+		game.setScreen(new GameEndedScreen(game, "YOU WON!", score));
 	}
 }

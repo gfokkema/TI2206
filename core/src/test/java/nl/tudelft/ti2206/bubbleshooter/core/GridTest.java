@@ -42,7 +42,7 @@ public class GridTest {
 	 */
 	@Before
 	public void setUp() {
-		grid = new Grid(6, 15);
+		grid = new Grid("Test", 6, 15);
 	}
 
 	/**
@@ -58,6 +58,7 @@ public class GridTest {
 		assertEquals(new Vector2(0, 0), grid.getOrigin());
 		assertEquals(Color.WHITE, grid.getColor());
 		assertEquals(0, grid.getRotation(), .001);
+		assertEquals("Test", grid.getName());
 
 	}
 
@@ -461,7 +462,7 @@ public class GridTest {
 		assertEquals(6, grid.getGridWidth());
 		assertEquals(15, grid.getGridHeight());
 
-		grid = new Grid(20, 4);
+		grid = new Grid("Test", 20, 4);
 		assertEquals(20, grid.getGridWidth());
 		assertEquals(4, grid.getGridHeight());
 	}
