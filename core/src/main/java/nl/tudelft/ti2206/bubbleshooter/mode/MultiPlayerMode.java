@@ -20,6 +20,7 @@ import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
@@ -123,7 +124,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		super.update(deltaTime);
 		if (grid2 == null) return;
 		condition2.check(this.grid2);
-		this.opponentStatsObs.updateScore(111);
+		this.opponentStatsObs.updateScore(new Score(111, grid2.getName()));
 		this.writeCondition(end);
 	}
 

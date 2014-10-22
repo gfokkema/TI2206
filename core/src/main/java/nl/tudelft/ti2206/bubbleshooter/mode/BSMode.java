@@ -14,6 +14,7 @@ import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.Logger;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
@@ -36,7 +37,7 @@ public abstract class BSMode implements EndingObserver {
 	protected GameObserver gameObs;
 
 	protected EndingCondition end;
-	private int score= 0;
+	private Score score;
 
 	/**
 	 * BSMode constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
@@ -49,7 +50,7 @@ public abstract class BSMode implements EndingObserver {
 		this.grid = grids.next();
 		this.cannon = cannon;
 		this.end = end;
-		this.score = 0;
+		this.score = new Score(0, grid.getName());
 		
 		setProjectile(cannon.getProjectile());
 		
@@ -79,9 +80,7 @@ public abstract class BSMode implements EndingObserver {
 			//			trigger the network sync...
 			projectile.move();
 			
-			score += g.remove();
-			score += g.triggerNeighbors();
-			score += grid.removeDisconnected();
+			score.add(g.remove() + g.triggerNeighbors() + grid.removeDisconnected());
 			statsObs.updateScore(score);
 		}
 	}
@@ -152,7 +151,7 @@ public abstract class BSMode implements EndingObserver {
 	 * Gets the {@link #score} of the game.
 	 * @return the {@link #score}.
 	 */
-	public int getScore() {
+	public Score getScore() {
 		return score;
 	}
 	

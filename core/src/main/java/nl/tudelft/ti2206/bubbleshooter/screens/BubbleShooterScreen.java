@@ -10,7 +10,6 @@ import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -97,13 +96,11 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 
 	@Override
 	public void switchToLostScreen() {
-		Score score = new Score(game_mode.getScore(), game_mode.getGrid().getName());
-		game.setScreen(new GameEndedScreen(game, "YOU LOST!", score));
+		game.setScreen(new GameEndedScreen(game, "YOU LOST!", game_mode.getScore()));
 	}
 
 	@Override
 	public void switchToWonScreen() {
-		Score score = new Score(game_mode.getScore(), game_mode.getGrid().getName());
-		game.setScreen(new GameEndedScreen(game, "YOU WON!", score));
+		game.setScreen(new GameEndedScreen(game, "YOU WON!", game_mode.getScore()));
 	}
 }
