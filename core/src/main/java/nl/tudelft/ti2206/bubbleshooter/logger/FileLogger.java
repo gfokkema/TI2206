@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.util;
+package nl.tudelft.ti2206.bubbleshooter.logger;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
