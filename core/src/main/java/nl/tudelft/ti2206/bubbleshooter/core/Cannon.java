@@ -29,7 +29,7 @@ public class Cannon extends BSDrawable implements Serializable {
 	
 	private final float LEFT_BOUNDARY = 47;
 	private final float RIGHT_BOUNDARY = -47;
-	private final int sensitivity = 100;
+	private final int sensitivity = 75;
 	private final int velocity = 5;
 	
 	/**
