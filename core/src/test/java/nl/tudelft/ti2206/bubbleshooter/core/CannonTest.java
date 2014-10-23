@@ -58,12 +58,12 @@ public class CannonTest {
 	 */
 	@Test
 	public void testInitializeCannon() {
-		assertEquals(new Vector2(-16, 0), cannon.getPointer().getOrigin());
+		assertEquals(new Vector2(-16, -40), cannon.getPointer().getOrigin());
 		assertEquals(100, cannon.getWidth());
 		assertEquals(100, cannon.getHeight());
 		assertEquals(TextureID.CANNON, cannon.getTexture());
-		assertEquals(new Vector2(-50, 0), cannon.getPosition());
-		assertEquals(new Vector2(50, 16), cannon.getOrigin());
+		assertEquals(new Vector2(-50, -20), cannon.getPosition());
+		assertEquals(new Vector2(50, 16-20), cannon.getOrigin());
 	}
 
 	/**
@@ -79,11 +79,11 @@ public class CannonTest {
 		cannon.setAngle(45);
 		assertEquals(45, cannon.getPointer().getAngle(), .001);
 
-		cannon.setAngle(-60);
-		assertEquals(-60, cannon.getPointer().getAngle(), .001);
+		cannon.setAngle(-47);
+		assertEquals(-47, cannon.getPointer().getAngle(), .001);
 
-		cannon.setAngle(60);
-		assertEquals(60, cannon.getPointer().getAngle(), .001);
+		cannon.setAngle(47);
+		assertEquals(47, cannon.getPointer().getAngle(), .001);
 	}
 
 	/**
@@ -92,10 +92,10 @@ public class CannonTest {
 	@Test
 	public void testAngleOutsideOfBoundaries() {
 		cannon.setAngle(-70);
-		assertEquals(-60, cannon.getPointer().getAngle(), .001);
+		assertEquals(-47, cannon.getPointer().getAngle(), .001);
 
 		cannon.setAngle(70);
-		assertEquals(60, cannon.getPointer().getAngle(), .001);
+		assertEquals(47, cannon.getPointer().getAngle(), .001);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class CannonTest {
 	@Test
 	public void testProjectile() {
 		Vector2 pos = cannon.getProjectile().getMidPoint();
-		assertEquals(cannon.getPointer().direction.cpy().scl(100).add(0, 16), pos);
+		assertEquals(cannon.getPointer().direction.cpy().scl(100).add(0, 16-40), pos);
 
 
 	}
@@ -133,18 +133,18 @@ public class CannonTest {
 		assertEquals(0, pointer.getAngle(), .001);
 
 		cannon.left(0.1f);
-		assertEquals(10, pointer.getAngle(), .001);
+		assertEquals(7.5, pointer.getAngle(), .001);
 
 		cannon.left(0.5f);
-		assertEquals(60, pointer.getAngle(), .001);
+		assertEquals(45, pointer.getAngle(), .001);
 
 		cannon.left(1.0f);
-		assertEquals(60, pointer.getAngle(), .001);
+		assertEquals(47, pointer.getAngle(), .001);
 
 		cannon.right(1.0f);
-		assertEquals(-40, pointer.getAngle(), .001);
+		assertEquals(-28, pointer.getAngle(), .001);
 
 		cannon.right(0.1f);
-		assertEquals(-50, pointer.getAngle(), .001);
+		assertEquals(-35.5, pointer.getAngle(), .001);
 	}
 }
