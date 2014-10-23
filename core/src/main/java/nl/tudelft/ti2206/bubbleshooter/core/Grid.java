@@ -63,7 +63,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 		cell.setBubble(b);
 
 		setChanged();
-		notifyObservers("Bubble has been added to index " + idx + ".");
+		notifyObservers("Grid: Bubble has been added to index " + idx + ".");
 		return cell;
 	}
 
@@ -149,6 +149,8 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 		Collection<GridCell> disconnected = new HashSet<GridCell>(getFilledGridCells());
 		disconnected.removeAll(connected);
 		disconnected.forEach((GridCell gc) -> gc.removeBubble());
+		setChanged();
+		notifyObservers("Grid: Removing " + disconnected.size() + "disconnected bubbles.");
 		return disconnected.size();
 	}
 
