@@ -42,7 +42,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
 	private EndingCondition condition2;
-	private Score oppScore;
 	private StatsObserver opponentStatsObs;
 	private OpponentAdapter opponentEndingObs;
 
@@ -68,17 +67,14 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		this.offset2 = new Vector2(320, 0);
 
 		this.grid = factory.makeLevels().get(0);
-		this.oppScore = new Score(0, "multi");
 
 		writeCondition(end);
 		writeDrawable(grid);
 		writeDrawable(cannon);
 		writeDrawable(cannon.getProjectile());
-		writeScore(this.getScore());
 		
 		grid.addObserver(this);
 		cannon.addObserver(this);
-		getScore().addObserver(this);
 	}
 
 	/**
@@ -169,14 +165,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	public synchronized void setProjectileOpp(Projectile pj) {
 		this.projectile2 = pj;
 	}
-	
-	/**
-	 * Setter for opponent projectile.
-	 * @param pj	the {@link Projectile} of the opponent 
-	 */
-	public synchronized void setScoreOpp(Score s) {
-		this.oppScore.update(s);
-	}
 
 	private void setConditionOpp(EndingCondition ec) {
 		this.condition2 = ec;
@@ -210,20 +198,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * Writes a {@link BSDrawable} over the network.
-	 * @param d	the {@link BSDrawable} of the player
-	 */
-	public void writeScore(Score s) {
-		try {
-			out.writeObject(s);
-			out.flush();
-			out.reset();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Runnable that copes with input read from sockets.
@@ -241,8 +215,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 					setProjectileOpp((Projectile) o);
 				} else if (o instanceof EndingCondition) {
 					setConditionOpp((EndingCondition) o);
-				} else if (o instanceof Score) {
-					setScoreOpp((Score) o);
 				}
 			} catch (EOFException e) {
 				
@@ -256,7 +228,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof BSDrawable) writeDrawable((BSDrawable) o);
-		else if (o instanceof Score) System.out.println("Score!");
 	}
 
 	public void addOpponentStatsObserver(StatsObserver multi) {

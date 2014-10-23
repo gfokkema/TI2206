@@ -1,7 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
 import java.io.Serializable;
-import java.util.Observable;
 
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 
@@ -10,7 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
  * @author group-15
  *
  */
-public class Score extends Observable implements Comparable<Score>, Serializable {
+public class Score implements Comparable<Score>, Serializable {
 	private static final long serialVersionUID = 2603273380851092688L;
 	private int score;
 	private String level;
@@ -37,7 +36,6 @@ public class Score extends Observable implements Comparable<Score>, Serializable
 	
 	public void add(int points) {
 		this.score += points;
-		setChanged();
 		
 		if (statsObs == null) return;
 		statsObs.updateScore(this);
@@ -61,7 +59,6 @@ public class Score extends Observable implements Comparable<Score>, Serializable
 	public void update(Score score) {
 		this.score = score.score;
 		this.level = score.level;
-		setChanged();
 		
 		if (statsObs == null) return;
 		statsObs.updateScore(this);
