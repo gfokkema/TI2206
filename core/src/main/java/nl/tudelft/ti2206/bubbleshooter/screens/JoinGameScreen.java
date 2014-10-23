@@ -12,6 +12,7 @@ import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -83,9 +84,10 @@ public class JoinGameScreen extends AbstractScreen {
 		
 		EndingCondition basic = new BasicCondition();
 		EndingCondition belowLine = new BelowLineCondition(basic);
-		GameUIBuilder gub = new GameUIBuilder(game.font);
 		MultiPlayerMode multi = new MultiPlayerMode(belowLine, br, bw);
-		gub.addMultiPlayerStatsBars(multi);
+		
+		GameUIBuilder gub = new GameUIBuilder(game.font);
+		gub.addMultiPlayerStatsBars(belowLine, multi.getScore(), new Score(0, "multi"));
 		game.setScreen(new BubbleShooterScreen(game, multi, gub.build()));
 	}
 }
