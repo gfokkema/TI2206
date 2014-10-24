@@ -25,5 +25,4 @@ public class BelowLineCondition extends EndingDecorator {
 		}
 		super.check(grid);
 	}
-
 }

@@ -11,6 +11,7 @@ import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.TimerCondition;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
@@ -58,10 +59,11 @@ public class MainMenuScreen extends AbstractScreen {
 				
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
-				BSMode single = new SinglePlayerMode(belowLine, new ZenBoardFactory());
+				EndingCondition gridEmpty = new EmptyGridCondition(belowLine);
+				BSMode single = new SinglePlayerMode(gridEmpty, new ZenBoardFactory());
 				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
-				gub.addSinglePlayerStatsBar(belowLine, single.getScore());
+				gub.addSinglePlayerStatsBar(gridEmpty, single.getScore());
 				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
 			}
 		});
@@ -73,10 +75,11 @@ public class MainMenuScreen extends AbstractScreen {
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
 				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
-				BSMode single = new SinglePlayerMode(timed, new ArcadeBoardFactory());
+				EndingCondition gridEmpty = new EmptyGridCondition(timed);
+				BSMode single = new SinglePlayerMode(gridEmpty, new ArcadeBoardFactory());
 				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
-				gub.addSinglePlayerStatsBar(timed, single.getScore());
+				gub.addSinglePlayerStatsBar(gridEmpty, single.getScore());
 				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
 			}
 		});
