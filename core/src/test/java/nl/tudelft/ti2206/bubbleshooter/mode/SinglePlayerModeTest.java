@@ -46,7 +46,7 @@ public class SinglePlayerModeTest {
 		Mockito.when(grid_it.next()).thenReturn(grid);
 		
 		mode = new SinglePlayerMode(end, factory, cannon);
-		mode.addStatsObserver(obs);
+		mode.getScore().addStatsObserver(obs);
 	}
 	
 	@Test

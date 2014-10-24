@@ -33,7 +33,6 @@ public abstract class BSMode implements EndingObserver {
 	protected boolean cannonLeft;
 	protected boolean cannonRight;
 
-	private StatsObserver statsObs;
 	protected GameObserver gameObs;
 
 	protected EndingCondition end;
@@ -81,19 +80,13 @@ public abstract class BSMode implements EndingObserver {
 			projectile.move();
 			
 			score.add(g.remove() + g.triggerNeighbors() + grid.removeDisconnected());
-			statsObs.updateScore(score);
 		}
 	}
 
 	/**
-	 * Add the {@link StatsObserver} to the {@link EndingCondition}.
-	 * @param obs the statsobserver.
+	 * 
+	 * @param obs
 	 */
-	public void addStatsObserver(StatsObserver obs) {
-		this.statsObs = obs;
-		end.addStatsObserver(obs);
-	}
-
 	public void addGameObserver(GameObserver obs) {
 		this.gameObs = obs;
 	}

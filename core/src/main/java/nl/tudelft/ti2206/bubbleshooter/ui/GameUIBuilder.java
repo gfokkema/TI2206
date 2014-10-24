@@ -1,16 +1,16 @@
 package nl.tudelft.ti2206.bubbleshooter.ui;
 
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 
 public class GameUIBuilder {
 	private BitmapFont font;
@@ -22,15 +22,17 @@ public class GameUIBuilder {
 		table.setFillParent(true);
 	}
 
-	public void addSinglePlayerStatsBar(BSMode gameMode) {
+	public void addSinglePlayerStatsBar(EndingCondition end, Score score) {
 		StatsBar single = addStatsBar(true);
-		gameMode.addStatsObserver(single);
+		end.addStatsObserver(single);
+		score.addStatsObserver(single);
 	}
 
-	public void addMultiPlayerStatsBars(MultiPlayerMode gameMode) {
-		addSinglePlayerStatsBar(gameMode);
+	public void addMultiPlayerStatsBars(EndingCondition end, Score score) {
+		addSinglePlayerStatsBar(end, score);
 		StatsBar multi = addStatsBar(false);
-		gameMode.addOpponentStatsObserver(multi);
+		// FIXME:
+		//gameMode.addOpponentStatsObserver(multi);
 	}
 
 	public StatsBar addStatsBar(boolean left) {
