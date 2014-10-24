@@ -17,6 +17,6 @@ public class BackgroundTest {
 		Background bg = new Background();
 		assertEquals(640, bg.getWidth());
 		assertEquals(480, bg.getHeight());
-		assertEquals(TextureID.BACKGROUND, bg.getTexture());
+		assertEquals(TextureID.GAMEBACKGROUND, bg.getTexture());
 	}
 }

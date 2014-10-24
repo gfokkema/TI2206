@@ -31,12 +31,13 @@ public class Score implements Comparable<Score>, Serializable {
 	 * @param score	The score of the player
 	 */
 	public Score(Score score) {
-		this.score = score.score;
-		this.level = score.level;
+		this(score.score, score.level);
 	}
 	
 	public void add(int points) {
 		this.score += points;
+		
+		if (statsObs == null) return;
 		statsObs.updateScore(this);
 	}
 	
@@ -53,6 +54,14 @@ public class Score implements Comparable<Score>, Serializable {
 	 */
 	public String getLevel() {
 		return level;
+	}
+	
+	public void update(Score score) {
+		this.score = score.score;
+		this.level = score.level;
+		
+		if (statsObs == null) return;
+		statsObs.updateScore(this);
 	}
 	
 	/**

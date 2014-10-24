@@ -14,7 +14,7 @@ public class Background extends BSDrawable {
 	 */
 	@Override
 	public TextureID getTexture() {
-		return TextureID.BACKGROUND;
+		return TextureID.GAMEBACKGROUND;
 	}
 
 	/**
