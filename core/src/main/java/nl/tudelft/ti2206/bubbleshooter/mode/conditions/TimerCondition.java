@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
-import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 public class TimerCondition extends EndingDecorator {
 	private static final long serialVersionUID = 5765501184371624635L;
