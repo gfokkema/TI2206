@@ -82,7 +82,9 @@ public class Score implements Comparable<Score>, Serializable {
 	 */
 	@Override
 	public int compareTo(Score o) {
-		return Integer.compare(this.score, o.score);
+		return level.getLevel() == o.level.getLevel() ? 
+					Integer.compare(this.score, o.score) :
+					Integer.compare(level.getLevel(), o.level.getLevel());
 	}
 	
 	/**
