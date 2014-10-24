@@ -23,7 +23,7 @@ public class HighScoreScreen extends AbstractScreen {
 	public HighScoreScreen(BubbleShooter game) {
 		super(game);
 		
-		Label label = new Label("These are the high scores for Arcade Mode.", labelStyle);
+		Label label = new Label("These are the high scores for Arcade Mode:", labelStyle);
 		table.add(label).expandX().center().colspan(7).row();
 		
 		NavigableSet<HighScore> scores = game.scores.loadScoreFile().descendingSet();
