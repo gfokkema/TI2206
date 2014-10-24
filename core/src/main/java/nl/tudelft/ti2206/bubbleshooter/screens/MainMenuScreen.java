@@ -6,6 +6,7 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
@@ -43,12 +44,27 @@ public class MainMenuScreen extends AbstractScreen {
 	public MainMenuScreen(BubbleShooter game) {
 		super(game);
 		
+		TextButton zenplay = new TextButton("Zen", buttonStyle);
 		TextButton singleplay = new TextButton("Single player", buttonStyle);
 		TextButton multiplay = new TextButton("Multi player", buttonStyle);
 		TextButton highscore = new TextButton("Highscores", buttonStyle);
 		TextButton options = new TextButton("Options", buttonStyle);
 		TextButton quit = new TextButton("Quit", buttonStyle);
 
+		zenplay.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				
+				EndingCondition basic = new BasicCondition();
+				EndingCondition belowLine = new BelowLineCondition(basic);
+				BSMode single = new SinglePlayerMode(belowLine, new ZenBoardFactory());
+				
+				GameUIBuilder gub = new GameUIBuilder(game.font);
+				gub.addSinglePlayerStatsBar(belowLine, single.getScore());
+				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
+			}
+		});
 		singleplay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -93,6 +109,7 @@ public class MainMenuScreen extends AbstractScreen {
 			}
 		});
 
+		table.add(zenplay).expandX().center().row();
 		table.add(singleplay).expandX().center().row();
 		table.add(multiplay).expandX().center().row();
 		table.add(highscore).expandX().center().row();
