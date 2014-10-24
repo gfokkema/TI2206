@@ -9,6 +9,8 @@ public abstract class EndingDecorator extends EndingCondition {
 
 	public EndingDecorator(EndingCondition end) {
 		this.end = end;
+		end.addEndingObserver(endingObs);
+		end.addStatsObserver(statsObs);
 	} 
 
 	/**
@@ -38,6 +40,7 @@ public abstract class EndingDecorator extends EndingCondition {
 
 	@Override
 	public void addEndingObserver(EndingObserver o) {
+		super.addEndingObserver(o);
 		end.addEndingObserver(o);
 	}
 }

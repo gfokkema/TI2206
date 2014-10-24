@@ -62,7 +62,7 @@ public class FileBoardFactoryTest {
 	@Test
 	public void testParseLevel() throws IOException {
 		// bogus simulated "file".
-		spy.parseLevel("5x5\nC00");
+		spy.parseLevel("Test", "5x5\nC00");
 		Mockito.verify(spy).parseType(anyString());
 	}
 	

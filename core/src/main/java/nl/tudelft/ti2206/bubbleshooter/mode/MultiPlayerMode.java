@@ -1,8 +1,9 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
-import java.io.EOFException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -65,12 +66,12 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
 
-		this.grid = factory.makeLevels().get(0);
+		this.grid = factory.makeLevels().next();
 
-		writeCondition(end);
-		writeDrawable(grid);
-		writeDrawable(cannon);
-		writeDrawable(cannon.getProjectile());
+		write(end);
+		write(grid);
+		write(cannon);
+		write(cannon.getProjectile());
 		
 		grid.addObserver(this);
 		cannon.addObserver(this);
@@ -123,8 +124,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		super.update(deltaTime);
 		if (grid2 == null) return;
 		condition2.check(this.grid2);
-		this.opponentStatsObs.updateScore(111);
-		this.writeCondition(end);
+		this.write(end);
 	}
 
 	
@@ -148,6 +148,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 */
 	public synchronized void setGridOpp(Grid grid) {
 		this.grid2 = grid;
+		
+		//this.opponentStatsObs.updateScore(new Score(111, grid2.getName()));
 	}
 	
 	@Override
@@ -168,30 +170,14 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		this.condition2 = ec;
 		condition2.addEndingObserver(opponentEndingObs);
 	}
-
-	/**
-	 * Writes the {@link EndingCondition} over the network.
-	 * @param condition	the {@link EndingCondition} of the player
-	 */
-	public void writeCondition(EndingCondition condition) {
-		try {
-			out.writeObject(condition);
-			out.flush();
-			out.reset();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
-	/**
-	 * Writes a {@link BSDrawable} over the network.
-	 * @param d	the {@link BSDrawable} of the player
-	 */
-	public void writeDrawable(BSDrawable d) {
+	public void write(Object o) {
 		try {
-			out.writeObject(d);
+			out.writeObject(o);
 			out.flush();
 			out.reset();
+		} catch (IOException e) {
+			won();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -202,8 +188,8 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	 */
 	@Override
 	public void run() {
-		while (true) {
-			try {
+		try {
+			while (true) {
 				Object o = in.readObject();
 				if (o instanceof Grid) {
 					setGridOpp((Grid) o);
@@ -214,22 +200,43 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 				} else if (o instanceof EndingCondition) {
 					setConditionOpp((EndingCondition) o);
 				}
-			} catch (EOFException e) {
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.exit(1);
 			}
+		} catch (IOException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof BSDrawable) writeDrawable((BSDrawable) o);
+		if (o instanceof BSDrawable) write(o);
 	}
 
 	public void addOpponentStatsObserver(StatsObserver multi) {
 		opponentStatsObs = multi;
 		condition2.addStatsObserver(opponentStatsObs);
+	}
+	
+	public void disconnect() {
+		try {
+			in.close();
+			out.close();
+		} catch (IOException e) {
+		} finally {
+			in = null;
+			out = null;
+		}
+	}
+	
+	@Override
+	public void lost() {
+		disconnect();
+		super.lost();
+	}
+
+	@Override
+	public void won() {
+		disconnect();
+		super.won();
 	}
 }

@@ -27,9 +27,9 @@ public class Cannon extends BSDrawable implements Serializable {
 	Projectile projectile;
 	Vector2 position;
 	
-	private final float LEFT_BOUNDARY = 60;
-	private final float RIGHT_BOUNDARY = -60;
-	private final int sensitivity = 100;
+	private final float LEFT_BOUNDARY = 47;
+	private final float RIGHT_BOUNDARY = -47;
+	private final int sensitivity = 75;
 	private final int velocity = 5;
 	
 	/**
@@ -38,9 +38,9 @@ public class Cannon extends BSDrawable implements Serializable {
 	 * @param y 		coordinate
 	 */
 	public Cannon(int x, int y) {
-		position = new Vector2(x - 50, y);
+		position = new Vector2(x - 50, y - 20);
 		pointer = new Pointer(new Vector2(x, y));
-		pointer.setOrigin(new Vector2(x - 16, y));
+		pointer.setOrigin(new Vector2(x - 16, y - 40));
 		
 		// add bubble
 		projectile = new Projectile(new Circle(getBubblePos(), 16), pointer.direction, 0);
@@ -156,7 +156,7 @@ public class Cannon extends BSDrawable implements Serializable {
 	 */
 	@Override
 	public Vector2 getOrigin() {
-		return new Vector2(50, 16);
+		return new Vector2(50, 16-20);
 	}
 
 	/**

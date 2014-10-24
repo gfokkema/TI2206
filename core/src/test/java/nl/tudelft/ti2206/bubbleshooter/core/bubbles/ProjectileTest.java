@@ -1,7 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.core.bubbles;
 
 import static org.junit.Assert.assertEquals;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,5 +64,17 @@ public class ProjectileTest {
 			projectile.move();
 			assertEquals(pos.add(dir), projectile.getPosition());
 		}
+	}
+	
+	/**
+	 * Checked whether the circles are initiated with the given boundaries.
+	 *
+	 */
+	@Test
+	public void testBounds() {
+		Circle c = new Circle(0, 0, 10);
+
+		projectile.setBounds(c);
+		assertEquals(c, projectile.getBounds());
 	}
 }

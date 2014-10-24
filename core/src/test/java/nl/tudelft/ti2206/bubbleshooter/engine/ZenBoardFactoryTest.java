@@ -18,7 +18,7 @@ public class ZenBoardFactoryTest {
 	@Before
 	public void setUp() {
 		factory = new ZenBoardFactory();
-		grids = factory.makeLevels().iterator();
+		grids = factory.makeLevels();
 		grid = grids.next();
 	}
 	

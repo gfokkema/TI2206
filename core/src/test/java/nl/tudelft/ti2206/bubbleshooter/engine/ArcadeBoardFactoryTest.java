@@ -1,11 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.engine;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
@@ -22,8 +16,6 @@ public class ArcadeBoardFactoryTest {
 	@Before
 	public void setUp() throws IOException {
 		factory = new ArcadeBoardFactory();
-		spy = spy(factory);
-		ls = new ArrayList<Grid>();
 	}
 	
 	/**
@@ -33,7 +25,5 @@ public class ArcadeBoardFactoryTest {
 	 */
 	@Test
 	public void testMakeLevels() throws IOException {
-		doReturn(ls).when(spy).parseFile(anyString());
-		assertEquals(ls, spy.makeLevels());
 	}
 }

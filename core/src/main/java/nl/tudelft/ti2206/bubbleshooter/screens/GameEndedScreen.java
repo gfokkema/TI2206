@@ -1,8 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.util.HighScore;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -25,27 +27,28 @@ public class GameEndedScreen extends AbstractScreen {
 	 * @param message the message shown.
 	 * @param score the final score.
 	 */
-	public GameEndedScreen(BubbleShooter game, String message, int score) {
+	public GameEndedScreen(BubbleShooter game, String message, Score score) {
 		super(game);
 		
 		Label messageLabel = new Label(message, labelStyle);
 		messageLabel.setScale(5);
-		Label scoreLabel = new Label("Your score: " + score, labelStyle);
+		Label scoreLabel = new Label("Your score: " + score.getScore(), labelStyle);
+		Label info = new Label("Press ESC to return", labelStyle);
+		
+		Label highscoreLabel = new Label("You've entered the hall of fame!", labelStyle);
+		Label nameLabel = new Label("Please enter your name:", labelStyle);
+		TextField nameField = new TextField("", textStyle);
+		TextButton submitButton = new TextButton("Submit", buttonStyle);
 		
 		table.add(messageLabel).expandX().center().row();
 		table.add(scoreLabel).expandX().center().row();
 		
 		if (game.scores.isHighScore(score)) {
-			Label highscoreLabel = new Label("You've entered the hall of fame!", labelStyle);
-			Label nameLabel = new Label("Please enter your name:", labelStyle);
-			TextField nameField = new TextField("", textStyle);
-			TextButton submitButton = new TextButton("Submit", buttonStyle);
-			
 			submitButton.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-					game.scores.addScore(nameField.getText(), score);
+					game.scores.addScore(new HighScore(score, nameField.getText()));
 					game.setScreen(new HighScoreScreen(game));
 				}
 			});
@@ -55,7 +58,6 @@ public class GameEndedScreen extends AbstractScreen {
 			table.add(nameField).expandX().center().row();
 			table.add(submitButton).expandX().center().row();
 		} else {
-			Label info = new Label("Press ESC to return", labelStyle);
 			table.add(info).expandX().center().row();
 		}
 	}

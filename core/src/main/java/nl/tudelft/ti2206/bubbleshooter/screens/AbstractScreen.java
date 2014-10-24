@@ -50,11 +50,7 @@ public class AbstractScreen extends ScreenAdapter {
 		this.textStyle = new TextFieldStyle(game.font, Color.WHITE, null, null, null);
 		table.debug();
 		
-		TextureRegion region = new TextureRegion(Assets.getAssets().get(TextureID.BACKGROUND));
-		TextureRegionDrawable drawable = new TextureRegionDrawable(region);
-		table.background(drawable);
-		table.setFillParent(true);
-		stage.addActor(table);
+		setBackground(TextureID.MENUBACKGROUND);
 	}
 	
 	/**
@@ -105,5 +101,13 @@ public class AbstractScreen extends ScreenAdapter {
 	
 	public ButtonStyle getButtonStyle() {
 		return this.buttonStyle;
+	}
+	
+	public void setBackground(TextureID background){
+		TextureRegion region = new TextureRegion(Assets.getAssets().get(background));
+		TextureRegionDrawable drawable = new TextureRegionDrawable(region);
+		table.background(drawable);
+		table.setFillParent(true);
+		stage.addActor(table);
 	}
 }

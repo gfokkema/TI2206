@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Grid extends BSDrawable implements Serializable, Collidable, Observer {
 	private static final long serialVersionUID = -3156876087711309439L;
 	private int width = 8, height = 20;
+	private String name;
 	public HashMap<Integer, GridCell> cells;
 	
 	/**
@@ -31,9 +32,10 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	 * @param width		the width of the grid in bubbles
 	 * @param height	the height of the grid in bubbles
 	 */
-	public Grid(int width, int height) {
+	public Grid(String name, int width, int height) {
 		this.width = width;
 		this.height = height;
+		this.name = name;
 		
 		cells = new HashMap<>(width * height - height / 2);
 		for (int i = 0; i < width * height - height / 2; i++) {
@@ -61,7 +63,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 		cell.setBubble(b);
 
 		setChanged();
-		notifyObservers("Bubble has been added to index " + idx + ".");
+		notifyObservers("Grid: Bubble has been added to index " + idx + ".");
 		return cell;
 	}
 
@@ -147,6 +149,8 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 		Collection<GridCell> disconnected = new HashSet<GridCell>(getFilledGridCells());
 		disconnected.removeAll(connected);
 		disconnected.forEach((GridCell gc) -> gc.removeBubble());
+		setChanged();
+		notifyObservers("Grid: Removing " + disconnected.size() + "disconnected bubbles.");
 		return disconnected.size();
 	}
 
@@ -185,6 +189,14 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	}
 	
 	/**
+	 * Returns the name of this {@link Board}.
+	 * @return	the name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
 	 * This method checks whether the board is empty.
 	 * @return	true if empty, false otherwise
 	 */
@@ -199,7 +211,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	public Collection<BSDrawable> getDrawables() {
 		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
 		drawables.add(this);
-		getFilledGridCells().forEach(c -> drawables.add(c.getBubble()));
+		getFilledGridCells().forEach(c -> drawables.add(c));
 		return drawables;
 	}
 

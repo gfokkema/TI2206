@@ -5,7 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class HighScoreTest {
-	HighScore highscore = new HighScore("tom_jones", 400);
+	Score score = new Score(400, "Test");
+	HighScore highscore = new HighScore(score, "tom_jones");
 
 	@Test
 	public void getNameTest() {
@@ -15,8 +16,8 @@ public class HighScoreTest {
 
 	@Test
 	public void getScoreTest() {
-		assertTrue(highscore.getHighScore() == 400);
-		assertFalse(highscore.getHighScore() != 400);
-		assertFalse(highscore.getHighScore() == 399);
+		assertTrue(highscore.getScore() == 400);
+		assertFalse(highscore.getScore() != 400);
+		assertFalse(highscore.getScore() == 399);
 	}
 }

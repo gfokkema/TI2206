@@ -1,18 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.time.Duration;
-
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.TimerCondition;
-import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -53,13 +43,7 @@ public class MainMenuScreen extends AbstractScreen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-				EndingCondition basic = new BasicCondition();
-				EndingCondition belowLine = new BelowLineCondition(basic);
-				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
-				BSMode single = new SinglePlayerMode(timed, new ArcadeBoardFactory());
-				GameUIBuilder gub = new GameUIBuilder(game.font);
-				gub.addSinglePlayerStatsBar(single);
-				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
+				game.setScreen(new ModeScreen(game));
 			}
 		});
 		multiplay.addListener(new ClickListener() {

@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -11,32 +13,25 @@ import org.junit.Test;
 
 public class FileHighscoreTest {
 	FileHighscore fhs = new FileHighscore();
-	HighScore score = new HighScore("jan_piet", 80);
+	Score score = new Score(80, "Test");
+	HighScore highScore = new HighScore(score, "jan piet");
 	NavigableSet<HighScore> scores;
 
 	@Before
 	public void initialize() {
+		new File("test").delete();
 		fhs.setFileName("test");
 	}
 
 	@Test
 	public void testAddScore() {
-
-		fhs.checkHighScoreFile();
-		fhs.addScore("jan_piet", 80);
-
-		scores = fhs.loadScoreFile();
-		score = scores.first();
-
-		int points = score.getHighScore();
-		String name = score.getName();
-
-		assertTrue(name.equals("jan_piet"));
-		assertFalse(name.equals("jan_pietje"));
-
-		assertTrue(points == 80);
-		assertFalse(points != 80);
-
+		fhs.addScore(highScore);
+		highScore = fhs.loadScoreFile().first();
+		System.out.println(highScore.getScore());
+		
+		assertEquals("jan piet", highScore.getName());
+		assertNotEquals("jan_pietje", highScore.getName());
+		assertEquals(80, highScore.getScore());
 	}
 
 	@Test
@@ -45,27 +40,24 @@ public class FileHighscoreTest {
 		f.delete();
 		assertFalse(f.exists());
 
-		fhs.addScore(null, 0);
+		fhs.addScore(highScore);
 		assertTrue(f.exists());
 	}
 
 	@Test
 	public void testGetFileName() {
-		assertTrue(fhs.getFileName().equals("test.txt"));
+		assertEquals("test.txt", fhs.getFileName());
 	}
 
 	@Test
 	public void testSetFileName() {
-		assertTrue(fhs.getFileName().equals("test.txt"));
+		assertEquals("test.txt", fhs.getFileName());
 
 		fhs.setFileName("test2");
-		assertTrue(fhs.getFileName().equals("test2.txt"));
-		assertFalse(fhs.getFileName().equals("test.txt"));
+		assertEquals("test2.txt", fhs.getFileName());
 
 		fhs.setFileName("test");
-		assertTrue(fhs.getFileName().equals("test.txt"));
-		assertFalse(fhs.getFileName().equals("test2.txt"));
-
+		assertEquals("test.txt", fhs.getFileName());
 	}
 
 	@Test
@@ -73,35 +65,12 @@ public class FileHighscoreTest {
 		File f = new File(fhs.getFileName());
 		f.delete();
 		fhs.loadScoreFile();
-		fhs.checkHighScoreFile();
-		fhs.addScore("jan_liet", 60);
+		fhs.addScore(new HighScore(score, "jan_liet"));
 
 		scores = fhs.loadScoreFile();
-		score = scores.first();
+		highScore = scores.first();
 
-		int points = score.getHighScore();
-		String name = score.getName();
-
-		assertTrue(name.equals("jan_liet"));
-		assertFalse(name.equals("jan_lietje"));
-
-		assertTrue(points == 60);
-		assertFalse(points != 60);
-
+		assertEquals("jan_liet", highScore.getName());
+		assertEquals(80, highScore.getScore());
 	}
-
-	@Test
-	public void testIsHighScore() {
-		fhs.addScore("jan_piet", 40);
-		fhs.addScore("jan_doet", 21);
-		assertTrue(fhs.isHighScore(20));
-
-		for (int i = 20; i < 60; i++) {
-			fhs.addScore("jan_piet", i);
-			fhs.addScore("jan_doet" + i, i + 1);
-		}
-		assertFalse(fhs.isHighScore(8));
-
-	}
-
 }

@@ -19,5 +19,5 @@ public interface StatsObserver {
 	 * Draws the score in all score-based game modes.
 	 * @param score - the score.
 	 */
-	public void updateScore(int score);
+	public void updateScore(Score score);
 }

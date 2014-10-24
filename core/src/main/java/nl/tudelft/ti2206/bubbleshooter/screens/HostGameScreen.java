@@ -9,8 +9,10 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.getIP;
 
 import com.badlogic.gdx.Gdx;
@@ -83,9 +85,11 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 		Gdx.app.postRunnable(() -> {
 			EndingCondition basic = new BasicCondition();
 			EndingCondition belowLine = new BelowLineCondition(basic);
+			EndingCondition emptyGrid = new EmptyGridCondition(belowLine);
+			MultiPlayerMode multi = new MultiPlayerMode(emptyGrid, br, bw);
+			
 			GameUIBuilder gub = new GameUIBuilder(game.font);
-			MultiPlayerMode multi = new MultiPlayerMode(belowLine, br, bw);
-			gub.addMultiPlayerStatsBars(multi);
+			gub.addMultiPlayerStatsBars(emptyGrid, multi.getScore(), new Score(0, "multi"));
 			game.setScreen(new BubbleShooterScreen(game, multi, gub.build()));
 		});
 	}
