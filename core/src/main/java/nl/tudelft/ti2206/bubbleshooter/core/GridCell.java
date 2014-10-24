@@ -10,7 +10,9 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * This class represents a cell in the {@link Grid}.
@@ -68,7 +70,6 @@ public class GridCell extends BSDrawable implements Collidable {
 	 */
 	public void setBubble(Bubble b) {
 		this.bubble = b;
-		b.setBounds(bounds);
 	}
 
 	/**
@@ -174,19 +175,29 @@ public class GridCell extends BSDrawable implements Collidable {
 		}
 		return score;
 	}
+	
+	@Override
+	public Color getColor() {
+		return bubble == null ? null : bubble.getColor();
+	}
+	
+	@Override
+	public Vector2 getPosition() {
+		return new Vector2(bounds.x - 16, bounds.y - 16);
+	}
 
 	@Override
 	public TextureID getTexture() {
-		return null;
+		return bubble == null ? null : bubble.getTexture();
 	}
 
 	@Override
 	public int getWidth() {
-		return 0;
+		return bubble == null ? null : bubble.getWidth();
 	}
 
 	@Override
 	public int getHeight() {
-		return 0;
+		return bubble == null ? null : bubble.getHeight();
 	}
 }

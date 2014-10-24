@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Projectile extends ColourBubble {
 	private static final long serialVersionUID = -4014441150246221939L;
+	private Circle bounds;
 	private Vector2 direction;
 	private int velocity;
 
@@ -99,5 +100,58 @@ public class Projectile extends ColourBubble {
 	 */
 	public Vector2 getDirection() {
 		return direction;
+	}
+			
+	/**
+	 * Get the bounding {@link Circle} of this {@link Bubble}.
+	 * @return	{@link Circle} that bounds this bubble
+	 */
+	public Circle getBounds() {
+		return this.bounds;
+	}
+	
+	/**
+	 * Gets the midpoint of the bubble.
+	 * @return vector2 with x and y coordinate.
+	 */
+	public Vector2 getMidPoint() {
+		return new Vector2(bounds.x, bounds.y);
+	}
+	
+	/**
+	 * Set the bounding {@link Circle} of this {@link Bubble}.
+	 * @param c	{@link Circle} that bounds this bubble
+	 */
+	public void setBounds(Circle c) {
+		this.bounds = c;
+		setChanged();
+		notifyObservers();
+	}
+	
+	/**
+	 * Gets the position of the bubble.
+	 * @return vector2 with c and y coordinate.
+	 */
+	@Override
+	public Vector2 getPosition() {
+		return new Vector2(bounds.x - 16, bounds.y - 16);
+	}
+
+	/**
+	 * Returns the width of this {@link Bubble}.
+	 * @return width of this {@link Bubble}.
+	 */
+	@Override
+	public int getWidth() {
+		return 32;
+	}
+
+	/**
+	 * Returns the height of this {@link Bubble}.
+	 * @return height of this {@link Bubble}.
+	 */
+	@Override
+	public int getHeight() {
+		return 32;
 	}
 }

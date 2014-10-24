@@ -211,7 +211,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	public Collection<BSDrawable> getDrawables() {
 		Collection<BSDrawable> drawables = new ArrayList<BSDrawable>();
 		drawables.add(this);
-		getFilledGridCells().forEach(c -> drawables.add(c.getBubble()));
+		getFilledGridCells().forEach(c -> drawables.add(c));
 		return drawables;
 	}
 

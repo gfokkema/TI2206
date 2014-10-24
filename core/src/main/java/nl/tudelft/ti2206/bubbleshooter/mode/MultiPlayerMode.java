@@ -20,7 +20,6 @@ import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
