@@ -5,7 +5,9 @@ import java.time.Duration;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
@@ -26,6 +28,7 @@ public class ModeScreen extends AbstractScreen {
 
 	public ModeScreen(BubbleShooter game) {
 		super(game);
+		setBackground(TextureID.MENUBACKGROUND);
 		
 		Label message = new Label("Choose your mode!", labelStyle);
 		TextButton zenplay = new TextButton("Zen", buttonStyle);
@@ -38,12 +41,10 @@ public class ModeScreen extends AbstractScreen {
 				
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
-				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
-				EndingCondition gridEmpty = new EmptyGridCondition(timed);
-				BSMode single = new SinglePlayerMode(gridEmpty, new ArcadeBoardFactory());
+				BSMode single = new SinglePlayerMode(belowLine, new ZenBoardFactory());
 				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
-				gub.addSinglePlayerStatsBar(gridEmpty, single.getScore());
+				gub.addSinglePlayerStatsBar(belowLine, single.getScore());
 				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
 			}
 		});

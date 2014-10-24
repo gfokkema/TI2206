@@ -34,15 +34,15 @@ public abstract class EndingCondition implements Serializable {
 	 */
 	public abstract void won();
 
-	public void addEndingObserver(EndingObserver o) {
-		this.endingObs = o;
-	}
-	
 	/**
 	 * Add the {@link StatsObserver}.
 	 * @param o the {@link StatsObserver}.
 	 */
 	public void addStatsObserver(StatsObserver o) {
 		this.statsObs = o;
+	}
+
+	public void addEndingObserver(EndingObserver o) {
+		this.endingObs = o;
 	}
 }
