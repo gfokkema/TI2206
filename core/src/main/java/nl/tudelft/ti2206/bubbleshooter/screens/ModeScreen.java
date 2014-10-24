@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
@@ -27,7 +26,6 @@ public class ModeScreen extends AbstractScreen {
 
 	public ModeScreen(BubbleShooter game) {
 		super(game);
-		setBackground(TextureID.MENUBACKGROUND);
 		
 		Label message = new Label("Choose your mode!", labelStyle);
 		TextButton zenplay = new TextButton("Zen", buttonStyle);

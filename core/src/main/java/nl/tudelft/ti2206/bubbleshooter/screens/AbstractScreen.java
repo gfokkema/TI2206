@@ -50,7 +50,7 @@ public class AbstractScreen extends ScreenAdapter {
 		this.textStyle = new TextFieldStyle(game.font, Color.WHITE, null, null, null);
 		table.debug();
 		
-		setBackground(TextureID.GAMEBACKGROUND);
+		setBackground(TextureID.MENUBACKGROUND);
 	}
 	
 	/**

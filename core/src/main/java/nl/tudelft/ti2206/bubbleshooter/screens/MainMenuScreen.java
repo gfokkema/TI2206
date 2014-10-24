@@ -1,20 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.time.Duration;
-
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.TimerCondition;
-import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -44,7 +32,6 @@ public class MainMenuScreen extends AbstractScreen {
 	 */
 	public MainMenuScreen(BubbleShooter game) {
 		super(game);
-		setBackground(TextureID.MENUBACKGROUND);
 		
 		TextButton singleplay = new TextButton("Single player", buttonStyle);
 		TextButton multiplay = new TextButton("Multi player", buttonStyle);
