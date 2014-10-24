@@ -8,6 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
+import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
@@ -49,7 +50,7 @@ public abstract class BSMode implements EndingObserver {
 		this.grid = grids.next();
 		this.cannon = cannon;
 		this.end = end;
-		this.score = new Score(0, grid.getName());
+		this.score = new Score(0, new Level(1, grid.getName()));
 		
 		setProjectile(cannon.getProjectile());
 		
@@ -162,6 +163,7 @@ public abstract class BSMode implements EndingObserver {
 	public void next() {
 		this.grid.deleteObservers();
 		this.grid = grids.next();
+		score.setLevel(new Level(score.getLevel().getLevel() + 1, grid.getName()));
 		this.grid.addObserver(Logger.getLogger());
 	}
 

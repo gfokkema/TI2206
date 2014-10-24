@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
@@ -89,7 +90,7 @@ public class JoinGameScreen extends AbstractScreen {
 		MultiPlayerMode multi = new MultiPlayerMode(emptyGrid, br, bw);
 		
 		GameUIBuilder gub = new GameUIBuilder(game.font);
-		gub.addMultiPlayerStatsBars(emptyGrid, multi.getScore(), new Score(0, "multi"));
+		gub.addMultiPlayerStatsBars(emptyGrid, multi.getScore(), new Score(0, new Level(1, "multi")));
 		game.setScreen(new BubbleShooterScreen(game, multi, gub.build()));
 	}
 }

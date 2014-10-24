@@ -48,7 +48,6 @@ public class AbstractScreen extends ScreenAdapter {
 												game.font);
 		this.labelStyle = new LabelStyle(game.font, Color.WHITE);
 		this.textStyle = new TextFieldStyle(game.font, Color.WHITE, null, null, null);
-		table.debug();
 		
 		setBackground(TextureID.MENUBACKGROUND);
 	}
