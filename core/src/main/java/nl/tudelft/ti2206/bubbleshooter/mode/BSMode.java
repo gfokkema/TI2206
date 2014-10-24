@@ -45,7 +45,7 @@ public abstract class BSMode implements EndingObserver {
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
 	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		this.grids = factory.makeLevels().iterator();
+		this.grids = factory.makeLevels();
 		this.grid = grids.next();
 		this.cannon = cannon;
 		this.end = end;

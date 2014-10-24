@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.engine;
 
-import java.util.List;
+import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
@@ -8,7 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
  * This is the abstract factory for our Boards.
  */
 public abstract class BoardFactory {
-	public abstract List<Grid> makeLevels();
+	public abstract Iterator<Grid> makeLevels();
 		
 	/**
 	 * Add a bubble to a board with the specified index.

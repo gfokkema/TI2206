@@ -65,7 +65,7 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
 
-		this.grid = factory.makeLevels().get(0);
+		this.grid = factory.makeLevels().next();
 
 		writeCondition(end);
 		writeDrawable(grid);
