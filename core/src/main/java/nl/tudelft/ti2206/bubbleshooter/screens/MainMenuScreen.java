@@ -53,12 +53,14 @@ public class MainMenuScreen extends AbstractScreen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
 				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
 				BSMode single = new SinglePlayerMode(timed, new ArcadeBoardFactory());
+				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
-				gub.addSinglePlayerStatsBar(single);
+				gub.addSinglePlayerStatsBar(timed, single.getScore());
 				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
 			}
 		});

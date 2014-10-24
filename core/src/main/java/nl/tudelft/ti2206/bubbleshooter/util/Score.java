@@ -2,6 +2,8 @@ package nl.tudelft.ti2206.bubbleshooter.util;
 
 import java.io.Serializable;
 
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+
 /**
  * A class which creates a object for the scoresFile.
  * @author group-15
@@ -11,6 +13,7 @@ public class Score implements Comparable<Score>, Serializable {
 	private static final long serialVersionUID = 2603273380851092688L;
 	private int score;
 	private String level;
+	private StatsObserver statsObs;
 	
 	/**
 	 * A method to create a score object.
@@ -34,6 +37,7 @@ public class Score implements Comparable<Score>, Serializable {
 	
 	public void add(int points) {
 		this.score += points;
+		statsObs.updateScore(this);
 	}
 	
 	/**
@@ -58,5 +62,13 @@ public class Score implements Comparable<Score>, Serializable {
 	@Override
 	public int compareTo(Score o) {
 		return Integer.compare(this.score, o.score);
+	}
+	
+	/**
+	 * Add the {@link StatsObserver} to the {@link EndingCondition}.
+	 * @param obs the statsobserver.
+	 */
+	public void addStatsObserver(StatsObserver obs) {
+		this.statsObs = obs;
 	}
 }
