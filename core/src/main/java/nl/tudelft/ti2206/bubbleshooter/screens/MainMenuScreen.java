@@ -6,7 +6,7 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
@@ -57,7 +57,7 @@ public class MainMenuScreen extends AbstractScreen {
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
 				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
-				BSMode single = new SinglePlayerMode(timed, new ArcadeBoardFactory());
+				GameMode single = new SinglePlayerMode(timed, new ArcadeBoardFactory());
 				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
 				gub.addSinglePlayerStatsBar(timed, single.getScore());

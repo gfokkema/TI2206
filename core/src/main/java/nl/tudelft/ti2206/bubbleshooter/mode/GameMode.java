@@ -24,7 +24,7 @@ import com.badlogic.gdx.math.Vector2;
  * It contains the basic game-logic applicable to all other game-modes.
  * It acts as an observable, calling a {@link StatsObserver} to update.
  */
-public abstract class BSMode implements EndingObserver {
+public abstract class GameMode implements EndingObserver {
 	protected Iterator<Grid> grids;
 	protected Grid grid;
 	protected Cannon cannon;
@@ -39,12 +39,12 @@ public abstract class BSMode implements EndingObserver {
 	private Score score;
 
 	/**
-	 * BSMode constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
+	 * {@link GameMode} constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
 	 * @param end the {@link EndingCondition} of the game.
 	 * @param factory the used {@link BoardFactory} for the game.
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
-	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
+	public GameMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
 		this.grids = factory.makeLevels().iterator();
 		this.grid = grids.next();
 		this.cannon = cannon;
@@ -157,7 +157,7 @@ public abstract class BSMode implements EndingObserver {
 	}
 	
 	/**
-	 * Switches {@link BSMode} to the next {@link Board}.
+	 * Switches {@link GameMode} to the next {@link Board}.
 	 */
 	public void next() {
 		this.grid.deleteObservers();

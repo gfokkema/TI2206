@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Input.Keys;
@@ -30,14 +30,14 @@ public abstract class AbstractProcessor extends InputAdapter {
 		keyUpBindings.put(Keys.RIGHT, AbstractProcessor::cannonStopRight);
 	}
 	
-	protected BSMode mode;
+	protected GameMode mode;
 
 	/**
-	 * Create a {@link AbstractProcessor} which will control the given {@link BSMode}.
-	 * @param BSMode	the {@link BSMode} to control
+	 * Create a {@link AbstractProcessor} which will control the given {@link GameMode}.
+	 * @param mode	the {@link GameMode} to control
 	 */
-	public AbstractProcessor(BSMode BSMode) {
-		this.mode = BSMode;
+	public AbstractProcessor(GameMode mode) {
+		this.mode = mode;
 	}
 
 	/**
@@ -63,31 +63,31 @@ public abstract class AbstractProcessor extends InputAdapter {
 	}
 
 	/**
-	 * This function will start rotating the cannon in the {@link BSMode} to the left.
+	 * This function will start rotating the cannon in the {@link GameMode} to the left.
 	 * @return	boolean indicating whether the cannon has started rotating
 	 */
 	public abstract boolean cannonLeft();
 	
 	/**
-	 * This function will start rotating the cannon in the {@link BSMode} to the right.
+	 * This function will start rotating the cannon in the {@link GameMode} to the right.
 	 * @return	boolean indicating whether the cannon has started rotating
 	 */
 	public abstract boolean cannonRight();
 	
 	/**
-	 * This function is called to shoot the cannon in the {@link BSMode} game.
+	 * This function is called to shoot the cannon in the {@link GameMode} game.
 	 * @return	boolean indicating whether the cannon could be fired
 	 */
 	public abstract boolean cannonShoot();
 	
 	/**
-	 * This function will stop rotating the cannon in the {@link BSMode} to the left.
+	 * This function will stop rotating the cannon in the {@link GameMode} to the left.
 	 * @return	boolean indicating whether the cannon has stopped rotating
 	 */
 	public abstract boolean cannonStopLeft();
 	
 	/**
-	 * This function will stop rotating the cannon in the {@link BSMode} to the right.
+	 * This function will stop rotating the cannon in the {@link GameMode} to the right.
 	 * @return	boolean indicating whether the cannon has stopped rotating
 	 */
 	public abstract boolean cannonStopRight();

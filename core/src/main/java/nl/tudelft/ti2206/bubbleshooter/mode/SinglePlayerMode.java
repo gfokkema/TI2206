@@ -20,7 +20,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class SinglePlayerMode extends BSMode {
+public class SinglePlayerMode extends GameMode {
 	private Background bg;
 	private Vector2 offset;
 	

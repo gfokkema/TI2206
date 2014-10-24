@@ -32,7 +32,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author group-15
  *
  */
-public class MultiPlayerMode extends BSMode implements Runnable, Observer {
+public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 

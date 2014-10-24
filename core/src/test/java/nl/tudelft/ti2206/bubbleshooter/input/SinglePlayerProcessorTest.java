@@ -6,7 +6,7 @@ import static org.mockito.Mockito.times;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import com.badlogic.gdx.Input.Keys;
 public class SinglePlayerProcessorTest {
 	private SinglePlayerProcessor input;
 	
-	@Mock BSMode mode;
+	@Mock GameMode mode;
 	@Mock Cannon cannon;
 	@Mock Grid grid;
 	@Mock Projectile projectile;
