@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Settings;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
 import com.badlogic.gdx.Gdx;
@@ -38,6 +39,9 @@ public class OptionsScreen extends AbstractScreen {
 		Label sfxlabel = new Label("Change SFX", labelStyle);
 		TextButton sfxup = new TextButton("+", buttonStyle);
 		TextButton sfxdown = new TextButton("-", buttonStyle);
+		Label themelabel = new Label("Change Theme", labelStyle);
+		TextButton themeleft = new TextButton("<", buttonStyle);
+		TextButton themeright = new TextButton(">", buttonStyle);
 		
 		volup.addListener(new ClickListener() {
 			@Override
@@ -67,6 +71,20 @@ public class OptionsScreen extends AbstractScreen {
 				SoundEngine.getSoundEngine().setSFXVolume(SoundEngine.getSoundEngine().getSFXVolume() - volumeStep);
 			}
 		});
+		themeleft.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				Settings.getSettings().left();
+			}
+		});
+		themeright.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				Settings.getSettings().right();
+			}
+		});
 		
 		HorizontalGroup volgroup = new HorizontalGroup();
 		volgroup.space(20);
@@ -78,10 +96,17 @@ public class OptionsScreen extends AbstractScreen {
 		sfxgroup.addActor(sfxup);
 		sfxgroup.addActor(sfxdown);
 		
+		HorizontalGroup themegroup = new HorizontalGroup();
+		themegroup.space(20);
+		themegroup.addActor(themeleft);
+		themegroup.addActor(themeright);
+		
 		table.add(vollabel).expandX().center().row();
 		table.add(volgroup).expandX().center().row();
 		table.add(sfxlabel).expandX().center().row();
 		table.add(sfxgroup).expandX().center().row();
+		table.add(themelabel).expandX().center().row();
+		table.add(themegroup).expandX().center().row();
 	}
 	
 	/**
