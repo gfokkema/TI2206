@@ -56,7 +56,8 @@ public class ModeScreen extends AbstractScreen {
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
 				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
-				BSMode single = new SinglePlayerMode(timed, new ArcadeBoardFactory());
+				EndingCondition gridEmpty = new EmptyGridCondition(timed);
+				BSMode single = new SinglePlayerMode(gridEmpty, new ArcadeBoardFactory());
 				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
 				gub.addSinglePlayerStatsBar(timed, single.getScore());
