@@ -2,6 +2,7 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import java.util.Collection;
 
+import nl.tudelft.ti2206.bubbleshooter.GameFactory;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
@@ -34,10 +35,10 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 	 * @param game_mode	the {@link GameMode} that will be used
 	 * @param ui		the {@link GameUI} that will be used
 	 */
-	public BubbleShooterScreen(BubbleShooter game, GameMode game_mode, GameUI ui) {
+	public BubbleShooterScreen(BubbleShooter game, GameFactory fact) {
 		this.game = game;
-		this.game_mode = game_mode;
-		this.ui = ui;
+		this.game_mode = fact.createMode();
+		this.ui = fact.createUI();
 		game_mode.addGameObserver(this);
 	}
 
