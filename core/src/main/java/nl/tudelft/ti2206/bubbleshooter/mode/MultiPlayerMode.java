@@ -22,6 +22,7 @@ import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
+import nl.tudelft.ti2206.bubbleshooter.util.chat.ChatMessage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -199,7 +200,13 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 					setProjectileOpp((Projectile) o);
 				} else if (o instanceof EndingCondition) {
 					setConditionOpp((EndingCondition) o);
+				} else if (o instanceof String) {
+					ChatMessage msg = new ChatMessage((String) o);
+					System.out.println(msg);
+					//hoort eig naar screen te zenden
 				}
+
+				
 			}
 		} catch (IOException e) {
 		} catch (Exception e) {
