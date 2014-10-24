@@ -44,40 +44,17 @@ public class MainMenuScreen extends AbstractScreen {
 	public MainMenuScreen(BubbleShooter game) {
 		super(game);
 		
-		TextButton zenplay = new TextButton("Zen", buttonStyle);
 		TextButton singleplay = new TextButton("Single player", buttonStyle);
 		TextButton multiplay = new TextButton("Multi player", buttonStyle);
 		TextButton highscore = new TextButton("Highscores", buttonStyle);
 		TextButton options = new TextButton("Options", buttonStyle);
 		TextButton quit = new TextButton("Quit", buttonStyle);
 
-		zenplay.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-				
-				EndingCondition basic = new BasicCondition();
-				EndingCondition belowLine = new BelowLineCondition(basic);
-				BSMode single = new SinglePlayerMode(belowLine, new ZenBoardFactory());
-				
-				GameUIBuilder gub = new GameUIBuilder(game.font);
-				gub.addSinglePlayerStatsBar(belowLine, single.getScore());
-				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
-			}
-		});
 		singleplay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-				
-				EndingCondition basic = new BasicCondition();
-				EndingCondition belowLine = new BelowLineCondition(basic);
-				EndingCondition timed = new TimerCondition(belowLine, Duration.ofMinutes(2));
-				BSMode single = new SinglePlayerMode(timed, new ArcadeBoardFactory());
-				
-				GameUIBuilder gub = new GameUIBuilder(game.font);
-				gub.addSinglePlayerStatsBar(timed, single.getScore());
-				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
+				game.setScreen(new ModeScreen(game));
 			}
 		});
 		multiplay.addListener(new ClickListener() {
@@ -109,7 +86,6 @@ public class MainMenuScreen extends AbstractScreen {
 			}
 		});
 
-		table.add(zenplay).expandX().center().row();
 		table.add(singleplay).expandX().center().row();
 		table.add(multiplay).expandX().center().row();
 		table.add(highscore).expandX().center().row();
