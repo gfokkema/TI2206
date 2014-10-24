@@ -54,34 +54,6 @@ public class BubbleTest {
 	}
 
 	/**
-	 * Checked whether the circles are initiated with the given boundaries.
-	 *
-	 */
-	@Test
-	public void testBounds() {
-		Circle c = new Circle(0, 0, 10);
-
-		bubble.setBounds(c);
-		assertEquals(c, bubble.getBounds());
-	}
-	/**
-	 * Checked whether the given vector is correctly initiated with given boundaries.
-	 *
-	 */
-	@Test
-	public void testPosition() {
-		Vector2 pos = new Vector2(10, 10), pos2 = new Vector2(20, 50);
-
-		bubble.setCircle(pos, 10);
-		assertEquals(pos, bubble.getMidPoint());
-		assertEquals(10, bubble.getBounds().radius, .001);
-
-		bubble.setPosition(pos2);
-		assertEquals(pos2, bubble.getMidPoint());
-		assertEquals(10, bubble.getBounds().radius, .001);
-	}
-
-	/**
 	 * Checked whether with the given bounds, overlaps gives the right output.
 	 *
 	 *

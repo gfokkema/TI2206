@@ -20,7 +20,6 @@ import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
@@ -66,7 +65,7 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
 
-		this.grid = factory.makeLevels().get(0);
+		this.grid = factory.makeLevels().next();
 
 		writeCondition(end);
 		writeDrawable(grid);
