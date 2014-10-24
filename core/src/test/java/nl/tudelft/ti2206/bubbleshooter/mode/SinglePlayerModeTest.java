@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyFloat;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -31,7 +30,6 @@ public class SinglePlayerModeTest {
 	@Mock Cannon cannon;
 	@Mock Collection<Bubble> colorgroup;
 	@Mock EndingCondition end;
-	@Mock ArrayList<Grid> grids;
 	@Mock Iterator<Grid> grid_it;
 	@Mock Grid grid;
 	@Mock Projectile bubble;
@@ -41,8 +39,7 @@ public class SinglePlayerModeTest {
 	@Before
 	public void setUp() throws IOException {
 		Mockito.when(cannon.getProjectile()).thenReturn(cbubble);
-		Mockito.when(factory.makeLevels()).thenReturn(grids);
-		Mockito.when(grids.iterator()).thenReturn(grid_it);
+		Mockito.when(factory.makeLevels()).thenReturn(grid_it);
 		Mockito.when(grid_it.next()).thenReturn(grid);
 		
 		mode = new SinglePlayerMode(end, factory, cannon);
