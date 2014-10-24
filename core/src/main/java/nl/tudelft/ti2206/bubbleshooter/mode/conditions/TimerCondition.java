@@ -34,4 +34,5 @@ public class TimerCondition extends EndingDecorator {
 		statsObs.updateTimer(gameLength.minus(deltaTime));
 		super.check(grid);
 	}
+
 }
