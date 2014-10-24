@@ -110,7 +110,7 @@ public class GridTest {
 
 		drawables = grid.getDrawables();
 		assertEquals(11, drawables.size());
-		for (Bubble b : testbubbles) assertTrue(drawables.contains(b));
+		for (GridCell g : grid.getFilledGridCells()) assertTrue(drawables.contains(g));
 	}
 
 	/**
@@ -326,11 +326,13 @@ public class GridTest {
 	@Test
 	public void testAlmostOutOfBoundsLeft() {
 		grid.add(new ColourBubble(), 0);
-		Vector2 position = grid.cells.get(0).getBubble().getMidPoint();
-		position.y -= 32;
-		position.x -= 1;
+		
+		Vector2 position = grid.cells.get(0).getPosition();
+		position.y -= 16;
+		position.x += 15;
 		Projectile justBelow = new Projectile(new Circle(position, 16), new Vector2(1, 0), 0);
 		assertFalse(grid.collides(justBelow));
+		
 		grid.add(justBelow);
 		assertEquals(new Vector2(-1,0),justBelow.getDirection());
 
@@ -338,7 +340,6 @@ public class GridTest {
 		position.y += 1;
 		// Move it to the right, so that it's not out of bounds anymore.
 		position.x += 1;
-		justBelow.setPosition(position);
 
 		// The bubble above now collides with the projectile.
 		assertTrue(grid.collides(justBelow));
@@ -354,8 +355,9 @@ public class GridTest {
 	@Test
 	public void testAlmostOutOfBoundsRight() {
 		grid.add(new ColourBubble(), 5);
-		Vector2 position = grid.cells.get(5).getBubble().getMidPoint();
-		position.y -= 32;
+		Vector2 position = grid.cells.get(5).getPosition();
+		position.x += 16;
+		position.y -= 16;
 		Projectile justBelow = new Projectile(new Circle(position, 16), new Vector2(1, 0), 0);
 		assertFalse(grid.collides(justBelow));
 		assertEquals(new Vector2(-1,0),justBelow.getDirection());
@@ -364,7 +366,7 @@ public class GridTest {
 		position.y += 1;
 		// Move it to the left, so that it's not out of bounds anymore.
 		position.x -= 1;
-		justBelow.setPosition(position);
+		justBelow = new Projectile(new Circle(position, 16), new Vector2(1, 0), 0);
 
 		// The bubble above now collides with the projectile.
 		assertTrue(grid.collides(justBelow));
