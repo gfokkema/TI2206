@@ -53,10 +53,10 @@ public class Settings {
 	public void nextTheme()  {
 		assets.unloadTextures();
 		// kinda shitty
-		String first = list.removeFirst();
-		setSettings(first);
+		String last = list.removeLast();
+		setSettings(last);
 		writeSettingsFile();
-		list.add(first);
+		list.addFirst(last);
 		assets.reload();
 	}
 	
@@ -64,7 +64,7 @@ public class Settings {
 		OutputStream out;
 		try {
 			out = new FileOutputStream(getFileName());
-			prop.setProperty("selected_theme", list.getFirst());
+			prop.setProperty("selected_theme", currentpath);
 		try {
 			prop.store(out, null);
 		} catch (IOException e) {
@@ -106,7 +106,12 @@ public class Settings {
 	}
 	
 	public void addTheme(String themepath) {
-		list.add(themepath);
+		if(themepath.equals(currentpath)){
+			list.addFirst(themepath);
+		}
+		else{
+			list.add(themepath);
+		}
 	}
 	
 	public String getCurrentPath() {
