@@ -22,7 +22,7 @@ public class SurvivalGameFactory extends SPGameFactory {
 	
 	@Override
 	public GameMode createMode() {
-		GameMode single = new SurvivalMode(end, getBoardFactory().makeLevels(), score);
+		SurvivalMode single = new SurvivalMode(end, getBoardFactory().makeLevels(), score);
 		setInputProcessor(single);
 		return single;
 	}
