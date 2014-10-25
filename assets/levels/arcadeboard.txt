@@ -98,7 +98,6 @@ S00   S00   ---   ---   ---   C00   C02   C02
    S00   S00   ---   C03   C04   C03   C03
 S00   S00   ---   C04   C02   C01   C00   C00
    S00   ---   ---   C02   C01   C01   C00  
----   ---   ---   ---   ---   ---   ---   ---
 --- END --- BUBBLESHOOTER OF DOOM ---
 --- BEGIN --- DEADSIMPLE DOOM 11 ---
 8x15
