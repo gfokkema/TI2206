@@ -234,7 +234,6 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 
 	@Override
 	public void updateScore(Score score) {
-		System.out.println("Score sent");
 		write(score);
 	}
 }
