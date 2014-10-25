@@ -168,8 +168,9 @@ public class Assets {
 	 * @param handle	handle for the {@link Drawable} file
 	 */
 	public void load(SkinID id, String handle) {
-		skins.put(id, handle);
-		loader.load(handle, Texture.class);
+		String path = Settings.getSettings().getCurrentPath() + handle;
+		skins.put(id, path);
+		loader.load(path, Texture.class);
 	}
 	
 	/**
@@ -209,10 +210,12 @@ public class Assets {
 			if(assets.loader.isLoaded(unload))
 				assets.loader.unload(unload);	
 		}
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "brown_button.png");
 	}
 	
 	public void reload() {
 		//TEMP
+		assets.load(SkinID.BUTTON, "brown_button.png");
 		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
 		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
 		assets.load(TextureID.BORDER, "MPborder.png");
