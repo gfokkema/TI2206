@@ -7,8 +7,8 @@ public class ChatWindow implements ChatObserver {
 	ChatMessage msg = new ChatMessage("");
 
 	@Override
-	public void addMessage(String message) {
-		this.msg = new ChatMessage(message);
+	public void addMessage(String msgstr) {
+		this.msg = new ChatMessage(msgstr);
 
 	}
 
