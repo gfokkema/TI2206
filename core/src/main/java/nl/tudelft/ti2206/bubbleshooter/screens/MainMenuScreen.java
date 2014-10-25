@@ -7,7 +7,6 @@ import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -39,7 +38,6 @@ public class MainMenuScreen extends AbstractScreen {
 		TextButton highscore = new TextButton("Highscores", buttonStyle);
 		TextButton options = new TextButton("Options", buttonStyle);
 		TextButton quit = new TextButton("Quit", buttonStyle);
-		TextField test = new TextField("", textStyle);
 
 		singleplay.addListener(new ClickListener() {
 			@Override
@@ -82,6 +80,5 @@ public class MainMenuScreen extends AbstractScreen {
 		table.add(highscore).expandX().center().row();
 		table.add(options).expandX().center().row();
 		table.add(quit).expandX().center().row();
-		table.add(test).expandX().center().row();
 	}
 }
