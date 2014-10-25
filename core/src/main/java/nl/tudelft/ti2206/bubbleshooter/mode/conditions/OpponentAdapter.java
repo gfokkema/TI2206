@@ -1,4 +1,7 @@
-package nl.tudelft.ti2206.bubbleshooter.util;
+package nl.tudelft.ti2206.bubbleshooter.mode.conditions;
+
+import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
+import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 
 
 public class OpponentAdapter implements EndingObserver {

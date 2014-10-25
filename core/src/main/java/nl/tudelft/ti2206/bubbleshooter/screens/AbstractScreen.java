@@ -2,10 +2,10 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
-import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -48,7 +48,6 @@ public class AbstractScreen extends ScreenAdapter {
 												game.font);
 		this.labelStyle = new LabelStyle(game.font, Color.WHITE);
 		this.textStyle = new TextFieldStyle(game.font, Color.WHITE, null, null, null);
-		table.debug();
 		
 		setBackground(TextureID.MENUBACKGROUND);
 	}

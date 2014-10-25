@@ -7,8 +7,8 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
 import nl.tudelft.ti2206.bubbleshooter.logger.ScreenLogger;
+import nl.tudelft.ti2206.bubbleshooter.score.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
-import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -46,6 +46,7 @@ public class BubbleShooter extends Game {
 		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
 		assets.load(SkinID.BUTTON, "brown_button.png");
+		assets.load(SkinID.TEXTFIELD, "brown_textfield.png");
 		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
 		assets.load(SoundID.BUTTON, "ButtonSFX.wav");
 		assets.load(SoundID.CANNON, "BubbleSFX.wav");
