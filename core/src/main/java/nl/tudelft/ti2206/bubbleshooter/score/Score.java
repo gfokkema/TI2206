@@ -26,6 +26,10 @@ public class Score implements Comparable<Score>, Serializable {
 		this.score = score;
 		this.level = level;
 	}
+
+	public Score(int score) {
+		this.level = new Level(1, "No level name");
+	}
 	
 	/**
 	 * A method to create a score object.

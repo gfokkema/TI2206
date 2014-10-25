@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.input;
 
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 
 /**
  * This class processes input from a single player game.
@@ -8,15 +8,15 @@ import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
  */
 public class SinglePlayerProcessor extends AbstractProcessor {
 	/**
-	 * Create a {@link SinglePlayerProcessor} which will control the given {@link BSMode}.
-	 * @param BSMode	the {@link BSMode} to control
+	 * Create a {@link SinglePlayerProcessor} which will control the given {@link GameMode}.
+	 * @param mode	the {@link GameMode} to control
 	 */
-	public SinglePlayerProcessor(BSMode BSMode) {
-		super(BSMode);
+	public SinglePlayerProcessor(GameMode mode) {
+		super(mode);
 	}
 
 	/**
-	 * This function is called to shoot the cannon in the {@link BSMode} game.
+	 * This function is called to shoot the cannon in the {@link GameMode} game.
 	 * @return	boolean indicating whether the cannon could be fired
 	 */
 	@Override
@@ -29,7 +29,7 @@ public class SinglePlayerProcessor extends AbstractProcessor {
 	}
 
 	/**
-	 * This function will start rotating the cannon in the {@link BSMode} to the left.
+	 * This function will start rotating the cannon in the {@link GameMode} to the left.
 	 * @return	boolean indicating whether the cannon has started rotating
 	 */
 	@Override
@@ -39,7 +39,7 @@ public class SinglePlayerProcessor extends AbstractProcessor {
 	}
 
 	/**
-	 * This function will start rotating the cannon in the {@link BSMode} to the right.
+	 * This function will start rotating the cannon in the {@link GameMode} to the right.
 	 * @return	boolean indicating whether the cannon has started rotating
 	 */
 	@Override
@@ -49,7 +49,7 @@ public class SinglePlayerProcessor extends AbstractProcessor {
 	}
 
 	/**
-	 * This function will stop rotating the cannon in the {@link BSMode} to the left.
+	 * This function will stop rotating the cannon in the {@link GameMode} to the left.
 	 * @return	boolean indicating whether the cannon has stopped rotating
 	 */
 	@Override
@@ -59,7 +59,7 @@ public class SinglePlayerProcessor extends AbstractProcessor {
 	}
 
 	/**
-	 * This function will stop rotating the cannon in the {@link BSMode} to the right.
+	 * This function will stop rotating the cannon in the {@link GameMode} to the right.
 	 * @return	boolean indicating whether the cannon has stopped rotating
 	 */
 	@Override

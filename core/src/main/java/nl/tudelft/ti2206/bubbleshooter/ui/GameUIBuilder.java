@@ -30,10 +30,8 @@ public class GameUIBuilder {
 
 	public void addMultiPlayerStatsBars(EndingCondition end, Score score, Score oppscore) {
 		addSinglePlayerStatsBar(end, score);
-		addSinglePlayerStatsBar(end, oppscore);
 		StatsBar multi = addStatsBar(false);
-		// FIXME:
-		//gameMode.addOpponentStatsObserver(multi);
+		oppscore.addStatsObserver(multi);
 	}
 
 	public StatsBar addStatsBar(boolean left) {

@@ -5,16 +5,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.core.Level;
+import nl.tudelft.ti2206.bubbleshooter.MPGameFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.score.Score;
-import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -84,13 +77,6 @@ public class JoinGameScreen extends AbstractScreen {
 			Gdx.app.exit();
 		}
 		
-		EndingCondition basic = new BasicCondition();
-		EndingCondition belowLine = new BelowLineCondition(basic);
-		EndingCondition emptyGrid = new EmptyGridCondition(belowLine);
-		MultiPlayerMode multi = new MultiPlayerMode(emptyGrid, br, bw);
-		
-		GameUIBuilder gub = new GameUIBuilder(game.font);
-		gub.addMultiPlayerStatsBars(emptyGrid, multi.getScore(), new Score(0, new Level(1, "multi")));
-		game.setScreen(new BubbleShooterScreen(game, multi, gub.build()));
+		game.setScreen(new BubbleShooterScreen(game, new MPGameFactory(game, br, bw)));
 	}
 }
