@@ -10,8 +10,8 @@ import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 public class MPGameFactory extends GameFactory {
 	EndingCondition end;
@@ -23,8 +23,8 @@ public class MPGameFactory extends GameFactory {
 	public MPGameFactory(BubbleShooter bs, ObjectInputStream in, ObjectOutputStream out) {
 		super(bs);
 		this.end = getEndingCondition();
-		this.ownScore = new Score(0, "No level name");
-		this.oppScore = new Score(0, "No level name");
+		this.ownScore = new Score(0);
+		this.oppScore = new Score(0);
 		this.in = in;
 		this.out = out;
 	}

@@ -10,11 +10,9 @@ import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
-import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**

@@ -22,7 +22,7 @@ public class BasicConditionTest {
 
 	@Before
 	public void setUp() {
-		basic = new BasicCondition();
+		basic = new EmptyGridCondition(new BasicCondition());
 		basic.addEndingObserver(obs);
 	}
 

@@ -8,13 +8,14 @@ import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
+import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
@@ -50,6 +51,7 @@ public abstract class GameMode implements EndingObserver {
 		this.cannon = new Cannon(160,15);
 		this.end = end;
 		this.score = score;
+		score.setLevel(new Level(1, grid.getName()));
 		setProjectile(cannon.getProjectile());
 		
 		this.cannon.addObserver(Logger.getLogger());
@@ -160,6 +162,7 @@ public abstract class GameMode implements EndingObserver {
 	public void next() {
 		this.grid.deleteObservers();
 		this.grid = grids.next();
+		score.setLevel(new Level(score.getLevel().getLevel() + 1, grid.getName()));
 		this.grid.addObserver(Logger.getLogger());
 	}
 

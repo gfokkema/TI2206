@@ -38,7 +38,8 @@ public class Assets {
 	 * This enum contains all types of {@link Texture} assets.
 	 */
 	public enum TextureID {
-		BACKGROUND,
+		MENUBACKGROUND,
+		GAMEBACKGROUND,
 		BORDER,
 		BUBBLE,
 		STONEBUBBLE,

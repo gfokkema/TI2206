@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyFloat;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -14,7 +13,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import org.junit.Before;
@@ -32,7 +31,6 @@ public class SinglePlayerModeTest {
 	@Mock Cannon cannon;
 	@Mock Collection<Bubble> colorgroup;
 	@Mock EndingCondition end;
-	@Mock ArrayList<Grid> grids;
 	@Mock Iterator<Grid> grid_it;
 	@Mock Score score;
 	@Mock Grid grid;

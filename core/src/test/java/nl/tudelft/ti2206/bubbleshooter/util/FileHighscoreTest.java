@@ -8,12 +8,17 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.NavigableSet;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Level;
+import nl.tudelft.ti2206.bubbleshooter.score.FileHighscore;
+import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class FileHighscoreTest {
 	FileHighscore fhs = new FileHighscore();
-	Score score = new Score(80, "Test");
+	Score score = new Score(80, new Level(1, "Test"));
 	HighScore highScore = new HighScore(score, "jan piet");
 	NavigableSet<HighScore> scores;
 

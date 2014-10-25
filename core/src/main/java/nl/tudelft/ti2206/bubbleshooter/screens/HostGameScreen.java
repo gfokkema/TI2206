@@ -7,12 +7,6 @@ import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.MPGameFactory;
-import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.getIP;
 
 import com.badlogic.gdx.Gdx;

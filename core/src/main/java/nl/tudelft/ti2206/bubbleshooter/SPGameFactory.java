@@ -3,8 +3,8 @@ package nl.tudelft.ti2206.bubbleshooter;
 import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 public abstract class SPGameFactory extends GameFactory {
 	private Score score;
@@ -12,7 +12,7 @@ public abstract class SPGameFactory extends GameFactory {
 
 	public SPGameFactory(BubbleShooter bs) {
 		super(bs);
-		score = new Score(0, "No level name");
+		score = new Score(0);
 	}
 
 	@Override

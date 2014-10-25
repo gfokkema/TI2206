@@ -1,7 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.ui;
 
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

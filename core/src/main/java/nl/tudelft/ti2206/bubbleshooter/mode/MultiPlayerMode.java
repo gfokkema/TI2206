@@ -1,6 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
-import java.io.EOFException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -14,12 +14,12 @@ import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
+import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
-import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.OpponentAdapter;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
-import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
@@ -56,6 +56,7 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	public MultiPlayerMode(EndingCondition end, Iterator<Grid> grids, Score score, Score oppScore, ObjectInputStream in, ObjectOutputStream out) {
 		super(end, grids, score);
 		this.opponentScore = oppScore;
+		oppScore.setLevel(new Level(1, grid.getName()));
 		
 		this.in = in;
 		this.out = out;
@@ -66,11 +67,11 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
 
-		writeCondition(this.end);
-		writeScore(this.score);
-		writeDrawable(grid);
-		writeDrawable(cannon);
-		writeDrawable(cannon.getProjectile());
+		write(end);
+		write(score);
+		write(grid);
+		write(cannon);
+		write(cannon.getProjectile());
 		
 		grid.addObserver(this);
 		cannon.addObserver(this);
@@ -113,7 +114,7 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 		super.update(deltaTime);
 		if (grid2 == null) return;
 		condition2.check(this.grid2);
-		this.writeCondition(end);
+		this.write(end);
 	}
 
 	
@@ -161,40 +162,14 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	private void setScoreOpp(Score score) {
 		opponentScore.update(score);
 	}
-
-	/**
-	 * Writes the {@link EndingCondition} over the network.
-	 * @param condition	the {@link EndingCondition} of the player
-	 */
-	public void writeCondition(EndingCondition condition) {
-		try {
-			out.writeObject(condition);
-			out.flush();
-			out.reset();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
-	private void writeScore(Score score) {
+	public void write(Object o) {
 		try {
-			out.writeObject(score);
+			out.writeObject(o);
 			out.flush();
 			out.reset();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Writes a {@link BSDrawable} over the network.
-	 * @param d	the {@link BSDrawable} of the player
-	 */
-	public void writeDrawable(BSDrawable d) {
-		try {
-			out.writeObject(d);
-			out.flush();
-			out.reset();
+		} catch (IOException e) {
+			won();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -205,8 +180,8 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	 */
 	@Override
 	public void run() {
-		while (true) {
-			try {
+		try {
+			while (true) {
 				Object o = in.readObject();
 				if (o instanceof Grid) {
 					setGridOpp((Grid) o);
@@ -219,22 +194,43 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 				} else if (o instanceof Score) {
 					setScoreOpp((Score) o);
 				}
-			} catch (EOFException e) {
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.exit(1);
 			}
+		} catch (IOException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof BSDrawable) writeDrawable((BSDrawable) o);
+		if (o instanceof BSDrawable) write(o);
 	}
 
 	public void addOpponentStatsObserver(StatsObserver multi) {
 		opponentStatsObs = multi;
 		condition2.addStatsObserver(opponentStatsObs);
+	}
+	
+	public void disconnect() {
+		try {
+			in.close();
+			out.close();
+		} catch (IOException e) {
+		} finally {
+			in = null;
+			out = null;
+		}
+	}
+	
+	@Override
+	public void lost() {
+		disconnect();
+		super.lost();
+	}
+
+	@Override
+	public void won() {
+		disconnect();
+		super.won();
 	}
 }

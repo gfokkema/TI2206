@@ -1,8 +1,10 @@
-package nl.tudelft.ti2206.bubbleshooter.util;
+package nl.tudelft.ti2206.bubbleshooter.score;
 
 import java.io.Serializable;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 /**
  * A class which creates a object for the scoresFile.
@@ -12,7 +14,7 @@ import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 public class Score implements Comparable<Score>, Serializable {
 	private static final long serialVersionUID = 2603273380851092688L;
 	private int score;
-	private String level;
+	private Level level;
 	private StatsObserver statsObs;
 	
 	/**
@@ -20,9 +22,13 @@ public class Score implements Comparable<Score>, Serializable {
 	 * @param name		The name given by the player
 	 * @param score	The score of the player
 	 */
-	public Score(int score, String level) {
+	public Score(int score, Level level) {
 		this.score = score;
 		this.level = level;
+	}
+
+	public Score(int score) {
+		this.level = new Level(1, "No level name");
 	}
 	
 	/**
@@ -52,8 +58,19 @@ public class Score implements Comparable<Score>, Serializable {
 	/**
 	 * This method returns the level associated with this {@link Score}.
 	 */
-	public String getLevel() {
+	public Level getLevel() {
 		return level;
+	}
+	
+	/**
+	 * This method updates the level associated with this {@link Score}.
+	 * @param score
+	 */
+	public void setLevel(Level level) {
+		this.level = level;
+		
+		if (statsObs == null) return;
+		statsObs.updateScore(this);
 	}
 	
 	public void update(Score score) {
@@ -70,7 +87,9 @@ public class Score implements Comparable<Score>, Serializable {
 	 */
 	@Override
 	public int compareTo(Score o) {
-		return Integer.compare(this.score, o.score);
+		return level.getLevel() == o.level.getLevel() ? 
+					Integer.compare(this.score, o.score) :
+					Integer.compare(level.getLevel(), o.level.getLevel());
 	}
 	
 	/**

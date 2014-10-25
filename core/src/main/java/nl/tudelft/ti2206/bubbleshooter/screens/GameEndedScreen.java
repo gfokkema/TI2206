@@ -3,8 +3,8 @@ package nl.tudelft.ti2206.bubbleshooter.screens;
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.util.HighScore;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
+import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
