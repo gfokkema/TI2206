@@ -46,6 +46,7 @@ public class BubbleShooter extends Game {
 		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
 		assets.load(SkinID.BUTTON, "brown_button.png");
+		assets.load(SkinID.TEXTFIELD, "brown_textfield.png");
 		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
 		assets.load(SoundID.BUTTON, "ButtonSFX.wav");
 		assets.load(SoundID.CANNON, "BubbleSFX.wav");

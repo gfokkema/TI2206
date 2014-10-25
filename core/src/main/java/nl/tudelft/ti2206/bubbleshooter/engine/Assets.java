@@ -17,7 +17,8 @@ public class Assets {
 	 * This enum contains all types of {@link Skin} assets.
 	 */
 	public enum SkinID {
-		BUTTON
+		BUTTON,
+		TEXTFIELD
 	}
 	/**
 	 * This enum contains all types of {@link Music} assets.
