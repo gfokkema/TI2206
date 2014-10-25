@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -37,7 +40,12 @@ public class GameEndedScreen extends AbstractScreen {
 		
 		Label highscoreLabel = new Label("You've entered the hall of fame!", labelStyle);
 		Label nameLabel = new Label("Please enter your name:", labelStyle);
+		
 		TextField nameField = new TextField("", textStyle);
+		Table nameFieldTable = new Table();
+		nameFieldTable.setBackground(Assets.getAssets().get(SkinID.TEXTFIELD));
+		nameFieldTable.add(nameField).padLeft(20).padRight(20).center().row();
+		
 		TextButton submitButton = new TextButton("Submit", buttonStyle);
 		
 		table.add(messageLabel).expandX().center().row();
@@ -55,7 +63,7 @@ public class GameEndedScreen extends AbstractScreen {
 			
 			table.add(highscoreLabel).spaceTop(50).expandX().center().row();
 			table.add(nameLabel).expandX().center().row();
-			table.add(nameField).expandX().center().row();
+			table.add(nameFieldTable).expandX().center().row();
 			table.add(submitButton).expandX().center().row();
 		} else {
 			table.add(info).expandX().center().row();
