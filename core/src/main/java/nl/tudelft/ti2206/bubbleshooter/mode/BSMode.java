@@ -82,12 +82,13 @@ public abstract class BSMode implements EndingObserver {
 			projectile.move();
 			
 			// FIXME: Reenable this again when testing with insertrows is done
-			// score.add(g.remove() + g.triggerNeighbors() + grid.removeDisconnected());
-			grid.insertRows(0);
-			for (int i = 0; i < grid.getGridWidth() * 2 - 1; i++) {
-				grid.add(new ColourBubble(4), i);
-			}
+			score.add(g.remove() + g.triggerNeighbors() + grid.removeDisconnected());
+			insertRows(0);
 		}
+	}
+	
+	public void insertRows(int row) {
+		return;
 	}
 
 	/**

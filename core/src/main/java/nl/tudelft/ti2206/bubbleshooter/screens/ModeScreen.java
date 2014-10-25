@@ -6,9 +6,11 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.engine.SurvivalFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.SurvivalMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
@@ -30,8 +32,9 @@ public class ModeScreen extends AbstractScreen {
 		
 		Label message = new Label("Choose your mode!", labelStyle);
 		TextButton zenplay = new TextButton("Zen", buttonStyle);
+		TextButton survival = new TextButton("Survival", buttonStyle);
 		TextButton arcade = new TextButton("Arcade", buttonStyle);
-		
+
 		zenplay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -40,6 +43,21 @@ public class ModeScreen extends AbstractScreen {
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
 				BSMode single = new SinglePlayerMode(belowLine, new ZenBoardFactory());
+				
+				GameUIBuilder gub = new GameUIBuilder(game.font);
+				gub.addSinglePlayerStatsBar(belowLine, single.getScore());
+				game.setScreen(new BubbleShooterScreen(game, single, gub.build()));
+			}
+		});
+		
+		survival.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				
+				EndingCondition basic = new BasicCondition();
+				EndingCondition belowLine = new BelowLineCondition(basic);
+				BSMode single = new SurvivalMode(belowLine, new SurvivalFactory());
 				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
 				gub.addSinglePlayerStatsBar(belowLine, single.getScore());
@@ -66,6 +84,7 @@ public class ModeScreen extends AbstractScreen {
 		
 		table.add(message).expandX().center().row();
 		table.add(zenplay).expandX().center().row();
+		table.add(survival).expandX().center().row();
 		table.add(arcade).expandX().center().row();
 	}
 	
