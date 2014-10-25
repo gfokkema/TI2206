@@ -3,27 +3,27 @@
 ---   ---   C00   C00   ---   ---   ---   ---
    ---   C00   C00   C00   ---   ---   ---  
 ---   ---   C00   C00   ---   ---   ---   ---
---- END --- BEGIN OF DOOM ---
+--- END --- BEGIN OF DOOM 01 ---
 --- BEGIN --- SHORES OF DOOM 02 ---
 8x15
 ---   ---   C01   C01   ---   ---   ---   ---
    ---   C01   C02   C01   ---   ---   ---  
 ---   ---   C02   C01   ---   ---   ---   ---
---- END --- SHORES OF DOOM ---
+--- END --- SHORES OF DOOM 02 ---
 --- BEGIN --- WASTETUNNELS OF DOOM 03 ---
 8x15
 ---   ---   C01   C01   ---   C03   ---   ---
    ---   C01   C02   C01   ---   C03   ---  
 ---   ---   C02   C01   ---   C03   C03   ---
    ---   ---   ---   ---   ---   C03   ---  
---- END --- WASTETUNNELS OF DOOM  ---
+--- END --- WASTETUNNELS OF DOOM 03 ---
 --- BEGIN --- REAL DOOM 04 ---
 8x15
 ---   C04   C01   C01   C03   ---   ---   ---
    C04   C04   C01   C02   C01   C03   ---  
 C04   ---   C02   C01   C03   C03   ---   ---
    C03   C03   ---   C04   ---   C03   ---  
---- END --- REAL DOOM ---
+--- END --- REAL DOOM 04 ---
 --- BEGIN --- STONE DOOM 05 ---
 8x15
 C04   ---   C01   C01   C03   ---   ---   ---
@@ -31,7 +31,7 @@ C04   ---   C01   C01   C03   ---   ---   ---
 C04   C02   C01   ---   C03   C03   ---   ---
    C02   C02   S00   C04   C03   ---   ---  
 S00   ---   ---   ---   ---   ---   ---   ---
---- END --- STONE DOOM ---
+--- END --- STONE DOOM 05 ---
 --- BEGIN --- GAUNTLET OF DOOM 06 ---
 8x15
 C02   C02   C02   C02   C02   C02   C02   C02
@@ -39,7 +39,7 @@ C02   C02   C02   C02   C02   C02   C02   C02
 C00   C00   C00   B00   C00   C00   C00   C00
    C01   B00   C01   B00   C01   C01   B00  
 ---   ---   ---   ---   ---   ---   B00   B00
---- END --- GAUNTLET OF DOOM ---
+--- END --- GAUNTLET OF DOOM 06 ---
 --- BEGIN --- DUKE NUKE DOOM 07 ---
 8x15
 C02   ---   C00   C00   C04   ---   ---   ---
@@ -47,7 +47,7 @@ C02   ---   C00   C00   C04   ---   ---   ---
 C01   ---   C02   C01   C04   C04   ---   ---
    C03   C03   ---   C00   ---   C04   ---  
 M00   ---   ---   ---   ---   ---   ---   ---
---- END --- DUKE NUKE DOOM ---
+--- END --- DUKE NUKE DOOM 07 ---
 --- BEGIN --- GAUNTLET OF DOOM 08 ---
 8x15
 C00   C00   C00   C00   C00   C00   C00   C00
@@ -55,7 +55,7 @@ C00   C00   C00   C00   C00   C00   C00   C00
 C02   C02   C02   C02   C02   C02   C02   C02
    C03   B00   C03   C03   C03   C03   C03  
 ---   ---   ---   ---   ---   ---   M00   S00
---- END --- GAUNTLET OF DOOM ---
+--- END --- GAUNTLET OF DOOM 08 ---
 --- BEGIN --- WASTELANDS OF DOOM 09 ---
 8x15
 C00   C00   C00   S00   C00   C00   C00   C00
@@ -64,7 +64,7 @@ C02   C02   S00   M00   S00   C02   C02   C02
    C03   S00   C03   C03   S00   C03   C03  
 C01   C03   C04   ---   C02   C01   C00   C00
    C01   C04   C03   C02   C01   C01   C00  
---- END --- WASTELANDS OF DOOM ---
+--- END --- WASTELANDS OF DOOM 09 ---
 --- BEGIN --- RUINS OF DOOM 10 ---
 8x15
 C00   C00   C00   C00   ---   C01   C00   C00
@@ -73,7 +73,7 @@ S00   S00   ---   ---   ---   C00   C02   C02
    S00   S00   ---   C03   C04   C03   C03  
 S00   S00   ---   C04   C02   C01   C00   C00
    S00   ---   ---   C02   C01   C01   C00  
---- END --- RUINS OF DOOM ---
+--- END --- RUINS OF DOOM 10 ---
 --- BEGIN --- DEADSIMPLE DOOM 11 ---
 8x15
 C01   ---   ---   ---   ---   ---   ---   ---
@@ -87,7 +87,7 @@ C03   B00   C02   C02   C02   C01   C04   C04
 C00   ---   C03   C02   C03   C04   C04   C01
    C00   C00   C02   C02   C03   C03   C03  
 C01   M00   C02   ---   ---   C00   C03   ---
---- END --- DEADSIMPLE DOOM ---
+--- END --- DEADSIMPLE DOOM 11 ---
 --- BEGIN --- SUNLIGHT OF DOOM 12 ---
 8x15
 S00   S00   S00   M00   S00   S00   S00   S00
@@ -97,7 +97,7 @@ C03   B00   B00   C02   C02   C01   C04   C04
 C00   ---   C03   C02   C03   C04   C04   C01
    C00   C00   C02   C02   C03   C03   C03  
 B00   ---   ---   S00   ---   ---   B00   B00
---- END --- SUNLIGHT OF DOOM ---
+--- END --- SUNLIGHT OF DOOM 12 ---
 --- BEGIN --- THE BETRAYAL OF DOOM 13 ---
 8x15
 C00   ---   C03   C02   C03   C04   C04   C01
@@ -107,7 +107,7 @@ C00   ---   C03   C02   C03   C04   C04   C01
 C03   S00   B00   C02   C02   C01   C04   C04
    C01   C00   C03   C03   C01   C03   C03  
 ---   ---   ---   ---   ---   ---   C00   C00
---- END --- THE BETRAYAL OF DOOM ---
+--- END --- THE BETRAYAL OF DOOM 13 ---
 --- BEGIN --- THE FACTORIES OF DOOM 14 ---
 8x15
 C00   ---   C03   C02   C03   C04   C04   C01
@@ -116,7 +116,7 @@ C00   ---   C03   C02   C03   C04   C04   C01
    C01   C02   B00   C03   C04   B00   ---  
 C00   ---   C03   C02   C03   C04   C04   C01
    C00   C00   C02   C02   C03   C03   C03  
---- END --- THE FACTORIES OF DOOM ---
+--- END --- THE FACTORIES OF DOOM 14 ---
 --- BEGIN --- ABANDONED SUBURBS OF DOOM 15 ---
 8x15
 ---   C01   C01   ---   ---   C03   C03   ---
@@ -127,7 +127,7 @@ C00   ---   C03   C02   C03   ---   C04   ---
    C00   C00   C02   C02   S00   S00   S00  
 S00   ---   ---   C03   ---   ---   C03   C03
    ---   ---   ---   ---   ---   ---   C03  
---- END --- ABANDONED SUBURBS OF DOOM ---
+--- END --- ABANDONED SUBURBS OF DOOM 15 ---
 --- BEGIN --- BLOCKED PATH TO DOOM 16 ---
 8x15
 ---   ---   ---   C00   ---   C00   ---   ---
@@ -135,7 +135,7 @@ S00   ---   ---   C03   ---   ---   C03   C03
 ---   ---   ---   C02   C01   ---   ---   ---
    ---   ---   C03   ---   C03   C01   ---  
 ---   ---   S00   S00   S00   S00   ---   ---
---- END --- BLOCKED PATH TO DOOM ---
+--- END --- BLOCKED PATH TO DOOM 16 ---
 --- BEGIN --- DOWNTOWN OF DOOM 17 ---
 8x15
 ---   ---   ---   C00   ---   C00   ---   ---
@@ -145,7 +145,7 @@ C00   ---   C03   C02   C03   C04   C04   C01
 C03   S00   S00   C02   C02   C01   C04   C04
    S00   S00   S00   C02   C02   C04   ---  
 S00   ---   C03   C02   C03   C04   C04   C01
---- END --- DOWNTOWN OF DOOM ---
+--- END --- DOWNTOWN OF DOOM 17 ---
 --- BEGIN --- UNDERHALLS OF DOOM 18 ---
 8x15
 ---   C01   C01   ---   ---   C03   C03   ---
@@ -156,7 +156,7 @@ C00   ---   C03   C02   C03   C04   C04   C01
    C01   C02   B00   C03   C04   B00   ---  
 C03   B00   C02   C02   C02   C01   C04   C04
    ---   ---   ---   ---   ---   ---   C03  
---- END --- UNDERHALLS OF DOOM ---
+--- END --- UNDERHALLS OF DOOM 18 ---
 --- BEGIN --- D-DAY OF DOOM 19 ---
 8x15
 C01   ---   ---   ---   ---   ---   ---   ---
@@ -170,7 +170,7 @@ C03   B00   C02   C02   C02   C01   C04   C04
 C00   ---   C03   C02   C03   C04   C04   C01
    C00   C00   C02   C02   C03   C03   C03  
 C01   ---   ---   C02   ---   ---   C00   C03
---- END --- D-DAY OF DOOM ---
+--- END --- D-DAY OF DOOM 19 ---
 --- BEGIN --- VICTORY OF DOOM 20 ---
 8x15
 C01   C01   ---   ---   ---   C03   C03   C00
@@ -182,4 +182,4 @@ C01   C01   ---   ---   ---   C03   C03   C00
 ---   ---   ---   C00   ---   ---   ---   C00
    ---   ---   ---   ---   ---   ---   ---  
 ---   ---   ---   ---   ---   ---   ---   C00
---- END --- VICTORY OF DOOM ---
+--- END --- VICTORY OF DOOM 20 ---
