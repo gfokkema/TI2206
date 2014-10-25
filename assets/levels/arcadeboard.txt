@@ -88,7 +88,6 @@ C02   C02   S00   M00   S00   C02   C02   C02
    C03   S00   C03   C03   S00   C03   C03
 C01   C03   C04   ---   C02   C01   C00   C00
    C01   C04   C03   C02   C01   C01   C00  
----   ---   ---   ---   ---   ---   ---   ---
 --- END --- BUBBLESHOOTER OF DOOM ---
 --- BEGIN --- RUINS OF DOOM 10 ---
 8x15
