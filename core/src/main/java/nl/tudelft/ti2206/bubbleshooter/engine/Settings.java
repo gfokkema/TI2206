@@ -10,8 +10,18 @@ import java.util.Properties;
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * Is responsible for managing settings:
+ * - Read and Write
+ * Can also set the next theme.
+ * @author group-15
+ *
+ */
 public class Settings {
 
+	/**
+	 * Settings has a singleton pattern.
+	 */
 	private static Settings settings = null;
 	private String filename = "settings.config";
 	Assets assets;
@@ -19,6 +29,10 @@ public class Settings {
 	LinkedList<String> list;
 	Properties prop;
 
+	/**
+	 * Setting constructor being called by the 2nd constructor
+	 * @param assets the {@link Assets} used.
+	 */
 	public Settings(Assets assets){
 		this.assets = assets;
 		prop = new Properties();
@@ -32,6 +46,9 @@ public class Settings {
 		}
 	}
 	
+	/**
+	 * Secondary constructor (singleton pattern).
+	 */
 	public Settings(){
 		this(Assets.getAssets());
 	}
@@ -46,10 +63,17 @@ public class Settings {
 		return settings;
 	}
 	
+	/**
+	 * Sets the theme path.
+	 * @param path
+	 */
 	public void setSettings(String path) {
 		this.currentpath = path;
 	}
 	
+	/**
+	 * Uses the next theme in line.
+	 */
 	public void nextTheme()  {
 		assets.unloadTextures();
 		String last = list.removeLast();
@@ -59,6 +83,9 @@ public class Settings {
 		assets.loadTextures();
 	}
 	
+	/**
+	 * Write to the config file.
+	 */
 	public void writeSettingsFile() {
 		OutputStream out;
 		try {
@@ -76,16 +103,30 @@ public class Settings {
 		}
 	}
 	
+	/**
+	 * Gets the config file name.
+	 * @return filename
+	 */
 	public String getFileName() {
 		return this.filename;
 	}
 	
+	/**
+	 * Reads the config file.
+	 * @param res name of the file
+	 * @return the applied theme setting
+	 * @throws IOException
+	 */
 	public String readSettingsFile(String res) throws IOException {
 		InputStream in = Gdx.files.internal(res).read();
 		return readSettingsFile(in);
 	}
 	
-	
+	/**
+	 * Being called by the other readSettingsFile method.
+	 * @param in is the {@link InputStream} given from the file.
+	 * @return the applied theme setting
+	 */
 	public String readSettingsFile(InputStream in){
 		try {
 			prop.load(in);
@@ -104,6 +145,10 @@ public class Settings {
 		return prop.getProperty("selected_theme");
 	}
 	
+	/**
+	 * Add a theme.
+	 * @param themepath the path to the theme.
+	 */
 	public void addTheme(String themepath) {
 		if(themepath.equals(currentpath)){
 			list.addFirst(themepath);
@@ -113,6 +158,10 @@ public class Settings {
 		}
 	}
 	
+	/**
+	 * Gets the current theme path.
+	 * @return
+	 */
 	public String getCurrentPath() {
 		if(currentpath != null){
 			return this.currentpath;

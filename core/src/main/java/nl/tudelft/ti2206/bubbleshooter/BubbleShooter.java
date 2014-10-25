@@ -4,7 +4,6 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Settings;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
 import nl.tudelft.ti2206.bubbleshooter.logger.ScreenLogger;
@@ -12,7 +11,6 @@ import nl.tudelft.ti2206.bubbleshooter.score.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -61,6 +59,9 @@ public class BubbleShooter extends Game {
 		font.dispose();
 	}
 	
+	/**
+	 * Loads the assets.
+	 */
 	public void loadAssets() {
 		Assets assets = Assets.getAssets();
 		assets.load(MusicID.GAME, "eerie.ogg");

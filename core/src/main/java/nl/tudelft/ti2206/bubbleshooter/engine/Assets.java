@@ -1,11 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.engine;
 
 import java.util.EnumMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -208,6 +203,9 @@ public class Assets {
 		});
 	}
 	
+	/**
+	 * Unload all the textures.
+	 */
 	public void unloadTextures() {
 		for(int i = 0; i< textures.entrySet().size(); i++){
 			String unload = textures.values().iterator().next();
@@ -218,6 +216,9 @@ public class Assets {
 		}
 	}
 	
+	/**
+	 * Load all the textures.
+	 */
 	public void loadTextures() {
 		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
 		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
