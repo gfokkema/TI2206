@@ -41,6 +41,6 @@ public class HighScoreScreen extends AbstractScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
+		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(new MainMenuScreen(game));
 	}
 }

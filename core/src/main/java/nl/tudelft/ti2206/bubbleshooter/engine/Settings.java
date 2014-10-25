@@ -105,7 +105,7 @@ public class Settings {
 		return prop.getProperty("selected_theme");
 	}
 	
-	public void addTheme(String theme, String themepath) {
+	public void addTheme(String themepath) {
 		list.add(themepath);
 	}
 	

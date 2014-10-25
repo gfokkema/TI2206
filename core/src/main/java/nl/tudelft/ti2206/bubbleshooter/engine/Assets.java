@@ -188,7 +188,6 @@ public class Assets {
 	 * @param handle	handle for the {@link Texture} file
 	 */
 	public void load(TextureID id, String handle) {
-		System.out.println(Settings.getSettings().getCurrentPath());
 		String path = Settings.getSettings().getCurrentPath() + handle;
 		textures.put(id, path);
 		loader.load(path, Texture.class);
@@ -205,7 +204,6 @@ public class Assets {
 	}
 	
 	public void unloadTextures() {
-		//TEMP
 		for(int i = 0; i< textures.entrySet().size(); i++){
 			String unload = textures.values().iterator().next();
 			if(assets.loader.isLoaded(unload))
