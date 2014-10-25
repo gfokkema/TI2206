@@ -77,4 +77,26 @@ public class FileHighscoreTest {
 		assertEquals("jan_liet", highScore.getName());
 		assertEquals(80, highScore.getScore());
 	}
+	
+	@Test
+	public void testIsHighScore() {
+		fhs.loadScoreFile();
+		
+		Score score = new Score(100, new Level(1, "test"));
+		assertTrue(fhs.isHighScore(score));
+		
+		for (int i = 0; i < 20; i++) {
+			score.add(10);
+			fhs.addScore(new HighScore(score, "test"));
+		}
+		
+		score = new Score(50, new Level(1, "test"));
+		assertFalse(fhs.isHighScore(score));
+		
+		score = new Score(200, new Level(1, "test"));
+		assertTrue(fhs.isHighScore(score));
+		
+		score = new Score(50, new Level(2, "test"));
+		assertTrue(fhs.isHighScore(score));
+	}
 }
