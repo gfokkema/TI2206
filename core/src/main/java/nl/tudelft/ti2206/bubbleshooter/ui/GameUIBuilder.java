@@ -1,5 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.ui;
 
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
@@ -10,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class GameUIBuilder {
@@ -45,6 +50,11 @@ public class GameUIBuilder {
 		if (left)	barcell.left();
 		else		barcell.right();
 		return new StatsBar(timer, score);
+	}
+
+	public ChatWindow addChatWindow() {
+		table.add(new Window("Chat", new WindowStyle(font, Color.WHITE, Assets.getAssets().get(SkinID.BUTTON))));
+		return null;
 	}
 
 	private Label getLabel() {

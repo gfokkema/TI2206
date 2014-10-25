@@ -9,7 +9,6 @@ public class ChatWindow implements ChatObserver {
 	@Override
 	public void addMessage(String msgstr) {
 		this.msg = new ChatMessage(msgstr);
-
 	}
 
 }
