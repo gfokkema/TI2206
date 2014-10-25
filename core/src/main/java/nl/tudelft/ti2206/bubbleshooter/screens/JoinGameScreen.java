@@ -39,7 +39,7 @@ public class JoinGameScreen extends AbstractScreen {
 		Label label = new Label("Please enter the IP address of a server", labelStyle);
 		TextField text = new TextField("", textStyle);
 		Table textTable = new Table();
-		textTable.setBackground(Assets.getAssets().get(SkinID.TEXTFIELD));
+		textTable.setBackground(Assets.getAssets().get(SkinID.BUTTON));
 		textTable.add(text).padLeft(20).padRight(20).center().row();
 		TextButton connect = new TextButton("Connect", buttonStyle);
 		

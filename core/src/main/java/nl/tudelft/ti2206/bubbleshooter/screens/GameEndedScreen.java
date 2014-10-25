@@ -43,7 +43,7 @@ public class GameEndedScreen extends AbstractScreen {
 		
 		TextField nameField = new TextField("", textStyle);
 		Table nameFieldTable = new Table();
-		nameFieldTable.setBackground(Assets.getAssets().get(SkinID.TEXTFIELD));
+		nameFieldTable.setBackground(Assets.getAssets().get(SkinID.BUTTON));
 		nameFieldTable.add(nameField).padLeft(20).padRight(20).center().row();
 		
 		TextButton submitButton = new TextButton("Submit", buttonStyle);
