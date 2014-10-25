@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.score;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
@@ -15,7 +17,7 @@ public class Score implements Comparable<Score>, Serializable {
 	private static final long serialVersionUID = 2603273380851092688L;
 	private int score;
 	private Level level;
-	private StatsObserver statsObs;
+	private List<StatsObserver> statsObservers;
 	
 	/**
 	 * A method to create a score object.
@@ -25,10 +27,11 @@ public class Score implements Comparable<Score>, Serializable {
 	public Score(int score, Level level) {
 		this.score = score;
 		this.level = level;
+		this.statsObservers = new ArrayList<StatsObserver>();
 	}
 
 	public Score(int score) {
-		this.level = new Level(1, "No level name");
+		this(score, new Level(1, "No level name"));
 	}
 	
 	/**
@@ -42,9 +45,7 @@ public class Score implements Comparable<Score>, Serializable {
 	
 	public void add(int points) {
 		this.score += points;
-		
-		if (statsObs == null) return;
-		statsObs.updateScore(this);
+		updateObservers();
 	}
 	
 	/**
@@ -68,19 +69,18 @@ public class Score implements Comparable<Score>, Serializable {
 	 */
 	public void setLevel(Level level) {
 		this.level = level;
-		
-		if (statsObs == null) return;
-		statsObs.updateScore(this);
+		updateObservers();
 	}
 	
 	public void update(Score score) {
 		this.score = score.score;
 		this.level = score.level;
-		
-		if (statsObs == null) return;
-		statsObs.updateScore(this);
+		updateObservers();
 	}
 	
+	public void updateObservers() {
+		statsObservers.forEach(statsObs -> statsObs.updateScore(this));
+	}
 	/**
 	 * Override method compareTo of the implemented comparable interface
 	 * @return the rank value after it compares it with {@score o} 
@@ -97,6 +97,6 @@ public class Score implements Comparable<Score>, Serializable {
 	 * @param obs the statsobserver.
 	 */
 	public void addStatsObserver(StatsObserver obs) {
-		this.statsObs = obs;
+		statsObservers.add(obs);
 	}
 }
