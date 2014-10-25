@@ -6,6 +6,7 @@ import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.TimerCondition;
 
@@ -24,6 +25,6 @@ public class ArcadeGameFactory extends SPGameFactory {
 
 	@Override
 	protected EndingCondition getEndingCondition() {
-		return new TimerCondition(new BelowLineCondition(new BasicCondition()), gameLength);
+		return new EmptyGridCondition(new TimerCondition(new BelowLineCondition(new BasicCondition()), gameLength));
 	}
 }

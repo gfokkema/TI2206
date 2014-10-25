@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,24 +15,23 @@ import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
-import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.OpponentAdapter;
+import nl.tudelft.ti2206.bubbleshooter.score.Level;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.chat.ChatMessage;
 
 import com.badlogic.gdx.math.Vector2;
-
 /**
  * Multiplayer mode for playing with your friends!
  * This mode allows an user to player across the network to play to each other.
  * @author group-15
  *
  */
-public class MultiPlayerMode extends GameMode implements Runnable, Observer {
+public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver, Observer {
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 
@@ -41,7 +41,6 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	private Projectile projectile2;
 	private Vector2 offset1, offset2;
 	private EndingCondition condition2;
-	private StatsObserver opponentStatsObs;
 	private OpponentAdapter opponentEndingObs;
 	private Score opponentScore;
 
@@ -56,6 +55,7 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	 */
 	public MultiPlayerMode(EndingCondition end, Iterator<Grid> grids, Score score, Score oppScore, ObjectInputStream in, ObjectOutputStream out) {
 		super(end, grids, score);
+		this.score.addStatsObserver(this);
 		this.opponentScore = oppScore;
 		oppScore.setLevel(new Level(1, grid.getName()));
 		
@@ -170,7 +170,6 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 			out.flush();
 			out.reset();
 		} catch (IOException e) {
-			won();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -212,11 +211,6 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	public void update(Observable o, Object arg) {
 		if (o instanceof BSDrawable) write(o);
 	}
-
-	public void addOpponentStatsObserver(StatsObserver multi) {
-		opponentStatsObs = multi;
-		condition2.addStatsObserver(opponentStatsObs);
-	}
 	
 	public void disconnect() {
 		try {
@@ -231,13 +225,21 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	
 	@Override
 	public void lost() {
-		disconnect();
 		super.lost();
+		disconnect();
 	}
 
 	@Override
 	public void won() {
-		disconnect();
 		super.won();
+		disconnect();
+	}
+
+	@Override
+	public void updateTimer(Duration duration) {}
+
+	@Override
+	public void updateScore(Score score) {
+		write(score);
 	}
 }

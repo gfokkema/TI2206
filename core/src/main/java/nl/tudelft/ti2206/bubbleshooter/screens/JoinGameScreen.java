@@ -6,6 +6,8 @@ import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.MPGameFactory;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
@@ -13,6 +15,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -35,6 +38,9 @@ public class JoinGameScreen extends AbstractScreen {
 		
 		Label label = new Label("Please enter the IP address of a server", labelStyle);
 		TextField text = new TextField("", textStyle);
+		Table textTable = new Table();
+		textTable.setBackground(Assets.getAssets().get(SkinID.TEXTFIELD));
+		textTable.add(text).padLeft(20).padRight(20).center().row();
 		TextButton connect = new TextButton("Connect", buttonStyle);
 		
 		connect.addListener(new ClickListener() {
@@ -46,7 +52,7 @@ public class JoinGameScreen extends AbstractScreen {
 		});
 		
 		table.add(label).expandX().center().row();
-		table.add(text).expandX().center().row();
+		table.add(textTable).expandX().center().row();
 		table.add(connect).expandX().center().row();
 	}
 	

@@ -9,6 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
+import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
@@ -49,7 +50,7 @@ public class MPGameFactory extends GameFactory {
 
 	@Override
 	protected EndingCondition getEndingCondition() {
-		return new BelowLineCondition(new BasicCondition());
+		return new EmptyGridCondition(new BelowLineCondition(new BasicCondition()));
 	}
 
 }
