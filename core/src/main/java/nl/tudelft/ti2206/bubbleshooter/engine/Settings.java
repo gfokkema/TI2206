@@ -57,7 +57,7 @@ public class Settings {
 		setSettings(last);
 		writeSettingsFile();
 		list.addFirst(last);
-		assets.reload();
+		assets.loadTextures();
 	}
 	
 	public void writeSettingsFile() {

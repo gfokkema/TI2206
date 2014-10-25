@@ -45,29 +45,7 @@ public class BubbleShooter extends Game {
 		Settings settings = Settings.getSettings();
 		settings.addTheme("themes/space/");
 		settings.addTheme("themes/dark/");
-		
-		Assets assets = Assets.getAssets();
-		assets.load(MusicID.GAME, "eerie.ogg");
-		assets.load(MusicID.MENU, "BGMenu.ogg");
-		assets.load(SkinID.BUTTON, "brown_button.png");
-		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
-		assets.load(SoundID.BUTTON, "ButtonSFX.wav");
-		assets.load(SoundID.CANNON, "BubbleSFX.wav");
-		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
-		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
-		assets.load(TextureID.BORDER, "MPborder.png");
-		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
-		assets.load(TextureID.CANNON, "cannon.png");
-		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
-		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
-		assets.load(TextureID.MICHAELBAYBUBBLE, "Nuke.png");
-		assets.finish();
-		
-		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		assets.get(TextureID.MICHAELBAYBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		loadAssets();
 	
 		scores = new FileHighscore();
 		mms = new MainMenuScreen(this);
@@ -81,5 +59,16 @@ public class BubbleShooter extends Game {
 	public void dispose() {
 		batch.dispose();
 		font.dispose();
+	}
+	
+	public void loadAssets() {
+		Assets assets = Assets.getAssets();
+		assets.load(MusicID.GAME, "eerie.ogg");
+		assets.load(MusicID.MENU, "BGMenu.ogg");
+		assets.load(SkinID.BUTTON, "brown_button.png");
+		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
+		assets.load(SoundID.BUTTON, "ButtonSFX.wav");
+		assets.load(SoundID.CANNON, "BubbleSFX.wav");
+		assets.loadTextures();
 	}
 }
