@@ -3,7 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

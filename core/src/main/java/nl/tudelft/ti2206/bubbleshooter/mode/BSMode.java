@@ -9,6 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 import nl.tudelft.ti2206.bubbleshooter.core.Level;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
@@ -80,7 +81,12 @@ public abstract class BSMode implements EndingObserver {
 			//			trigger the network sync...
 			projectile.move();
 			
-			score.add(g.remove() + g.triggerNeighbors() + grid.removeDisconnected());
+			// FIXME: Reenable this again when testing with insertrows is done
+			// score.add(g.remove() + g.triggerNeighbors() + grid.removeDisconnected());
+			grid.insertRows(0);
+			for (int i = 0; i < grid.getGridWidth() * 2 - 1; i++) {
+				grid.add(new ColourBubble(4), i);
+			}
 		}
 	}
 

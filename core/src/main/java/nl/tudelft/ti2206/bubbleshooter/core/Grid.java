@@ -134,6 +134,23 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 		}
 		return new ArrayList<Color>(colours);
 	}
+	
+	/**
+	 * This method inserts 2 rows of bubbles starting from the row index given.
+	 */
+	public void insertRows(int row) {
+		for (int i = cells.size() - 1; i >= toIdx(0, row); i--) {
+			GridCell curCell = cells.get(i);
+			int new_idx = i - toIdx(0, 2);
+			if (!curCell.isOccupied() && new_idx >= 0) {
+				GridCell newCell = cells.get(new_idx);
+				curCell.setBubble(newCell.getBubble());
+				newCell.removeBubble();
+			}
+		}
+		
+		setChanged();
+	}
 
 
 	/**
