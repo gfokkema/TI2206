@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 public class StatsBar implements StatsObserver {

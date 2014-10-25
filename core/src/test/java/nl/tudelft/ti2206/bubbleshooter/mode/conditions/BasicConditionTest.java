@@ -4,7 +4,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
-import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 
 import org.junit.Before;
@@ -16,13 +16,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class BasicConditionTest {
 	@Mock EndingObserver obs;
-	@Mock BSMode mode;
+	@Mock GameMode mode;
 	@Mock Grid grid;
 	public EndingCondition basic;
 
 	@Before
 	public void setUp() {
-		basic = new BasicCondition();
+		basic = new EmptyGridCondition(new BasicCondition());
 		basic.addEndingObserver(obs);
 	}
 

@@ -12,9 +12,10 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.score.Level;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
@@ -24,7 +25,7 @@ import com.badlogic.gdx.math.Vector2;
  * It contains the basic game-logic applicable to all other game-modes.
  * It acts as an observable, calling a {@link StatsObserver} to update.
  */
-public abstract class BSMode implements EndingObserver {
+public abstract class GameMode implements EndingObserver {
 	protected Iterator<Grid> grids;
 	protected Grid grid;
 	protected Cannon cannon;
@@ -36,24 +37,23 @@ public abstract class BSMode implements EndingObserver {
 	protected GameObserver gameObs;
 
 	protected EndingCondition end;
-	private Score score;
+	protected Score score;
 
 	/**
-	 * BSMode constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
+	 * {@link GameMode} constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
 	 * @param end the {@link EndingCondition} of the game.
 	 * @param factory the used {@link BoardFactory} for the game.
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
-	public BSMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		this.grids = factory.makeLevels();
+	public GameMode(EndingCondition end, Iterator<Grid> grids, Score score) {
+		this.grids = grids;
 		this.grid = grids.next();
-		this.cannon = cannon;
+		this.cannon = new Cannon(160,15);
 		this.end = end;
-		this.score = new Score(0, grid.getName());
-		
+		this.score = score;
+		score.setLevel(new Level(1, grid.getName()));
 		setProjectile(cannon.getProjectile());
 		
-		this.grid.addObserver(Logger.getLogger());
 		this.cannon.addObserver(Logger.getLogger());
 		this.end.addEndingObserver(this);
 	}
@@ -157,11 +157,12 @@ public abstract class BSMode implements EndingObserver {
 	}
 	
 	/**
-	 * Switches {@link BSMode} to the next {@link Board}.
+	 * Switches {@link GameMode} to the next {@link Board}.
 	 */
 	public void next() {
 		this.grid.deleteObservers();
 		this.grid = grids.next();
+		score.setLevel(new Level(score.getLevel().getLevel() + 1, grid.getName()));
 		this.grid.addObserver(Logger.getLogger());
 	}
 

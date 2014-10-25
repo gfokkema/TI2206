@@ -5,20 +5,17 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+import nl.tudelft.ti2206.bubbleshooter.MPGameFactory;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
-import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -41,6 +38,9 @@ public class JoinGameScreen extends AbstractScreen {
 		
 		Label label = new Label("Please enter the IP address of a server", labelStyle);
 		TextField text = new TextField("", textStyle);
+		Table textTable = new Table();
+		textTable.setBackground(Assets.getAssets().get(SkinID.TEXTFIELD));
+		textTable.add(text).padLeft(20).padRight(20).center().row();
 		TextButton connect = new TextButton("Connect", buttonStyle);
 		
 		connect.addListener(new ClickListener() {
@@ -52,7 +52,7 @@ public class JoinGameScreen extends AbstractScreen {
 		});
 		
 		table.add(label).expandX().center().row();
-		table.add(text).expandX().center().row();
+		table.add(textTable).expandX().center().row();
 		table.add(connect).expandX().center().row();
 	}
 	
@@ -83,13 +83,6 @@ public class JoinGameScreen extends AbstractScreen {
 			Gdx.app.exit();
 		}
 		
-		EndingCondition basic = new BasicCondition();
-		EndingCondition belowLine = new BelowLineCondition(basic);
-		EndingCondition emptyGrid = new EmptyGridCondition(belowLine);
-		MultiPlayerMode multi = new MultiPlayerMode(emptyGrid, br, bw);
-		
-		GameUIBuilder gub = new GameUIBuilder(game.font);
-		gub.addMultiPlayerStatsBars(emptyGrid, multi.getScore(), new Score(0, "multi"));
-		game.setScreen(new BubbleShooterScreen(game, multi, gub.build()));
+		game.setScreen(new BubbleShooterScreen(game, new MPGameFactory(game, br, bw)));
 	}
 }

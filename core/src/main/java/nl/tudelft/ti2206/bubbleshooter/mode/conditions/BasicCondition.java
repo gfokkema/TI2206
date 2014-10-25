@@ -14,9 +14,7 @@ public class BasicCondition extends EndingCondition {
 	 * Check if the {@link Board} is empty.
 	 */
 	@Override
-	public void check(Grid grid) {
-		if (grid.isEmpty()) this.won();
-	}
+	public void check(Grid grid) {}
 
 	@Override
 	public void lost() {
