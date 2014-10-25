@@ -41,9 +41,9 @@ public class OptionsScreen extends AbstractScreen {
 		Label sfxlabel = new Label("Change SFX", labelStyle);
 		TextButton sfxup = new TextButton("+", buttonStyle);
 		TextButton sfxdown = new TextButton("-", buttonStyle);
-		Label themelabel = new Label("Change Theme", labelStyle);
-		TextButton themeleft = new TextButton("<", buttonStyle);
-		TextButton themeright = new TextButton(">", buttonStyle);
+		Label themelabel = new Label("Current Theme", labelStyle);
+		TextButton themenext = new TextButton("Change Theme", buttonStyle);
+
 		
 		volup.addListener(new ClickListener() {
 			@Override
@@ -73,19 +73,11 @@ public class OptionsScreen extends AbstractScreen {
 				SoundEngine.getSoundEngine().setSFXVolume(SoundEngine.getSoundEngine().getSFXVolume() - volumeStep);
 			}
 		});
-		themeleft.addListener(new ClickListener() {
+		themenext.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-				Settings.getSettings().left();
-				game.setScreen(new OptionsScreen(game));
-			}
-		});
-		themeright.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-				Settings.getSettings().right();
+				Settings.getSettings().nextTheme();
 				game.setScreen(new OptionsScreen(game));
 			}
 		});
@@ -102,8 +94,7 @@ public class OptionsScreen extends AbstractScreen {
 		
 		HorizontalGroup themegroup = new HorizontalGroup();
 		themegroup.space(20);
-		themegroup.addActor(themeleft);
-		themegroup.addActor(themeright);
+		themegroup.addActor(themenext);
 		
 		table.add(vollabel).expandX().center().row();
 		table.add(volgroup).expandX().center().row();

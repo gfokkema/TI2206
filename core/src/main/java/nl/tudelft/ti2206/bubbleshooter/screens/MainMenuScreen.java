@@ -82,15 +82,4 @@ public class MainMenuScreen extends AbstractScreen {
 		table.add(options).expandX().center().row();
 		table.add(quit).expandX().center().row();
 	}
-	
-//	/**
-//	 * Show is being called upon entering the screen.
-//	 */
-//	@Override
-//	public void show() {
-//		Gdx.input.setInputProcessor(stage);
-//		SoundEngine.getSoundEngine().play(MusicID.MENU);
-//		
-//	}
-
 }

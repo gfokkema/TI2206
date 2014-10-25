@@ -1,37 +1,35 @@
 package nl.tudelft.ti2206.bubbleshooter.engine;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
+import java.io.OutputStream;
 import java.util.LinkedList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import java.util.Properties;
 
 import com.badlogic.gdx.Gdx;
 
 public class Settings {
 
 	private static Settings settings = null;
-	private String filename = "Settings.txt";
+	private String filename = "settings.config";
 	Assets assets;
 	String currentpath;
 	LinkedList<String> list;
+	Properties prop;
 
 	public Settings(Assets assets){
 		this.assets = assets;
+		prop = new Properties();
 		list = new LinkedList<String>();
-		// default selected theme
-		setSettings("themes/dark/");
+		
+		try {
+			setSettings(readSettingsFile(getFileName()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Settings(){
@@ -50,36 +48,32 @@ public class Settings {
 	
 	public void setSettings(String path) {
 		this.currentpath = path;
-		writeSettingsFile();
 	}
 	
-	public void left() {
+	public void nextTheme()  {
 		assets.unloadTextures();
+		// kinda shitty
 		String first = list.removeFirst();
-		setSettings(list.getFirst());
+		setSettings(first);
+		writeSettingsFile();
 		list.add(first);
-
 		assets.reload();
 	}
 	
-	public void right() {
-		//TODO
-	}
-	
 	public void writeSettingsFile() {
-		PrintWriter writer;
+		OutputStream out;
 		try {
-			writer = new PrintWriter(filename, "UTF-8");
-			//FIXME only writing currently selected theme (nothing with sound settings saving)
-			writer.println("[GameOptions]");
-			writer.println(currentpath);
-			writer.close();
-		} catch (FileNotFoundException e) {
+			out = new FileOutputStream(getFileName());
+			prop.setProperty("selected_theme", list.getFirst());
+		try {
+			prop.store(out, null);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
+		}
+		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 	
@@ -93,28 +87,33 @@ public class Settings {
 	}
 	
 	
-	public String readSettingsFile(InputStream in) throws IOException {
-		InputStreamReader is = new InputStreamReader(in);
-		BufferedReader br = new BufferedReader(is);
-		
-		String setting;
-		while ((setting = br.readLine()) != null) {
-			Matcher matcher = Pattern.compile("[GameOptions]").matcher(setting);
-			if (!matcher.matches()) throw new IOException();
-			
-			//TODO only accounting for one line now.
-			if((setting = br.readLine()) != null)
-				 return setting;
+	public String readSettingsFile(InputStream in){
+		try {
+			prop.load(in);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		return setting;
+		}
+		return prop.getProperty("selected_theme");
 	}
 	
-	public void addTheme(String themepath) {
+	public void addTheme(String theme, String themepath) {
 		list.add(themepath);
 	}
 	
 	public String getCurrentPath() {
-		return this.currentpath;
+		if(currentpath != null){
+			return this.currentpath;
+		}
+		return "";
 	}
 
 }

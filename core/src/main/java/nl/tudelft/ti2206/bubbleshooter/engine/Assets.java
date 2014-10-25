@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
@@ -204,32 +205,16 @@ public class Assets {
 	}
 	
 	public void unloadTextures() {
-//		for(int i = 0; i < textures.entrySet().size(); i++){
-//		Iterator<TextureID> keyset = textures.keySet().iterator();
-//		if(keyset.hasNext()){
-//			TextureID next = textures.keySet().iterator().next(); 
-//			load(next, textures.get(next));
-//		}
-//	}
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "MainMenuDoomBG.png");
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "BG_back.png");
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "MPborder.png");
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "Bubble-Blue.png");
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "cannon.png");
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "StoneBubble.png");
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "BomBubble.png");
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "Nuke.png");
+		//TEMP
+		for(int i = 0; i< textures.entrySet().size(); i++){
+			String unload = textures.values().iterator().next();
+			if(assets.loader.isLoaded(unload))
+				assets.loader.unload(unload);	
+		}
 	}
 	
 	public void reload() {
-//		for(int i = 0; i < textures.entrySet().size(); i++){
-//			Iterator<TextureID> keyset = textures.keySet().iterator();
-//			if(keyset.hasNext()){
-//				TextureID next = textures.keySet().iterator().next(); 
-//				load(next, textures.get(next));
-//			}
-//		}
-
+		//TEMP
 		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
 		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
 		assets.load(TextureID.BORDER, "MPborder.png");
@@ -238,6 +223,12 @@ public class Assets {
 		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
 		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
 		assets.load(TextureID.MICHAELBAYBUBBLE, "Nuke.png");
+		
+		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.MICHAELBAYBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.finish();
 	}
 }

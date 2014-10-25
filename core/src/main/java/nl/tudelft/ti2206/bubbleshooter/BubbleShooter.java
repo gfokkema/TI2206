@@ -43,8 +43,8 @@ public class BubbleShooter extends Game {
 		font = new BitmapFont();
 		Logger.getLogger().addLog(new ScreenLogger());
 		Settings settings = Settings.getSettings();
-		settings.addTheme("themes/dark/");
-		settings.addTheme("themes/space/");
+		settings.addTheme("dark_theme", "themes/dark/");
+		settings.addTheme("space_theme", "themes/space/");
 		
 		Assets assets = Assets.getAssets();
 		assets.load(MusicID.GAME, "eerie.ogg");
