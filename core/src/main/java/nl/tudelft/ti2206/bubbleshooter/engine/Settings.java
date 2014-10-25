@@ -52,7 +52,6 @@ public class Settings {
 	
 	public void nextTheme()  {
 		assets.unloadTextures();
-		// kinda shitty
 		String last = list.removeLast();
 		setSettings(last);
 		writeSettingsFile();
