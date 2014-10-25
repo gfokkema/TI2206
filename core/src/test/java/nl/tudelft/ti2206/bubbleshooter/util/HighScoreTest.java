@@ -3,6 +3,8 @@ package nl.tudelft.ti2206.bubbleshooter.util;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import nl.tudelft.ti2206.bubbleshooter.core.Level;
+import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
 import org.junit.Test;
 

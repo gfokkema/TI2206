@@ -9,6 +9,9 @@ import java.io.File;
 import java.util.NavigableSet;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Level;
+import nl.tudelft.ti2206.bubbleshooter.score.FileHighscore;
+import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -7,8 +7,8 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
 import nl.tudelft.ti2206.bubbleshooter.logger.ScreenLogger;
+import nl.tudelft.ti2206.bubbleshooter.score.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
-import nl.tudelft.ti2206.bubbleshooter.util.FileHighscore;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;

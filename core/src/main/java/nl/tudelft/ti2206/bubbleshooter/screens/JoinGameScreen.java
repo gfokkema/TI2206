@@ -13,8 +13,8 @@ import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

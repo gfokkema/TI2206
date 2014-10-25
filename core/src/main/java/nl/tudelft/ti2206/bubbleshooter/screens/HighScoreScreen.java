@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NavigableSet;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.util.HighScore;
+import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

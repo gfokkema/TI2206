@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.util;
+package nl.tudelft.ti2206.bubbleshooter.score;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

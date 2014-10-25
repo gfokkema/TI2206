@@ -1,9 +1,10 @@
-package nl.tudelft.ti2206.bubbleshooter.util;
+package nl.tudelft.ti2206.bubbleshooter.score;
 
 import java.io.Serializable;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 /**
  * A class which creates a object for the scoresFile.
