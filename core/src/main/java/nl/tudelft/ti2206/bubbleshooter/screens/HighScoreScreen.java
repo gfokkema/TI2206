@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NavigableSet;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
-import nl.tudelft.ti2206.bubbleshooter.util.HighScore;
+import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -48,6 +48,6 @@ public class HighScoreScreen extends AbstractScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
+		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(new MainMenuScreen(game));
 	}
 }

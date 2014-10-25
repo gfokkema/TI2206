@@ -1,7 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.rmi.server.SocketSecurityException;
+
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Settings;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
 import com.badlogic.gdx.Gdx;
@@ -38,6 +41,9 @@ public class OptionsScreen extends AbstractScreen {
 		Label sfxlabel = new Label("Change SFX", labelStyle);
 		TextButton sfxup = new TextButton("+", buttonStyle);
 		TextButton sfxdown = new TextButton("-", buttonStyle);
+		Label themelabel = new Label("Current Theme", labelStyle);
+		TextButton themenext = new TextButton("Change Theme", buttonStyle);
+
 		
 		volup.addListener(new ClickListener() {
 			@Override
@@ -67,6 +73,14 @@ public class OptionsScreen extends AbstractScreen {
 				SoundEngine.getSoundEngine().setSFXVolume(SoundEngine.getSoundEngine().getSFXVolume() - volumeStep);
 			}
 		});
+		themenext.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
+				Settings.getSettings().nextTheme();
+				game.setScreen(new OptionsScreen(game));
+			}
+		});
 		
 		HorizontalGroup volgroup = new HorizontalGroup();
 		volgroup.space(20);
@@ -78,10 +92,16 @@ public class OptionsScreen extends AbstractScreen {
 		sfxgroup.addActor(sfxup);
 		sfxgroup.addActor(sfxdown);
 		
+		HorizontalGroup themegroup = new HorizontalGroup();
+		themegroup.space(20);
+		themegroup.addActor(themenext);
+		
 		table.add(vollabel).expandX().center().row();
 		table.add(volgroup).expandX().center().row();
 		table.add(sfxlabel).expandX().center().row();
 		table.add(sfxgroup).expandX().center().row();
+		table.add(themelabel).expandX().center().row();
+		table.add(themegroup).expandX().center().row();
 	}
 	
 	/**
@@ -90,6 +110,6 @@ public class OptionsScreen extends AbstractScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
+		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(new MainMenuScreen(game));
 	}
 }

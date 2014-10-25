@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
@@ -17,7 +18,8 @@ public class Assets {
 	 * This enum contains all types of {@link Skin} assets.
 	 */
 	public enum SkinID {
-		BUTTON
+		BUTTON,
+		TEXTFIELD
 	}
 	/**
 	 * This enum contains all types of {@link Music} assets.
@@ -165,8 +167,9 @@ public class Assets {
 	 * @param handle	handle for the {@link Drawable} file
 	 */
 	public void load(SkinID id, String handle) {
-		skins.put(id, handle);
-		loader.load(handle, Texture.class);
+		String path = Settings.getSettings().getCurrentPath() + handle;
+		skins.put(id, path);
+		loader.load(path, Texture.class);
 	}
 	
 	/**
@@ -185,8 +188,9 @@ public class Assets {
 	 * @param handle	handle for the {@link Texture} file
 	 */
 	public void load(TextureID id, String handle) {
-		textures.put(id, handle);
-		loader.load(handle, Texture.class);
+		String path = Settings.getSettings().getCurrentPath() + handle;
+		textures.put(id, path);
+		loader.load(path, Texture.class);
 	}
 	
 	/**
@@ -197,5 +201,40 @@ public class Assets {
 		skins.values().forEach((String handle) -> {
 			skin.add(handle, loader.get(handle), Texture.class);
 		});
+	}
+	
+	/**
+	 * Unload all the textures.
+	 */
+	public void unloadTextures() {
+		for(int i = 0; i< textures.entrySet().size(); i++){
+			String unload = textures.values().iterator().next();
+			if(assets.loader.isLoaded(unload)){
+				assets.loader.unload(unload);
+				textures.remove(unload);
+			}
+		}
+	}
+	
+	/**
+	 * Load all the textures.
+	 */
+	public void loadTextures() {
+		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
+		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
+		assets.load(TextureID.BORDER, "MPborder.png");
+		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
+		assets.load(TextureID.CANNON, "cannon.png");
+		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
+		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
+		assets.load(TextureID.MICHAELBAYBUBBLE, "Nuke.png");
+		assets.load(SkinID.BUTTON, "brown_button.png");
+		assets.finish();
+	
+		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.MICHAELBAYBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 	}
 }

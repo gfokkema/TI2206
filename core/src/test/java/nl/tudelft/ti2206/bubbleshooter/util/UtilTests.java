@@ -5,9 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ FileHighscoreTest.class,
-				GetIPTest.class,
-				HighScoreTest.class })
+@SuiteClasses({ GetIPTest.class })
 public class UtilTests {
 
 }

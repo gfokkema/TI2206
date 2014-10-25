@@ -1,7 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.ui;
 
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
-import nl.tudelft.ti2206.bubbleshooter.util.Score;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -30,10 +30,8 @@ public class GameUIBuilder {
 
 	public void addMultiPlayerStatsBars(EndingCondition end, Score score, Score oppscore) {
 		addSinglePlayerStatsBar(end, score);
-		addSinglePlayerStatsBar(end, oppscore);
 		StatsBar multi = addStatsBar(false);
-		// FIXME:
-		//gameMode.addOpponentStatsObserver(multi);
+		oppscore.addStatsObserver(multi);
 	}
 
 	public StatsBar addStatsBar(boolean left) {

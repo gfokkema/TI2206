@@ -333,6 +333,10 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 		
 		return toIdx(x_id, y_id);
 	}
+	
+	public void shift() {
+		
+	}
 
 	@Override
 	public TextureID getTexture() {
