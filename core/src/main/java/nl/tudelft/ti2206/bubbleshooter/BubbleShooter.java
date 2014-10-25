@@ -5,6 +5,7 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Settings;
 import nl.tudelft.ti2206.bubbleshooter.logger.Logger;
 import nl.tudelft.ti2206.bubbleshooter.logger.ScreenLogger;
 import nl.tudelft.ti2206.bubbleshooter.screens.MainMenuScreen;
@@ -41,7 +42,10 @@ public class BubbleShooter extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		Logger.getLogger().addLog(new ScreenLogger());
-	
+		Settings settings = Settings.getSettings();
+		settings.addTheme("themes/dark/");
+		settings.addTheme("themes/space/");
+		
 		Assets assets = Assets.getAssets();
 		assets.load(MusicID.GAME, "eerie.ogg");
 		assets.load(MusicID.MENU, "BGMenu.ogg");
@@ -64,9 +68,8 @@ public class BubbleShooter extends Game {
 		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.MICHAELBAYBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
+		//System.out.println(assets.loader.isLoaded(Settings.getSettings().getCurrentPath() + "MainMenuDoomBG.png"));
 		scores = new FileHighscore();
-		
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
 	}

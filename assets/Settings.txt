@@ -1,0 +1,2 @@
+[GameOptions]
+themes/space/

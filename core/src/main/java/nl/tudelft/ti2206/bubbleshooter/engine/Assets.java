@@ -1,6 +1,8 @@
 package nl.tudelft.ti2206.bubbleshooter.engine;
 
 import java.util.EnumMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -185,8 +187,10 @@ public class Assets {
 	 * @param handle	handle for the {@link Texture} file
 	 */
 	public void load(TextureID id, String handle) {
-		textures.put(id, handle);
-		loader.load(handle, Texture.class);
+		System.out.println(Settings.getSettings().getCurrentPath());
+		String path = Settings.getSettings().getCurrentPath() + handle;
+		textures.put(id, path);
+		loader.load(path, Texture.class);
 	}
 	
 	/**
@@ -197,5 +201,43 @@ public class Assets {
 		skins.values().forEach((String handle) -> {
 			skin.add(handle, loader.get(handle), Texture.class);
 		});
+	}
+	
+	public void unloadTextures() {
+//		for(int i = 0; i < textures.entrySet().size(); i++){
+//		Iterator<TextureID> keyset = textures.keySet().iterator();
+//		if(keyset.hasNext()){
+//			TextureID next = textures.keySet().iterator().next(); 
+//			load(next, textures.get(next));
+//		}
+//	}
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "MainMenuDoomBG.png");
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "BG_back.png");
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "MPborder.png");
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "Bubble-Blue.png");
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "cannon.png");
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "StoneBubble.png");
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "BomBubble.png");
+		assets.loader.unload(Settings.getSettings().getCurrentPath() + "Nuke.png");
+	}
+	
+	public void reload() {
+//		for(int i = 0; i < textures.entrySet().size(); i++){
+//			Iterator<TextureID> keyset = textures.keySet().iterator();
+//			if(keyset.hasNext()){
+//				TextureID next = textures.keySet().iterator().next(); 
+//				load(next, textures.get(next));
+//			}
+//		}
+
+		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
+		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
+		assets.load(TextureID.BORDER, "MPborder.png");
+		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
+		assets.load(TextureID.CANNON, "cannon.png");
+		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
+		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
+		assets.load(TextureID.MICHAELBAYBUBBLE, "Nuke.png");
+		assets.finish();
 	}
 }

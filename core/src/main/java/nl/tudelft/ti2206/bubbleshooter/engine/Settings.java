@@ -7,8 +7,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.MusicID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
 import com.badlogic.gdx.Gdx;
 
@@ -18,9 +25,13 @@ public class Settings {
 	private String filename = "Settings.txt";
 	Assets assets;
 	String currentpath;
+	LinkedList<String> list;
 
 	public Settings(Assets assets){
 		this.assets = assets;
+		list = new LinkedList<String>();
+		// default selected theme
+		setSettings("themes/dark/");
 	}
 	
 	public Settings(){
@@ -43,11 +54,16 @@ public class Settings {
 	}
 	
 	public void left() {
-		//TODO take the left item from the current pos
+		assets.unloadTextures();
+		String first = list.removeFirst();
+		setSettings(list.getFirst());
+		list.add(first);
+
+		assets.reload();
 	}
 	
 	public void right() {
-		//TODO take the right item from the current pos
+		//TODO
 	}
 	
 	public void writeSettingsFile() {
@@ -55,6 +71,7 @@ public class Settings {
 		try {
 			writer = new PrintWriter(filename, "UTF-8");
 			//FIXME only writing currently selected theme (nothing with sound settings saving)
+			writer.println("[GameOptions]");
 			writer.println(currentpath);
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -92,5 +109,12 @@ public class Settings {
 		return setting;
 	}
 	
+	public void addTheme(String themepath) {
+		list.add(themepath);
+	}
+	
+	public String getCurrentPath() {
+		return this.currentpath;
+	}
 
 }
