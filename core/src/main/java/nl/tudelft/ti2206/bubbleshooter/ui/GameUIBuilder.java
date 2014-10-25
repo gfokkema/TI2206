@@ -9,6 +9,7 @@ import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -53,7 +54,7 @@ public class GameUIBuilder {
 	}
 
 	public ChatWindow addChatWindow() {
-		table.add(new Window("Chat", new WindowStyle(font, Color.WHITE, Assets.getAssets().get(SkinID.BUTTON))));
+		table.add(new Dialog("Chat", new WindowStyle(font, Color.WHITE, Assets.getAssets().get(SkinID.BUTTON)))).expand();
 		return null;
 	}
 

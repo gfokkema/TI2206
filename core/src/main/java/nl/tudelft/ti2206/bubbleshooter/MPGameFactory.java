@@ -40,6 +40,7 @@ public class MPGameFactory extends GameFactory {
 	@Override
 	public GameUI createUI() {
 		gub.addMultiPlayerStatsBars(end, ownScore, oppScore);
+		gub.addChatWindow();
 		return gub.build();
 	}
 
