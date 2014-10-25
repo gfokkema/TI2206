@@ -9,9 +9,9 @@ import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
+import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 
 public class SurvivalGameFactory extends SPGameFactory {
-	EndingCondition end;
 	Score score;
 
 	public SurvivalGameFactory(BubbleShooter bs) {
@@ -35,5 +35,11 @@ public class SurvivalGameFactory extends SPGameFactory {
 	@Override
 	protected EndingCondition getEndingCondition() {
 		return new BelowLineCondition(new EmptyGridCondition(new BasicCondition()));
+	}
+	
+	@Override
+	public GameUI createUI() {
+		gub.addSinglePlayerStatsBar(end, score);
+		return gub.build();
 	}
 }

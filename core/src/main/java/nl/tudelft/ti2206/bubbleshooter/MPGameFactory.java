@@ -15,7 +15,6 @@ import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 
 public class MPGameFactory extends GameFactory {
-	EndingCondition end;
 	Score ownScore;
 	Score oppScore;
 	ObjectInputStream in;

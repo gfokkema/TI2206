@@ -10,6 +10,7 @@ import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
 
 public abstract class GameFactory {
+	protected EndingCondition end;
 	protected GameUIBuilder gub;
 
 	public GameFactory(BubbleShooter bs) {
