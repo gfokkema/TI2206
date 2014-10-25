@@ -2,14 +2,11 @@ package nl.tudelft.ti2206.bubbleshooter.score;
 
 import java.io.Serializable;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 /**
  * A class which creates a object for the scoresFile.
- * @author group-15
- *
  */
 public class Score implements Comparable<Score>, Serializable {
 	private static final long serialVersionUID = 2603273380851092688L;
@@ -19,27 +16,34 @@ public class Score implements Comparable<Score>, Serializable {
 	
 	/**
 	 * A method to create a score object.
-	 * @param name		The name given by the player
-	 * @param score	The score of the player
+	 * @param score		the startingscore of the player
+	 * @param level		the level associated with this score
 	 */
 	public Score(int score, Level level) {
 		this.score = score;
 		this.level = level;
 	}
-
+	
+	/**
+	 * A method to crate a score object.
+	 * @param score		the starting score of the player
+	 */
 	public Score(int score) {
 		this.level = new Level(1, "No level name");
 	}
 	
 	/**
-	 * A method to create a score object.
-	 * @param name		The name given by the player
-	 * @param score	The score of the player
+	 * A method to create a score object from another score object.
+	 * @param score		another score object
 	 */
 	public Score(Score score) {
 		this(score.score, score.level);
 	}
 	
+	/**
+	 * This method adds a number of points to this {@link Score}.
+	 * @param points	the number of points
+	 */
 	public void add(int points) {
 		this.score += points;
 		
@@ -73,6 +77,10 @@ public class Score implements Comparable<Score>, Serializable {
 		statsObs.updateScore(this);
 	}
 	
+	/**
+	 * This method updates this {@link Score} using another {@link Score}.
+	 * @param score	the other {@link Score}
+	 */
 	public void update(Score score) {
 		this.score = score.score;
 		this.level = score.level;
