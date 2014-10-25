@@ -17,7 +17,7 @@ public class Score implements Comparable<Score>, Serializable {
 	private static final long serialVersionUID = 2603273380851092688L;
 	private int score;
 	private Level level;
-	private List<StatsObserver> statsObservers;
+	private transient List<StatsObserver> statsObservers;
 	
 	/**
 	 * A method to create a score object.
