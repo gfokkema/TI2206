@@ -1,5 +1,6 @@
 package nl.tudelft.ti2206.bubbleshooter.util.chat;
 
+
 import java.io.Serializable;
 import java.util.Date;
 import java.text.SimpleDateFormat;
