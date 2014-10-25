@@ -3,7 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
-import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
+import nl.tudelft.ti2206.bubbleshooter.mode.SurvivalMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EmptyGridCondition;
@@ -22,7 +22,7 @@ public class SurvivalGameFactory extends SPGameFactory {
 	
 	@Override
 	public GameMode createMode() {
-		SinglePlayerMode single = new SinglePlayerMode(end, getBoardFactory().makeLevels(), score);
+		GameMode single = new SurvivalMode(end, getBoardFactory().makeLevels(), score);
 		setInputProcessor(single);
 		return single;
 	}
