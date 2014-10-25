@@ -36,7 +36,6 @@ public class SinglePlayerMode extends GameMode {
 		super(end, grids, score);
 		this.bg = new Background();
 		this.offset = new Vector2(140, 0);
-		this.cannon = new Cannon(160,15);
 	}
 
 	/**
