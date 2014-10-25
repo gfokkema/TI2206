@@ -6,9 +6,9 @@ import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.MPGameFactory;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SkinID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
-import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
 import com.badlogic.gdx.Gdx;
