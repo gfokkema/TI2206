@@ -208,14 +208,12 @@ public class Assets {
 		for(int i = 0; i< textures.entrySet().size(); i++){
 			String unload = textures.values().iterator().next();
 			if(assets.loader.isLoaded(unload))
-				assets.loader.unload(unload);	
+				assets.loader.unload(unload);
 		}
-		assets.loader.unload(Settings.getSettings().getCurrentPath() + "brown_button.png");
 	}
 	
 	public void reload() {
 		//TEMP
-		assets.load(SkinID.BUTTON, "brown_button.png");
 		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
 		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
 		assets.load(TextureID.BORDER, "MPborder.png");
@@ -224,8 +222,9 @@ public class Assets {
 		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
 		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
 		assets.load(TextureID.MICHAELBAYBUBBLE, "Nuke.png");
+		assets.load(SkinID.BUTTON, "brown_button.png");
 		assets.finish();
-		
+	
 		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.STONEBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
