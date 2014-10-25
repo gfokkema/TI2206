@@ -1,2 +1,2 @@
 [GameOptions]
-themes/space/
+themes/dark/

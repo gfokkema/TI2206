@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
+import java.rmi.server.SocketSecurityException;
+
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Settings;
@@ -76,6 +78,7 @@ public class OptionsScreen extends AbstractScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				Settings.getSettings().left();
+				game.setScreen(new OptionsScreen(game));
 			}
 		});
 		themeright.addListener(new ClickListener() {
@@ -83,6 +86,7 @@ public class OptionsScreen extends AbstractScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
 				Settings.getSettings().right();
+				game.setScreen(new OptionsScreen(game));
 			}
 		});
 		
@@ -115,6 +119,6 @@ public class OptionsScreen extends AbstractScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(game.mms);
+		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) game.setScreen(new MainMenuScreen(game));
 	}
 }

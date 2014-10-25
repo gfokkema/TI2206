@@ -68,7 +68,7 @@ public class BubbleShooter extends Game {
 		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.MICHAELBAYBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		//System.out.println(assets.loader.isLoaded(Settings.getSettings().getCurrentPath() + "MainMenuDoomBG.png"));
+	
 		scores = new FileHighscore();
 		mms = new MainMenuScreen(this);
 		this.setScreen(mms);
