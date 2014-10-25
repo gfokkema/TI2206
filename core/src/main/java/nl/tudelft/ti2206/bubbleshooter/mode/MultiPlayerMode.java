@@ -200,9 +200,9 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 					setProjectileOpp((Projectile) o);
 				} else if (o instanceof EndingCondition) {
 					setConditionOpp((EndingCondition) o);
-				} else if (o instanceof String) {
-					ChatMessage msg = new ChatMessage((String) o);
-					System.out.println(msg);
+				} else if (o instanceof ChatMessage) {
+		//			ChatMessage msg = new ChatMessage((String) o);
+					System.out.println(o);
 					//hoort eig naar screen te zenden
 				}
 
