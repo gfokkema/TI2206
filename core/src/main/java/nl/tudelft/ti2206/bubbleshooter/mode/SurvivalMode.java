@@ -23,9 +23,4 @@ public class SurvivalMode extends SinglePlayerMode{
 		} else shotcounter ++;
 	}
 	
-	@Override
-	public void won() {
-		if(hasNext()) next();
-		else gameObs.switchToWonScreen();
-	}
 }

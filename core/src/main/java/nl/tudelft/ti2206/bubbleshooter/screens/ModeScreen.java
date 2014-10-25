@@ -6,7 +6,6 @@ import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.ArcadeBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
-import nl.tudelft.ti2206.bubbleshooter.engine.SurvivalFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.BSMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SinglePlayerMode;
@@ -57,7 +56,7 @@ public class ModeScreen extends AbstractScreen {
 				
 				EndingCondition basic = new BasicCondition();
 				EndingCondition belowLine = new BelowLineCondition(basic);
-				BSMode single = new SurvivalMode(belowLine, new SurvivalFactory());
+				BSMode single = new SurvivalMode(belowLine, new ZenBoardFactory());
 				
 				GameUIBuilder gub = new GameUIBuilder(game.font);
 				gub.addSinglePlayerStatsBar(belowLine, single.getScore());
