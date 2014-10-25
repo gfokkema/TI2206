@@ -15,16 +15,15 @@ import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
-import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.OpponentAdapter;
+import nl.tudelft.ti2206.bubbleshooter.score.Level;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
-
 /**
  * Multiplayer mode for playing with your friends!
  * This mode allows an user to player across the network to play to each other.

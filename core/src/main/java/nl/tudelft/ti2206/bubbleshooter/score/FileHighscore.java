@@ -107,6 +107,6 @@ public class FileHighscore {
 	 * @return		boolean indicating whether this is a highscore
 	 */
 	public boolean isHighScore(Score score) {
-		return scores.size() < 20 || score.getScore() > scores.first().getScore();
+		return scores.size() < 20 || score.compareTo(scores.first()) > 0;
 	}
 }
