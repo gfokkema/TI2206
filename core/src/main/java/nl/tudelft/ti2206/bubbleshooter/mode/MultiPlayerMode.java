@@ -177,7 +177,6 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 			out.flush();
 			out.reset();
 		} catch (IOException e) {
-			won();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -230,13 +229,13 @@ public class MultiPlayerMode extends BSMode implements Runnable, Observer {
 	
 	@Override
 	public void lost() {
-		disconnect();
 		super.lost();
+		disconnect();
 	}
 
 	@Override
 	public void won() {
-		disconnect();
 		super.won();
+		disconnect();
 	}
 }
