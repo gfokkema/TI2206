@@ -26,6 +26,7 @@ public abstract class SPGameFactory extends GameFactory {
 	@Override
 	public GameUI createUI() {
 		gub.addSinglePlayerStatsBar(end, score);
+		gub.addChatWindow();
 		return gub.build();
 	}
 }

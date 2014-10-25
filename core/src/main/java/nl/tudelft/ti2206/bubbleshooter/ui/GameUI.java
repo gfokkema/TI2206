@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 public class GameUI {
 	private Stage stage;
 
-	public GameUI(Table table) {
-		this.stage = new Stage();
-		stage.addActor(table);
+	public GameUI(Stage stage) {
+		this.stage = stage;
+		//stage.addActor(table);
 	}
 
 	public void draw() {

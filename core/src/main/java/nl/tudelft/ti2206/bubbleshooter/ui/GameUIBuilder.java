@@ -8,24 +8,29 @@ import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 
 public class GameUIBuilder {
 	private BitmapFont font;
 	private Table table;
+	private Stage stage;
 
 	public GameUIBuilder(BitmapFont font) {
 		this.font = font;
 		this.table = new Table();
 		table.setFillParent(true);
+		this.stage = new Stage();
 	}
 
 	public void addSinglePlayerStatsBar(EndingCondition end, Score score) {
@@ -53,9 +58,12 @@ public class GameUIBuilder {
 		return new StatsBar(timer, score);
 	}
 
-	public ChatWindow addChatWindow() {
-		table.add(new Dialog("Chat", new WindowStyle(font, Color.WHITE, Assets.getAssets().get(SkinID.BUTTON)))).expand();
-		return null;
+	public void addChatWindow() {
+		Window chat = new Window("Chat", new WindowStyle(font, Color.WHITE, Assets.getAssets().get(SkinID.TEXTFIELD)));
+		Label text = getLabel();
+		text.setText("Hello World");
+		chat.addActor(text);
+		stage.addActor(chat);
 	}
 
 	private Label getLabel() {
@@ -64,6 +72,7 @@ public class GameUIBuilder {
 	}
 
 	public GameUI build() {
-		return new GameUI(table);
+		stage.addActor(table);
+		return new GameUI(stage);
 	}
 }
