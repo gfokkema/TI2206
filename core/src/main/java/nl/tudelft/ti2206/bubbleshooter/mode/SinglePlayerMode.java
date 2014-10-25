@@ -3,13 +3,16 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -27,23 +30,15 @@ public class SinglePlayerMode extends GameMode {
 	/**
 	 * Constructor for the Single-Player mode.
 	 * @param end the used {@link EndingCondition}.
-	 * @param factory the used {@link BoardFactory} for the game.
+	 * @param score 
+	 * @param iterator the used {@link BoardFactory} for the game.
 	 * @param cannon the used {@link Cannon}.
 	 */
-	public SinglePlayerMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		super(end, factory, cannon);
+	public SinglePlayerMode(EndingCondition end, Iterator<Grid> grids, Score score) {
+		super(end, grids, score);
 		this.bg = new Background();
 		this.offset = new Vector2(140, 0);
-	}
-	
-	/**
-	 * Constructor for the Single-Player mode with some default values.
-	 * @param end the used {@link EndingCondition}.
-	 * @param factory the used {@link BoardFactory} for the game.
-	 */
-	public SinglePlayerMode(EndingCondition end, BoardFactory factory) {
-		this(end, factory, new Cannon(160,15));
-		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
+		this.cannon = new Cannon(160,15);
 	}
 
 	/**

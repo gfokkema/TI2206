@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,14 +16,12 @@ import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
-import nl.tudelft.ti2206.bubbleshooter.engine.MPBoardFactory;
-import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.OpponentAdapter;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -43,47 +42,38 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	private EndingCondition condition2;
 	private StatsObserver opponentStatsObs;
 	private OpponentAdapter opponentEndingObs;
+	private Score opponentScore;
 
 	/**
 	 * The Multiplayer mode constructor.
 	 * @param end the {@link EndingCondition}.
-	 * @param factory the used {@link BoardFactory} for the game.
-	 * @param cannon the used {@link Cannon} for the game.
+	 * @param grids the {@link Grid} {@link Iterator}
+	 * @param score the {@link Score} of the local player.
+	 * @param oppScore the opponents {@link Score}
 	 * @param in the {@link ObjectInputStream}.
 	 * @param out the {@link ObjectOutputStream}.
 	 */
-	protected MultiPlayerMode(EndingCondition end, BoardFactory factory, Cannon cannon, ObjectInputStream in, ObjectOutputStream out) {
-		super(end, factory, cannon);
+	public MultiPlayerMode(EndingCondition end, Iterator<Grid> grids, Score score, Score oppScore, ObjectInputStream in, ObjectOutputStream out) {
+		super(end, grids, score);
+		this.opponentScore = oppScore;
 		
 		this.in = in;
 		this.out = out;
 		new Thread(this).start();
 
-		Gdx.input.setInputProcessor(new SinglePlayerProcessor(this));
 		bg = new Background();
 
 		this.offset1 = new Vector2(0, 0);
 		this.offset2 = new Vector2(320, 0);
 
-		this.grid = factory.makeLevels().next();
-
-		writeCondition(end);
+		writeCondition(this.end);
+		writeScore(this.score);
 		writeDrawable(grid);
 		writeDrawable(cannon);
 		writeDrawable(cannon.getProjectile());
 		
 		grid.addObserver(this);
 		cannon.addObserver(this);
-	}
-
-	/**
-	 * The Multiplayer mode constructor with some default values.
-	 * @param end the {@link EndingCondition}.
-	 * @param in the {@link ObjectInputStream}.
-	 * @param out the {@link ObjectOutputStream}.
-	 */
-	public MultiPlayerMode(EndingCondition end, ObjectInputStream in, ObjectOutputStream out) {
-		this(end, new MPBoardFactory(), new Cannon(160,15), in, out);
 	}
 
 	/**
@@ -147,8 +137,6 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 	 */
 	public synchronized void setGridOpp(Grid grid) {
 		this.grid2 = grid;
-		
-		//this.opponentStatsObs.updateScore(new Score(111, grid2.getName()));
 	}
 	
 	@Override
@@ -170,6 +158,10 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 		condition2.addEndingObserver(opponentEndingObs);
 	}
 
+	private void setScoreOpp(Score score) {
+		opponentScore.update(score);
+	}
+
 	/**
 	 * Writes the {@link EndingCondition} over the network.
 	 * @param condition	the {@link EndingCondition} of the player
@@ -184,6 +176,16 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 		}
 	}
 	
+	private void writeScore(Score score) {
+		try {
+			out.writeObject(score);
+			out.flush();
+			out.reset();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Writes a {@link BSDrawable} over the network.
 	 * @param d	the {@link BSDrawable} of the player
@@ -214,6 +216,8 @@ public class MultiPlayerMode extends GameMode implements Runnable, Observer {
 					setProjectileOpp((Projectile) o);
 				} else if (o instanceof EndingCondition) {
 					setConditionOpp((EndingCondition) o);
+				} else if (o instanceof Score) {
+					setScoreOpp((Score) o);
 				}
 			} catch (EOFException e) {
 				

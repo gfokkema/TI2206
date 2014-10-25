@@ -36,7 +36,7 @@ public abstract class GameMode implements EndingObserver {
 	protected GameObserver gameObs;
 
 	protected EndingCondition end;
-	private Score score;
+	protected Score score;
 
 	/**
 	 * {@link GameMode} constructor containing a {@link Board}, {@link EndingCondition} and {@link Cannon}
@@ -44,16 +44,14 @@ public abstract class GameMode implements EndingObserver {
 	 * @param factory the used {@link BoardFactory} for the game.
 	 * @param cannon the {@link Cannon} the user will be using.
 	 */
-	public GameMode(EndingCondition end, BoardFactory factory, Cannon cannon) {
-		this.grids = factory.makeLevels();
+	public GameMode(EndingCondition end, Iterator<Grid> grids, Score score) {
+		this.grids = grids;
 		this.grid = grids.next();
-		this.cannon = cannon;
+		this.cannon = new Cannon(160,15);
 		this.end = end;
-		this.score = new Score(0, grid.getName());
-		
+		this.score = score;
 		setProjectile(cannon.getProjectile());
 		
-		this.grid.addObserver(Logger.getLogger());
 		this.cannon.addObserver(Logger.getLogger());
 		this.end.addEndingObserver(this);
 	}

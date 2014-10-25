@@ -14,6 +14,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.util.Score;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import org.junit.Before;
@@ -33,6 +34,7 @@ public class SinglePlayerModeTest {
 	@Mock EndingCondition end;
 	@Mock ArrayList<Grid> grids;
 	@Mock Iterator<Grid> grid_it;
+	@Mock Score score;
 	@Mock Grid grid;
 	@Mock Projectile bubble;
 	@Mock Projectile cbubble;
@@ -41,12 +43,12 @@ public class SinglePlayerModeTest {
 	@Before
 	public void setUp() throws IOException {
 		Mockito.when(cannon.getProjectile()).thenReturn(cbubble);
-		Mockito.when(factory.makeLevels()).thenReturn(grids);
-		Mockito.when(grids.iterator()).thenReturn(grid_it);
+		Mockito.when(factory.makeLevels()).thenReturn(grid_it);
 		Mockito.when(grid_it.next()).thenReturn(grid);
 		
-		mode = new SinglePlayerMode(end, factory, cannon);
+		mode = new SinglePlayerMode(end, factory.makeLevels(), score);
 		mode.getScore().addStatsObserver(obs);
+		mode.cannon = cannon;
 	}
 	
 	@Test

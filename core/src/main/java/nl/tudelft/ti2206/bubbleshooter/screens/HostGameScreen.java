@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
+import nl.tudelft.ti2206.bubbleshooter.MPGameFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.MultiPlayerMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BelowLineCondition;
@@ -82,12 +83,7 @@ public class HostGameScreen extends AbstractScreen implements Runnable {
 			Gdx.app.exit();
 		}
 		Gdx.app.postRunnable(() -> {
-			EndingCondition basic = new BasicCondition();
-			EndingCondition belowLine = new BelowLineCondition(basic);
-			GameUIBuilder gub = new GameUIBuilder(game.font);
-			MultiPlayerMode multi = new MultiPlayerMode(belowLine, br, bw);
-			gub.addMultiPlayerStatsBars(belowLine, multi.getScore(), new Score(0, "multi"));
-			game.setScreen(new BubbleShooterScreen(game, multi, gub.build()));
+			game.setScreen(new BubbleShooterScreen(game, new MPGameFactory(game, br, bw)));
 		});
 	}
 }
