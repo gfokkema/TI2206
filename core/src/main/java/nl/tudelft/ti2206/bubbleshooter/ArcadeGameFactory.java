@@ -25,6 +25,6 @@ public class ArcadeGameFactory extends SPGameFactory {
 
 	@Override
 	protected EndingCondition getEndingCondition() {
-		return new TimerCondition(new EmptyGridCondition(new BelowLineCondition(new BasicCondition())), gameLength);
+		return new EmptyGridCondition(new TimerCondition(new BelowLineCondition(new BasicCondition()), gameLength));
 	}
 }
