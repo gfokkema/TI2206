@@ -1,4 +1,4 @@
-package nl.tudelft.ti2206.bubbleshooter.util;
+package nl.tudelft.ti2206.bubbleshooter.score;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.NavigableSet;
 
-import nl.tudelft.ti2206.bubbleshooter.core.Level;
 import nl.tudelft.ti2206.bubbleshooter.score.FileHighscore;
 import nl.tudelft.ti2206.bubbleshooter.score.HighScore;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;

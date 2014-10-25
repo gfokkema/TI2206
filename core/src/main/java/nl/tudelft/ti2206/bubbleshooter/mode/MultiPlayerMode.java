@@ -3,7 +3,6 @@ package nl.tudelft.ti2206.bubbleshooter.mode;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-
 /**
  * Multiplayer mode for playing with your friends!
  * This mode allows an user to player across the network to play to each other.
