@@ -152,6 +152,7 @@ public class Assets {
 	
 	/**
 	 * Loads a file and links it to a {@link MusicID}.
+	 * @param settings	the {@link Settings} to use
 	 * @param id		{@link MusicID} to link this file with
 	 * @param handle	handle for the {@link Music} file
 	 */
@@ -162,6 +163,7 @@ public class Assets {
 	
 	/**
 	 * Loads a file and links it to a {@link SkinID}.
+	 * @param settings	the {@link Settings} to use
 	 * @param id		{@link SkinID} to link this file with
 	 * @param handle	handle for the {@link Drawable} file
 	 */
@@ -173,6 +175,7 @@ public class Assets {
 	
 	/**
 	 * Loads a file and links it to a {@link SoundID}.
+	 * @param settings	the {@link Settings} to use
 	 * @param id		{@link SoundID} to link this file with
 	 * @param handle	handle for the {@link Sound} file
 	 */
@@ -183,6 +186,7 @@ public class Assets {
 	
 	/**
 	 * Loads a file and links it to a {@link TextureID}.
+	 * @param settings	the {@link Settings} to use
 	 * @param id		{@link TextureID} to link this file with
 	 * @param handle	handle for the {@link Texture} file
 	 */
@@ -216,6 +220,7 @@ public class Assets {
 	
 	/**
 	 * Load all the textures using the specified settings.
+	 * @param settings	the {@link Settings} to use
 	 */
 	public void loadTextures(Settings settings) {
 		assets.load(settings, TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");

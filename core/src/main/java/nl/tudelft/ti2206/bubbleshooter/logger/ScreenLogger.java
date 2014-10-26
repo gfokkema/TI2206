@@ -13,6 +13,7 @@ public class ScreenLogger implements LogStrategy {
 	
 	/**
 	 * Creates a {@link ScreenLogger} that logs to the specified stream.
+	 * @param o	output stream
 	 */
 	public ScreenLogger(PrintStream o) {
 		out = o;

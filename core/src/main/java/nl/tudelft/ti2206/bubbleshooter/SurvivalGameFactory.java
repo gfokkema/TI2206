@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.engine.SurvivalBoardFactory;
+import nl.tudelft.ti2206.bubbleshooter.engine.ZenBoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.SurvivalMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.BasicCondition;

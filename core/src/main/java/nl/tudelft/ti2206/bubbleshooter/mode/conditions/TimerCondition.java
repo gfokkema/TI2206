@@ -30,7 +30,7 @@ public class TimerCondition extends EndingDecorator {
 
 	/**
 	 * Returns the amount of time that has elapsed.
-	 * @return
+	 * @return	duration between start and now
 	 */
 	protected Duration getDeltaTime() {
 		return Duration.between(epoch, ZonedDateTime.now());
