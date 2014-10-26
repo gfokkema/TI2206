@@ -48,7 +48,7 @@ C01   ---   C02   C01   C04   C04   ---   ---
    C03   C03   ---   C00   ---   C04   ---  
 M00   ---   ---   ---   ---   ---   ---   ---
 --- END --- DUKE NUKE DOOM ---
---- BEGIN --- GAUNTLET OF DOOM 08 ---
+--- BEGIN --- GAUNTLET OF DOOM ---
 8x15
 C00   C00   C00   C00   C00   C00   C00   C00
    C01   C01   C01   C01   C01   C01   C01  
@@ -135,7 +135,7 @@ S00   ---   ---   C03   ---   ---   C03   C03
 ---   ---   ---   C02   C01   ---   ---   ---
    ---   ---   C03   ---   C03   C01   ---  
 ---   ---   S00   S00   S00   S00   ---   ---
---- END --- BLOCKED PATH TO DOOM 16 ---
+--- END --- BLOCKED PATH TO DOOM ---
 --- BEGIN --- DOWNTOWN OF DOOM ---
 8x15
 ---   ---   ---   C00   ---   C00   ---   ---
