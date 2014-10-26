@@ -105,7 +105,7 @@ public class Assets {
 	/**
 	 * Set the skin we should use.
 	 * This can be used for changing menu themes.
-	 * @param loader	the {@link Skin} to use
+	 * @param skin	the {@link Skin} to use
 	 */
 	public void setSkin(Skin skin) {
 		this.skin = skin;

@@ -12,8 +12,8 @@ public class HighScore extends Score {
 	
 	/**
 	 * A method to create a HighScore object.
-	 * @param name		The name given by the player
-	 * @param highscore	The score of the player
+	 * @param score		a {@link Score} object
+	 * @param name		the name of the player
 	 */
 	public HighScore(Score score, String name) {
 		super(score);

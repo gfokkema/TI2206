@@ -22,9 +22,9 @@ import com.badlogic.gdx.Gdx;
 
 public abstract class FileBoardFactory extends BoardFactory {
 	/**
-	 * Create a Board list from a file
+	 * Create a Grid list from a file
 	 * @param res	internal path to the file
-	 * @return		list of Boards
+	 * @return		list of Grids
 	 * @throws IOException	when the file could not be read
 	 */
 	public List<Grid> parseFile(String res) throws IOException {
@@ -33,9 +33,9 @@ public abstract class FileBoardFactory extends BoardFactory {
 	}
 	
 	/**
-	 * Create a Board list from a {@link InputStream}
-	 * @param in	{@link InputStream} containing 1 or more Boards
-	 * @return		list of Boards
+	 * Create a Grid list from a {@link InputStream}
+	 * @param in	{@link InputStream} containing 1 or more Grids
+	 * @return		list of Grids
 	 * @throws IOException	when the stream could not be read or is invalid
 	 */
 	public List<Grid> parseFile(InputStream in) throws IOException {
@@ -58,9 +58,10 @@ public abstract class FileBoardFactory extends BoardFactory {
 	}
 	
 	/**
-	 * Parse a String containing the full specification of a single {@link Board}
-	 * @param s		a String containing the full specification of 1 {@link Board}
-	 * @return		list of Boards
+	 * Parse a String containing the full specification of a single {@link Grid}
+	 * @param name	the name of the {@link Grid}
+	 * @param s		a String containing the full specification of 1 {@link Grid}
+	 * @return		list of Grids
 	 * @throws IOException	when the stream could not be read or is invalid
 	 */
 	public Grid parseLevel(String name, String s) throws IOException {

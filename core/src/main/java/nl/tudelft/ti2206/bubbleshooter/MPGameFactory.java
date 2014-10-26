@@ -17,7 +17,7 @@ import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 
 /**
  * This class is a concrete {@link GameFactory} class that creates a {@link MultiPlayerMode} game.
- * It specializes the {@link GameFactory} by setting up all needed values for a {@link MultiPlayerMode game with:
+ * It specializes the {@link GameFactory} by setting up all needed values for a {@link MultiPlayerMode} game with:
  * - 2 grids
  * - 2 cannons
  * - 2 projectiles
@@ -78,11 +78,11 @@ public class MPGameFactory extends GameFactory {
 	}
 
 	/**
-	 * This method creates and returns a {@link EndingCondition that can be used in a {@link MultiPlayerMode} game.
+	 * This method creates and returns a {@link EndingCondition} that can be used in a {@link MultiPlayerMode} game.
 	 * The {@link EndingCondition} consists of:
 	 * - BelowLineCondition
 	 * - EmptyGridCondition
-	 * @return	{@link EndingCondition that was created
+	 * @return	{@link EndingCondition} that was created
 	 */
 	@Override
 	protected EndingCondition getEndingCondition() {

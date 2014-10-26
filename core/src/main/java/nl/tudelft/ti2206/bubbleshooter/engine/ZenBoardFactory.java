@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.engine;
 import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
 
 /**
@@ -12,7 +13,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
  */
 public class ZenBoardFactory extends BoardFactory {
 	/**
-	 * Creates an infinite iterator over {@link Grid}s with 40 random {@link Bubbles}.
+	 * Creates an infinite iterator over {@link Grid}s with 40 random {@link Bubble}s.
 	 * @return	iterator over all {@link Grid}s
 	 */
 	@Override

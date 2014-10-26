@@ -24,12 +24,8 @@ public class FileHighscore {
 	}
 
 	/**
-	 * A method to add a HighScore object
-	 * 
-	 * @param name
-	 *            The name given by the player
-	 * @param score
-	 *            The score of the player
+	 * A method to add a {@link HighScore} object
+	 * @param score	the {@link HighScore} to add
 	 */
 	public void addScore(HighScore score) {
 		scores.add(score);

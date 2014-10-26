@@ -62,6 +62,7 @@ public class Score implements Comparable<Score>, Serializable {
 	
 	/**
 	 * This method returns the level associated with this {@link Score}.
+	 * @return the {@link Level}
 	 */
 	public Level getLevel() {
 		return level;
@@ -69,7 +70,7 @@ public class Score implements Comparable<Score>, Serializable {
 	
 	/**
 	 * This method updates the level associated with this {@link Score}.
-	 * @param score
+	 * @param level	the associated {@link Level}
 	 */
 	public void setLevel(Level level) {
 		this.level = level;
@@ -91,7 +92,7 @@ public class Score implements Comparable<Score>, Serializable {
 	}
 	/**
 	 * Override method compareTo of the implemented comparable interface
-	 * @return the rank value after it compares it with {@score o} 
+	 * @return the rank value after it compares it with {@link Score} o 
 	 */
 	@Override
 	public int compareTo(Score o) {

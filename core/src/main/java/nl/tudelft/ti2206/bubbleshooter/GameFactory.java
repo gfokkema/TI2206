@@ -1,14 +1,16 @@
 package nl.tudelft.ti2206.bubbleshooter;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.input.SinglePlayerProcessor;
 import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUI;
 import nl.tudelft.ti2206.bubbleshooter.ui.GameUIBuilder;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 
 /**
  * This is the abstract base class for all {@link GameFactory} classes.
@@ -47,8 +49,8 @@ public abstract class GameFactory {
 	protected abstract BoardFactory getBoardFactory();
 
 	/**
-	 * This method creates and returns a {@link EndingCondition that can be used in a {@link GameMode}.
-	 * @return	{@link EndingCondition that was created
+	 * This method creates and returns a {@link EndingCondition} that can be used in a {@link GameMode}.
+	 * @return	{@link EndingCondition} that was created
 	 */
 	protected abstract EndingCondition getEndingCondition();
 

@@ -33,11 +33,11 @@ public class ZenGameFactory extends SPGameFactory {
 	}
 
 	/**
-	 * This method creates and returns a {@link EndingCondition that can be used in a {@link SinglePlayerMode} game.
+	 * This method creates and returns a {@link EndingCondition} that can be used in a {@link SinglePlayerMode} game.
 	 * The {@link EndingCondition} consists of:
 	 * - BelowLineCondition
 	 * - EmptyGridCondition
-	 * @return	{@link EndingCondition that was created
+	 * @return	{@link EndingCondition} that was created
 	 */
 	@Override
 	protected EndingCondition getEndingCondition() {

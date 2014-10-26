@@ -65,7 +65,7 @@ public class Settings {
 	
 	/**
 	 * Sets the theme path.
-	 * @param path
+	 * @param path	the theme path
 	 */
 	public void setSettings(String path) {
 		this.currentpath = path;
@@ -115,7 +115,7 @@ public class Settings {
 	 * Reads the config file.
 	 * @param res name of the file
 	 * @return the applied theme setting
-	 * @throws IOException
+	 * @throws IOException	when the settings file could not be read
 	 */
 	public String readSettingsFile(String res) throws IOException {
 		InputStream in = Gdx.files.internal(res).read();
@@ -160,7 +160,7 @@ public class Settings {
 	
 	/**
 	 * Gets the current theme path.
-	 * @return
+	 * @return	the current theme path
 	 */
 	public String getCurrentPath() {
 		if(currentpath != null){
