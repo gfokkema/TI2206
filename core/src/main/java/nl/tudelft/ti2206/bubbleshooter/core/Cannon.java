@@ -3,6 +3,7 @@ package nl.tudelft.ti2206.bubbleshooter.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
@@ -13,8 +14,8 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Create a cannon which can shoot bubbles!
- * This class also handles the input necessary to shoot and rotate the cannon.
+ * A {@link Cannon} which can shoot bubbles!
+ * This class handles the input necessary to shoot and rotate the cannon.
  * @author group-15
  *
  */
@@ -33,9 +34,9 @@ public class Cannon extends BSDrawable implements Serializable {
 	private final int velocity = 5;
 	
 	/**
-	 * Constructs a {@link Cannon} using a specified at the specified location.
-	 * @param x			coordinate
-	 * @param y 		coordinate
+	 * Constructs a {@link Cannon} using at the specified location.
+	 * @param x	The x-coordinate
+	 * @param y The y-coordinate
 	 */
 	public Cannon(int x, int y) {
 		position = new Vector2(x - 50, y - 20);
@@ -81,11 +82,10 @@ public class Cannon extends BSDrawable implements Serializable {
 		return this.projectile;
 	}
 		
-		
 	/**
-	 * Shoot the actual bubble: pew pew!
+	 * Shoot the actual {@link Bubble}: pew pew!
 	 * @param colors	list of colors for the {@link Projectile}
-	 * @return		{@link Projectile} that has been shot
+	 * @return	{@link Projectile} that has been shot
 	 */
 	public Projectile shoot(ArrayList<Color> colors) {
 		Projectile fired = projectile;
@@ -101,7 +101,7 @@ public class Cannon extends BSDrawable implements Serializable {
 	
 	/**
 	 * Moves the cannon to the left
-	 * @param dt	the amount to move
+	 * @param dt	The difference of time since now and the latest frame.
 	 */
 	public void left(float dt) {
 		setAngle(this.getRotation() + sensitivity * dt);
@@ -109,14 +109,14 @@ public class Cannon extends BSDrawable implements Serializable {
 	
 	/**
 	 * Moves the cannon to the right
-	 * @param dt	the amount to move
+	 * @param dt	The difference of time since now and the latest frame.
 	 */
 	public void right(float dt) {
 		setAngle(this.getRotation() - sensitivity * dt);
 	}
 	
 	/**
-	 * Get the associated pointer with the cannon.
+	 * Get the associated {@link Pointer} with the cannon.
 	 * @return pointer
 	 */
 	public Pointer getPointer() {

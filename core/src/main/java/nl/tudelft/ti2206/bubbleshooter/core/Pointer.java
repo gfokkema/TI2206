@@ -19,7 +19,6 @@ public class Pointer implements Serializable {
 	Vector2 origin;
 
 	/**
-	 * Constructor for pointer.
 	 * Sets the origin and a given standard direction (up).
 	 * @param origin	{@link Vector2} representing this {@link Pointer}'s origin
 	 */
