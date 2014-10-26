@@ -1,5 +1,7 @@
 package nl.tudelft.ti2206.bubbleshooter.input;
 
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
+import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.mode.GameMode;
 
 /**
@@ -23,6 +25,7 @@ public class SinglePlayerProcessor extends AbstractProcessor {
 	public boolean cannonShoot() {
 		if (mode.getProjectile() == mode.getCannon().getProjectile() && !mode.getGrid().collides(mode.getCannon().getProjectile())) {
 			mode.setProjectile(mode.getCannon().shoot(mode.getGrid().getColoursAvailable()));
+			SoundEngine.getSoundEngine().play(SoundID.CANNON);
 			return true;
 		}
 		return false;

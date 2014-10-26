@@ -94,7 +94,6 @@ public class Cannon extends BSDrawable implements Serializable {
 		fired.setDirection(new Vector2(pointer.direction));
 		
 		projectile = new Projectile(colors, new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
-		SoundEngine.getSoundEngine().play(SoundID.CANNON);
 		setChanged();
 		notifyObservers("Cannon has been shot!");
 		return fired;
