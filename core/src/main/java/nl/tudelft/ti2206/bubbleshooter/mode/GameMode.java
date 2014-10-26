@@ -41,9 +41,9 @@ public abstract class GameMode implements EndingObserver {
 
 	/**
 	 * {@link GameMode} constructor containing a {@link Grid}, {@link EndingCondition} and {@link Cannon}
-	 * @param end		the {@link EndingCondition} of the game
-	 * @param grids		the used {@link Grid}s for the game
-	 * @param score		the {@link Score} the user will be using
+	 * @param end		the {@link EndingCondition} of the game, which will be checked each frame.
+	 * @param grids		the used {@link Grid}s for the game.
+	 * @param score		the {@link Score} object for keeping track of scoring.
 	 */
 	public GameMode(EndingCondition end, Iterator<Grid> grids, Score score) {
 		this.grids = grids;

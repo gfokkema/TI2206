@@ -48,12 +48,12 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 	/**
 	 * Start a new {@link Thread} to read the {@link ObjectInputStream}, and write
 	 * the local fields to the opponent using the {@link ObjectOutputStream}.
-	 * @param end the {@link EndingCondition}.
-	 * @param grids the {@link Grid} {@link Iterator}
-	 * @param score the {@link Score} of the local player.
-	 * @param oppScore the opponents {@link Score}
-	 * @param in the {@link ObjectInputStream}.
-	 * @param out the {@link ObjectOutputStream}.
+	 * @param end 		the {@link EndingCondition}.
+	 * @param grids 	the {@link Grid} {@link Iterator} for cycling through levels.
+	 * @param score 	the {@link Score} of the local player.
+	 * @param oppScore	the opponent's {@link Score}.
+	 * @param in		the {@link ObjectInputStream} for writing {@link Object}s to the opponent.
+	 * @param out		the {@link ObjectOutputStream} for receiving {@link Object} of the opponent.
 	 */
 	public MultiPlayerMode(EndingCondition end, Iterator<Grid> grids, Score score, Score oppScore, ObjectInputStream in, ObjectOutputStream out) {
 		super(end, grids, score);
