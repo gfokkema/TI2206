@@ -64,12 +64,12 @@ public class BubbleShooter extends Game {
 	 */
 	public void loadAssets() {
 		Assets assets = Assets.getAssets();
-		assets.load(MusicID.GAME, "eerie.ogg");
-		assets.load(MusicID.MENU, "BGMenu.ogg");
-		assets.load(SkinID.BUTTON, "brown_button.png");
-		assets.load(SoundID.BUBBLE, "BubbleSFX.wav");
-		assets.load(SoundID.BUTTON, "ButtonSFX.wav");
-		assets.load(SoundID.CANNON, "BubbleSFX.wav");
+		assets.load(Settings.getSettings(), MusicID.GAME, "eerie.ogg");
+		assets.load(Settings.getSettings(), MusicID.MENU, "BGMenu.ogg");
+		assets.load(Settings.getSettings(), SkinID.BUTTON, "brown_button.png");
+		assets.load(Settings.getSettings(), SoundID.BUBBLE, "BubbleSFX.wav");
+		assets.load(Settings.getSettings(), SoundID.BUTTON, "ButtonSFX.wav");
+		assets.load(Settings.getSettings(), SoundID.CANNON, "BubbleSFX.wav");
 		assets.loadTextures();
 	}
 }

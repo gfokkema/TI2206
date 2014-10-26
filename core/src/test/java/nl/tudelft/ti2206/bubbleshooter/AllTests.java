@@ -4,6 +4,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.CoreTests;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BubbleTests;
 import nl.tudelft.ti2206.bubbleshooter.engine.EngineTests;
 import nl.tudelft.ti2206.bubbleshooter.input.InputTests;
+import nl.tudelft.ti2206.bubbleshooter.logger.LoggerTests;
 import nl.tudelft.ti2206.bubbleshooter.mode.ModeTests;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.ConditionTests;
 import nl.tudelft.ti2206.bubbleshooter.score.ScoreTests;
@@ -19,6 +20,7 @@ import org.junit.runners.Suite.SuiteClasses;
 				CoreTests.class,
 				EngineTests.class,
 				InputTests.class,
+				LoggerTests.class,
 				ModeTests.class,
 				ScoreTests.class,
 				UtilTests.class })

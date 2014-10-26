@@ -14,11 +14,8 @@ import com.badlogic.gdx.Gdx;
  * Is responsible for managing settings:
  * - Read and Write
  * Can also set the next theme.
- * @author group-15
- *
  */
 public class Settings {
-
 	/**
 	 * Settings has a singleton pattern.
 	 */
@@ -30,7 +27,7 @@ public class Settings {
 	Properties prop;
 
 	/**
-	 * Setting constructor being called by the 2nd constructor
+	 * Creates an instance {@link Settings} using the specified {@link Assets}.
 	 * @param assets the {@link Assets} used.
 	 */
 	public Settings(Assets assets){
