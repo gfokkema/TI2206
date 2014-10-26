@@ -45,12 +45,7 @@ public class GameUIBuilder {
 		Cell<?> barcell = table.add(stats).expand().top();
 		if (left)	barcell.left();
 		else		barcell.right();
-		barcell.row();
-		
-		Label level = getLabel();	
-		table.add(level).bottom().left().expand();
-		
-		return new StatsBar(timer, score, level);
+		return new StatsBar(timer, score);
 	}
 
 	private Label getLabel() {
