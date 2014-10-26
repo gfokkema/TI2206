@@ -32,8 +32,7 @@ public class BubbleShooterScreen extends ScreenAdapter implements GameObserver {
 	 * Constructor of BubbleShooterScreen
 	 * Creates a cannon, board and game.
 	 * @param game		the parent {@link BubbleShooter} instance
-	 * @param game_mode	the {@link GameMode} that will be used
-	 * @param ui		the {@link GameUI} that will be used
+	 * @param fact		the {@link GameFactory} that will be used
 	 */
 	public BubbleShooterScreen(BubbleShooter game, GameFactory fact) {
 		this.game = game;

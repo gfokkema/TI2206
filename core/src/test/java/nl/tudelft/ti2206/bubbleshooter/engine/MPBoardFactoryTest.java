@@ -36,7 +36,7 @@ public class MPBoardFactoryTest {
 	/**
 	 * Test makeLevels.
 	 * This parses all the arcade levels.
-	 * @throws IOException
+	 * @throws IOException	when parsing went wrong
 	 */
 	@Test
 	public void testMakeLevels() throws IOException {

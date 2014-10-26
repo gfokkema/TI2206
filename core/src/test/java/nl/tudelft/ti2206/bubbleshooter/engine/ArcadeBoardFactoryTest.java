@@ -32,7 +32,7 @@ public class ArcadeBoardFactoryTest {
 	/**
 	 * Test makeLevels.
 	 * This parses all the arcade levels.
-	 * @throws IOException
+	 * @throws IOException	when the file could not be parsed
 	 */
 	@Test
 	public void testMakeLevels() throws IOException {

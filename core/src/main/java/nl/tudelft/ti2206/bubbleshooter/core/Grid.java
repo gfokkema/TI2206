@@ -189,7 +189,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	}
 
 	/**
-	 * This method returns a Collection of {@link GridCells}s that have a {@link Bubble}.
+	 * This method returns a Collection of {@link GridCell}s that have a {@link Bubble}.
 	 * @return	collection of {@link GridCell}s
 	 */
 	public Collection<GridCell> getFilledGridCells() {

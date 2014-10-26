@@ -84,7 +84,7 @@ public class Cannon extends BSDrawable implements Serializable {
 		
 	/**
 	 * Shoot the actual bubble: pew pew!
-	 * @param board	{@link Board} that this projectile will be shot at
+	 * @param colors	list of colors for the {@link Projectile}
 	 * @return		{@link Projectile} that has been shot
 	 */
 	public Projectile shoot(ArrayList<Color> colors) {

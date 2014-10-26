@@ -167,6 +167,7 @@ public class GridCell extends BSDrawable implements Collidable {
 
 	/**
 	 * Trigger the neighboring bubbles (used upon collision).
+	 * @return	the score associated with this trigger
 	 */
 	public int triggerNeighbors() {
 		int score = 0;

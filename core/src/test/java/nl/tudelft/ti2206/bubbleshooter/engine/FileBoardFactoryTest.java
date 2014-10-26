@@ -25,7 +25,7 @@ public class FileBoardFactoryTest {
 	
 	/**
 	 * Setup.
-	 * @throws IOException 
+	 * @throws IOException	when parsing went wrong
 	 */
 	@Before
 	public void setUp() throws IOException {
@@ -37,7 +37,7 @@ public class FileBoardFactoryTest {
 	
 	/**
 	 * Test parsing a file.
-	 * @throws IOException
+	 * @throws IOException	when parsing went wrong
 	 */
 	@Test
 	public void testParseFileInputStream() throws IOException {
@@ -50,7 +50,7 @@ public class FileBoardFactoryTest {
 	/**
 	 * Test ParseFile.
 	 * Tests parsing the file.
-	 * @throws IOException 
+	 * @throws IOException	when parsing went wrong
 	 */
 	@Test(expected = IOException.class)
 	public void testParseBufferedReaderFileException() throws IOException {

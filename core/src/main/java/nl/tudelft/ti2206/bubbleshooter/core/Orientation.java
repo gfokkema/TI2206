@@ -34,9 +34,9 @@ public enum Orientation {
 	 * newIndex = startIndex + delta_y * width + delta_x,
 	 * where delta_y and delta_x both be either -1, 0 or 1.
 	 * NORTH_EAST.fromIndex(6, 4) will return 3.
-	 * @param index	{@link Board} index
-	 * @param width	{@link Board} width
-	 * @return		new {@link Board} index
+	 * @param index	{@link Grid} index
+	 * @param width	{@link Grid} width
+	 * @return		new {@link Grid} index
 	 */
 	public int fromIndex(int index, int width) {
 		return index + delta_y * width + delta_x;

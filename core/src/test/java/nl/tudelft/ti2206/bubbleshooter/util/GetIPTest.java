@@ -32,7 +32,7 @@ public class GetIPTest {
 	 * We zijn uitgegaan van de conventionele localhost, en houden dus geen
 	 * rekening met zelf gewijzigde systemen.
 	 * 
-	 * @throws Exception
+	 * @throws Exception	when the loopback IP was not available
 	 */
 	@Test
 	public void getLoopbackIPTest() throws Exception {

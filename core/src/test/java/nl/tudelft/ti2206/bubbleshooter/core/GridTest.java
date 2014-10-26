@@ -46,7 +46,7 @@ public class GridTest {
 	}
 
 	/**
-	 * Test the default values of a {@link Board}.
+	 * Test the default values of a {@link Grid}.
 	 */
 	@Test
 	public void testCreate() {
