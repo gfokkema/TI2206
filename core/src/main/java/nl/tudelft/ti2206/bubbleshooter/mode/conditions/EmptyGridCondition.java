@@ -19,7 +19,7 @@ public class EmptyGridCondition extends EndingDecorator {
 	}
 	
 	/**
-	 * Check if the {@link Board} is empty.
+	 * Check if the {@link Grid} is empty.
 	 */
 	@Override
 	public void check(Grid grid) {
