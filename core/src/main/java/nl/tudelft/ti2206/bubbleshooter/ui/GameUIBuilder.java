@@ -6,6 +6,7 @@ import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -44,7 +45,12 @@ public class GameUIBuilder {
 		Cell<?> barcell = table.add(stats).expand().top();
 		if (left)	barcell.left();
 		else		barcell.right();
-		return new StatsBar(timer, score);
+		barcell.row();
+		
+		Label level = getLabel();	
+		table.add(level).bottom().left().expand();
+		
+		return new StatsBar(timer, score, level);
 	}
 
 	private Label getLabel() {
