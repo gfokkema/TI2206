@@ -27,7 +27,7 @@ public class Settings {
 	Properties prop;
 
 	/**
-	 * Creates an instance {@link Settings} using the specified {@link Assets}.
+	 * Initializes the {@link Settings} class that holds all settings for Bubbleshooter.
 	 * @param assets the {@link Assets} used.
 	 */
 	public Settings(Assets assets){
@@ -44,7 +44,7 @@ public class Settings {
 	}
 	
 	/**
-	 * Secondary constructor (singleton pattern).
+	 * Initializes the {@link Settings} class that holds all settings for Bubbleshooter.
 	 */
 	public Settings(){
 		this(Assets.getAssets());
@@ -62,7 +62,7 @@ public class Settings {
 	
 	/**
 	 * Sets the theme path.
-	 * @param path	the theme path
+	 * @param path	the path to the stored theme
 	 */
 	public void setSettings(String path) {
 		this.currentpath = path;
@@ -81,7 +81,7 @@ public class Settings {
 	}
 	
 	/**
-	 * Write to the config file.
+	 * Write the selected theme to the config file.
 	 */
 	public void writeSettingsFile() {
 		OutputStream out;
@@ -102,7 +102,7 @@ public class Settings {
 	
 	/**
 	 * Gets the config file name.
-	 * @return filename
+	 * @return filename the name of the config file.
 	 */
 	public String getFileName() {
 		return this.filename;

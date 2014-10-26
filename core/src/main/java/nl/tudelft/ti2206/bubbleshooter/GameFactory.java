@@ -36,7 +36,7 @@ public abstract class GameFactory {
 	public abstract GameMode createMode();
 
 	/**
-	 * This method creates and returns a {@link GameUI} that can be used in a {@link GameMode}.
+	 * Create and return a {@link GameUI} for drawing the UI elements of the game.
 	 * @return	{@link GameUI} that was created
 	 */
 	public abstract GameUI createUI();

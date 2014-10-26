@@ -24,9 +24,9 @@ public class SinglePlayerMode extends GameMode {
 	private Vector2 offset;
 	
 	/**
-	 * Constructor for the Single-Player mode.
+	 * Initialize the {@link Background} and the {@link Grid}'s offset.
 	 * @param end		the used {@link EndingCondition}.
-	 * @param grids		an iterator over all the grids for this game.
+	 * @param grids		an {@link Iterator} to cycle through the {@link Grid}s of this game.
 	 * @param score		the {@link Score} of the player.
 	 */
 	public SinglePlayerMode(EndingCondition end, Iterator<Grid> grids, Score score) {
@@ -36,8 +36,8 @@ public class SinglePlayerMode extends GameMode {
 	}
 
 	/**
-	 * Gets the drawables for the multiplayer-game.
-	 * @return a hash-map containing all the drawables.
+	 * Gets the {@link Drawable}s for rendering the game.
+	 * @return a {@link HashMap} containing all the {@link Drawable}s, with their offsets as keys.
 	 */
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
@@ -54,6 +54,10 @@ public class SinglePlayerMode extends GameMode {
 		return odraw;
 	}
 
+	/**
+	 * Go to the next level if there is won, otherwise change the screen to show that we've
+	 * won.
+	 */
 	@Override
 	public void won() {
 		if(hasNext()) next();

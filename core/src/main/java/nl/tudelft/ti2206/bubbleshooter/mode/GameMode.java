@@ -17,7 +17,9 @@ import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 /**
  * This class serves as the abstraction of all other game-modes. 
@@ -40,9 +42,9 @@ public abstract class GameMode implements EndingObserver {
 
 	/**
 	 * {@link GameMode} constructor containing a {@link Grid}, {@link EndingCondition} and {@link Cannon}
-	 * @param end		the {@link EndingCondition} of the game
-	 * @param grids		the used {@link Grid}s for the game
-	 * @param score		the {@link Score} the user will be using
+	 * @param end		the {@link EndingCondition} of the game, which will be checked each frame.
+	 * @param grids		the used {@link Grid}s for the game.
+	 * @param score		the {@link Score} object for keeping track of scoring.
 	 */
 	public GameMode(EndingCondition end, Iterator<Grid> grids, Score score) {
 		this.grids = grids;
@@ -59,9 +61,9 @@ public abstract class GameMode implements EndingObserver {
 
 	/**
 	 * The update method deals with the actual game-logic.
-	 * Inside this method, the actual calls to rotating the cannon,
+	 * Inside this method, the calls to rotating the cannon,
 	 * moving the projectile, removing bubbles and updating the score is being taken care of.
-	 * @param deltaTime	the time that has elapsed
+	 * @param deltaTime	the time that has elapsed since the last frame
 	 */
 	public void update(float deltaTime) {
 		end.check(this.grid);
@@ -84,9 +86,7 @@ public abstract class GameMode implements EndingObserver {
 		}
 	}
 	
-	public void insertRows(int row) {
-		return;
-	}
+	public void insertRows(int row) {}
 
 	/**
 	 * Adds a game observer to this {@link GameMode}.
@@ -97,8 +97,8 @@ public abstract class GameMode implements EndingObserver {
 	}
 
 	/**
-	 * Abstract method for getting all drawables.
-	 * @return {@link HashMap} containing all {@link BSDrawable} objects and their offset
+	 * Abstract method for getting all {@link Drawable}s.
+	 * @return {@link HashMap} containing all {@link BSDrawable} and their offsets as keys.
 	 */
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();
 
@@ -136,11 +136,20 @@ public abstract class GameMode implements EndingObserver {
 		this.projectile.addObserver(Logger.getLogger());
 	}
 
-	// FUGLY, doesn't belong here...
+	/**
+	 * Called by the {@link InputProcessor} when the {@link Cannon} should rotate left.
+	 * The {@link InputProcessor} doesn't work well when holding down the keys, so we need
+	 * to use this for smooth movement.
+	 * @param left	boolean to indicate whether it should start or stop moving.
+	 */
 	public void cannonLeft(boolean left) {
 		this.cannonLeft = left;
 	}
 
+	/**
+	 * Called by the {@link InputProcessor} when the {@link Cannon} should rotate right.
+	 * @param right	boolean to indicate whether it should start or stop moving.
+	 */
 	public void cannonRight(boolean right) {
 		this.cannonRight = right;
 	}

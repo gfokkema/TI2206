@@ -24,6 +24,8 @@ import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+
 /**
  * Multiplayer mode for playing with your friends!
  * This mode allows an user to player across the network to play to each other.
@@ -44,13 +46,14 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 	private Score opponentScore;
 
 	/**
-	 * The Multiplayer mode constructor.
-	 * @param end the {@link EndingCondition}.
-	 * @param grids the {@link Grid} {@link Iterator}
-	 * @param score the {@link Score} of the local player.
-	 * @param oppScore the opponents {@link Score}
-	 * @param in the {@link ObjectInputStream}.
-	 * @param out the {@link ObjectOutputStream}.
+	 * Start a new {@link Thread} to read the {@link ObjectInputStream}, and write
+	 * the local fields to the opponent using the {@link ObjectOutputStream}.
+	 * @param end 		the {@link EndingCondition}.
+	 * @param grids 	the {@link Grid} {@link Iterator} for cycling through levels.
+	 * @param score 	the {@link Score} of the local player.
+	 * @param oppScore	the opponent's {@link Score}.
+	 * @param in		the {@link ObjectInputStream} for writing {@link Object}s to the opponent.
+	 * @param out		the {@link ObjectOutputStream} for receiving {@link Object} of the opponent.
 	 */
 	public MultiPlayerMode(EndingCondition end, Iterator<Grid> grids, Score score, Score oppScore, ObjectInputStream in, ObjectOutputStream out) {
 		super(end, grids, score);
@@ -78,8 +81,8 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 	}
 
 	/**
-	 * Gets the drawables for the multiplayer-game.
-	 * @return a hash-map containing all the drawables.
+	 * Gets the {@link Drawable}s for rendering the game.
+	 * @return a {@link HashMap} containing all the {@link Drawable}s, with their offsets as keys.
 	 */
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {
@@ -106,8 +109,10 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 	}
 
 	/**
-	 * Updates every frame the cannon,board and projectile.
-	 * @param deltaTime	the time that has elapsed
+	 * Aside from updating the local state, also check the opponent's
+	 * {@link EndingCondition}, and write our own {@link EndingCondition} so
+	 * that the opponent can check ours.
+	 * @param deltaTime	the time that has elapsed since the last frame
 	 */
 	@Override
 	public void update(float deltaTime) {
@@ -147,22 +152,35 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 	}
 
 	/**
-	 * Setter for opponent projectile.
+	 * Setter for opponent's {@link Projectile}.
 	 * @param pj	the {@link Projectile} of the opponent 
 	 */
 	public synchronized void setProjectileOpp(Projectile pj) {
 		this.projectile2 = pj;
 	}
 
+	/**
+	 * Set the opponent's {@link EndingCondition}.
+	 * @param ec	the {@link EndingCondition} of the opponent.
+	 */
 	private void setConditionOpp(EndingCondition ec) {
 		this.condition2 = ec;
 		condition2.addEndingObserver(opponentEndingObs);
 	}
 
+	/**
+	 * Update the opponentScore object with the new {@link Score} object
+	 * sent by the opponent.
+	 * @param score	the opponent's {@link Score}.
+	 */
 	private void setScoreOpp(Score score) {
 		opponentScore.update(score);
 	}
 	
+	/**
+	 * Write an {@link Object} to the {@link ObjectOutputStream}
+	 * @param o	the {@link Object} to be written.
+	 */
 	public void write(Object o) {
 		try {
 			out.writeObject(o);
@@ -205,6 +223,9 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 		if (o instanceof BSDrawable) write(o);
 	}
 	
+	/**
+	 * Disconnect from the opponent.
+	 */
 	public void disconnect() {
 		try {
 			in.close();
@@ -216,12 +237,18 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 		}
 	}
 	
+	/**
+	 * Called by the {@link EndingCondition} when we've lost.
+	 */
 	@Override
 	public void lost() {
 		super.lost();
 		disconnect();
 	}
 
+	/**
+	 * Called by the {@link EndingCondition} when we've won.
+	 */
 	@Override
 	public void won() {
 		super.won();
@@ -231,6 +258,10 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 	@Override
 	public void updateTimer(Duration duration) {}
 
+	/**
+	 * Write our own {@link Score} to the {@link ObjectOutputStream}, because
+	 * it has changed.
+	 */
 	@Override
 	public void updateScore(Score score) {
 		write(score);

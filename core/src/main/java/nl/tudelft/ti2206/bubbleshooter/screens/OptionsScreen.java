@@ -1,7 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.rmi.server.SocketSecurityException;
-
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Settings;
@@ -41,7 +39,7 @@ public class OptionsScreen extends AbstractScreen {
 		Label sfxlabel = new Label("Change SFX", labelStyle);
 		TextButton sfxup = new TextButton("+", buttonStyle);
 		TextButton sfxdown = new TextButton("-", buttonStyle);
-		Label themelabel = new Label("Current Theme", labelStyle);
+		Label themelabel = new Label("Theme", labelStyle);
 		TextButton themenext = new TextButton("Change Theme", buttonStyle);
 
 		
