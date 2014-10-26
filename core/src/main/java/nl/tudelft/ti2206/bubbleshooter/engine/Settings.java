@@ -30,7 +30,7 @@ public class Settings {
 	 * Initializes the {@link Settings} class that holds all settings for Bubbleshooter.
 	 * @param assets the {@link Assets} used.
 	 */
-	public Settings(Assets assets){
+	private Settings(Assets assets){
 		this.assets = assets;
 		prop = new Properties();
 		list = new LinkedList<String>();
@@ -46,7 +46,7 @@ public class Settings {
 	/**
 	 * Initializes the {@link Settings} class that holds all settings for Bubbleshooter.
 	 */
-	public Settings(){
+	private Settings(){
 		this(Assets.getAssets());
 	}
 	
