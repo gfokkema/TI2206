@@ -42,9 +42,9 @@ public class ArcadeGameFactory extends SPGameFactory {
 	/**
 	 * This method creates and returns a {@link EndingCondition} that can be used in a {@link SinglePlayerMode} game.
 	 * The {@link EndingCondition} consists of:
-	 * - BelowLineCondition
-	 * - EmptyGridCondition
-	 * - TimerCondition
+	 * - {@link BelowLineCondition}
+	 * - {@link EmptyGridCondition}
+	 * - {@link TimerCondition}
 	 * @return	{@link EndingCondition} that was created
 	 */
 	@Override
