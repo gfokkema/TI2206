@@ -7,6 +7,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
+import nl.tudelft.ti2206.bubbleshooter.engine.SoundEngine;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
@@ -93,7 +94,7 @@ public class Cannon extends BSDrawable implements Serializable {
 		fired.setDirection(new Vector2(pointer.direction));
 		
 		projectile = new Projectile(colors, new Circle(getBubblePos(), 16), pointer.direction.cpy(), 0);
-		Assets.getAssets().get(SoundID.CANNON).play();
+		SoundEngine.getSoundEngine().play(SoundID.CANNON);
 		setChanged();
 		notifyObservers("Cannon has been shot!");
 		return fired;
