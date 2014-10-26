@@ -19,6 +19,7 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 /**
  * This class serves as the abstraction of all other game-modes. 
@@ -96,8 +97,8 @@ public abstract class GameMode implements EndingObserver {
 	}
 
 	/**
-	 * Abstract method for getting all drawables.
-	 * @return {@link HashMap} containing all {@link BSDrawable} objects and their offset
+	 * Abstract method for getting all {@link Drawable}s.
+	 * @return {@link HashMap} containing all {@link BSDrawable} and their offsets as keys.
 	 */
 	public abstract HashMap<Vector2, Collection<BSDrawable>> getDrawables();
 
