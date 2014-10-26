@@ -59,9 +59,9 @@ public abstract class GameMode implements EndingObserver {
 
 	/**
 	 * The update method deals with the actual game-logic.
-	 * Inside this method, the actual calls to rotating the cannon,
+	 * Inside this method, the calls to rotating the cannon,
 	 * moving the projectile, removing bubbles and updating the score is being taken care of.
-	 * @param deltaTime	the time that has elapsed
+	 * @param deltaTime	the time that has elapsed since the last frame
 	 */
 	public void update(float deltaTime) {
 		end.check(this.grid);

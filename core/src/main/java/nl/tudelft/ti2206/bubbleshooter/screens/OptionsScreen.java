@@ -1,7 +1,5 @@
 package nl.tudelft.ti2206.bubbleshooter.screens;
 
-import java.rmi.server.SocketSecurityException;
-
 import nl.tudelft.ti2206.bubbleshooter.BubbleShooter;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.SoundID;
 import nl.tudelft.ti2206.bubbleshooter.engine.Settings;
