@@ -36,8 +36,8 @@ public class SinglePlayerMode extends GameMode {
 	}
 
 	/**
-	 * Gets the {@link Drawable}s for rendering the game.
-	 * @return a {@link HashMap} containing all the {@link Drawable}s, with their offsets as keys.
+	 * Gets the {@link BSDrawable}s for rendering the game.
+	 * @return a {@link HashMap} containing all the {@link BSDrawable}s, with their offsets as keys.
 	 */
 	@Override
 	public HashMap<Vector2, Collection<BSDrawable>> getDrawables() {

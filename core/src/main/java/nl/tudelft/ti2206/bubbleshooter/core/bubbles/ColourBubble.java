@@ -70,6 +70,7 @@ public class ColourBubble extends Bubble{
 	
 	/**
 	 * Pick a ColorValue at random from all available colours.
+	 * @param colours	list of available colours
 	 * @return a randomly chosen ColorValue.
 	 */
 	protected Color getRandomColor(ArrayList<Color> colours) {

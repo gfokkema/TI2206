@@ -15,6 +15,7 @@ public class FileLogger implements LogStrategy {
 	
 	/**
 	 * Creates a {@link FileLogger} using the specified buffered writer.
+	 * @param bw	output writer
 	 */
 	public FileLogger(BufferedWriter bw) {
 		this.bw = bw;

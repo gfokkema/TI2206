@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * In this class we will test the functionality of our Bubble class.
@@ -53,30 +51,6 @@ public class BubbleTest {
 		assertEquals(TextureID.BUBBLE, bubble.getTexture());
 	}
 
-	/**
-	 * Checked whether with the given bounds, overlaps gives the right output.
-	 *
-	 *
-	@Test
-	public void testCollide() {
-		Circle c1 = new Circle(0, 0, 5);
-		Circle c2 = new Circle(0, 5, 5);
-		Circle c3 = new Circle(0, 10, 5);
-		Bubble b = new ColourBubble();
-		b.setBounds(c1);
-
-		bubble.setBounds(c1);
-		assertTrue(b.collides(bubble));
-
-		bubble.setBounds(c2);
-		assertTrue(b.collides(bubble));
-
-		bubble.setBounds(c3);
-		assertFalse(b.collides(bubble));
-
-		b.setBounds(c2);
-		assertTrue(b.collides(bubble));
-	}
 	/**
 	 * Checks if the new the position, from given index with given orientation is.
 	 *
