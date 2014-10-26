@@ -10,7 +10,6 @@ import java.util.Observer;
 import java.util.stream.Collectors;
 
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
-import nl.tudelft.ti2206.bubbleshooter.core.bubbles.BubbleColors;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 
@@ -30,7 +29,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	public HashMap<Integer, GridCell> cells;
 	
 	/**
-	 * Constructs a {@link Grid} with all it's {@link GridCell}s initialized.
+	 * Constructs a {@link Grid} with all its {@link GridCell}s connected to one another.
 	 * @param name		the name of this grid
 	 * @param width		the width of the grid in bubbles
 	 * @param height	the height of the grid in bubbles
@@ -55,7 +54,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	 * Add a {@link Bubble} to a {@link GridCell} on a specific {@link Grid} index.
 	 * @param b		{@link Bubble} that has to be added
 	 * @param idx	{@link Grid} index
-	 * @return	the {@link GridCell} this {@link Bubble} was added to (can be null)
+	 * @return	the {@link GridCell} this {@link Bubble} was added to, or null if the {@link GridCell} was occupied.
 	 */
 	public GridCell add(Bubble b, Integer idx) {
 		GridCell cell = cells.get(idx);
@@ -73,7 +72,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	 * @param b	{@link Bubble} that has to be added
 	 * @param i	hexagonal x-coordinate
 	 * @param j	hexagonal y-coordinate
-	 * @return	the {@link GridCell} this {@link Bubble} was added to (can be null)
+	 * @return	the {@link GridCell} this {@link Bubble} was added to, or null if the {@link GridCell} was occupied.
 	 */
 	public GridCell add(Bubble b, int i, int j) {
 		return add(b, toIdx(i, j));
@@ -82,15 +81,16 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	/**
 	 * Adds a projectile to the board using it's current location.
 	 * @param p	the {@link Projectile} that has to be added to the board
-	 * @return	the {@link GridCell} this {@link Bubble} was added to (can be null)
+	 * @return	the {@link GridCell} this {@link Bubble} was added to, or null if the {@link GridCell} was occupied.
 	 */
 	public GridCell add(Projectile p) {
 		return add(p, getIndex(p.getMidPoint()));
 	}
 	
 	/**
-	 * Checks whether there are {@link GridCell}s with {@link Bubble}s below the {@link Grid} losing line.
-	 * @return	true if there are bubbles, false otherwise
+	 * Checks whether there are {@link GridCell}s with {@link Bubble}s below the {@link Grid} losing line. Uses a
+	 * default row.
+	 * @return	true if there are {@link Bubble}s below the line, false otherwise
 	 */
 	public boolean bubbleBelowLine() {
 		return bubbleBelowLine(getGridHeight() - 2);
@@ -99,7 +99,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	/**
 	 * Checks whether there are {@link GridCell}s with {@link Bubble}s below the specified losing line.
 	 * @param lineRow	the specified losing line
-	 * @return			true if there are bubbles, false otherwise
+	 * @return	true if there are {@link Bubble}s below the line, false otherwise
 	 */
 	protected boolean bubbleBelowLine(int lineRow) {
 		int start = toIdx(0,lineRow);
@@ -131,8 +131,8 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	}
 	
 	/**
-	 * This method returns the list of {@link BubbleColors} that are still in the playing field.
-	 * @return	a list of {@link BubbleColors}
+	 * This method returns the list of {@link Color}s that are still in the playing field.
+	 * @return	a list of {@link Color}s
 	 */
 	public ArrayList<Color> getColoursAvailable() {
 		HashSet<Color> colours = new HashSet<Color>();
@@ -145,7 +145,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	}
 	
 	/**
-	 * This method inserts 2 rows of bubbles starting from the row index given.
+	 * This method inserts 2 rows of {@link Bubble}s starting from the given row index.
 	 * @param row	the row index
 	 */
 	public void insertRows(int row) {
@@ -165,7 +165,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	/**
 	 * This method starts the {@link Bubble} removal of {@link Bubble}s that aren't
 	 * connected to the ceiling anymore.
-	 * @return		the score associated with the removal
+	 * @return	The number of {@link Bubble}s that were removed.
 	 */
 	public int removeDisconnected() {
 		Collection<GridCell> connected = new ArrayList<GridCell>();
@@ -181,15 +181,15 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	}
 
 	/**
-	 * This method returns the number of bubbles in the grid.
-	 * @return	the number of bubbles
+	 * This method returns the number of {@link Bubble}s in the grid.
+	 * @return	the number of {@link Bubble}s in the grid.
 	 */
 	public int size() {
 		return getFilledGridCells().size();
 	}
 
 	/**
-	 * This method returns a Collection of {@link GridCell}s that have a {@link Bubble}.
+	 * This method returns a {@link Collection} of {@link GridCell}s that have a {@link Bubble}.
 	 * @return	collection of {@link GridCell}s
 	 */
 	public Collection<GridCell> getFilledGridCells() {
@@ -326,7 +326,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	}
 
 	/**
-	 * Get the index of the grid cell containing the given
+	 * Get the index of the grid cell corresponding to the given
 	 * {@link Vector2}.
 	 * @param loc The (x,y)-coordinate on the grid.
 	 * @return The index of the grid containing the given
@@ -372,7 +372,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	}
 
 	/**
-	 * This method is used to notify observers of changes.
+	 * This method is used to notify {@link Observer}s of changes.
 	 */
 	@Override
 	public void update(Observable o, Object arg) {

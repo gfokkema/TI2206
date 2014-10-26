@@ -17,8 +17,8 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * This class represents a cell in the {@link Grid}.
  * A {@link GridCell} has a specified size and collision area,
- * and it can contain a {@link Bubble}.
- * The {@link GridCell} also knows who it's neighbors are.
+ * and it may contain a {@link Bubble}.
+ * The {@link GridCell} also contains references to its neighbors.
  */
 public class GridCell extends BSDrawable implements Collidable {
 	private static final long serialVersionUID = 4801310405424982822L;
@@ -50,7 +50,7 @@ public class GridCell extends BSDrawable implements Collidable {
 	
 	/**
 	 * This method returns the {@link Bubble} contained in this {@link GridCell}.
-	 * @return		the contained {@link Bubble}
+	 * @return		the contained {@link Bubble}, or null if there is none.
 	 */
 	public Bubble getBubble() {
 		return this.bubble;
@@ -171,6 +171,7 @@ public class GridCell extends BSDrawable implements Collidable {
 	 */
 	public int triggerNeighbors() {
 		int score = 0;
+		//Can't use forEachNeighbor, because closures can't be used for local variables in Java.
 		for (GridCell g : neighbors) {
 			score += g.trigger();
 		}
