@@ -20,8 +20,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.StoneBubble;
 
 import com.badlogic.gdx.Gdx;
 
-public abstract class FileBoardFactory extends BoardFactory {	
-	
+public abstract class FileBoardFactory extends BoardFactory {
 	/**
 	 * Create a Board list from a file
 	 * @param res	internal path to the file

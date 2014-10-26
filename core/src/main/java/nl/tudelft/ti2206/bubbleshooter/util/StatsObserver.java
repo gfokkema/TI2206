@@ -6,8 +6,6 @@ import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
 /**
  * Observes the statistics of the game, such as score and timer.
- * @author group-15
- *
  */
 public interface StatsObserver {
 	
