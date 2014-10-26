@@ -6,7 +6,6 @@ import nl.tudelft.ti2206.bubbleshooter.score.Score;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -27,6 +26,7 @@ public class GameUIBuilder {
 		StatsBar single = addStatsBar(true);
 		end.addStatsObserver(single);
 		score.addStatsObserver(single);
+		single.updateScore(score);
 	}
 
 	public void addMultiPlayerStatsBars(EndingCondition end, Score score, Score oppscore) {
