@@ -27,11 +27,12 @@ public class ModeScreen extends AbstractScreen {
 		TextButton survival = new TextButton("Survival", buttonStyle);
 		TextButton arcade = new TextButton("Arcade", buttonStyle);
 
-		zenplay.addListener(new ClickListener() {
+		
+		arcade.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-				GameFactory fact = new ZenGameFactory(game);
+				GameFactory fact = new ArcadeGameFactory(game, Duration.ofMinutes(2));
 				game.setScreen(new BubbleShooterScreen(game, fact));
 			}
 		});
@@ -45,19 +46,19 @@ public class ModeScreen extends AbstractScreen {
 			}
 		});
 		
-		arcade.addListener(new ClickListener() {
+		zenplay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				SoundEngine.getSoundEngine().play(SoundID.BUTTON);
-				GameFactory fact = new ArcadeGameFactory(game, Duration.ofMinutes(2));
+				GameFactory fact = new ZenGameFactory(game);
 				game.setScreen(new BubbleShooterScreen(game, fact));
 			}
 		});
 		
 		table.add(message).expandX().center().row();
-		table.add(zenplay).expandX().center().row();
-		table.add(survival).expandX().center().row();
 		table.add(arcade).expandX().center().row();
+		table.add(survival).expandX().center().row();
+		table.add(zenplay).expandX().center().row();
 	}
 	
 	/**

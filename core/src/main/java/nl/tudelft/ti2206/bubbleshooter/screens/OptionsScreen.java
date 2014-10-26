@@ -39,7 +39,7 @@ public class OptionsScreen extends AbstractScreen {
 		Label sfxlabel = new Label("Change SFX", labelStyle);
 		TextButton sfxup = new TextButton("+", buttonStyle);
 		TextButton sfxdown = new TextButton("-", buttonStyle);
-		Label themelabel = new Label("Current Theme", labelStyle);
+		Label themelabel = new Label("Theme", labelStyle);
 		TextButton themenext = new TextButton("Change Theme", buttonStyle);
 
 		

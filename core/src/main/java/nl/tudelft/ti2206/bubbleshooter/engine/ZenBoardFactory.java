@@ -12,6 +12,12 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
  * {@link Grid}s filled with 40 random {@link Bubble}s. 
  */
 public class ZenBoardFactory extends BoardFactory {
+	
+	/**
+	 * The mode name of Zen Mode.
+	 */
+	private String modeName = "Zen";
+	
 	/**
 	 * Creates an infinite iterator over {@link Grid}s with 40 random {@link Bubble}s.
 	 * @return	iterator over all {@link Grid}s
@@ -26,12 +32,20 @@ public class ZenBoardFactory extends BoardFactory {
 			
 			@Override
 			public Grid next() {
-				Grid g = new Grid("Zen", 8, 15);
+				Grid g = new Grid(getModeName(), 8, 15);
 				for (int i = 0; i < 40; i++) {
 					add(g, new ColourBubble(4), i);
 				}
 				return g;
 			}
 		};
+	}
+	
+	/**
+	 * Returns the name of the zen mode.
+	 * @return name of the this mode.
+	 */
+	public String getModeName() {
+		return this.modeName;
 	}
 }
