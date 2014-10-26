@@ -61,6 +61,6 @@ public class SinglePlayerMode extends GameMode {
 	@Override
 	public void won() {
 		if(hasNext()) next();
-		else gameObs.switchToWonScreen();
+		else super.won();
 	}
 }

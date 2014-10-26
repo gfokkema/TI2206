@@ -1,7 +1,10 @@
 package nl.tudelft.ti2206.bubbleshooter.mode;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Matchers.anyFloat;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -9,11 +12,14 @@ import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
+import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Bubble;
 import nl.tudelft.ti2206.bubbleshooter.core.bubbles.Projectile;
 import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
+import nl.tudelft.ti2206.bubbleshooter.score.Level;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
+import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
 import org.junit.Before;
@@ -33,19 +39,24 @@ public class SinglePlayerModeTest {
 	@Mock EndingCondition end;
 	@Mock Iterator<Grid> grid_it;
 	@Mock Score score;
+	@Mock Level level;
 	@Mock Grid grid;
+	@Mock GridCell gridcell;
 	@Mock Projectile bubble;
 	@Mock Projectile cbubble;
-	@Mock StatsObserver obs;
+	@Mock GameObserver gameobs;
+	@Mock StatsObserver statsobs;
 	
 	@Before
 	public void setUp() throws IOException {
 		Mockito.when(cannon.getProjectile()).thenReturn(cbubble);
 		Mockito.when(factory.makeLevels()).thenReturn(grid_it);
 		Mockito.when(grid_it.next()).thenReturn(grid);
+		Mockito.when(score.getLevel()).thenReturn(level);
+		Mockito.when(level.getLevel()).thenReturn(1);
 		
 		mode = new SinglePlayerMode(end, factory.makeLevels(), score);
-		mode.getScore().addStatsObserver(obs);
+		mode.getScore().addStatsObserver(statsobs);
 		mode.cannon = cannon;
 	}
 	
@@ -69,6 +80,11 @@ public class SinglePlayerModeTest {
 	}
 	
 	@Test
+	public void testGrid() {
+		assertEquals(grid, mode.getGrid());
+	}
+	
+	@Test
 	public void testSetProjectile() {
 		mode.setProjectile(bubble);
 		assertEquals(bubble, mode.getProjectile());
@@ -76,45 +92,48 @@ public class SinglePlayerModeTest {
 		Mockito.verify(bubble).move();
 	}
 	
-	/*
 	@Test
 	public void testCollideProjectile() {
-		Mockito.when(board.collides(bubble)).thenReturn(true);
+		Mockito.when(grid.collides(bubble)).thenReturn(true);
+		Mockito.when(grid.add(bubble)).thenReturn(gridcell);
 		
 		mode.setProjectile(bubble);
 		mode.update(.02f);
-		Mockito.verify(board).add(bubble);
+		Mockito.verify(grid).add(bubble);
+		Mockito.verify(cannon, times(2)).getProjectile();
+		Mockito.verify(bubble).move();
 	}
 	
 	@Test
 	public void testCollideProjectileOccupied() {
-		Mockito.when(board.collides(bubble)).thenReturn(true);
-		Mockito.when(board.add(bubble)).thenReturn(-1);
+		Mockito.when(grid.collides(bubble)).thenReturn(true);
+		Mockito.when(grid.add(bubble)).thenReturn(null);
 		
 		mode.setProjectile(bubble);
 		mode.update(.02f);
 		
-		Mockito.verify(board, never()).getColorGroup(anyInt());
-		Mockito.verify(board, never()).getDisconnectedGroup();
-		Mockito.verify(board, never()).removeAll(any());
+		Mockito.verify(cbubble, never()).move();
+		assertNotEquals(cbubble, mode.getProjectile());
 	}
 	
 	@Test
-	public void testColorGroup() {
-		Mockito.when(board.collides(bubble)).thenReturn(true);
-		Mockito.when(colorgroup.size()).thenReturn(5);
-		Mockito.when(board.getColorGroup(anyInt())).thenReturn(colorgroup);
+	public void testLostObserver() {
+		mode.addGameObserver(gameobs);
 		
-		mode.setProjectile(bubble);
-		mode.update(.02f);
-		Mockito.verify(board).add(bubble);
-		Mockito.verify(board).removeAll(colorgroup);
+		mode.lost();
+		Mockito.verify(gameobs, times(1)).switchToLostScreen();
 	}
 	
-	*/
-
 	@Test
-	public void testDrawables() {
+	public void testWonObserver() {
+		mode.addGameObserver(gameobs);
 		
+		Mockito.when(grid_it.hasNext()).thenReturn(true);
+		mode.won();
+		Mockito.verify(gameobs, never()).switchToWonScreen();
+		
+		Mockito.when(grid_it.hasNext()).thenReturn(false);
+		mode.won();
+		Mockito.verify(gameobs, times(1)).switchToWonScreen();
 	}
 }
