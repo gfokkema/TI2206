@@ -335,7 +335,7 @@ public class Grid extends BSDrawable implements Serializable, Collidable, Observ
 	public int getIndex(Vector2 loc) {
 		int x = (int)loc.x;
 		int y = (int)loc.y;
-		x = x - 32;
+		x = x - 34;
 		y = 480 - y;
 		int y_id = y / 28;
 		int x_id = x - (y_id & 1) * 16;
