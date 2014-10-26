@@ -155,7 +155,7 @@ public class Assets {
 	 * @param id		{@link MusicID} to link this file with
 	 * @param handle	handle for the {@link Music} file
 	 */
-	public void load(MusicID id, String handle) {
+	public void load(Settings settings, MusicID id, String handle) {
 		music.put(id, handle);
 		loader.load(handle, Music.class);
 	}
@@ -165,8 +165,8 @@ public class Assets {
 	 * @param id		{@link SkinID} to link this file with
 	 * @param handle	handle for the {@link Drawable} file
 	 */
-	public void load(SkinID id, String handle) {
-		String path = Settings.getSettings().getCurrentPath() + handle;
+	public void load(Settings settings, SkinID id, String handle) {
+		String path = settings.getCurrentPath() + handle;
 		skins.put(id, path);
 		loader.load(path, Texture.class);
 	}
@@ -176,7 +176,7 @@ public class Assets {
 	 * @param id		{@link SoundID} to link this file with
 	 * @param handle	handle for the {@link Sound} file
 	 */
-	public void load(SoundID id, String handle) {
+	public void load(Settings settings, SoundID id, String handle) {
 		sounds.put(id, handle);
 		loader.load(handle, Sound.class);
 	}
@@ -186,8 +186,8 @@ public class Assets {
 	 * @param id		{@link TextureID} to link this file with
 	 * @param handle	handle for the {@link Texture} file
 	 */
-	public void load(TextureID id, String handle) {
-		String path = Settings.getSettings().getCurrentPath() + handle;
+	public void load(Settings settings, TextureID id, String handle) {
+		String path = settings.getCurrentPath() + handle;
 		textures.put(id, path);
 		loader.load(path, Texture.class);
 	}
@@ -206,28 +206,27 @@ public class Assets {
 	 * Unload all the textures.
 	 */
 	public void unloadTextures() {
-		for(int i = 0; i< textures.entrySet().size(); i++){
-			String unload = textures.values().iterator().next();
-			if(assets.loader.isLoaded(unload)){
-				assets.loader.unload(unload);
-				textures.remove(unload);
+		textures.values().forEach((String handle) -> {
+			if(assets.loader.isLoaded(handle)) {
+				assets.loader.unload(handle);
+				textures.remove(handle);
 			}
-		}
+		});
 	}
 	
 	/**
-	 * Load all the textures.
+	 * Load all the textures using the specified settings.
 	 */
-	public void loadTextures() {
-		assets.load(TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
-		assets.load(TextureID.GAMEBACKGROUND, "BG_back.png");
-		assets.load(TextureID.BORDER, "MPborder.png");
-		assets.load(TextureID.BUBBLE, "Bubble-Blue.png");
-		assets.load(TextureID.CANNON, "cannon.png");
-		assets.load(TextureID.STONEBUBBLE, "StoneBubble.png");
-		assets.load(TextureID.BOMBUBBLE, "BomBubble.png");
-		assets.load(TextureID.MICHAELBAYBUBBLE, "Nuke.png");
-		assets.load(SkinID.BUTTON, "brown_button.png");
+	public void loadTextures(Settings settings) {
+		assets.load(settings, TextureID.MENUBACKGROUND, "MainMenuDoomBG.png");
+		assets.load(settings, TextureID.GAMEBACKGROUND, "BG_back.png");
+		assets.load(settings, TextureID.BORDER, "MPborder.png");
+		assets.load(settings, TextureID.BUBBLE, "Bubble-Blue.png");
+		assets.load(settings, TextureID.CANNON, "cannon.png");
+		assets.load(settings, TextureID.STONEBUBBLE, "StoneBubble.png");
+		assets.load(settings, TextureID.BOMBUBBLE, "BomBubble.png");
+		assets.load(settings, TextureID.MICHAELBAYBUBBLE, "Nuke.png");
+		assets.load(settings, SkinID.BUTTON, "brown_button.png");
 		assets.finish();
 	
 		assets.get(TextureID.BUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -235,5 +234,12 @@ public class Assets {
 		assets.get(TextureID.BOMBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.MICHAELBAYBUBBLE).setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		assets.get(TextureID.CANNON).setFilter(TextureFilter.Linear, TextureFilter.Linear);
+	}
+	
+	/**
+	 * Load all the textures using global settings.
+	 */
+	public void loadTextures() {
+		loadTextures(Settings.getSettings());
 	}
 }

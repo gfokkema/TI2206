@@ -8,7 +8,7 @@ import nl.tudelft.ti2206.bubbleshooter.core.bubbles.ColourBubble;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
-public class SurvivalMode extends SinglePlayerMode{
+public class SurvivalMode extends SinglePlayerMode {
 	private int shotcounter;	
 	
 	/**
@@ -23,13 +23,13 @@ public class SurvivalMode extends SinglePlayerMode{
 	}
 
 	/**
-	 * Insert 2 rows starting at the given index, when there has been 5 shots with the
+	 * Insert 2 rows starting at the given index, when there has been 7 shots with the
 	 * {@link Cannon}
 	 * @param row	The row index where to start inserting rows.
 	 */
 	@Override
 	public void insertRows(int row) {
-		if(shotcounter >= 5) {
+		if(shotcounter >= 7) {
 			grid.insertRows(row);
 			for (int i = 0; i < grid.getGridWidth() * 2 - 1; i++) {
 				grid.add(new ColourBubble(4), i);
