@@ -178,7 +178,7 @@ public abstract class GameMode implements EndingObserver {
 		this.grid = grids.next();
 		score.setLevel(new Level(score.getLevel().getLevel() + 1, grid.getName()));
 		this.grid.addObserver(Logger.getLogger());
-		cannon.shoot(grid.getColoursAvailable());
+		cannon.setProjectile(grid.getColoursAvailable());
 		setProjectile(cannon.getProjectile());
 	}
 
