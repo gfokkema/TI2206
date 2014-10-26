@@ -35,7 +35,7 @@ public class MainMenuScreen extends AbstractScreen {
 		
 		TextButton singleplay = new TextButton("Single-player", buttonStyle);
 		TextButton multiplay = new TextButton("Multiplayer", buttonStyle);
-		TextButton highscore = new TextButton("Highscores", buttonStyle);
+		TextButton highscore = new TextButton("High Scores", buttonStyle);
 		TextButton options = new TextButton("Options", buttonStyle);
 		TextButton quit = new TextButton("Quit", buttonStyle);
 
