@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+import nl.tudelft.ti2206.bubbleshooter.core.Grid;
 import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 
 /**
@@ -15,17 +16,15 @@ import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
  */
 public class MichaelBayBehaviour implements BubbleBehaviour {
 	
-	/**
-	 * Gets the {@link Collection<{@link Bubble}>} of {@link Bubble}s to be removed.
-	 * @return the {@link Collection<{@link Bubble}>} of all bubbles.
-	 */
 	@Override
 	public int chain(GridCell cell) {
 		return trigger(cell);
 	}
 	
 	/**
-	 * Removes all the {@link Bubble}s.
+	 * Removes all the {@link Bubble}s in the {@link Grid}.
+	 * @param cell	the {@link GridCell} containing the {@link MichaelBayBubble}.
+	 * @return the amount of {@link Bubble}s on the {@link Grid}.
 	 */
 	@Override
 	public int remove(GridCell cell) {

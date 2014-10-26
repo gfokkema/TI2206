@@ -11,17 +11,15 @@ import nl.tudelft.ti2206.bubbleshooter.core.GridCell;
 public class BomBehaviour implements BubbleBehaviour{
 	int score = 0;
 	
-	/**
-	 * Gets the {@link Collection<{@link Bubble}>} of {@link Bubble}s to be removed.
-	 * @return the {@link Collection<{@link Bubble}>} of all adjacent bubbles.
-	 */
 	@Override
 	public int chain(GridCell cell) {
 		return trigger(cell);
 	}
 	
 	/**
-	 * Removes the {@link Bubble}s caught within the blast of the {@link BomBubble}.
+	 * Remove each neighboring {@link Bubble}.
+	 * @param cell	The {@link GridCell} containing the {@link BomBubble}.
+	 * @return the amount of {@link Bubble}s removed due to this explosion.
 	 */
 	@Override
 	public int remove(GridCell cell) {

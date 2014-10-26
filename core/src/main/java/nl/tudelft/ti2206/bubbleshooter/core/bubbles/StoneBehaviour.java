@@ -21,7 +21,7 @@ public class StoneBehaviour implements BubbleBehaviour {
 	}
 
 	/**
-	 * Don't remove.
+	 * Don't remove, because it's not part of a chain reaction.
 	 */
 	@Override
 	public int remove(GridCell cell) {
