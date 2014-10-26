@@ -17,6 +17,7 @@ import nl.tudelft.ti2206.bubbleshooter.util.EndingObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.GameObserver;
 import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -84,9 +85,7 @@ public abstract class GameMode implements EndingObserver {
 		}
 	}
 	
-	public void insertRows(int row) {
-		return;
-	}
+	public void insertRows(int row) {}
 
 	/**
 	 * Adds a game observer to this {@link GameMode}.
@@ -136,11 +135,20 @@ public abstract class GameMode implements EndingObserver {
 		this.projectile.addObserver(Logger.getLogger());
 	}
 
-	// FUGLY, doesn't belong here...
+	/**
+	 * Called by the {@link InputProcessor} when the {@link Cannon} should rotate left.
+	 * The {@link InputProcessor} doesn't work well when holding down the keys, so we need
+	 * to use this for smooth movement.
+	 * @param left	boolean to indicate whether it should start or stop moving.
+	 */
 	public void cannonLeft(boolean left) {
 		this.cannonLeft = left;
 	}
 
+	/**
+	 * Called by the {@link InputProcessor} when the {@link Cannon} should rotate right.
+	 * @param right	boolean to indicate whether it should start or stop moving.
+	 */
 	public void cannonRight(boolean right) {
 		this.cannonRight = right;
 	}
