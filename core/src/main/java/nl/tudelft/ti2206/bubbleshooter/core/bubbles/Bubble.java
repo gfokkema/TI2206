@@ -5,28 +5,26 @@ import java.io.Serializable;
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 
 /**
- * The {@link Bubble} class is an abstraction of {@link Bubble}s used for the {@link Bubble}s on the play-field.
+ * The {@link Bubble} class is an abstract base class for all {@link Bubble}s used on the playing field.
  * {@link Bubble}s on the field have an orientation (six directions - because of the hexagonal board).
- * Furthermore bubbles possess a position and bounding circle (the latter can be compared to a "hit-box").
- * @author group-15
- *
+ * {@link Bubble}s are eighter contained in a {@link GridCell}, or a {@link Projectile}.
  */
 public abstract class Bubble extends BSDrawable implements Serializable {
 	private static final long serialVersionUID = -3647601554787437036L;
-	
-	/**
-	 * Initialization of behaviour and bounds.
-	 */
 	transient BubbleBehaviour behaviour;
 
 	/**
-	 * Bubbles contain a {@link BubbleBehaviour} and bounds.
-	 * @param b
+	 * Creates a {@link Bubble} with the specified {@link BubbleBehaviour}.
+	 * @param b	the specified {@link BubbleBehaviour}
 	 */
 	public Bubble(BubbleBehaviour b) {
 		this.behaviour = b;
 	}
 
+	/**
+	 * Returns the {@link BubbleBehaviour} of this {@link Bubble}.
+	 * @return	the {@link BubbleBehaviour}
+	 */
 	public BubbleBehaviour getBehaviour() {
 		return this.behaviour;
 	}
@@ -47,5 +45,5 @@ public abstract class Bubble extends BSDrawable implements Serializable {
 	@Override
 	public int getHeight() {
 		return 32;
-	}	
+	}
 }

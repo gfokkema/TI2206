@@ -7,9 +7,7 @@ import java.util.Iterator;
 
 import nl.tudelft.ti2206.bubbleshooter.core.BSDrawable;
 import nl.tudelft.ti2206.bubbleshooter.core.Background;
-import nl.tudelft.ti2206.bubbleshooter.core.Cannon;
 import nl.tudelft.ti2206.bubbleshooter.core.Grid;
-import nl.tudelft.ti2206.bubbleshooter.engine.BoardFactory;
 import nl.tudelft.ti2206.bubbleshooter.mode.conditions.EndingCondition;
 import nl.tudelft.ti2206.bubbleshooter.score.Score;
 
@@ -27,10 +25,9 @@ public class SinglePlayerMode extends GameMode {
 	
 	/**
 	 * Constructor for the Single-Player mode.
-	 * @param end the used {@link EndingCondition}.
-	 * @param score 
-	 * @param iterator the used {@link BoardFactory} for the game.
-	 * @param cannon the used {@link Cannon}.
+	 * @param end		the used {@link EndingCondition}.
+	 * @param grids		an iterator over all the grids for this game.
+	 * @param score		the {@link Score} of the player.
 	 */
 	public SinglePlayerMode(EndingCondition end, Iterator<Grid> grids, Score score) {
 		super(end, grids, score);

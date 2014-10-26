@@ -10,8 +10,6 @@ import nl.tudelft.ti2206.bubbleshooter.util.StatsObserver;
  * The EndingCondition of the various game modes.
  * It contains a check on whether a certain game should end.
  * Additionally it can add an observer for the statistics of the game.
- * @author group-15
- *
  */
 public abstract class EndingCondition implements Serializable {
 	private static final long serialVersionUID = -6763514295341944686L;
@@ -20,7 +18,7 @@ public abstract class EndingCondition implements Serializable {
 
 	/**
 	 * Check whether the game should end
-	 * @param board TODO
+	 * @param grid	the grid that should be checked
 	 */
 	public abstract void check(Grid grid);
 
@@ -42,6 +40,10 @@ public abstract class EndingCondition implements Serializable {
 		this.statsObs = o;
 	}
 
+	/**
+	 * Add the {@link EndingObserver}.
+	 * @param o	the {@link EndingObserver}
+	 */
 	public void addEndingObserver(EndingObserver o) {
 		this.endingObs = o;
 	}

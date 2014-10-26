@@ -15,15 +15,13 @@ import com.badlogic.gdx.graphics.Color;
  * - Green
  * - Yellow
  * - Pink
- * @author group-15
- *
  */
 public class ColourBubble extends Bubble{
 	private static final long serialVersionUID = 746300724926407976L;
 	protected int colour;
 	
 	/**
-	 * ColourBubble constructor.
+	 * Creates a {@link ColourBubble} with a random color.
 	 */
 	public ColourBubble() {
 		super(new ColourBehaviour());
@@ -31,8 +29,9 @@ public class ColourBubble extends Bubble{
 	}
 	
 	/**
-	 * Secondary ColorBubble constructor.
-	 * @param colourLimit the amount of colors a bubble may be.
+	 * Creates a {@link ColourBubble} with a random color,
+	 * chosen from the colours with an index below colourLimit.
+	 * @param colourLimit	the maximum colourindex
 	 */
 	public ColourBubble(int colourLimit) {
 		super(new ColourBehaviour());
@@ -40,16 +39,19 @@ public class ColourBubble extends Bubble{
 		
 	}
 	
+	/**
+	 * Creates a {@link ColourBubble} with a random color,
+	 * chosen from the supplied list of colours.
+	 * @param colours	a list of colours
+	 */
 	public ColourBubble(ArrayList<Color> colours) {
 		super(new ColourBehaviour());
 		this.colour = Color.rgba8888(getRandomColor(colours));
 	}
 		
 	/**
-	 * Instantiate a new Bubble, with the given color.
-	 * This function is for testing purposes, therefore
-	 * it's protected and can only be used in the same package.
-	 * @param c - the Color of the Bubble.
+	 * Creates a {@link ColourBubble} with the given color.
+	 * @param colour	a colour
 	 */
 	public ColourBubble(Color colour) {
 		super(new ColourBehaviour());
@@ -57,7 +59,8 @@ public class ColourBubble extends Bubble{
 	}
 		
 	/**
-	 * Pick a ColorValue at random.
+	 * Pick a ColorValue at random with an index lower than the specified limit.
+	 * @param colourLimit	the index limit
 	 * @return a randomly chosen ColorValue.
 	 */
 	protected Color getRandomColor(int colourLimit) {
@@ -65,6 +68,10 @@ public class ColourBubble extends Bubble{
 		return colors[(new Random()).nextInt(colourLimit)].getColor();
 	}
 	
+	/**
+	 * Pick a ColorValue at random from all available colours.
+	 * @return a randomly chosen ColorValue.
+	 */
 	protected Color getRandomColor(ArrayList<Color> colours) {
 		return colours.get(new Random().nextInt(colours.size()));
 	}
@@ -80,7 +87,7 @@ public class ColourBubble extends Bubble{
 	
 	/**
 	 * Returns the texture of this {@link Bubble}.
-	 * @return {@link #Texture} of this {@link Bubble}.
+	 * @return {@link TextureID} of this {@link Bubble}.
 	 */
 	@Override
 	public TextureID getTexture() {

@@ -134,7 +134,7 @@ public class MultiPlayerMode extends GameMode implements Runnable, StatsObserver
 	
 	/**
 	 * Setter for opponent's board.
-	 * @param board	the {@link Board} of the opponent
+	 * @param grid	the {@link Grid} of the opponent
 	 */
 	public synchronized void setGridOpp(Grid grid) {
 		this.grid2 = grid;

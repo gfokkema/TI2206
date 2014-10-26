@@ -5,8 +5,6 @@ import nl.tudelft.ti2206.bubbleshooter.engine.Assets.TextureID;
 /**
  * The {@link BomBubble} is a special {@link Bubble} that acts like bomb.
  * It contains its own {@link BubbleBehaviour} and {@link TextureID}.
- * @author group-15
- *
  */
 public class BomBubble extends Bubble{
 	private static final long serialVersionUID = -684963823755680038L;
@@ -20,7 +18,7 @@ public class BomBubble extends Bubble{
 	
 	/**
 	 * Returns the texture of this {@link Bubble}.
-	 * @return {@link #Texture} of this {@link Bubble}.
+	 * @return {@link TextureID} of this {@link Bubble}.
 	 */
 	@Override
 	public TextureID getTexture() {
